@@ -1,1 +1,3 @@
 # ChemClick
+
+Members: Zhen Zhao, 
