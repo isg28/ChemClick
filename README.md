@@ -1,3 +1,3 @@
 # ChemClick
 
-Members: Zhen Zhao, Danica Galang, Isabel Santoyo-Garcia, Maria Valencia, 
+Members: Zhen Zhao, Danica Galang, Isabel Santoyo-Garcia, Maria Valencia, Marilyn Sarabia,
