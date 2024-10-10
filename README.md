@@ -1,3 +1,3 @@
 # ChemClick
 
-Members: Zhen Zhao, Danica Galang
+Members: Zhen Zhao, Danica Galang, Isabel Santoyo-Garcia
