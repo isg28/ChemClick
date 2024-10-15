@@ -5,7 +5,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Dashboard />
+      
+      ChemClick Homepage. Navigate to other pages through search engine (ex: localhost:3000/login)
+
     </div>
   );
 }
