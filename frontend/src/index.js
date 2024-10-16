@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-do
 import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
+import AccountCreation from './components/accountcreation/AccountCreation';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -18,6 +19,7 @@ ReactDOM.render(
         <Route path = "/dashboard" element = {<Dashboard/>} />
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/logout" element = {<Logout/>} />
+        <Route path = "/accountcreation" element = {<AccountCreation/>} />
         {/* ... etc. */}
       </Routes>
     </Router>
