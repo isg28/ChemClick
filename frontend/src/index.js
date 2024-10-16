@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
 import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
+import Logout from './components/logout/Logout';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path = "/" element = {<App />} />
         <Route path = "/dashboard" element = {<Dashboard/>} />
         <Route path = "/login" element = {<Login/>}/>
+        <Route path = "/logout" element = {<Logout/>} />
         {/* ... etc. */}
       </Routes>
     </Router>
