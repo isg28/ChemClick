@@ -1,0 +1,61 @@
+.click-to-begin-container {
+    position: fixed;
+    top: 140px; 
+    right: calc((100vw - 1160px) / 2 - 20px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:25px; 
+    width: 350px; 
+    height: auto; 
+    border: 3px solid #015770;
+    border-radius: 15px;
+    background-color: #00D5D7; 
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8); 
+    z-index: 10;
+    border: 5px solid white;
+
+}
+
+.click-to-begin-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../assets/dashboard/clickbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    border-radius: 10px;
+    z-index: 0;
+}
+
+.click-text {
+    font-size: 2rem;
+    font-family: 'Orelega One', cursive;
+    font-weight: bold;
+    color: black;
+    border: 5px solid #015770;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: white; 
+    z-index: 1; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+}
+
+.click-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    border: 5px solid #015770;
+    object-fit: contain;
+    background-color: white; 
+    z-index: 1; 
+    padding: 10px;
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+}

@@ -7,9 +7,6 @@
     justify-content: center; 
     align-items: center;
     width: 100%;
-    background-image: url('../../assets/dashboard/dashboardbg.png');
-    background-size: cover;
-    background-repeat: no-repeat;
 }
   
 .inner-container {
@@ -23,6 +20,7 @@
     background-color: #00D5D7; 
     border-radius: 25px;
     overflow: hidden; 
+    border: 5px solid white;
 }
 
 .inner-container::before {
