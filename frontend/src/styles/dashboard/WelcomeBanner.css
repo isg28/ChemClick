@@ -1,0 +1,27 @@
+.welcome-banner {
+    position: relative; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 60%; 
+    max-width: 800px; 
+    padding: 10px;
+    margin: 0 auto; 
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+    border: 5px solid #015770;
+    font-family: 'Orelega One', cursive;
+    overflow: hidden;
+    transform: translateX(-23%);
+}
+
+.welcome-banner h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: black;
+    text-align: center;
+    z-index: 1;
+}

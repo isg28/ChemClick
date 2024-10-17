@@ -1,0 +1,99 @@
+.announcements-container {
+    position: fixed;
+    top: 415px; 
+    right: calc((100vw - 1160px) / 2 - 20px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px; 
+    width: 350px; 
+    height: auto; 
+    border: 3px solid #015770;
+    border-radius: 15px;
+    background-color: #00D5D7; 
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8); 
+    border: 5px solid white;
+    z-index: 20;
+    margin-bottom: -20px;
+    overflow: hidden;
+}
+
+.announcements-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30px;
+    right: -30px;
+    bottom: 0;
+    background-image: url('../../assets/dashboard/announcementsbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    border-radius: 25px;
+    z-index: 0;
+}
+
+.announcements-title {
+    font-size: 2rem; 
+    font-family: 'Orelega One', cursive;
+    color: black;
+    padding: 10px 15px; 
+    border-radius: 10px; 
+    background-color: white;
+    border: 5px solid #015770;
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+    text-align: center;
+    z-index: 2; 
+    position: relative; 
+    margin-bottom: 20px; 
+}
+
+.announcements-content-box {
+    width: 100%; 
+    height: 200px; 
+    padding: 20px; 
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid #015770;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
+    z-index: 1; 
+    overflow-y: auto; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.announcement-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    margin-top: 10px;
+    padding:10px;
+    font-family: 'Orelega One', cursive;
+    border-bottom: 1px solid #ccc; 
+    margin-bottom: 1px; 
+}
+
+.announcement-author {
+    margin-top: -5px;
+    color: black;
+    font-size: 1.2rem;
+}
+
+.announcement-date {
+    color: darkgray;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.announcement-text {
+    font-size: 1rem;
+    color: black;
+    flex-grow: 1; 
+    margin-bottom: 12px;
+}
+
+.announcement-message:last-child {
+    margin-bottom: 12px;
+}

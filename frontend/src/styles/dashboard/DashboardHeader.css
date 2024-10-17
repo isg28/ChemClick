@@ -23,6 +23,7 @@
     background-color: #00D5D7; 
     border-radius: 25px;
     overflow: hidden; 
+    border: 5px solid white;
 }
 
 .inner-container::before {
