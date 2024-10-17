@@ -1,0 +1,378 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.Question {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.Logo {
+    width: 3.25vw;
+    height: auto;
+    display: block;
+    margin-left: 3vw;
+    margin-top: 0.4vw;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.Home {
+    width: 4.5vw;
+    height: auto;
+    display: block;
+    margin-left: 91.5vw;
+    position: absolute;
+}
+
+.QuestionHeader {
+    background-color: #00D5D7;
+    width: 98vw;
+    height: 12vh;
+    min-height: 9vh;
+    display: flex;
+    margin: auto;
+    margin-top: 0.75vh;
+    margin-left: 2vh;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    position: relative;
+    border: 5px solid white;
+    max-width: 2000px; 
+}
+
+.WhiteHeaderBox {
+    background-color: white;
+    width: 35vw;
+    height: 8vh;
+    margin: auto;
+    margin-left: 1%;
+    border-radius: 20px;
+    border: 5px solid black;
+    max-width: 800px; 
+}
+
+.WhiteHeaderBox h2 {
+    font-size: 2.2vw; 
+    margin-top: 0.8vh;
+    margin-left: 5.5vw;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.BlueQuestionBox {
+    background-color: #00D5D7;
+    width: 69vw;
+    height: 84vh;
+    min-height: 20vh;
+    min-width: 61vw;
+    display: flex;
+    margin: auto;
+    margin-bottom: 1vh;
+    margin-left: 1vw;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 5px solid white;
+    max-width: 1600px; 
+}
+
+.WhiteTitleBox {
+    background-color: white;
+    width: 66vw;
+    height: 12vh;
+    margin: auto;
+    margin-top: 2vh;
+    margin-left: 1vw;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.WhiteTitleBox h1 {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: center;
+}
+
+.WhiteQuestionBox {
+    background-color: white;
+    width: 66vw;
+    height: 55vh;
+    margin: auto;
+    margin-bottom: 12vh;
+    margin-left: 1vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 20px;
+    border: 5px solid black;
+    position: relative;
+    max-width: 1600px; 
+}
+
+/* {1st line across} */
+.WhiteQuestionBox::before {
+    content: '';
+    position: absolute;
+    top: 9vh;
+    height: 0.65vh;
+    width: 65.5vw;
+    background-color: black;
+}
+
+/* {2nd line across} */
+.WhiteQuestionBox::after {
+    content: '';
+    position: absolute;
+    top: 44vh;
+    height: 0.65vh;
+    width: 65.5vw;
+    background-color: black;
+}
+
+.QuestionText {
+    font-size: 2.5vw;
+    margin-top: 2vh;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: center;
+}
+
+.AnswerContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 2vw;
+    justify-content: center;
+}
+
+.AnswerText {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: left;
+}
+
+.AnswerInput {
+    font-size: 2.2vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin-left: 1vw;
+    width: 30vw;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+.SubmitButton {
+    background-color: #E3F0CC;
+    width: 27vw;
+    height: 9vh;
+    margin-left: 30%;
+    margin-top: 56vh;
+    border-radius: 20px;
+    border: 5px solid #237B31;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    cursor: pointer;
+}
+
+.SubmitButton h2 {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: center;
+    margin-top: 1.5vh;
+}
+
+.SubmitButton:active {
+    background-color: #66c776;
+}
+
+.ElementImage {
+    width: 15vw;
+    height: auto;
+    display: block;
+    margin: 3.75vh auto;
+    border-radius: 10px;
+}
+
+.Mastery {
+    background-color: #00D5D7;
+    width: 28vw;
+    height: 25vh;
+    display: flex;
+    margin: auto;
+    margin-top: 15vh;
+    margin-left: 71vw;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 5px solid white;
+    position: absolute;
+    max-width: 700px; 
+}
+
+.MasteryWhiteTitleBox {
+    background-color: white;
+    width: 14vw;
+    height: 7vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.MasteryStarWhiteBox {
+    background-color: white;
+    width: 25vw;
+    height: 11.5vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.MasteryWhiteTitleBox h1 {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: center;
+}
+
+.StarsImage {
+    width: 23vw;
+    height: 7vh;
+    display: flexbox;
+    margin: 2vh auto;
+    border-radius: 10px;
+}
+
+.Goal {
+    background-color: #00D5D7;
+    width: 28vw;
+    height: 24vh;
+    display: flex;
+    margin: auto;
+    margin-top: 42vh;
+    margin-left: 71vw;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 5px solid white;
+    position: absolute;
+    max-width: 700px; 
+}
+
+.GoalWhiteTitleBox {
+    background-color: white;
+    width: 10vw;
+    height: 7vh;
+    margin:auto;
+    display: flex;
+    justify-content:center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.GoalWhiteTitleBox h1 {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One',sans-serif;
+    font-weight: normal;
+    text-align:center;
+}
+
+.GoalStarWhiteBox {
+    background-color: white;
+    width: 25vw;
+    height: 11.5vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.CheckmarksImage {
+    width: 23vw;
+    height: 11vh;
+    display: flexbox;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.Progress {
+    background-color: #00D5D7;
+    width: 28vw;
+    height: 30.5vh;
+    display: flex;
+    margin: auto;
+    margin-top: 68vh;
+    margin-left: 71vw;
+    flex-direction: column;
+    border-radius: 20px;
+    border: 5px solid white;
+    position: absolute;
+    max-width: 700px; 
+}
+
+.ProgressWhiteTitleBox {
+    background-color: white;
+    width: 15vw;
+    height: 7vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.ProgressWhiteTitleBox h1 {
+    font-size: 2.5vw; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    text-align: center;
+}
+
+.ProgressBarWhiteBox {
+    background-color: white;
+    width: 25vw;
+    height: 19vh;
+    margin:auto;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: 5px solid black;
+}
+
+.ProgressBarImage {
+    width: 23vw;
+    height:7vh;
+    margin-top: 4vh;
+    border-radius: 10px;
+}
+
+.ProgressBarWhiteBox h1 {
+    font-size: 1rem; 
+    margin-top: 13vh;
+    font-family: 'Orelega One', sans-serif;
+    font-weight:normal;
+    position: absolute;
+}
