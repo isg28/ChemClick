@@ -6,8 +6,30 @@ const DashboardHeader = () => {
   const navigate = useNavigate();
 
   const handleMenuBarClick = () =>{
-    navigate('/login');
+    document.getElementById("myDropdown").classList.toggle("show");
   };
+  window.onclick = function(event) {
+    if(!event.target.matches('.menu-bar')) {
+        var dropdowns = document.getElementsByClassName('dropdown-content');
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown  = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+  }
+  const handleDashboardClick = () =>{
+    navigate('/dashboard');
+  }
+  const handleProfileClick = () =>{
+    navigate('/profile');
+  }
+  const handleLogoutClick = () =>{
+    navigate('/logout');
+  }
+
   return (
     <header className="main-header">
       <div className="inner-container">
@@ -18,7 +40,15 @@ const DashboardHeader = () => {
         <div className = "profile-picture">
           <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>
         </div>
-        <div className = "menu-bar" onClick = {handleMenuBarClick}></div>
+        <div className = "dropdown">
+            <div className = "menu-bar" onClick = {handleMenuBarClick}>
+            </div>
+            <div id = "myDropdown" class = "dropdown-content">
+                <ul onClick = {handleDashboardClick}>Dashboard</ul>
+                <ul onClick = {handleProfileClick}>Profile Page</ul>
+                <ul onClick = {handleLogoutClick}>Sign Out</ul>
+            </div>
+        </div>
       </div>
     </header>
   );

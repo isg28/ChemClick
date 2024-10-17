@@ -32,40 +32,26 @@ const ProfileHeader = () => {
     navigate('/logout');
   }
   return (
-    <body>
-        <header className="main-header">
-            <div className="inner-container">
-                <div className="logo-container">
-                    <img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="logo" onClick = {handleDashboardClick} />
-                    <span className="profile-title">[User]'s Profile Page</span>
+    <header className="main-header">
+        <div className="inner-container">
+            <div className="logo-container">
+                <img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="logo" onClick = {handleDashboardClick} />
+                <span className="profile-title">[User]'s Profile Page</span>
+            </div>
+            <div className = "profile-picture">
+                <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>
+            </div>
+            <div className = "dropdown">
+                <div className = "menu-bar" onClick = {handleMenuBarClick}>
                 </div>
-                <div className = "profile-picture">
-                    <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>
-                </div>
-                <div className = "dropdown">
-                    <div className = "menu-bar" onClick = {handleMenuBarClick}>
-                    </div>
-                    <div id = "myDropdown" class = "dropdown-content">
-                        <ul onClick = {handleDashboardClick}>Dashboard</ul>
-                        <ul onClick = {handleProfileClick}>Profile Page</ul>
-                        <ul onClick = {handleLogoutClick}>Sign Out</ul>
-                    </div>
+                <div id = "myDropdown" class = "dropdown-content">
+                    <ul onClick = {handleDashboardClick}>Dashboard</ul>
+                    <ul onClick = {handleProfileClick}>Profile Page</ul>
+                    <ul onClick = {handleLogoutClick}>Sign Out</ul>
                 </div>
             </div>
-        </header>
-
-        <div className = "history-container">
-            <span className = "sub-title">History</span>
         </div>
-        <div className = "progress-container">
-            <span className = "sub-title">Progress</span>
-        </div>
-        <div className = "achievements-container">
-            <span className = "sub-title">Achievements</span>
-        </div>
-    </body>
-
-
+    </header>
   );
 };
 
