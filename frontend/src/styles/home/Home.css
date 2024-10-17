@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden; 
+}
+
+body {
+    background-image: url('../../assets/login/ChemClick_Background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
+    width: 100vw; 
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; 
+
+    align-items: center;
+    justify-content: center;
+}
+
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 80vw;
+    padding: 5%;
+    background: #00D5D7;
+    border-radius: 25px;
+}
+
+.main-container {
+    display: flex;
+    height: 70vh;
+    width: 80vw;
+    border: 1vh solid #015770;
+    border-radius: 2vh;
+
+    background: white;
+    background-image: url('../../assets/home/homebg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+
+    align-items: center;
+}
+
+.main-item {
+    display: flex;
+    width: 38vw;
+    height: 50vh;
+    padding: 2vh
+}
+
+#welcomeTitle {
+    font-size: clamp(2rem, 7.5vw, 10rem);        /* Makes the text a lot bigger */
+    color: #015770;            /* Set a color that contrasts the background */
+    text-align: center; 
+    font-family: 'Orelega One', cursive;
+    font-weight: bold;
+}
+
+#menuOptions  {
+    width: 36vw;
+    height: 69vh;
+    padding-left: 10%;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    height: 65vh;
+    width: 33vw;
+    border: 1vh solid #015770;
+    border-radius: 2vh;
+    align-items: center;
+
+    justify-content: space-around;
+
+    background-color: #00D5D7;
+}
+
+.home-logo {
+    width: clamp(20px, 11vw, 120px);  /* Minimum width 100px, ideal width 20% of viewport, maximum width 300px */
+    height: auto;  /* Keeps aspect ratio */
+    max-width: 100%;  /* Prevents the image from exceeding the width of its container */
+    display: block;  /* Allows for margin auto centering */
+    margin: 0 auto;
+}
+
+.home-button{
+    font-family: 'Orelega One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 10vh;
+    color: #fff;
+    background: #2C2C2C;
+    font-size: 2vw;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 30px;
+}
+

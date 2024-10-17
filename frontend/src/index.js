@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
+import Home from './components/home/Home';
 import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
@@ -16,7 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path = "/" element = {<App />} />
+        <Route path = "/" element = {<Home />} />
         <Route path = "/dashboard" element = {<Dashboard/>} />
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/logout" element = {<Logout/>} />
