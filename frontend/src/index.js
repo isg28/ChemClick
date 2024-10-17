@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import AccountCreation from './components/accountcreation/AccountCreation';
+import Profile from './components/profile/Profile';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -20,6 +21,7 @@ ReactDOM.render(
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/logout" element = {<Logout/>} />
         <Route path = "/accountcreation" element = {<AccountCreation/>} />
+        <Route path = "/profile" element = {<Profile/>} />
         {/* ... etc. */}
       </Routes>
     </Router>

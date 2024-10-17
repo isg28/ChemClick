@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
 
 .main-header {
@@ -7,11 +6,10 @@
     justify-content: center; 
     align-items: center;
     width: 100%;
-    /* background-image: url('../../assets/dashboard/dashboardbg.png'); */
     background-size: cover;
     background-repeat: no-repeat;
 }
-  
+
 .inner-container {
     position: relative; 
     display: flex;
@@ -22,7 +20,7 @@
     padding: 10px;
     background-color: #00D5D7; 
     border-radius: 25px;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .inner-container::before {
@@ -32,7 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('../../assets/dashboard/headertopbg.png');
+    background-image: url('../../assets/profile/headertopbg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -70,6 +68,7 @@
 }
 
 .logo-container {
+    width: 500px;
     background-color: white;
     padding: 10px 20px;
     border-radius: 25px; 
@@ -81,12 +80,13 @@
 }
 
 .logo{
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    cursor: pointer;
 }
 
-.dashboard-title {
+.profile-title {
     font-family: 'Orelega One', cursive;
     font-size: 1.8rem;
     font-weight: bold;
@@ -105,7 +105,7 @@
 }
 
 .menu-bar{
-    background-image: url('../../assets/dashboard/menubar.png');
+    background-image: url('../../assets/profile/menubar.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 80px;
@@ -113,4 +113,86 @@
     display: inline-block;
     cursor: pointer;
     margin-left: auto;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 3;
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed;
+    background-color: #e5ffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.dropdown-content ul {
+    font-family: 'Orelega One', cursive;
+    font-size: 1.2rem;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.show {display:block;}
+
+.sub-title {
+    font-family: 'Orelega One', cursive;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.history-container {
+    position: relative; 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px 25px;
+    height: 200px;
+    border-radius: 25px; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+    margin-inline: auto;
+    border: 5px solid #015770;
+}
+
+.progress-container {
+    position: relative; 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px 25px;
+    height: 200px;
+    border-radius: 25px; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+    margin-top: 20px;
+    margin-inline: auto;
+    border: 5px solid #015770;
+}
+
+.achievements-container {
+    position: relative; 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px 25px;
+    height: 200px;
+    border-radius: 25px; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+    margin-top: 20px;
+    margin-inline: auto;
+    border: 5px solid #015770;
 }
