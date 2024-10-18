@@ -26,6 +26,8 @@ ReactDOM.render(
         <Route path = "/logout" element = {<Logout/>} />
         <Route path = "/accountcreation" element = {<AccountCreation/>} />
         <Route path = "/profile" element = {<Profile/>} />
+        <Route path = "/question" element = {<Question/>} />
+        <Route path = "/teacherdashboard" element = {<TeacherDashboard/>} />
         {/* ... etc. */}
       </Routes>
     </Router>
