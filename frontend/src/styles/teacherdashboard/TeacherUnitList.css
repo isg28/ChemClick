@@ -1,0 +1,181 @@
+.unitlist-container {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%; 
+    max-width: 800px; 
+    padding: 10px;
+    margin: 0 auto; 
+    background-color: #00D5D7;
+    border-radius: 10px;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
+    transform: translateX(-23%);
+    top: 20px;
+    min-height: 620px;
+    max-height: 620px;
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+
+.unitlist-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -30px;
+    right: -30px;
+    bottom: 0;
+    background-image: url('../../assets/teacherdashboard/teacherannouncementsbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    border-radius: 25px;
+    z-index: -1;
+}
+
+.unitlist-header h1 {
+    font-family: 'Orelega One', cursive;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    padding: 10px;
+    border: 3px solid #015770;
+}
+
+.unitlist-content {
+    width: 100%;
+}
+
+.unit-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e7f7f9;
+    border: 2px solid #015770;
+}
+
+.current-unit {
+    background-color: #e5ffb5 !important; 
+}
+
+.current-lesson {
+    background-color: #e5ffb5 !important; 
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 2px solid #237B31;    
+}
+
+.unit-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Orelega One', cursive;
+    font-size: 1.7rem;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.unit-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #000;
+}
+
+.unit-text {
+    flex-grow: 1;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #000;
+    margin-left: 10px; 
+    letter-spacing: 1.5px;
+}
+
+.triangle {
+    font-family: 'Orelega One', cursive;
+    font-size: 2.5rem; 
+    margin-left: 10px;
+    color: #000;
+}
+
+.unit-details {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 2px solid #015770;
+}
+
+.unit-details ul {
+    list-style: decimal;
+    margin-left: 20px;
+    display: block;
+    
+}
+
+.unit-details li {
+    font-family: 'Orelega One', cursive;
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    justify-content: space-between;
+    letter-spacing: 1px;
+    display: block;
+}
+  
+  .in-progress-lesson {
+    background-color: #e5ffb5; 
+    border-left: 5px solid #bff855;
+  }
+  
+  .completed-lesson .due-date {
+    text-decoration: line-through;
+    text-decoration-thickness: 1px; 
+    text-decoration-color: darkred;
+}
+
+.due-date {
+    font-size: 0.9rem;
+    font-family: 'Orelega One', cursive;
+    color: #000000;
+    margin-left: 10px;
+    font-style: italic;
+  }
+.table {
+    font-family: "Orelega One", cursive;
+    border-collapse: collapse;
+}
+
+.table th{
+    text-align: left; 
+    border-top: 2px solid #009578;
+    border-bottom: 2px solid #009578;
+}
+
+.table td,
+
+.search-input {
+    font-size: 1em;
+    padding: .6em 1em;
+}
+
+.search-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-family: "Orelega One", cursive;
+}
+
+.table-search-container {
+    margin-top: 10px; 
+    padding: 10px;    
+    display: block;   
+    width: 100%;      
+  }
+  

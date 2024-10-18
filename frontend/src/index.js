@@ -10,6 +10,7 @@ import Login from './components/login/Login';
 import Logout from './components/logout/Logout';
 import AccountCreation from './components/accountcreation/AccountCreation';
 import Profile from './components/profile/Profile';
+import TeacherDashboard from './components/teacherdashboard/TeacherDashboard';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path = "/logout" element = {<Logout/>} />
         <Route path = "/accountcreation" element = {<AccountCreation/>} />
         <Route path = "/profile" element = {<Profile/>} />
+        <Route path = "/teacherdashboard" element = {<TeacherDashboard/>} />
         {/* ... etc. */}
       </Routes>
     </Router>

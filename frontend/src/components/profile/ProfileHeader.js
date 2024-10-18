@@ -28,6 +28,9 @@ const ProfileHeader = () => {
   const handleProfileClick = () =>{
     navigate('/profile');
   }
+  const handleTeacherDashboardClick = () =>{
+    navigate('/teacherdashboard');
+  }
   const handleLogoutClick = () =>{
     navigate('/logout');
   }
@@ -47,6 +50,7 @@ const ProfileHeader = () => {
                 <div id = "myDropdown" class = "dropdown-content">
                     <ul onClick = {handleDashboardClick}>Dashboard</ul>
                     <ul onClick = {handleProfileClick}>Profile Page</ul>
+                    <ul onClick = {handleTeacherDashboardClick}>Teacher Dashboard</ul>
                     <ul onClick = {handleLogoutClick}>Sign Out</ul>
                 </div>
             </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/dashboard/DashboardHeader.css';
+import '../../styles/teacherdashboard/TeacherDashboardHeader.css';
 
-const DashboardHeader = () => {
+const TeacherDashboardHeader = () => {
   const navigate = useNavigate();
 
   const handleMenuBarClick = () =>{
@@ -38,7 +38,7 @@ const DashboardHeader = () => {
       <div className="inner-container">
         <div className="logo-container">
           <img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="logo" />
-          <span className="dashboard-title">ChemClick Dashboard</span>
+          <span className="dashboard-title">Teacher Dashboard</span>
         </div>
         <div className = "profile-picture">
           <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>
@@ -58,4 +58,4 @@ const DashboardHeader = () => {
   );
 };
 
-export default DashboardHeader;
+export default TeacherDashboardHeader;
