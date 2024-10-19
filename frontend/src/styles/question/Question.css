@@ -4,8 +4,7 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html,body {
     height: 100%;
     overflow-x: hidden;
 }
@@ -20,359 +19,387 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-}
-
-.Logo {
-    width: 3.25vw;
-    height: auto;
-    display: block;
-    margin-left: 3vw;
-    margin-top: 0.4vw;
-    border-radius: 10px;
-    position: absolute;
-}
-
-.Home {
-    width: 4.5vw;
-    height: auto;
-    display: block;
-    margin-left: 91.5vw;
-    position: absolute;
-}
-
-.QuestionHeader {
-    background-color: #00D5D7;
-    width: 98vw;
-    height: 12vh;
-    min-height: 9vh;
-    display: flex;
-    margin: auto;
-    margin-top: 0.75vh;
-    margin-left: 2vh;
-    flex-direction: column;
-    justify-content: center;
-    border-radius: 20px;
     position: relative;
-    border: 5px solid white;
-    max-width: 2000px; 
 }
 
-.WhiteHeaderBox {
-    background-color: white;
-    width: 35vw;
-    height: 8vh;
-    margin: auto;
-    margin-left: 1%;
-    border-radius: 20px;
-    border: 5px solid black;
-    max-width: 800px; 
-}
-
-.WhiteHeaderBox h2 {
-    font-size: 2.2vw; 
-    margin-top: 0.8vh;
-    margin-left: 5.5vw;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-}
-
-.BlueQuestionBox {
+.header {
+    width: 1400px;
+    height: 100px;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-color: #00D5D7;
-    width: 69vw;
-    height: 84vh;
-    min-height: 20vh;
-    min-width: 61vw;
-    display: flex;
-    margin: auto;
-    margin-bottom: 1vh;
-    margin-left: 1vw;
-    flex-direction: column;
-    border-radius: 20px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    border-radius: 15px;
     border: 5px solid white;
-    max-width: 1600px; 
-}
-
-.WhiteTitleBox {
-    background-color: white;
-    width: 66vw;
-    height: 12vh;
-    margin: auto;
-    margin-top: 2vh;
-    margin-left: 1vw;
-    display: flex;
-    justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
-}
-
-.WhiteTitleBox h1 {
-    font-size: 2.5vw; 
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    text-align: center;
-}
-
-.WhiteQuestionBox {
-    background-color: white;
-    width: 66vw;
-    height: 55vh;
-    margin: auto;
-    margin-bottom: 12vh;
-    margin-left: 1vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 20px;
-    border: 5px solid black;
-    position: relative;
-    max-width: 1600px; 
-}
-
-/* {1st line across} */
-.WhiteQuestionBox::before {
-    content: '';
-    position: absolute;
-    top: 9vh;
-    height: 0.65vh;
-    width: 65.5vw;
-    background-color: black;
-}
-
-/* {2nd line across} */
-.WhiteQuestionBox::after {
-    content: '';
-    position: absolute;
-    top: 44vh;
-    height: 0.65vh;
-    width: 65.5vw;
-    background-color: black;
-}
-
-.QuestionText {
-    font-size: 2.5vw;
-    margin-top: 2vh;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    text-align: center;
-}
-
-.AnswerContainer {
     display: flex;
     align-items: center;
-    margin-left: 2vw;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
 }
 
-.AnswerText {
-    font-size: 2.5vw; 
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    text-align: left;
-}
-
-.AnswerInput {
-    font-size: 2.2vw; 
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    margin-left: 1vw;
-    width: 30vw;
-    height: 5vh;
-    border-radius: 10px;
-}
-
-.SubmitButton {
-    background-color: #E3F0CC;
-    width: 27vw;
-    height: 9vh;
-    margin-left: 30%;
-    margin-top: 56vh;
-    border-radius: 20px;
-    border: 5px solid #237B31;
+.insideheader {
+    width: 450px;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
     display: flex;
+    align-items: center;
     justify-content: center;
+    margin-right: 900px;
+}
+
+.insideheader h1 {
+    font-size: 2rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
     position: absolute;
+    left: 7%;
+}
+
+.ChemClickLogoHeader {
+    position: absolute;
+    width: 55px;
+    left: 2.75%;
+    top: 22%;
+}
+
+.homelines {
+    position: absolute;
+    width: 60px;
+    right: 2%;
+    top: 22%;
     cursor: pointer;
 }
 
-.SubmitButton h2 {
-    font-size: 2.5vw; 
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    text-align: center;
-    margin-top: 1.5vh;
+.questionbox {
+    position: absolute;
+    top: 130px;
+    left: calc((100vw - 1366px) / 2 - 20px);
+    width: 1000px;
+    height: 535px;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: flex-start;
+    padding: 10px;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+
 }
 
-.SubmitButton:active {
-    background-color: #66c776;
-}
-
-.ElementImage {
-    width: 15vw;
+.element {
+    position: absolute;
+    width: 200px;
     height: auto;
-    display: block;
-    margin: 3.75vh auto;
-    border-radius: 10px;
+    top: 38.5%;
+    left: 40%;
 }
 
-.Mastery {
-    background-color: #00D5D7;
-    width: 28vw;
-    height: 25vh;
+.questionboxtitle {
+    width: 950px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
     display: flex;
-    margin: auto;
-    margin-top: 15vh;
-    margin-left: 71vw;
-    flex-direction: column;
-    border-radius: 20px;
-    border: 5px solid white;
-    position: absolute;
-    max-width: 700px; 
-}
-
-.MasteryWhiteTitleBox {
-    background-color: white;
-    width: 14vw;
-    height: 7vh;
-    margin: auto;
-    display: flex;
+    align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
+    margin-left: 11px;
+
 }
 
-.MasteryStarWhiteBox {
-    background-color: white;
-    width: 25vw;
-    height: 11.5vh;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
-}
-
-.MasteryWhiteTitleBox h1 {
-    font-size: 2.5vw; 
+.questionboxtitle h1 {
+    font-size: 2.25rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
+    position: absolute;
     text-align: center;
 }
 
-.StarsImage {
-    width: 23vw;
-    height: 7vh;
-    display: flexbox;
-    margin: 2vh auto;
-    border-radius: 10px;
-}
-
-.Goal {
-    background-color: #00D5D7;
-    width: 28vw;
-    height: 24vh;
+.questionboxquestion {
+    width: 950px;
+    height: 390px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
     display: flex;
-    margin: auto;
-    margin-top: 42vh;
-    margin-left: 71vw;
-    flex-direction: column;
-    border-radius: 20px;
-    border: 5px solid white;
-    position: absolute;
-    max-width: 700px; 
-}
-
-.GoalWhiteTitleBox {
-    background-color: white;
-    width: 10vw;
-    height: 7vh;
-    margin:auto;
-    display: flex;
-    justify-content:center;
-    border-radius: 20px;
-    border: 5px solid black;
-}
-
-.GoalWhiteTitleBox h1 {
-    font-size: 2.5vw; 
-    font-family: 'Orelega One',sans-serif;
-    font-weight: normal;
-    text-align:center;
-}
-
-.GoalStarWhiteBox {
-    background-color: white;
-    width: 25vw;
-    height: 11.5vh;
-    margin: auto;
-    display: flex;
+    align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
+    margin-left: 11px;
+    margin-top: 10px;
 }
 
-.CheckmarksImage {
-    width: 23vw;
-    height: 11vh;
-    display: flexbox;
-    margin: auto;
-    border-radius: 10px;
-}
-
-.Progress {
-    background-color: #00D5D7;
-    width: 28vw;
-    height: 30.5vh;
-    display: flex;
-    margin: auto;
-    margin-top: 68vh;
-    margin-left: 71vw;
-    flex-direction: column;
-    border-radius: 20px;
-    border: 5px solid white;
+.questionboxquestion::before {
+    content: '';
     position: absolute;
-    max-width: 700px; 
+    top: 185px;
+    background-color: #015770;
+    width: 95%;
+    height: 5px;
+
+
 }
 
-.ProgressWhiteTitleBox {
-    background-color: white;
-    width: 15vw;
-    height: 7vh;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
+.questionboxquestion::after {
+    content: '';
+    position: absolute;
+    top: 440px;
+    background-color: #015770;
+    width: 95%;
+    height: 5px;
+
 }
 
-.ProgressWhiteTitleBox h1 {
-    font-size: 2.5vw; 
+.questionboxquestion h1 {
+    font-size: 2.25rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
+    position: absolute;
+    text-align: center;
+    position: absolute;
+    top: 26%;
+
+}
+
+.questionboxanswer h1 {
+    font-size: 2.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    position: absolute;
+    text-align: center;
+    position: absolute;
+    top: 87%;
+    left: 4.5%;
+}
+
+.elemententered {
+    width: 37%;
+    height: 40px;
+    margin-top: 320px;
+    margin-left: 555px;
+    border-radius: 15px;
+    border: 2px solid #015770;
+    background-color: #e7eae2;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-family: 'Orelega One', sans-serif;
+}
+
+.masterybox {
+    position: absolute;
+    top: 130px;
+    right: calc((100vw - 1366px) / 2 - 20px);
+    width: 380px;
+    height: 185px;
+    padding: 10px;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: flex-start;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+}
+
+.masteryboxtitle {
+    width: 200px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 75px;
+
+}
+
+.masteryboxtitle h1 {
+    font-size: 2.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    position: absolute;
     text-align: center;
 }
 
-.ProgressBarWhiteBox {
-    background-color: white;
-    width: 25vw;
-    height: 19vh;
-    margin:auto;
+.masteryboxstars {
+    width: 330px;
+    height: 85px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
     display: flex;
+    align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    border: 5px solid black;
+    margin-left: 11px;
+    margin-top: 10px;
 }
 
-.ProgressBarImage {
-    width: 23vw;
-    height:7vh;
-    margin-top: 4vh;
-    border-radius: 10px;
+.masterystars {
+    width: 300px;
 }
 
-.ProgressBarWhiteBox h1 {
-    font-size: 1rem; 
-    margin-top: 13vh;
-    font-family: 'Orelega One', sans-serif;
-    font-weight:normal;
+.goalbox {
     position: absolute;
+    top: 340px;
+    right: calc((100vw - 1366px) / 2 - 20px);
+    width: 380px;
+    height: 185px;
+    padding: 10px;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+}
+
+.goalboxtitle {
+    width: 150px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 100px;
+
+}
+
+.goalboxtitle h1 {
+    font-size: 2.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    position: absolute;
+    text-align: center;
+}
+
+.goalboxchecks {
+    width: 330px;
+    height: 85px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 11px;
+    margin-top: 10px;
+}
+
+.goalchecks {
+    width: 300px;
+}
+
+.progressbox {
+    position: absolute;
+    top: 550px;
+    right: calc((100vw - 1366px) / 2 - 20px);
+    width: 380px;
+    height: 185px;
+    padding: 10px;
+    background-color: #00D5D7;
+    border-radius: 8px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+    border-radius: 15px;
+
+}
+
+.progressboxtitle {
+    width: 220px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 65px;
+
+}
+
+.progressboxtitle h1 {
+    font-size: 2.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    position: absolute;
+    text-align: center;
+}
+
+.progressboxtitle h2 {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    position: absolute;
+    text-align: center;
+    top: 77%
+}
+
+.progressboxbar {
+    width: 330px;
+    height: 85px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 11px;
+    margin-top: 10px;
+}
+
+.progressbar {
+    width: 300px;
+    position: absolute;
+    top: 57%;
+}
+
+.submitbutton {
+    position: absolute;
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 15px;
+    width: 300px;
+    height: 65px;
+    left: 355px;
+    top: 540px;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+}
+
+
+.submitbutton:active {
+    background-color: #98c844;
+    cursor: pointer;
 }

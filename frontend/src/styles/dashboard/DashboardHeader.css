@@ -51,6 +51,7 @@
     position: absolute;
     top: 50%;
     left: calc(300px + 100px);
+    margin-left: 43px;
     transform: translateY(-50%);
     z-index: 2;
     border: 5px solid #015770;
