@@ -1,20 +1,20 @@
 import React from 'react';
 import '../../styles/question/Question.css';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from  'react-router-dom';
 
 
 function Question() {
     const navigate = useNavigate();
 
-    const handlequestion = () => {
-        navigate('/dashboard');
-    };
+const handlequestion = () => {
+    navigate('/dashboard');
+};
 
     return (
         <div className='Question'>
-            <div className='header'>
+            <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} />
+                <img src={require('../../assets/question/Home.png')} className='homelines'onClick={handlequestion} />
 
                 <div className='insideheader'><h1>
                     ChemClick Assignments

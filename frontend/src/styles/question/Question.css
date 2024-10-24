@@ -22,7 +22,7 @@ html,body {
     position: relative;
 }
 
-.header {
+.questionheader {
     width: 1400px;
     height: 100px;
     background-image: url('../../assets/question/RainbowBackground.png');
