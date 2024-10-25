@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 SECRET_KEY = os.getenv('SECRET_KEY')  # Load SECRET_KEY from .env
 DEBUG = os.getenv('DEBUG') == 'True'  # Convert to boolean
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')  # Convert string to list
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,7 +51,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOW_ALL_ORIGINS = TRUE
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  
+]
 
 ROOT_URLCONF = 'backend.urls'
 

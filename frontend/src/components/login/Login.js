@@ -1,12 +1,36 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useNavigate} from  'react-router-dom';
 import '../../styles/login/Login.css';
 
 function Login() {
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    navigate('/dashboard');
+  const [studentId, setStudentId] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignIn = async () => {
+      try {
+          const response = await fetch('http://localhost:8000/users/login/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  student_id: studentId,
+                  password: password,
+              }),
+          });
+
+          if (response.ok) {
+              const data = await response.json();
+              console.log(data.message);
+              navigate('/dashboard');
+          } else {
+              console.error('Login failed');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
   };
 
   return (
@@ -21,18 +45,26 @@ function Login() {
           <div className = 'inputs'>
             <div className = "Student-ID">STUDENT ID</div>
             <div className = 'input'>
-              <input type = "Student ID" />
+              <input
+                type="text"
+                value={studentId}
+                onChange={(e) => setStudentId(e.target.value)}
+              />
             </div>
           </div>
           <div className = 'inputs'>
             <div className = 'Password'>PASSWORD</div>
             <div className = 'input'>
-              <input type = "Password" />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />            
             </div>
           </div>
           <div className = 'options'>
             <div className = 'forgot-password'>Forgot Password?</div>
-            <div className = 'create-account'>Create Account</div>
+            <div className='create-account' onClick={() => navigate('/accountcreation')}>Create Account</div>
             <div className = 'submit-container'>
           </div>
         </div>
