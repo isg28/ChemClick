@@ -8,8 +8,17 @@ function AccountCreation() {
     const [studentId, setStudentId] = useState('');
     const [schoolEmail, setSchoolEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleCreateAccount = async () => {
+        setErrorMessage('');
+
+        //setting 8 char min req for pw
+        if (password.length < 8){
+            setErrorMessage("Password must be at least 8 charcters long");
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:8000/users/create/', {
                 method: 'POST',
@@ -28,9 +37,12 @@ function AccountCreation() {
                 console.log(data.message);
                 navigate('/login'); 
             } else {
-                console.error('Account creation failed');
+                const errorData = await response.json();
+                setErrorMessage(errorData.error || 'Account creation failed');
+                console.error('Account creation failed', errorData);
             }
         } catch (error) {
+            setErrorMessage('An error occurred. Please try again.');
             console.error('Error:', error);
         }
     };
@@ -77,6 +89,7 @@ function AccountCreation() {
                             />                        
                         </div>
                     </div>
+                    {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
                     <div className = 'options'>
                         <div className = 'already-have-account' onClick={() => navigate('/login')}>Already Have Account?Login</div>
                         <div className = 'submit-container'>
@@ -86,7 +99,7 @@ function AccountCreation() {
                 <div className = 'submit' onClick = {handleCreateAccount}>CREATE ACCOUNT</div>    
             </div>
         </div>
-    </div>
+    </div> 
     );
 };
 

@@ -7,8 +7,17 @@ function Login() {
 
   const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSignIn = async () => {
+      setErrorMessage(''); 
+
+      //setting 8 character min req for pw
+      if (password.length < 8){
+        setErrorMessage("Password must be at least 8 charachters long");
+        return;
+      }
+
       try {
           const response = await fetch('http://localhost:8000/users/login/', {
               method: 'POST',
@@ -24,11 +33,13 @@ function Login() {
           if (response.ok) {
               const data = await response.json();
               console.log(data.message);
-              navigate('/dashboard');
+              navigate('/dashboard'); 
           } else {
-              console.error('Login failed');
+              const errorData = await response.json();
+              setErrorMessage(errorData.error ||'Login failed');
           }
       } catch (error) {
+          setErrorMessage('An error occurred. Please try again');
           console.error('Error:', error);
       }
   };
@@ -66,8 +77,9 @@ function Login() {
             <div className = 'forgot-password'>Forgot Password?</div>
             <div className='create-account' onClick={() => navigate('/accountcreation')}>Create Account</div>
             <div className = 'submit-container'>
+            </div>
           </div>
-        </div>
+          {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
         <div className = 'submit' onClick = {handleSignIn}>SIGN IN</div>
       </div>
     </div>
