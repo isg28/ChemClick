@@ -74,7 +74,7 @@ function Login() {
             </div>
           </div>
           <div className = 'options'>
-            <div className = 'forgot-password'>Forgot Password?</div>
+            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password?</div>
             <div className='create-account' onClick={() => navigate('/accountcreation')}>Create Account</div>
             <div className = 'submit-container'>
             </div>

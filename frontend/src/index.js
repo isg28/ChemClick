@@ -12,6 +12,8 @@ import AccountCreation from './components/accountcreation/AccountCreation';
 import Profile from './components/profile/Profile';
 import TeacherDashboard from './components/teacherdashboard/TeacherDashboard';
 import Question from './components/question/Question';
+import ConfirmEmail from './components/passwordreset/ConfirmEmail';
+import NewPassword from './components/passwordreset/NewPassword';
 
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +30,8 @@ ReactDOM.render(
         <Route path = "/profile" element = {<Profile/>} />
         <Route path = "/question" element = {<Question/>} />
         <Route path = "/teacherdashboard" element = {<TeacherDashboard/>} />
+        <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
+        <Route path = "/NewPassword" element = {<NewPassword/>} />
         {/* ... etc. */}
       </Routes>
     </Router>
