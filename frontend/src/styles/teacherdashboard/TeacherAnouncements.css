@@ -16,6 +16,7 @@
     z-index: 20;
     margin-bottom: -20px;
     overflow: hidden;
+    z-index: 0;
 }
 
 .teacherannouncements-container::before {

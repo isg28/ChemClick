@@ -23,6 +23,7 @@
     border-radius: 25px;
     overflow: hidden; 
     border: 5px solid white;
+    z-index: 20;
 }
 
 .inner-container::before {
@@ -38,12 +39,12 @@
     background-repeat: no-repeat;
     opacity: 0.6;
     border-radius: 25px; 
-    z-index: 0; 
+    z-index: 1; 
 }
 
 .inner-container > * {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .profile-picture{

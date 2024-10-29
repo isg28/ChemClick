@@ -5,11 +5,18 @@ import ClickToBegin from './ClickToBegin';
 import Announcements from './Announcements';
 import UnitList from './UnitList';
 import '../../styles/dashboard/Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Dashboard() {
   const username = "Walter W"; // CHANGE, once we can make the data dynamic!
+  const navigate = useNavigate();
+
+  const handleClickToBegin = () => {
+    navigate('/question');
+  };
+
   const unitData = [
     {
       number: 1,
@@ -65,7 +72,7 @@ function Dashboard() {
       <DashboardHeader />
       <WelcomeBanner username={username} />
       <UnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} />
-      <ClickToBegin />
+      <ClickToBegin onClick = {handleClickToBegin} />
       <Announcements announcements={sortedAnnouncements} />
     </div>
   );
