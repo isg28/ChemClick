@@ -5,46 +5,87 @@ import '../../styles/accountcreation/AccountCreation.css';
 function AccountCreation() {
     const navigate = useNavigate();
 
-    const [studentId, setStudentId] = useState('');
-    const [schoolEmail, setSchoolEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        studentId: '',
+        confirmId: '',
+        password: '',
+        confirmPassword: '',
+    });
+    
+    const [errors, setErrors] = useState({});
+
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleCreateAccount = async () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleCreateAccount = async (e) => {
+        e.preventDefault();
         setErrorMessage('');
 
-        //setting 8 char min req for pw
-        if (password.length < 8){
-            setErrorMessage("Password must be at least 8 charcters long");
-            return;
-        }
+        const newErrors = validateForm(formData);
+        setErrors(newErrors);
 
-        try {
-            const response = await fetch('http://localhost:8000/users/create/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    student_id: studentId,
-                    school_email: schoolEmail,
-                    password: password,
-                }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                console.log(data.message);
-                navigate('/login'); 
-            } else {
-                const errorData = await response.json();
-                setErrorMessage(errorData.error || 'Account creation failed');
-                console.error('Account creation failed', errorData);
+        if (Object.keys(newErrors).length === 0) {
+            try {
+                const response = await fetch('http://localhost:8000/users/create/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        student_id: formData.studentId,
+                        school_email: formData.studentId + "@sanjuan.edu",
+                        password: formData.password,
+                    }),
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data.message);
+                    navigate('/login'); 
+                } else {
+                    const errorData = await response.json();
+                    setErrorMessage(errorData.error || 'Account creation failed');
+                    console.error('Account creation failed', errorData);
+                }
+            } catch (error) {
+                setErrorMessage('An error occurred. Please try again.');
+                console.error('Error:', error);
             }
-        } catch (error) {
-            setErrorMessage('An error occurred. Please try again.');
-            console.error('Error:', error);
+            console.log('Form submitted successfully!');
+        } else {
+            console.log('Form submission failed due to validation errors.');
         }
+    };
+
+    const validateForm = (data) => {
+        const errors = {};
+
+        if (!data.studentId.trim()) {
+            errors.studentId = 'Student ID is required';
+        }
+
+        if (data.confirmId !== data.studentId) {
+            errors.confirmId = 'Student IDs do not match';
+        }
+
+        if (!data.password) {
+            errors.password = 'Password is required';
+        } else if (data.password.length < 8) {
+            errors.password = 'Password must be at least 8 characters long';
+        }
+
+        if (data.confirmPassword !== data.password) {
+            errors.confirmPassword = 'Passwords do not match';
+        }
+
+        return errors;
     };
 
     return (
@@ -61,42 +102,67 @@ function AccountCreation() {
                         <div className = 'input'>
                             <input 
                                 type="text" 
-                                id="studentId" 
-                                value={studentId} 
-                                onChange={(e) => setStudentId(e.target.value)} 
-                            />                        
-                        </div>
+                                name="studentId" 
+                                value={formData.studentId} 
+                                onChange={handleChange} 
+                            />                      
+                        </div> 
                     </div>
+                    {errors.studentId && ( 
+                                <span className="error-message">
+                                    {errors.studentId}
+                                </span>)} 
                     <div className = 'inputs'>
-                        <div className = "School-Email">SCHOOL EMAIL</div>
+                        <div className = "Student-ID">CONFIRM STUDENT ID</div>
                         <div className = 'input'>
                             <input 
-                                type="email" 
-                                id="schoolEmail" 
-                                value={schoolEmail} 
-                                onChange={(e) => setSchoolEmail(e.target.value)} 
-                            />                       
-                        </div>
+                                type="text" 
+                                name="confirmId" 
+                                value={formData.confirmId} 
+                                onChange={handleChange} 
+                            />                         
+                        </div> 
                     </div>
+                    {errors.confirmId && ( 
+                                <span className="error-message">
+                                    {errors.confirmId}
+                                </span>)} 
                     <div className = 'inputs'>
                         <div className = "Password">PASSWORD</div>
                         <div className = 'input'>
                             <input 
                                 type="password" 
-                                id="password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
-                            />                        
-                        </div>
+                                name="password" 
+                                value={formData.password} 
+                                onChange={handleChange} 
+                            />                          
+                        </div> 
                     </div>
+                    {errors.password && ( 
+                            <span className="error-message">
+                                {errors.password}
+                            </span>)} 
+                    <div className = 'inputs'>
+                        <div className = "Password">CONFIRM PASSWORD</div>
+                        <div className = 'input'>
+                            <input 
+                                type="password" 
+                                name="confirmPassword" 
+                                value={formData.confirmPassword} 
+                                onChange={handleChange} 
+                            />                          
+                        </div> 
+                    </div>
+                    {errors.confirmPassword && ( 
+                            <span className="error-message">
+                                {errors.confirmPassword}
+                            </span>)} 
                     {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
                     <div className = 'options'>
-                        <div className = 'already-have-account' onClick={() => navigate('/login')}>Already Have Account?Login</div>
-                        <div className = 'submit-container'>
-                    </div>
-                </div>
-
-                <div className = 'submit' onClick = {handleCreateAccount}>CREATE ACCOUNT</div>    
+                        <div className = 'already-have-account' onClick={() => navigate('/login')}>Already Have Account? Login</div>
+                        <div className = 'submit-container'></div>
+                        <div className = 'submit' onClick = {handleCreateAccount}>CREATE ACCOUNT</div>
+                </div>    
             </div>
         </div>
     </div> 

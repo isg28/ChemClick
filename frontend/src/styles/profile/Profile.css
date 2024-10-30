@@ -10,7 +10,6 @@ html, body {
 }
 
 .Profile {
-    /* placeholder */
     background-image: url('../../assets/profile/profilebg.png');
     background-size: cover;
     background-position: center;
