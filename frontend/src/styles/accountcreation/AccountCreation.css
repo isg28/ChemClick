@@ -60,7 +60,7 @@ html, body {
     margin-top: 55px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
     justify-content: center;
 }
 
@@ -68,7 +68,7 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin:auto;
+    /* margin:auto; */
     width: 480px;
     height: 80px;
     background: #eaeaea;
@@ -76,7 +76,7 @@ html, body {
     border: 4px solid #015770;
 }
 
-.input input{
+/* .input input{
     height: 50px;
     width: 100%;
     background: transparent;
@@ -86,7 +86,7 @@ html, body {
     font-size: 1.8rem;
     text-align: left;
     margin-left: 40px;
-}
+} */
 
 .input-box{
     background: white;
@@ -114,16 +114,24 @@ html, body {
     margin-left: 30px;
 }
 
+.error-message {
+    color: red;
+    font-size: 8px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+}
+
 .options{
     color: black;
     text-decoration: underline;
-    cursor: pointer;
+    position: relative;
+    justify-content: center;
 }
 
-.submit-container{
-    display:flex;
-    gap: 30px;
-    margin: 20px auto;
+.already-have-account{
+    margin-top: 20px;
+    margin-bottom: -40px;
+    margin-left: 15px;
 }
 
 .submit{
@@ -140,4 +148,5 @@ html, body {
     font-weight: 700;
     cursor: pointer;
     border-radius: 30px;
+    padding: 5px;
 }
