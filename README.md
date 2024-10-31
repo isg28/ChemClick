@@ -1,5 +1,5 @@
 # ChemClicks
-
+<a id="readme-top"></a>
 <!-- PROJECT SHIELDS -->
 <!--
 *** I'm using markdown "reference style" links for readability.
@@ -7,14 +7,6 @@
 *** See the bottom of this document for the declaration of the reference variables
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-<!--
-*** [![MIT License][license-shield]][license-url]
-*** [![LinkedIn][linkedin-shield]][linkedin-url]
 -->
 
 
@@ -24,13 +16,14 @@
     <img src="frontend/src/assets/login/ChemClickLogo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">ChemClicks: Interactive Chemistry Learning Website</h3>
-
+  <h3 align="center">ChemClicks: An Interactive Chemistry Learning Website</h3>
+</div>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![Screenshot 2024-10-30 at 10 44 34 PM](https://github.com/user-attachments/assets/49fce4f3-5f4c-4dd9-af21-3673bd1b6cf9)
+
 
 Code Blue has been tasked with creating a web application designed to facilitate learning of core high school chemistry concepts by serving as an interactive, dynamic, and autonomous learning tool.  The focus is to encourage high school students to learn by creating knowledge rather than just recollecting it. This website will house the curriculum of our client and will be designed with our client's students in mind.
 
@@ -43,9 +36,7 @@ This project is being undertaken by the development team Code Blue, composed of 
 
 ### Built With
 
-We are building this project using React as our frontend framework, Node.js, and MongoDB as our database. We will be writing code in HTML, CSS, Javascript, and Python for the backend.
-
-* [![React][React.js]][React-url]
+We are building this project using React as our frontend framework, Node.js, and MongoDB for the database. We will be writing code in HTML, CSS, Javascript, and Python for the backend.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -58,7 +49,6 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites: Installing Node.js and React framework
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm and node.js installation on MacOS
   ```sh
   # installs nvm (Node Version Manager)
@@ -94,10 +84,18 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-5. Change git remote url to avoid accidental pushes to base project
+3. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
+   ```
+4. Change directories into frontend folder 
+   ```sh
+   cd frontend
+   ```
+5. Run the code from there
+   ```sh
+   npm start
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
