@@ -1,7 +1,7 @@
 import React from 'react';
 import TeacherDashboardHeader from './TeacherDashboardHeader';
 import TeacherWelcomeBanner from './TeacherWelcomeBanner';
-import TeacherAnouncements from './TeacherAnouncements';
+import TeacherAnnouncements from './TeacherAnnouncements';
 import TeacherUnitList from './TeacherUnitList';
 import '../../styles/teacherdashboard/TeacherDashboard.css';
 
@@ -65,7 +65,7 @@ function TeacherDashboard() {
       <TeacherDashboardHeader />
       <TeacherWelcomeBanner username={username} />
       <TeacherUnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} />
-      <TeacherAnouncements announcements={sortedAnnouncements} />
+      <TeacherAnnouncements announcements={sortedAnnouncements} />
     </div>
   );
 }

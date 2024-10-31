@@ -1,18 +1,19 @@
 import React from 'react';
-import '../../styles/teacherdashboard/TeacherAnouncements.css';
+import '../../styles/teacherdashboard/TeacherAnnouncements.css';
 
-    function TeacherAnouncements({ announcements }) {
+    function Teacherannouncements({ announcements }) {
         
         
         const handlePost = () => {
         
         };
         return (
+        <div class = "teacherannouncements-wrapper">   
             <div className="teacherannouncements-container">
                 <div className="teacherannouncements-header">
                     <h1 className="teacherannouncements-title">Announcements</h1>
                 </div>
-                <div className = 'teacheranouncements-writing-box'>
+                <div className = 'teacherannouncements-writing-box'>
                     <form>
                         <input type ="text" placeholder='Write an announcement...' className="input-teacher"></input>
                         <div className = 'post' onClick = {handlePost}>Post</div>
@@ -28,8 +29,9 @@ import '../../styles/teacherdashboard/TeacherAnouncements.css';
                     ))}
                 </div>
             </div>
+        </div>     
         );
     }
 
 
-export default TeacherAnouncements;
+export default Teacherannouncements;
