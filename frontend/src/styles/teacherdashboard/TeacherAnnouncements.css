@@ -45,7 +45,6 @@
     margin-bottom: 10px; 
 }
 
-
 .teacherannouncements-writing-box{
     width: 100%; 
     height: 285px; 
@@ -58,7 +57,9 @@
     overflow-y: auto; 
     box-sizing: border-box;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-start;
+    
 }
 .input-teacher{
     width: 100%; 
@@ -71,9 +72,9 @@
     z-index: 1; 
     overflow-y: auto; 
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column-reverse;
-
+    text-align: left;
+    line-height: normal;
+   
 }
 .teacherannouncements-content-box {
     width: 100%; 

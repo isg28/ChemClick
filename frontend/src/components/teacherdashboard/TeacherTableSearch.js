@@ -4,9 +4,26 @@ function TableSearch() {
   const [searchQuery, setSearchQuery] = useState({ name: '', studentId: '', percentDone: '' });
 
   const data = [
-    { name: 'Reamonn Corkill', studentId: 'Pharmacist', percentDone: 'France' },
-    { name: 'Dara Lovell', studentId: 'Assistant Professor', percentDone: 'Russia' },
-    { name: 'Zorina Hugli', studentId: 'Design Engineer', percentDone: 'China' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Dara Lovell', studentId: '156123', percentDone: '25' },
+    { name: 'Zorina Hugli', studentId: '98414123', percentDone: '50' },
+    { name: 'Zorina Hugli', studentId: '98414123', percentDone: '50' },
+    { name: 'Dara Lovell', studentId: '156123', percentDone: '25' },
+    { name: 'Zorina Hugli', studentId: '98414123', percentDone: '50' },
+    { name: 'Dara Lovell', studentId: '156123', percentDone: '25' },
+    { name: 'Zorina Hugli', studentId: '98414123', percentDone: '50' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Dara Lovell', studentId: '156123', percentDone: '25' },
+    { name: 'Zorina Hugli', studentId: '98414123', percentDone: '50' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    { name: 'Reamonn Corkill', studentId: '1565448', percentDone: '63' },
+    
     // Add more data here...
   ];
 
@@ -44,7 +61,7 @@ function TableSearch() {
                 type="text"
                 name="studentId"
                 className="search-input"
-                placeholder="studentId"
+                placeholder="Student Id"
                 onChange={handleSearchChange}
                 value={searchQuery.studentId}
               />
@@ -54,7 +71,7 @@ function TableSearch() {
                 type="text"
                 name="percentDone"
                 className="search-input"
-                placeholder="percentDone"
+                placeholder="Percent Done"
                 onChange={handleSearchChange}
                 value={searchQuery.percentDone}
               />

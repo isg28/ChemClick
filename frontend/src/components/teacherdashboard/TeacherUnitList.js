@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/teacherdashboard/TeacherUnitList.css';
-import TableSearch from './TeacherTableSearch';
+import TeacherProgressBox from "./TeacherStudentProgress";
 
 function TeacherUnitList({ units, currentUnit }) {
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
@@ -68,7 +68,7 @@ function TeacherUnitList({ units, currentUnit }) {
                       </div>
                       {openLessons[unitIndex][lessonIndex] && (
                         <div>
-                          <TableSearch/>
+                          <TeacherProgressBox/>
                         </div>
                       )}
                     </li>

@@ -14,6 +14,7 @@ import TeacherDashboard from './components/teacherdashboard/TeacherDashboard';
 import Question from './components/question/Question';
 import ConfirmEmail from './components/passwordreset/ConfirmEmail';
 import NewPassword from './components/passwordreset/NewPassword';
+import Statistics from './components/statistics/Statistics';
 
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path = "/teacherdashboard" element = {<TeacherDashboard/>} />
         <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
         <Route path = "/NewPassword" element = {<NewPassword/>} />
+        <Route path = "/Statistics" element = {<Statistics/>} />
         {/* ... etc. */}
       </Routes>
     </Router>

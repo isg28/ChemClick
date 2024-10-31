@@ -14,10 +14,9 @@ import '../../styles/teacherdashboard/TeacherAnnouncements.css';
                     <h1 className="teacherannouncements-title">Announcements</h1>
                 </div>
                 <div className = 'teacherannouncements-writing-box'>
-                    <form>
-                        <input type ="text" placeholder='Write an announcement...' className="input-teacher"></input>
-                        <div className = 'post' onClick = {handlePost}>Post</div>
-                    </form>
+                        <input type ="text" className="input-teacher" placeholder='Write an announcement...'></input>  
+                            <div className = 'post' onClick = {handlePost}>Post</div>
+  
                 </div>
                 <div className="teacherannouncements-content-box">
                     {announcements.map((announcement, index) => (

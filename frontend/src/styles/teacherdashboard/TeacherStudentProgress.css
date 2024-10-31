@@ -1,0 +1,48 @@
+.student-progress-wrapper {
+    width: 100%;
+    height: 225px;
+    display: block;
+    justify-content: space-evenly;
+    margin: auto;
+    padding: 12px;
+}
+.student-progress-started {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 12px;
+}
+.student-progress-not-started {
+    display: flex;
+    align-items: left; 
+    justify-content: flex-start;
+    margin: auto;
+    padding: 12px;
+}
+.student-progress-finished {
+    display: flex;
+    align-items: right;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 12px;
+}
+
+.student-progress-button {
+    font-family: 'Orelega One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 59px;
+    color: black;
+    background: lightgreen;
+    border-style:solid;
+    border-color: green;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 30px ;
+    margin-top: 5px;
+}
+

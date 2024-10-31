@@ -1,0 +1,114 @@
+.main-header {
+    padding: 20px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+  
+.inner-container {
+    position: relative; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 10px;
+    background-color: #00D5D7; 
+    border-radius: 25px;
+    overflow: hidden; 
+    border: 5px solid white;
+    z-index: 20;
+}
+
+.inner-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../assets/teacherdashboard/teacherheadertopbg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    border-radius: 25px; 
+    z-index: 1; 
+}
+
+.inner-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+.profile-picture{
+    position: absolute;
+    top: 50%;
+    left: calc(300px + 100px);
+    transform: translateY(-50%);
+    z-index: 2;
+    border: 5px solid #015770;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    background-color: rgb(254, 254, 254);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic{
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+}
+
+.logo-container {
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 25px; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8); 
+    display: flex;
+    align-items: center;
+    border: 5px solid #015770; /* 5 OR 4 LOOKS GOOD */
+    position: relative;
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.dashboard-title {
+    font-family: 'Orelega One', cursive;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: black;
+    margin-right: 70px;
+}
+
+.profile-menu {
+    display: flex;
+    align-items: center;
+}
+   
+.menu-icon {
+    font-size: 2rem;
+    color: #333;
+}
+
+.menu-bar{
+    background-image: url('../../assets/teacherdashboard/teachermenubar.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: auto;
+}
