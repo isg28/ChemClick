@@ -92,7 +92,6 @@ function Profile() {
                     )}
 
 
-
                     {unitBoxNumber === 1 && (
                       <>
                         <table className="dateResultsExpandedTable">
@@ -137,7 +136,6 @@ function Profile() {
 
 
 
-
                     {unitBoxNumber === 2 && (
                       <>
                         <table className="dateResultsExpandedTable">
@@ -179,7 +177,6 @@ function Profile() {
                         </table>
                       </>
                     )}
-
 
 
                   </div>
