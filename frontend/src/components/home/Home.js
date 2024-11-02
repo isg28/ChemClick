@@ -18,7 +18,7 @@ function Home() {
             <div className="home-container">
                 <div className="main-container">
                     <div className="main-item" id="welcomeTitle">
-                        Welcome to ChemClick
+                        Welcome to ChemClicks
                     </div>
                     <div className="main-item" id="menuOptions">
                         <div className="menu-container">

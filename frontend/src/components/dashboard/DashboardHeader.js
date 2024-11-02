@@ -38,7 +38,7 @@ const DashboardHeader = () => {
       <div className="inner-container">
         <div className="logo-container">
           <img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="logo" />
-          <span className="dashboard-title">ChemClick Dashboard</span>
+          <span className="dashboard-title">ChemClicks Dashboard</span>
         </div>
         <div className = "profile-picture">
           <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>
