@@ -15,7 +15,7 @@ import Question from './components/question/Question';
 import ConfirmEmail from './components/passwordreset/ConfirmEmail';
 import NewPassword from './components/passwordreset/NewPassword';
 import Statistics from './components/statistics/Statistics';
-
+import Congrats from './components/congrats/Congrats';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -34,6 +34,7 @@ ReactDOM.render(
         <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
         <Route path = "/NewPassword" element = {<NewPassword/>} />
         <Route path = "/Statistics" element = {<Statistics/>} />
+        <Route path = "/Congrats" element = {<Congrats/>} />
         {/* ... etc. */}
       </Routes>
     </Router>
