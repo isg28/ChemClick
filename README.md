@@ -47,7 +47,7 @@ We are building this project using React as our frontend framework, Node.js, and
 
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites: Installing Node.js and React framework
+### Prerequisites: Installing Node.js, React framework, Python, and MongoDB
 
 * npm and node.js installation on MacOS
   ```sh
@@ -73,30 +73,61 @@ To get a local copy up and running follow these simple example steps.
   # verifies the right npm version is in the environment
   npm -v 
   ```
+* Installing Python
+
+      Make sure you have Python 3.8+ installed. You can download it here: https://www.python.org/downloads/
+* MongoDB Setup
+
+      Ensure MongoDB is installed and running. You can download MongoDB here: https://www.mongodb.com/try/download/community
+
 
 ### Installation
 
-1. Clone the repo
+1. Clone the repo & change directories
    ```sh
    git clone https://github.com/isg28/ChemClick.git
+   cd ChemClick
    ```
-2. Install NPM packages
-   ```sh
-   npm install
-   ```
-3. Change git remote url to avoid accidental pushes to base project
+2. Change git remote url to avoid accidental pushes to base project
    ```sh
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
-4. Change directories into frontend folder 
-   ```sh
-   cd frontend
-   ```
-5. Run the code from there
-   ```sh
-   npm start
-   ```
+3. Setup Backend 
 
+    * Change directories into the backend folder
+      ```sh
+      cd backend
+       ```
+    
+    * create a virtual environment
+      ```sh
+      python -m venv venv
+      source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+       ```
+      
+    * Install Django and other packages
+      ```sh
+      pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
+      ```
+    * Start the backend servers
+      ```sh
+      python manage.py runserver
+      ```
+4. Setup Frontend
+   * Open a new terminal & change directories into frontend folder 
+       ```sh
+       cd frontend
+       ```
+   * Install NPM packages
+       ```sh
+       npm install
+       ```
+   * Run the frontend server
+       ```sh
+       npm start
+       ```
+5. Access the Application
+   * Open your browser and access the web application at http://localhost:3000/
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
