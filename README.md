@@ -21,11 +21,11 @@
 
 <!--TABLE OF CONTENTS-->
 ## Table of Contents
-- [<code> About The Project </code>](#about-the-project)
-  *[<code> Built With </code>](#built-with)
-- [<code> Getting Started </code>](#-getting-started)
-  *[<code> Prerequisites </code>](#-prerequisites)
-  *[<code> Installation </code>](#-installation)
+- [About The Project](#about-the-project)
+  -[Built With](#built-with)
+- [Getting Started](#-getting-started)
+  -[Prerequisites](#-prerequisites-installing-node.js-react-framework-python-and-mongodb)
+  -[Installation](#-installation)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -135,7 +135,6 @@ To get a local copy up and running follow these simple example steps.
        ```
 5. Access the Application
    * Open your browser and access the web application at http://localhost:3000/
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Running Locally
   1. Clone the project
@@ -143,33 +142,37 @@ To get a local copy up and running follow these simple example steps.
     git clone https://github.com/isg28/ChemClick.git
     cd ChemClick
     ```
-  2. Move to backend folder
-    ```sh
-      cd backend
-    ```
-  3. Install necessary packages and libraries
-    ```sh
-      pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
-    ```
-  4. Run backend
-    ```sh
-    python manage.py runserver
-    ```
-  5. Move to frontend folder
-    ```sh
-    cd frontend
-    ```
-  6. Install necessary packages and libraries for frontend
-    ```sh
-       npm install
-     ```
-  7. Start up frontend server
-  ```sh
-    npm start
+  2. Set up backend
+    * Change directories into backend folder
+      ```sh
+        cd backend
+      ```
+    * Install necessary packages and libraries
+      ```sh
+        pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
+      ```
+    * Run backend
+      ```sh
+        python manage.py runserver
+      ```
+  3. Set up frontend
+    * Change directories into frontend folder
+      ```sh
+        cd frontend
+      ```
+    * Install necessary packages and libraries for frontend
+      ```sh
+        npm install
+      ```
+    * Start up frontend server
+      ```sh
+      npm start
+      ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Deployment
 
-<!--   TESTING -->
+<!--TESTING -->
 ## Running Tests
 To be continued in CSC191
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
