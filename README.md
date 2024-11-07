@@ -24,8 +24,9 @@
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
-  - [Prerequisites]
-  - [Installation]
+  - [Prerequisites](#prerequisites-installing-nodejs-react-framework-python-and-mongodb)
+  - [Installation](#installation)
+  - [Running Locally](#running-locally)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -143,16 +144,16 @@ To get a local copy up and running follow these simple example steps.
     git clone https://github.com/isg28/ChemClick.git
     cd ChemClick
     ```
-  2. Set up backend
+  2. Set up backend in new terminal
       ```sh
       # Change directories into backend folder
       cd backend
       # Install necessary packages and libraries
       pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
-      #Run backend
+      # Run backend
       python manage.py runserver
       ```
-  3. Set up frontend
+  3. Set up frontend in new terminal
       ```sh
       # Change directories into frontend folder
       cd frontend
