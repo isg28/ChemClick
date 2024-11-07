@@ -140,6 +140,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Running Locally
   1. Clone the project
+  
     ```sh
     git clone https://github.com/isg28/ChemClick.git
     cd ChemClick
