@@ -22,10 +22,10 @@
 <!--TABLE OF CONTENTS-->
 ## Table of Contents
 - [About The Project](#about-the-project)
-  -[Built With](#built-with)
-- [Getting Started](#-getting-started)
-  -[Prerequisites](#-prerequisites-installing-node.js-react-framework-python-and-mongodb)
-  -[Installation](#-installation)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites]
+  - [Installation]
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -135,6 +135,7 @@ To get a local copy up and running follow these simple example steps.
        ```
 5. Access the Application
    * Open your browser and access the web application at http://localhost:3000/
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Running Locally
   1. Clone the project
@@ -143,32 +144,23 @@ To get a local copy up and running follow these simple example steps.
     cd ChemClick
     ```
   2. Set up backend
-    * Change directories into backend folder
       ```sh
-        cd backend
-      ```
-    * Install necessary packages and libraries
-      ```sh
-        pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
-      ```
-    * Run backend
-      ```sh
-        python manage.py runserver
+      # Change directories into backend folder
+      cd backend
+      # Install necessary packages and libraries
+      pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
+      #Run backend
+      python manage.py runserver
       ```
   3. Set up frontend
-    * Change directories into frontend folder
       ```sh
-        cd frontend
-      ```
-    * Install necessary packages and libraries for frontend
-      ```sh
-        npm install
-      ```
-    * Start up frontend server
-      ```sh
+      # Change directories into frontend folder
+      cd frontend
+      # Install necessary packages and libraries for frontend
+      npm install
+      # Start up frontend server
       npm start
       ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Deployment
 
