@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/dashboard/UnitList.css';
 
-function UnitList({ units, currentUnit }) {
+function UnitList({ units, currentUnit, onLessonClick }) {
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
 
   const toggleUnit = (index) => {
@@ -48,8 +48,12 @@ function UnitList({ units, currentUnit }) {
                       key={lessonIndex} 
                       className={getStatusClass(lesson.status)}
                     >
-                      <span>{lessonIndex + 1}. {lesson.name} </span>
-                      <span className="due-date">Due: {lesson.dateDue}</span>
+                    <span 
+                      onClick={() => lesson.route && onLessonClick(lesson.route)}
+                      style={{ cursor: lesson.route ? 'pointer' : 'default' }} // can add a underline feature/color difference for the question's status result [later]
+                      >
+                    {lessonIndex + 1}. {lesson.name} </span>
+                    <span className="due-date">Due: {lesson.dateDue}</span>
                     </li>
                   ))}
                 </ul>

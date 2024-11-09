@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../styles/dashboard/WelcomeBanner.css';
 
-const WelcomeBanner = ({ username }) => {
+const WelcomeBanner = () => {
   return (
     <div className="welcome-banner">
-      <h2>Welcome Back, {username}!</h2>
+      <h2>Welcome Back!</h2>
     </div>
   );
 };

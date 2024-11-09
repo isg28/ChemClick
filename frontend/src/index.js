@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from './components/home/Home';
 import Dashboard from './components/dashboard/Dashboard';
 import Login from './components/login/Login';
@@ -16,6 +15,7 @@ import ConfirmEmail from './components/passwordreset/ConfirmEmail';
 import NewPassword from './components/passwordreset/NewPassword';
 import Statistics from './components/statistics/Statistics';
 import Congrats from './components/congrats/Congrats';
+import LessonOnePointTwo from './components/question/LessonOnePointTwo';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -35,6 +35,7 @@ ReactDOM.render(
         <Route path = "/NewPassword" element = {<NewPassword/>} />
         <Route path = "/Statistics" element = {<Statistics/>} />
         <Route path = "/Congrats" element = {<Congrats/>} />
+        <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
         {/* ... etc. */}
       </Routes>
     </Router>

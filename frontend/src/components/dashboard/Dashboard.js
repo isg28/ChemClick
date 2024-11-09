@@ -10,21 +10,33 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Dashboard() {
-  const username = "Walter W"; // CHANGE, once we can make the data dynamic!
   const navigate = useNavigate();
 
   const handleClickToBegin = () => {
     navigate('/question');
   };
+  
+  const handleLessonClick = (route) => {
+    navigate(route);
+  };
 
   const unitData = [
     {
       number: 1,
-      title: "Uncertainty of Measurement: Visible Scale",
+      title: "Uncertainty in Measurement: Visible Scale",
       lessons: [
-        { name: "Visible Scale - Ruler", status: "completed", dateDue: "Jan. 17, 2024"},
-        { name: "Visible Scale - Cylinder", status: "in-progress", dateDue: "Feb. 3, 2024"},
-        { name: "Digital Scale - Balance", status: "locked", dateDue: "[LOCKED]" }
+        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Jan. 17, 2024"},
+        { name: "Lesson 1.2: Tenths Value", status: "in-progress", dateDue: "Feb. 3, 2024", route: "/LessonOnePointTwo"},
+        { name: "Lesson 1.3: Tenths Value", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.4: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.5: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.6: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.7: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.8: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.9: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.10: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.11: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.12: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" }
       ]
     },
     {
@@ -70,8 +82,8 @@ function Dashboard() {
   return (
     <div className="Dashboard">
       <DashboardHeader />
-      <WelcomeBanner username={username} />
-      <UnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} />
+      <WelcomeBanner />
+      <UnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} onLessonClick={handleLessonClick} />
       <ClickToBegin onClick = {handleClickToBegin} />
       <Announcements announcements={sortedAnnouncements} />
     </div>
