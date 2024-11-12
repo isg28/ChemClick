@@ -25,9 +25,9 @@ function Dashboard() {
       number: 1,
       title: "Uncertainty in Measurement: Visible Scale",
       lessons: [
-        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Jan. 17, 2024"},
-        { name: "Lesson 1.2: Tenths Value", status: "in-progress", dateDue: "Feb. 3, 2024", route: "/LessonOnePointTwo"},
-        { name: "Lesson 1.3: Tenths Value", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Oct. 30, 2024", dateSubmitted: "Nov. 1, 2024"},        
+        { name: "Lesson 1.2: Tenths Value", status: "completed", submittedLate: true, dateDue: "Nov. 10, 2024", dateSubmitted: "Nov. 11, 2024", route: "/LessonOnePointTwo" },
+        { name: "Lesson 1.3: Tenths Value", status: "in-progress", dateDue: "Nov. 18, 2024" },
         { name: "Lesson 1.4: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
         { name: "Lesson 1.5: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
         { name: "Lesson 1.6: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
@@ -41,10 +41,10 @@ function Dashboard() {
     },
     {
       number: 2,
-      title: "Structure of an Atom: Bohr's Model",
+      title: "Uncertainty in Measurements (Digital Scale-Balance)",
       lessons: [
-        { name: "Bohr's Model Description", status: "locked", dateDue: "[LOCKED]" },
-        { name: "Subatomic Particles", status: "locked", dateDue: "[LOCKED]" }
+        { name: "Lesson 2.1: Digital Scale-Balance", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 2.2: Reading a Standard", status: "locked", dateDue: "[LOCKED]" }
       ]
     },
     {

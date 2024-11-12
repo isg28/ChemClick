@@ -23,6 +23,19 @@ function UnitList({ units, currentUnit, onLessonClick }) {
     }
   };
 
+  const getStatusText = (lesson) => {
+    if (lesson.status === 'completed') {
+      return lesson.submittedLate ? `Submitted (late)` : `Submitted`;
+    }
+    if (lesson.status === 'in-progress') {
+      return `In Progress, Due: ${lesson.dateDue}`;
+    }
+    if (lesson.status === 'locked') {
+      return `Due: [LOCKED]`;
+    }
+    return `Past Due: ${lesson.dateDue}`;
+  };
+
   return (
     <div className="unitlist-container">
       <div className="unitlist-header">
@@ -46,14 +59,26 @@ function UnitList({ units, currentUnit, onLessonClick }) {
                   {unit.lessons.map((lesson, lessonIndex) => (
                     <li 
                       key={lessonIndex} 
-                      className={getStatusClass(lesson.status)}
+                      className={`${getStatusClass(lesson.status)} lesson-item`}
                     >
-                    <span 
-                      onClick={() => lesson.route && onLessonClick(lesson.route)}
-                      style={{ cursor: lesson.route ? 'pointer' : 'default' }} // can add a underline feature/color difference for the question's status result [later]
+                      <span 
+                        onClick={() => lesson.route && onLessonClick(lesson.route)}
+                        style={{ cursor: lesson.route ? 'pointer' : 'default' }}
                       >
-                    {lessonIndex + 1}. {lesson.name} </span>
-                    <span className="due-date">Due: {lesson.dateDue}</span>
+                        {lessonIndex + 1}. {lesson.name}
+                      </span>
+                      <span 
+                        className="due-date" 
+                        style={{ cursor: lesson.status === 'in-progress' ? 'default' : 'pointer' }}
+                      >
+                        {getStatusText(lesson)}
+                        {lesson.status === 'completed' && (
+                          <span className="tooltip">
+                            Due: {lesson.dateDue} <br />
+                            Submitted on: {lesson.dateSubmitted}
+                          </span>
+                        )}
+                      </span>
                     </li>
                   ))}
                 </ul>

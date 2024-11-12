@@ -117,32 +117,71 @@
 }
 
 .unit-details li {
-    font-family: 'Orelega One', cursive;
-    font-size: 1.1rem;
-    color: #333;
+    position: relative;
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
     margin-left: 20px;
-    display: flex;
-    justify-content: space-between;
-    letter-spacing: 1px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    font-family: 'Orelega One', cursive;
+    font-size: 1.7rem;
+    color: #333;
 }
-  
-  .in-progress-lesson {
+
+.due-date {
+    position: absolute; 
+    right: 0; 
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    font-style: normal;
+    cursor: pointer;
+}
+
+.due-date .tooltip {
+    display: none; 
+    position: absolute;
+    top: 50%; 
+    right: 100%; 
+    transform: translateY(-50%); 
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 10px; 
+}
+
+.due-date:hover .tooltip {
+    display: block;
+}
+
+.lesson-name {
+    flex-grow: 1;
+}
+
+.in-progress-lesson {
     background-color: #e5ffb5; 
     border-left: 5px solid #bff855;
-  }
-  
-  .completed-lesson .due-date {
+}
+
+.in-progress-lesson .due-date {
+    color: #333;
+    font-weight: normal;
+}
+
+.completed-lesson .due-date {
     text-decoration: line-through;
     text-decoration-thickness: 1px; 
     text-decoration-color: darkred;
 }
 
-.due-date {
-    font-size: 0.9rem;
-    font-family: 'Orelega One', cursive;
-    color: #000000;
-    margin-left: 10px;
-    font-style: italic;
-  }
-  
+.locked-lesson .due-date {
+    color: #999;
+    font-weight: bold;
+}
