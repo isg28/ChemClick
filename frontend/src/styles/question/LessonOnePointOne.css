@@ -81,6 +81,7 @@ html,body {
 
 .lesson-one-point-one-ruler {
     width: 100%;
+    left: 85px;
 }
 
 
@@ -199,8 +200,9 @@ html,body {
     width: 25px;
     height: 25px;
     position: absolute;
-    left: 91px;
     z-index: 4;
+    cursor: pointer;
+    
 
 }
 .lesson-one-point-one-line {

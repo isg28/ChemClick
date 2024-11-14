@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
@@ -6,15 +6,34 @@ import '../../styles/question/LessonOnePointOne.css';
 
 function LessonOnePointOne(){
     const navigate = useNavigate();
+    const startingMeasurementRef = useRef(null);
 
     const handlequestion = () => {
         navigate('/dashboard');
     };
-
     const [offsetX, setOffsetX] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
-    const [lineWidth, setLineWidth] = useState(0); // Line width in pixels
+    const [lineWidth, setLineWidth] = useState(0);
+    const [randomNumber, setRandomNumber] = useState(0);
+    const [leftPosition, setLeftPosition] = useState(85);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [feedbackClass, setFeedbackClass] = useState('');
 
+
+    const generateRandomNumberAndPosition = () => {
+        // Generate random number between 0.0 and 5.9
+        const randomNum = (Math.random() * 5.9).toFixed(1);
+        setRandomNumber(randomNum);
+
+    };
+
+    // Use effect to set initial state and call the new function
+    useEffect(() => {
+        setLeftPosition(85); // Ensure the starting position is 85px
+        startingMeasurementRef.current.style.left = '85px';
+
+        generateRandomNumberAndPosition();
+    }, []);
 
 
     // Start dragging and record initial click position
@@ -23,7 +42,7 @@ function LessonOnePointOne(){
         setOffsetX(e.clientX - e.target.getBoundingClientRect().left);
     };
 
-    // Handle movement while dragging
+
     const handleMouseMove = (e) => {
         if (isDragging) {
             const newLeft = e.clientX - offsetX;
@@ -34,7 +53,38 @@ function LessonOnePointOne(){
         }
     };
 
-    // Stop dragging
+
+    const handleSubmit = () => {
+        const targetPosition = 85 + (randomNumber / 5.9) * 790;
+        const currentLeft = parseFloat(startingMeasurementRef.current.style.left || '0');
+        const tolerance = 8;
+        
+        if (Math.abs(currentLeft - targetPosition) <= tolerance) {
+            setFeedbackMessage("Correct! Moving to the next question.");
+            setFeedbackClass('correct');
+
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 2000);
+        
+            setRandomNumber((Math.random() * 5.9).toFixed(1));
+            setLineWidth(0);
+            setLeftPosition(85);
+            startingMeasurementRef.current.style.left = '85px';
+        } else {
+            setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
+            setFeedbackClass('incorrect');
+            setLineWidth(0);
+            setLeftPosition(85);
+            startingMeasurementRef.current.style.left = '85px';
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 4000);
+        }
+    };
+
     const handleMouseUp = () => {
         setIsDragging(false);
     };
@@ -58,8 +108,8 @@ function LessonOnePointOne(){
                     <div className='lesson-one-point-one-measurement-container'>
                         <div className = 'lesson-one-point-one-line' style = {{width: `${lineWidth}px`}}></div>
                         <img src ={require('../../assets/question/startingmeasurement.png')} className= "lesson-one-point-one-starting-measurement" alt= "Starting Measurment"
-                        onMouseDown={handleMouseDown}
-                        style={{ cursor: 'pointer' }}/>
+                        onMouseDown={handleMouseDown} ref = {startingMeasurementRef}
+                        style={{ cursor: 'pointer', left: `${leftPosition}px`}}/>
                     </div>
                     <div className="lesson-one-point-one-ruler-container">
                         <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-one-ruler" alt="Ruler" />
@@ -67,14 +117,15 @@ function LessonOnePointOne(){
 
                     <hr className="separator" />
                     <div className='lesson-one-point-one-question'>
-                        <h1>Click and drag the cursor to show the measurement of [number]. </h1>
-                        <button className='submitbutton'>Submit Answer</button>
+                        <h1>Click and drag the cursor to show the measurement of {randomNumber} </h1>
                     </div>
                 </div>
 
                 <div className="submit-feedback-container">
-
-
+                    <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
+                    <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
+                    <p>{feedbackMessage}</p>
+                    </div>
                 </div>
             </div>
 

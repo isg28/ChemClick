@@ -6,7 +6,7 @@ const ClickToBegin = () => {
     const navigate = useNavigate();
 
     const handleClickToBegin = () => {
-        navigate('/question');
+        navigate('/lessononepointone');
     };
     return (
         <div className="click-to-begin-container">
