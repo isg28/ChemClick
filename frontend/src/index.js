@@ -17,6 +17,7 @@ import Statistics from './components/statistics/Statistics';
 import Congrats from './components/congrats/Congrats';
 import LessonOnePointTwo from './components/question/LessonOnePointTwo';
 import LessonOnePointOne from './components/question/LessonOnePointOne';
+import LessonOnePointEight from './components/question/LessonOnePointEight';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -38,6 +39,7 @@ ReactDOM.render(
         <Route path = "/Congrats" element = {<Congrats/>} />
         <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>
+        <Route path = "/LessonOnePointEight" element = {<LessonOnePointEight/>}/>
         {/* ... etc. */}
       </Routes>
     </Router>
