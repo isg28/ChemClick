@@ -1,4 +1,4 @@
-.unitlist-container {
+.teacherunitlist-container {
     position: relative; 
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     overflow-x: hidden;
 }
 
-.unitlist-container::before {
+.teacherunitlist-container::before {
     content: '';
     position: absolute;
     top: 0;
@@ -35,23 +35,23 @@
     z-index: -1;
 }
 
-.unitlist-header h1 {
+.teacherunitlist-header h1 {
     font-family: 'Orelega One', cursive;
     font-size: 1.5rem;
     text-align: center;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border-radius: 15px;
     background-color: #fff;
     padding: 10px;
     border: 3px solid #015770;
 }
 
-.unitlist-content {
+.teacherunitlist-content {
     width: 100%;
 }
 
-.unit-item {
+.teacherunit-item {
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -59,18 +59,18 @@
     border: 2px solid #015770;
 }
 
-.current-unit {
+.teachercurrent-unit {
     background-color: #e5ffb5 !important; 
 }
 
-.current-lesson {
+.teachercurrent-lesson {
     background-color: #e5ffb5 !important; 
     padding: 10px; 
     border-radius: 5px; 
     border: 2px solid #237B31;    
 }
 
-.unit-title {
+.teacherunit-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,14 +80,14 @@
     letter-spacing: 1px;
 }
 
-.unit-number {
+.teacherunit-number {
     font-size: 1.2rem;
     font-weight: bold;
     margin-right: 10px;
     color: #000;
 }
 
-.unit-text {
+.teacherunit-text {
     flex-grow: 1;
     font-size: 1.3rem;
     font-weight: bold;
@@ -96,14 +96,14 @@
     letter-spacing: 1.5px;
 }
 
-.triangle {
+.teachertriangle {
     font-family: 'Orelega One', cursive;
     font-size: 2.5rem; 
     margin-left: 10px;
     color: #000;
 }
 
-.unit-details {
+.teacherunit-details {
     background-color: #fff;
     padding: 10px;
     margin-top: 10px;
@@ -111,14 +111,14 @@
     border: 2px solid #015770;
 }
 
-.unit-details ul {
+.teacherunit-details ul {
     list-style: decimal;
     margin-left: 20px;
     display: block;
     
 }
 
-.unit-details li {
+.teacherunit-details li {
     font-family: 'Orelega One', cursive;
     font-size: 1.1rem;
     color: #333;
@@ -129,18 +129,18 @@
     display: block;
 }
   
-  .in-progress-lesson {
+  .teacherin-progress-lesson {
     background-color: #e5ffb5; 
     border-left: 5px solid #bff855;
   }
   
-  .completed-lesson .due-date {
+  .teachercompleted-lesson .due-date {
     text-decoration: line-through;
     text-decoration-thickness: 1px; 
     text-decoration-color: darkred;
 }
 
-.due-date {
+.teacherdue-date {
     font-size: 0.9rem;
     font-family: 'Orelega One', cursive;
     color: #000000;
@@ -182,4 +182,23 @@
     display: flex;   
     width: 100%;      
   }
-  
+
+  .unit-student-progress-button {
+    font-family: 'Orelega One', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 59px;
+    color: black;
+    background: lightgreen;
+    border-style:solid;
+    border-color: green;
+    font-size: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 30px ;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    
+}
