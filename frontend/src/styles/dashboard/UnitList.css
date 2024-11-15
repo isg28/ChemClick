@@ -125,7 +125,7 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
     font-family: 'Orelega One', cursive;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     color: #333;
 }
 
@@ -133,7 +133,7 @@
     position: absolute; 
     right: 0; 
     font-family: inherit;
-    font-size: inherit;
+    font-size: 1.1rem;
     color: inherit;
     font-style: normal;
     cursor: pointer;

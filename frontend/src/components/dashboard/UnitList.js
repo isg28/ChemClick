@@ -69,7 +69,7 @@ function UnitList({ units, currentUnit, onLessonClick }) {
                       </span>
                       <span 
                         className="due-date" 
-                        style={{ cursor: lesson.status === 'in-progress' ? 'default' : 'pointer' }}
+                        style={{ cursor: lesson.status === 'in-progress' || lesson.status === 'locked' ? 'default' : 'pointer' }}
                       >
                         {getStatusText(lesson)}
                         {lesson.status === 'completed' && (
