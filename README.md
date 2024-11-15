@@ -100,6 +100,19 @@ To get a local copy up and running follow these simple example steps.
    git remote set-url origin github_username/repo_name
    git remote -v # confirm the changes
    ```
+3. Initial Setup
+    * Change directories into the ChemClick folder
+      ```sh
+      cd ChemClick
+       ```
+    * Install Mongoose, NodeJS, and other packages
+      ```sh
+      npm i express ejs 
+      npm i mongoose 
+      npm install concurrently --save-dev
+      npm i cors 
+      npm install node.js
+       ```
 3. Setup Backend 
 
     * Change directories into the backend folder
