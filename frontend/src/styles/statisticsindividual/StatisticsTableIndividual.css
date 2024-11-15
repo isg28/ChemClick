@@ -1,0 +1,55 @@
+.statisticsindividual-container {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%; 
+    max-width: 1200px; 
+    padding: 10px;
+    margin: 0 auto; 
+    background-color: #00D5D7;
+    border-radius: 10px;
+    border: 5px solid #ffffff;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
+    top: 20px;
+    min-height: 620px;
+    max-height: 1000px;
+    overflow-y: auto; 
+    overflow-x: hidden;
+}
+.statistics-lessons-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.statistics-lessons-list .lesson div span {
+    font-size: 24px;
+}
+
+.statistics-lessons-list .lesson .student-info {
+    font-size: 16px; 
+}
+
+.search-container {
+    width: 100%;
+    margin-bottom: 2px; 
+    text-align: center;
+  }
+.search-input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.search-input:focus {
+    border-color: #00D5D7;
+    outline: none;
+}
+  
+
+  

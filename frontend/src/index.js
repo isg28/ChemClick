@@ -14,6 +14,7 @@ import Question from './components/question/Question';
 import ConfirmEmail from './components/passwordreset/ConfirmEmail';
 import NewPassword from './components/passwordreset/NewPassword';
 import Statistics from './components/statistics/Statistics';
+import StatisticsIndividual from './components/statisticsindividual/StatisticsIndividual';
 import Congrats from './components/congrats/Congrats';
 import LessonOnePointTwo from './components/question/LessonOnePointTwo';
 import LessonOnePointOne from './components/question/LessonOnePointOne';
@@ -36,6 +37,7 @@ ReactDOM.render(
         <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
         <Route path = "/NewPassword" element = {<NewPassword/>} />
         <Route path = "/Statistics" element = {<Statistics/>} />
+        <Route path = "/StatisticsIndividual" element = {<StatisticsIndividual/>} />
         <Route path = "/Congrats" element = {<Congrats/>} />
         <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>

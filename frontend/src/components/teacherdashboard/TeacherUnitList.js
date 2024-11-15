@@ -20,7 +20,7 @@ function TeacherUnitList({ units, currentUnit }) {
   };
   const navigate = useNavigate();
     const handleClickToBegin = () => {
-        navigate('/statistics');
+        navigate('/statisticsindividual');
     };
 
   const getStatusClass = (status) => {
@@ -42,7 +42,7 @@ function TeacherUnitList({ units, currentUnit }) {
         <h1>Student Progress</h1> 
       </div>
       <div className='unit-student-progress-button'>
-            <h3 onClick = {handleClickToBegin} >View Full Statistics</h3> 
+            <h4 onClick = {handleClickToBegin} >View Full Individual Statistics</h4> 
       </div>
 
       <div className="teacherunitlist-content">
