@@ -16,8 +16,9 @@ import NewPassword from './components/passwordreset/NewPassword';
 import Statistics from './components/statistics/Statistics';
 import StatisticsIndividual from './components/statisticsindividual/StatisticsIndividual';
 import Congrats from './components/congrats/Congrats';
-import LessonOnePointTwo from './components/question/LessonOnePointTwo';
 import LessonOnePointOne from './components/question/LessonOnePointOne';
+import LessonOnePointTwo from './components/question/LessonOnePointTwo';
+import LessonOnePointSeven from './components/question/LessonOnePointSeven';
 import LessonOnePointEight from './components/question/LessonOnePointEight';
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -39,8 +40,9 @@ ReactDOM.render(
         <Route path = "/Statistics" element = {<Statistics/>} />
         <Route path = "/StatisticsIndividual" element = {<StatisticsIndividual/>} />
         <Route path = "/Congrats" element = {<Congrats/>} />
-        <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>
+        <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
+        <Route path = "/LessonOnePointSeven" element = {<LessonOnePointSeven/>}/>
         <Route path = "/LessonOnePointEight" element = {<LessonOnePointEight/>}/>
         {/* ... etc. */}
       </Routes>

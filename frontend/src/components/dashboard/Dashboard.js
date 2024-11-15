@@ -31,7 +31,7 @@ function Dashboard() {
         { name: "Lesson 1.4: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
         { name: "Lesson 1.5: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
         { name: "Lesson 1.6: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
-        { name: "Lesson 1.7: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
+        { name: "Lesson 1.7: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointSeven"},
         { name: "Lesson 1.8: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointEight" },
         { name: "Lesson 1.9: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
         { name: "Lesson 1.10: Meniscus (Vertical Scale)", status: "locked", dateDue: "[LOCKED]" },
