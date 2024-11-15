@@ -4,25 +4,25 @@ import '../../styles/statisticsindividual/StatisticsTableIndividual.css';
 function StatisticsTableIndividual({ lessons }) {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter lessons based on student ID
+  
   const filteredLessons = lessons.filter(lesson =>
     lesson.studentid && lesson.studentid.includes(searchQuery)
   );
 
   return (
     <div className="statistics-table">
-      {/* Search Box */}
+      {}
       <div className="search-container">
         <input
           type="text"
           placeholder="Search by Student ID"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="search-input"
+          className="statistics-individual-search-input"
         />
       </div>
 
-      {/* Lessons List */}
+      {}
       <ul className="statistics-lessons-list">
         {filteredLessons.map((lesson, index) => (
           <li key={index} className={`lesson ${lesson.status}`}>

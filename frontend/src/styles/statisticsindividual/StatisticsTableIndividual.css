@@ -36,10 +36,10 @@
 .search-container {
     width: 100%;
     margin-bottom: 2px; 
-    text-align: center;
+    text-align: left;
   }
-.search-input {
-    width: 60%;
+.statistics-individual-search-input {
+    width: 50%;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;

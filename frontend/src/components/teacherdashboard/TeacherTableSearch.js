@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 function TableSearch() {
   const [searchQuery, setSearchQuery] = useState({ studentId: '', percentDone: '' });
-  const [data, setData] = useState([]); // State to store the fetched student data
-  const [error, setError] = useState(null); // State to store errors
+  const [data, setData] = useState([]); 
+  const [error, setError] = useState(null); 
 
-  // Fetch data when the component mounts
+  
   useEffect(() => {
     fetch("http://localhost:4000/api/users")
       .then((response) => {
@@ -16,15 +16,15 @@ function TableSearch() {
       })
       .then((users) => {
         console.log("Fetched users:", users);
-        setData(users); // Update the state with the fetched data
+        setData(users); 
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
         setError("Failed to load student data.");
       });
-  }, []); // Empty dependency array ensures this runs once on component mount
+  }, []); 
 
-  // Handle search input changes
+  
   const handleSearchChange = (e) => {
     setSearchQuery({
       ...searchQuery,
@@ -32,17 +32,17 @@ function TableSearch() {
     });
   };
 
-  // Filter the data based on search queries
+ 
   const filteredData = data.filter(
     (row) =>
-      row.student_id.toLowerCase().includes(searchQuery.studentId) &&  // Use student_id from MongoDB
-      (row.percentDone || "").toString().toLowerCase().includes(searchQuery.percentDone)  // If percentDone is missing, handle it
+      row.student_id.toLowerCase().includes(searchQuery.studentId) &&  
+      (row.percentDone || "").toString().toLowerCase().includes(searchQuery.percentDone)  
   );
 
   return (
     <div className="table-container">
       <h2>Student Data</h2>
-      {error && <p>{error}</p>} {/* Display error message if there was an issue fetching data */}
+      {error && <p>{error}</p>} {}
 
       <table className="table">
         <thead>
@@ -73,8 +73,8 @@ function TableSearch() {
           {filteredData.length > 0 ? (
             filteredData.map((row, index) => (
               <tr key={index}>
-                <td>{row.student_id}</td> {/* Display student_id from MongoDB */}
-                <td>{row.percentDone || "N/A"}</td> {/* If percentDone is missing, display "N/A" */}
+                <td>{row.student_id}</td> {}
+                <td>{row.percentDone || "N/A"}</td> {}
               </tr>
             ))
           ) : (
