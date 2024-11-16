@@ -18,6 +18,7 @@ import StatisticsIndividual from './components/statisticsindividual/StatisticsIn
 import Congrats from './components/congrats/Congrats';
 import LessonOnePointOne from './components/question/LessonOnePointOne';
 import LessonOnePointTwo from './components/question/LessonOnePointTwo';
+import LessonOnePointFour from './components/question/LessonOnePointFour';
 import LessonOnePointFive from './components/question/LessonOnePointFive';
 import LessonOnePointSix from './components/question/LessonOnePointSix';
 import LessonOnePointSeven from './components/question/LessonOnePointSeven';
@@ -46,6 +47,7 @@ ReactDOM.render(
         <Route path = "/Congrats" element = {<Congrats/>} />
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>
         <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
+        <Route path = "/LessonOnePointFour" element = {<LessonOnePointFour/>}/>
         <Route path = "/LessonOnePointFive" element = {<LessonOnePointFive/>}/>
         <Route path = "/LessonOnePointSix" element = {<LessonOnePointSix/>}/>
         <Route path = "/LessonOnePointSeven" element = {<LessonOnePointSeven/>}/>
