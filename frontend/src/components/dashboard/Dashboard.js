@@ -25,7 +25,7 @@ function Dashboard() {
       number: 1,
       title: "Uncertainty in Measurement: Visible Scale",
       lessons: [
-        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Oct. 30, 2024", dateSubmitted: "Nov. 1, 2024", route: "/LessonOnePointOne" },        
+        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Oct. 30, 2024", dateSubmitted: "Nov. 1, 2024", route: "/LessonOnePointOne", route: "/LessonOnePointOne" },       
         { name: "Lesson 1.2: Tenths Value", status: "completed", submittedLate: true, dateDue: "Nov. 10, 2024", dateSubmitted: "Nov. 11, 2024", route: "/LessonOnePointTwo" },
         { name: "Lesson 1.3: Tenths Value", status: "in-progress", dateDue: "Nov. 18, 2024", route: "/LessonOnePointThree" },
         { name: "Lesson 1.4: Hundredths Digit", status: "locked", dateDue: "[LOCKED]" },
