@@ -14,7 +14,7 @@ function Login() {
 
       //setting 8 character min req for pw
       if (password.length < 8){
-        setErrorMessage("Password must be at least 8 charachters long");
+        setErrorMessage("Password must be at least 8 characters long");
         return;
       }
 
