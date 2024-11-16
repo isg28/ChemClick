@@ -10,7 +10,6 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "mongoose": "^8.8.1",
-    "node.js": "^0.0.1-security",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
@@ -42,9 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0",
-    "install": "^0.13.0"
   }
 }
