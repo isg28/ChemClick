@@ -23,7 +23,6 @@ import LessonOnePointFive from './components/question/LessonOnePointFive';
 import LessonOnePointSix from './components/question/LessonOnePointSix';
 import LessonOnePointSeven from './components/question/LessonOnePointSeven';
 import LessonOnePointEight from './components/question/LessonOnePointEight';
-import LessonOnePointFive from './components/question/LessonOnePointFive';
 import LessonOnePointThree from './components/question/LessonOnePointThree';
 
 
