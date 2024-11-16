@@ -86,13 +86,14 @@ html,body {
 }
 
 .lesson-one-point-seven-cylinder {
-    /* width: 17%; */
     height: 100%;
+    /* display: block; */
 }
 
 .lesson-one-point-seven-cylinderWaterContainer {
+    position: relative;
     min-height: 400px;
-    /* border: solid; */
+    overflow: hidden;
 }
 
 .lesson-one-point-seven-cylinderWater {
@@ -101,12 +102,28 @@ html,body {
     width: 120px;
     height: 100%;
     opacity: 50%;
-    border: solid 5px blue;
-    /* background-color: blue; */
-    /* border-color: blue transparent transparent transparent; */
-    /* border-radius: 150%/100px 100px 0 0; */
+    border: solid 4px blue;
     border-color: transparent transparent blue transparent;
     border-radius: 0 0 100px 75%/100px;
+}
+
+@keyframes idleWater {
+    0% { transform: scaleY(1) scaleX(1); }
+    25% { transform: scaleY(1.01) scaleX(1.01); }
+    50% { transform: scaleY(0.99) scaleX(0.99); }
+    75% { transform: scaleY(1.01) scaleX(1.005); }
+    100% { transform: scaleY(1) scaleX(1); }
+}
+
+.filledWater {
+    position: absolute;
+    bottom: -10px; 
+    left: 32px; 
+    right: 8px; 
+    background-color: rgba(0, 0, 255, 0.3); 
+    transition: height 0.3s ease; 
+    animation: idleWater 15s infinite ease-in-out;
+    transform-origin: bottom;
 }
 
 .lesson-one-point-seven-question {

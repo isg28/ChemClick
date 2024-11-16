@@ -166,12 +166,68 @@ function LessonOnePointSeven() {
                 </div>
                 <div className='lesson-one-point-seven-content'>
                     <p className='lesson-one-point-seven-prompt'>
-                        Look at the graduted cylinder and use the up and down arrow keys to positon the meniscus at the given measurement.
+                        Look at the graduted cylinder and use the up and down arrow keys to positon the meniscus at the given measurement. <br />
+                        Hint: Make sure to measure from the bottom of the meniscus!
                     </p>
                     <div className="lesson-one-point-seven-cylinder-container">
                         <div className="lesson-one-point-seven-cylinderWaterContainer">
                             <img src={require('../../assets/question/gradCylinder.png')} className="lesson-one-point-seven-cylinder" alt="Graduated Cylinder" />
                             <div className="lesson-one-point-seven-cylinderWater" style={{ top: questions[currentPositionIndex]?.cursorPosition }}></div>
+
+                            {/*Context: [Positionings]
+                            0-9 equivalent to 0-1 on the image scale; 9-19 equivalent to 1-2 on the image scale
+                            19-29 equivalent to 2-3 on the image scale; 29-39 equivalent to 3-4 on the image scale
+                            39-49 equivalent to 4-5 on the image; 49-59 equivalent to 5-6 on the image */}
+                            <div
+                                className="filledWater"
+                                style={{     
+                                    height:
+                                    currentPositionIndex <= 1
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 500}%` 
+                                        : currentPositionIndex <= 2
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 300}%` 
+                                        : currentPositionIndex <= 3
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 230}%` 
+                                        : currentPositionIndex <= 4
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 190}%` 
+                                        : currentPositionIndex <= 5
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 165}%` 
+                                        : currentPositionIndex <= 6
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 150}%` 
+                                        : currentPositionIndex <= 8
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 135}%` 
+                                        : currentPositionIndex <= 9
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 132}%` 
+                                        : currentPositionIndex <= 10
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 125}%` 
+                                        : currentPositionIndex <= 13
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 117}%` 
+                                        : currentPositionIndex <= 16
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 108}%` 
+                                        : currentPositionIndex <= 20
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 103}%` 
+                                        : currentPositionIndex <= 24
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 100}%` 
+                                        : currentPositionIndex <= 30
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 96}%` 
+                                        : currentPositionIndex <= 32
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 94}%` 
+                                        : currentPositionIndex <= 34
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 93.5}%` 
+                                        : currentPositionIndex <= 39
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 92}%`
+                                        : currentPositionIndex <= 44
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 91}%` 
+                                        : currentPositionIndex <= 50
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 90}%`
+                                        : currentPositionIndex <= 59 
+                                        ? `${(currentPositionIndex / (positions.length - 1)) * 90}%` 
+                                        : `${(currentPositionIndex / (positions.length - 1)) * 200}%`, 
+                                    transition: "height 0.3s ease",
+                                }}
+                                >
+                                </div>
+
                         </div>
                     </div>
 

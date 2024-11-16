@@ -47,9 +47,12 @@ ReactDOM.render(
         <Route path = "/Congrats" element = {<Congrats/>} />
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>
         <Route path = "/LessonOnePointTwo" element = {<LessonOnePointTwo/>}/>
+        <Route path = "/LessonOnePointThree" element = {<LessonOnePointThree/>}/>
         <Route path = "/LessonOnePointFour" element = {<LessonOnePointFour/>}/>
         <Route path = "/LessonOnePointFive" element = {<LessonOnePointFive/>}/>
-        <Route path = "/LessonOnePointThree" element = {<LessonOnePointThree/>}/>
+        <Route path = "/LessonOnePointSix" element = {<LessonOnePointSix/>}/>
+        <Route path = "/LessonOnePointSeven" element = {<LessonOnePointSeven/>}/>
+        <Route path = "/LessonOnePointEight" element = {<LessonOnePointEight/>}/>
         {/* ... etc. */}
       </Routes>
     </Router>
