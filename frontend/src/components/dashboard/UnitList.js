@@ -25,15 +25,32 @@ function UnitList({ units, currentUnit, onLessonClick }) {
 
   const getStatusText = (lesson) => {
     if (lesson.status === 'completed') {
-      return lesson.submittedLate ? `Submitted (late)` : `Submitted`;
+      const submittedText = lesson.submittedLate ? `Submitted (late)` : `Submitted`;
+      return (
+        <span className="status-text">
+          {submittedText}
+        </span>
+      );
     }
     if (lesson.status === 'in-progress') {
-      return `In Progress, Due: ${lesson.dateDue}`;
+      return (
+        <span className="status-text">
+          In Progress, Due: {lesson.dateDue}
+        </span>
+      );
     }
     if (lesson.status === 'locked') {
-      return `Due: [LOCKED]`;
+      return (
+        <span className="status-text">
+          Due: [LOCKED]
+        </span>
+      );
     }
-    return `Past Due: ${lesson.dateDue}`;
+    return (
+      <span className="status-text">
+        Past Due: {lesson.dateDue}
+      </span>
+    );
   };
 
   return (

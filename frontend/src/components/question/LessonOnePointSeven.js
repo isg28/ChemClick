@@ -86,6 +86,160 @@ function LessonOnePointSeven() {
     const [feedback, setFeedback] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('hidden');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+    const [bubbles, setBubbles] = useState([]); 
+
+    const calculateHeight = () => {
+        return currentPositionIndex <= 1
+            ? `${(currentPositionIndex / (positions.length - 1)) * 400}%`
+            : currentPositionIndex <= 2
+            ? `${(currentPositionIndex / (positions.length - 1)) * 250}%`
+            : currentPositionIndex <= 3
+            ? `${(currentPositionIndex / (positions.length - 1)) * 195}%`
+            : currentPositionIndex <= 4
+            ? `${(currentPositionIndex / (positions.length - 1)) * 164}%`
+            : currentPositionIndex <= 5
+            ? `${(currentPositionIndex / (positions.length - 1)) * 147}%`
+            : currentPositionIndex <= 6
+            ? `${(currentPositionIndex / (positions.length - 1)) * 135}%`
+            : currentPositionIndex <= 7
+            ? `${(currentPositionIndex / (positions.length - 1)) * 125}%`
+            : currentPositionIndex <= 8
+            ? `${(currentPositionIndex / (positions.length - 1)) * 120}%`
+            : currentPositionIndex <= 9
+            ? `${(currentPositionIndex / (positions.length - 1)) * 120}%`
+            : currentPositionIndex <= 10
+            ? `${(currentPositionIndex / (positions.length - 1)) * 115}%`
+            : currentPositionIndex <= 11
+            ? `${(currentPositionIndex / (positions.length - 1)) * 112}%`
+            : currentPositionIndex <= 12
+            ? `${(currentPositionIndex / (positions.length - 1)) * 108}%`
+            : currentPositionIndex <= 13
+            ? `${(currentPositionIndex / (positions.length - 1)) * 105}%`
+            : currentPositionIndex <= 14
+            ? `${(currentPositionIndex / (positions.length - 1)) * 105}%`
+            : currentPositionIndex <= 15
+            ? `${(currentPositionIndex / (positions.length - 1)) * 103}%`
+            : currentPositionIndex <= 16
+            ? `${(currentPositionIndex / (positions.length - 1)) * 102}%`
+            : currentPositionIndex <= 17
+            ? `${(currentPositionIndex / (positions.length - 1)) * 100}%`
+            : currentPositionIndex <= 18
+            ? `${(currentPositionIndex / (positions.length - 1)) * 98}%`
+            : currentPositionIndex <= 19
+            ? `${(currentPositionIndex / (positions.length - 1)) * 100}%`
+            : currentPositionIndex <= 20
+            ? `${(currentPositionIndex / (positions.length - 1)) * 99}%`
+            : currentPositionIndex <= 21
+            ? `${(currentPositionIndex / (positions.length - 1)) * 98}%`
+            : currentPositionIndex <= 22
+            ? `${(currentPositionIndex / (positions.length - 1)) * 96}%`
+            : currentPositionIndex <= 23
+            ? `${(currentPositionIndex / (positions.length - 1)) * 96}%`
+            : currentPositionIndex <= 24
+            ? `${(currentPositionIndex / (positions.length - 1)) * 95}%`
+            : currentPositionIndex <= 25
+            ? `${(currentPositionIndex / (positions.length - 1)) * 94}%`
+            : currentPositionIndex <= 26
+            ? `${(currentPositionIndex / (positions.length - 1)) * 94}%`
+            : currentPositionIndex <= 27
+            ? `${(currentPositionIndex / (positions.length - 1)) * 94}%`
+            : currentPositionIndex <= 28
+            ? `${(currentPositionIndex / (positions.length - 1)) * 93}%`
+            : currentPositionIndex <= 29
+            ? `${(currentPositionIndex / (positions.length - 1)) * 93}%`
+            : currentPositionIndex <= 30
+            ? `${(currentPositionIndex / (positions.length - 1)) * 93.2}%`
+            : currentPositionIndex <= 31
+            ? `${(currentPositionIndex / (positions.length - 1)) * 93}%`
+            : currentPositionIndex <= 32
+            ? `${(currentPositionIndex / (positions.length - 1)) * 92.5}%`
+            : currentPositionIndex <= 33
+            ? `${(currentPositionIndex / (positions.length - 1)) * 92.5}%`
+            : currentPositionIndex <= 34
+            ? `${(currentPositionIndex / (positions.length - 1)) * 92}%`
+            : currentPositionIndex <= 35
+            ? `${(currentPositionIndex / (positions.length - 1)) * 91}%`
+            : currentPositionIndex <= 36
+            ? `${(currentPositionIndex / (positions.length - 1)) * 91}%`
+            : currentPositionIndex <= 37
+            ? `${(currentPositionIndex / (positions.length - 1)) * 91}%`
+            : currentPositionIndex <= 38
+            ? `${(currentPositionIndex / (positions.length - 1)) * 90}%`
+            : currentPositionIndex <= 39
+            ? `${(currentPositionIndex / (positions.length - 1)) * 90.8}%`
+            : currentPositionIndex <= 40
+            ? `${(currentPositionIndex / (positions.length - 1)) * 90}%`
+            : currentPositionIndex <= 41
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89.5}%`
+            : currentPositionIndex <= 42
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89.5}%`
+            : currentPositionIndex <= 43
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89.5}%`
+            : currentPositionIndex <= 44
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89.5}%`
+            : currentPositionIndex <= 45
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89.5}%`
+            : currentPositionIndex <= 46
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89}%`
+            : currentPositionIndex <= 47
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89}%`
+            : currentPositionIndex <= 48
+            ? `${(currentPositionIndex / (positions.length - 1)) * 89}%`
+            : currentPositionIndex <= 49
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.5}%`
+            : currentPositionIndex <= 50
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.5}%`
+            : currentPositionIndex <= 51
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.5}%`
+            : currentPositionIndex <= 52
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.2}%`
+            : currentPositionIndex <= 53
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.2}%`
+            : currentPositionIndex <= 54
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88.2}%`
+            : currentPositionIndex <= 55
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88}%`
+            : currentPositionIndex <= 56
+            ? `${(currentPositionIndex / (positions.length - 1)) * 88}%`
+            : currentPositionIndex <= 57
+            ? `${(currentPositionIndex / (positions.length - 1)) * 87.8}%`
+            : currentPositionIndex <= 58
+            ? `${(currentPositionIndex / (positions.length - 1)) * 87.8}%`
+            : currentPositionIndex <= 59
+            ? `${(currentPositionIndex / (positions.length - 1)) * 87.8}%`
+            : `${(currentPositionIndex / (positions.length - 1)) * 200}%`;
+    };
+
+    const addBubble = (isMovingDown) => {
+        if (Math.random() > 0.5) return; // 50% chance to create a bubble
+    
+        const filledWaterHeight = calculateHeight();
+        const filledWaterLeft = 24; 
+        const filledWaterWidth = 52; 
+    
+        const bubbleColors = [
+            "rgba(173, 216, 230, 0.2)", // Lighter blue with very low opacity
+            "rgba(200, 230, 255, 0.2)", // ^
+            "rgba(220, 240, 255, 0.1)", // Almost white with a hint of blue
+            "rgba(240, 255, 255, 0.4)", // Light cyan
+            "rgba(240, 248, 255, 0.8)", // Alice blue
+        ];
+
+        const spawnOffset = isMovingDown ? -50 : 0;
+        const newBubble = {
+            id: Date.now(),
+            size: Math.random() * 4 + 9, 
+            left: Math.random() * filledWaterWidth + filledWaterLeft, 
+            bottom: `calc(${filledWaterHeight} + ${spawnOffset}px)`,
+            color: bubbleColors[Math.floor(Math.random() * bubbleColors.length)], 
+            duration: isMovingDown ? 1.5 : 2, 
+        };
+        setBubbles((prevBubbles) => [...prevBubbles, newBubble]);
+    
+        setTimeout(() => {
+            setBubbles((prevBubbles) => prevBubbles.filter((bubble) => bubble.id !== newBubble.id));
+        }, newBubble.duration * 1000); 
+    };
 
     useEffect(() => {
         const shuffleQuestions = () => {
@@ -106,9 +260,11 @@ function LessonOnePointSeven() {
         const handleKeyDown = (event) => {
             if(event.key === 'ArrowDown'){
                 setCurrentPositionIndex((prevIndex) => Math.max(0, prevIndex - 1));
+                addBubble(true);
                 event.preventDefault();     // prevents arrow key from scrolling page
             } else if (event.key === 'ArrowUp'){
                 setCurrentPositionIndex((prevIndex) => Math.min(positions.length - 1, prevIndex + 1));
+                addBubble(false);
                 event.preventDefault();     // prevents arrow key from scrolling page
             }
         };
@@ -179,55 +335,26 @@ function LessonOnePointSeven() {
                             19-29 equivalent to 2-3 on the image scale; 29-39 equivalent to 3-4 on the image scale
                             39-49 equivalent to 4-5 on the image; 49-59 equivalent to 5-6 on the image */}
                             <div
-                                className="filledWater"
+                                className="lesson-seven-filledWater"
                                 style={{     
-                                    height:
-                                    currentPositionIndex <= 1
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 500}%` 
-                                        : currentPositionIndex <= 2
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 300}%` 
-                                        : currentPositionIndex <= 3
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 230}%` 
-                                        : currentPositionIndex <= 4
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 190}%` 
-                                        : currentPositionIndex <= 5
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 165}%` 
-                                        : currentPositionIndex <= 6
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 150}%` 
-                                        : currentPositionIndex <= 8
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 135}%` 
-                                        : currentPositionIndex <= 9
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 132}%` 
-                                        : currentPositionIndex <= 10
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 125}%` 
-                                        : currentPositionIndex <= 13
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 117}%` 
-                                        : currentPositionIndex <= 16
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 108}%` 
-                                        : currentPositionIndex <= 20
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 103}%` 
-                                        : currentPositionIndex <= 24
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 100}%` 
-                                        : currentPositionIndex <= 30
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 96}%` 
-                                        : currentPositionIndex <= 32
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 94}%` 
-                                        : currentPositionIndex <= 34
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 93.5}%` 
-                                        : currentPositionIndex <= 39
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 92}%`
-                                        : currentPositionIndex <= 44
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 91}%` 
-                                        : currentPositionIndex <= 50
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 90}%`
-                                        : currentPositionIndex <= 59 
-                                        ? `${(currentPositionIndex / (positions.length - 1)) * 90}%` 
-                                        : `${(currentPositionIndex / (positions.length - 1)) * 200}%`, 
-                                    transition: "height 0.3s ease",
+                                    height: calculateHeight(),
                                 }}
                                 >
-                                </div>
-
+                            </div>
+                            {bubbles.map((bubble) => (
+                            <div
+                                key={bubble.id}
+                                className="bubble"
+                                style={{
+                                    width: `${bubble.size}px`,
+                                    height: `${bubble.size}px`,
+                                    left: `${bubble.left}%`,
+                                    bottom: bubble.bottom,
+                                    backgroundColor: bubble.color,
+                                    animationDuration: `${bubble.duration}s`,
+                                }}
+                            ></div>
+                            ))}
                         </div>
                     </div>
 

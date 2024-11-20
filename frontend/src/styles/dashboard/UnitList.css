@@ -161,6 +161,34 @@
     display: block;
 }
 
+.due-date .status-text:hover {
+    text-decoration: none; 
+    color: black;
+}
+
+.due-date:hover {
+    background-color: rgba(0, 0, 0, 0.05); 
+    padding: 5px; 
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease-in-out; 
+}
+
+span.due-date, span.due-date:hover {
+    text-decoration: none !important; 
+}
+
+.lesson-item span:hover {
+    text-decoration: underline; 
+    text-decoration-thickness: 2px; 
+    background-color: rgba(0, 0, 0, 0.05); 
+    color: #015770; 
+    padding: 2px; 
+    border-radius: 5px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease-in-out; 
+}
+
 .lesson-name {
     flex-grow: 1;
 }

@@ -107,23 +107,29 @@ html,body {
     border-radius: 0 0 100px 75%/100px;
 }
 
-@keyframes idleWater {
-    0% { transform: scaleY(1) scaleX(1); }
-    25% { transform: scaleY(1.01) scaleX(1.01); }
-    50% { transform: scaleY(0.99) scaleX(0.99); }
-    75% { transform: scaleY(1.01) scaleX(1.005); }
-    100% { transform: scaleY(1) scaleX(1); }
+.lesson-seven-filledWater {
+    position: absolute;
+    bottom: -10px;
+    left: 32px;
+    right: 8px;
+    background-color: rgba(0, 0, 255, 0.3); 
+    transition: height 0.3s ease, transform 0.3s ease;
+    border-radius: 0 0 20px 20px; 
+    transform-origin: bottom;
+    animation: idleRipple 3s infinite ease-in-out;
+    z-index: 1; 
 }
 
-.filledWater {
-    position: absolute;
-    bottom: -10px; 
-    left: 32px; 
-    right: 8px; 
-    background-color: rgba(0, 0, 255, 0.3); 
-    transition: height 0.3s ease; 
-    animation: idleWater 15s infinite ease-in-out;
-    transform-origin: bottom;
+@keyframes idleRipple {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.002); 
+    }
+    100% {
+         transform: scale(1);
+    }
 }
 
 .lesson-one-point-seven-question {
@@ -234,4 +240,37 @@ html,body {
     border-top: 4px solid #015770;
     margin-top: 20px;
     margin-bottom: 10px;
+}
+
+.bubble {
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    animation: rise 2s ease-in, pop 0.3s ease-out 1.7s forwards;
+    z-index: 3;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
