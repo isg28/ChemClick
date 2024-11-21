@@ -1,3 +1,4 @@
+/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -73,7 +74,7 @@ html, body {
     font-weight: normal;
     color: #0a0a0a;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 50px; /* Add space here */
     padding: 0 20px;
     max-width: 800px;
     line-height: 1.5;
@@ -86,34 +87,34 @@ html, body {
     margin: 20px 0;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .lesson-one-point-six-ruler {
     width: 90%;
     margin: 0 auto;
-    left: 0; /* Center align within the ruler container */
 }
 
-.lesson-one-point-six-static-object {
+.lesson-one-point-six-pencil {
     position: absolute;
-    bottom: 90px; /* Adjust based on ruler's position */
-    left: 5%; /* Adjust the horizontal alignment (relative to the ruler) */
-    width: 50px; /* Set object width */
-    height: auto; /* Maintain aspect ratio */
-    z-index: 4; /* Ensure it appears above the ruler */
-    pointer-events: none; /* Prevent interactions */
+    top: -30px; /* Adjusted to position the pencil above the ruler */
+    z-index: 1; /* Ensure it's behind the slider */
 }
 
 .lesson-one-point-six-dragger {
     position: absolute;
-    top: -20px; /* Adjust to sit on the ruler */
-    width: 2px; /* Thin vertical line */
-    height: 60px; /* Make it tall enough for visibility */
+    top: 320px; /* Positioned just above the ruler */
+    width: 2px;
+    height: 125px; /* Height of the red slider */
     background-color: red;
-    cursor: grab;
-    z-index: 5;
-    transition: left 0.1s linear;
+    cursor: pointer; /* Indicate draggable */
+    z-index: 2;
 }
+
+.lesson-one-point-six-dragger:active {
+    cursor: grabbing; /* Show grabbing cursor when dragging */
+}
+
 
 .lesson-one-point-six-question {
     display: flex;
@@ -121,7 +122,7 @@ html, body {
     justify-content: center; 
     gap: 10px; 
     width: 100%; 
-    margin-top: 20px; /* Space above the question section */
+    margin-top: 20px;
 }
 
 .lesson-one-point-six-input {
@@ -155,7 +156,7 @@ html, body {
     margin-top: 5px;
     text-align: center;
     transition: opacity 0.3s ease, transform 0.3s ease;
-    width: 80%; /* Make feedback box width flexible */
+    width: 80%;
 }
 
 .lesson-one-point-six-feedback.correct {
