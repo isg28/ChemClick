@@ -43,11 +43,17 @@ This project is being undertaken by the development team Code Blue, composed of 
 
 ### Built With
 
-We are building this project using React as our frontend framework, Node.js, and MongoDB for the database. We will be writing code in HTML, CSS, Javascript, and Python for the backend.
+We are building this project using the following:
+* [![React][React.js]][React-url] **React** - Frontend framework  
+* [![Node.js][Node.js]][Node-url] **Node.js** - Server-side runtime environment  
+* [![MongoDB][MongoDB]][MongoDB-url] **MongoDB** - Database  
+* [![Django][Django]][Django-url] **Django** - Backend web framework  
+* [![HTML][HTML]][HTML-url] **HTML** - Markup language
+* [![CSS][CSS]][CSS-url] **CSS** - Styling language 
+* [![JavaScript][JavaScript]][JavaScript-url] **JavaScript** - Programming language for frontend 
+* [![Python][Python]][Python-url] **Python** - Backend programming language
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -184,5 +190,26 @@ To get a local copy up and running follow these simple example steps.
 ## Running Tests
 To be continued in CSC191
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Node.js]: https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
+[Node-url]: https://nodejs.org/
+[MongoDB]: https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white
+[MongoDB-url]: https://www.mongodb.com/
+[Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white
+[Django-url]: https://www.djangoproject.com/
+[HTML]: https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white
+[HTML-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[CSS]: https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white
+[CSS-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[JavaScript]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
+[JavaScript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://www.python.org/
+
 
 
