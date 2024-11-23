@@ -23,6 +23,7 @@
 ## Table of Contents
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
+  - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites-installing-nodejs-react-framework-python-and-mongodb)
   - [Installation](#installation)
@@ -54,6 +55,44 @@ We are building this project using the following:
 * [![Python][Python]][Python-url] **Python** - Backend programming language
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ERD -->
+## Entity-Relationship Diagram (ERD)
+
+Below is the current Entity-Relationship Diagram (ERD) for our project. This diagram represents the relationships between key entities in our database:
+
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/chemclick_ERD.png" alt="Entity-Relationship Diagram" width="750">
+</div>
+
+### Explanation
+
+- **Students**: Stores basic student information, including a unique `student_id`, `school_email`, hashed `password`, and `admin_id`.
+- **Admin**: Stores information about an administrator, including a unique `admin_id` and `email`.
+- **Profiles**: Tracks a student's overall progress with `questions_completed` and `questions_correct`. 
+- **Lessons**: Contains a unique `lesson_id` and `lesson_name` for each lesson. 
+- **Lesson Progress**: Records each student's performance in individual lessons, including `questions_completed` and `questions_correct`. 
+
+
+### How Data Flows Between Entities
+- **Students**: This is the main table that holds the primary information about users (students). Each student:
+  - Is assigned to a specific admin through `admin_id` (many-to-one relationship).
+  - Has a single profile that tracks their overall progress (one-to-one relationship).
+  - Can have multiple lesson progress records (one-to-many relationship).
+- **Admin**: Manages multiple students via the `admin_id` field in the `Students` table (one-to-many relationship).
+- **Profiles**: Aggregates the overall progress data for each student, linked via `student_id` (one-to-one relationship).
+- **Lessons**: Stores information about each lesson and connects to Lesson_Progress for tracking student activity (independent table).
+- **Lesson Progress**: Tracks individual student performance for specific lessons. Acts as a bridge table:
+  - Links each entry to a specific student via `student_id` (many-to-one relationship).
+  - Links each entry to a specific lesson via `lesson_id` (many-to-one relationship).
+
+
+### Current Status
+- The ERD is still a work in progress as we refine and expand the database structure to accommodate additional features.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 <!-- GETTING STARTED -->
 ## Getting Started
