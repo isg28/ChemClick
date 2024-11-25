@@ -184,7 +184,7 @@ function LessonOnePointTwo() {
             <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
                 <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClick Assignments</h1></div>
+                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
             <div className='lesson-one-point-two-box'>
                 <div className='lesson-one-point-two-box-title'>

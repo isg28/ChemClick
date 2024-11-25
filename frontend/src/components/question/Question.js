@@ -17,7 +17,7 @@ const handlequestion = () => {
                 <img src={require('../../assets/question/Home.png')} className='homelines'onClick={handlequestion} />
 
                 <div className='insideheader'><h1>
-                    ChemClick Assignments
+                    ChemClicks Assignments
                 </h1>
                 </div>
             </div>

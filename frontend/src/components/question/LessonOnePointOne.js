@@ -95,7 +95,7 @@ function LessonOnePointOne(){
             <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
                 <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClick Assignments</h1></div>
+                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
             <div className='lesson-one-point-one-box'>
                 <div className='lesson-one-point-one-box-title'>
@@ -117,7 +117,7 @@ function LessonOnePointOne(){
 
                     <hr className="separator" />
                     <div className='lesson-one-point-one-question'>
-                        <h1>Click and drag the cursor to show the measurement of {randomNumber} </h1>
+                        <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
                     </div>
                 </div>
 

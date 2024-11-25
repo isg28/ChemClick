@@ -125,8 +125,15 @@ html, body {
     margin-top: 20px;
 }
 
+.lesson-one-point-six-question h1, .lesson-one-point-six-box-title h1 {
+        font-size: 1.72rem;
+        font-family: 'Orelega One', sans-serif;
+        font-weight: normal;
+        margin:0;
+}
+
 .lesson-one-point-six-input {
-    width: 40%; 
+    width: 50%; 
     height: 40px;
     border-radius: 15px;
     border: 2px solid #015770;

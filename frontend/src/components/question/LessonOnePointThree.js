@@ -172,7 +172,7 @@ function LessonOnePointThree() {
             <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
                 <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClick Assignments</h1></div>
+                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
             <div className='lesson-one-point-three-box'>
                 <div className='lesson-one-point-three-box-title'>
@@ -206,6 +206,7 @@ function LessonOnePointThree() {
                     <div className="lesson-one-point-three-question">
                         <input
                             type="text"
+                            className = "lesson-one-point-three-input"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             placeholder="Enter your measurement"

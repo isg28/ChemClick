@@ -176,7 +176,7 @@ function LessonOnePointEight() {
             <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
                 <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClick Assignments</h1></div>
+                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
             <div className='lesson-one-point-eight-box'>
                 <div className='lesson-one-point-eight-box-title'>
@@ -184,7 +184,8 @@ function LessonOnePointEight() {
                 </div>
                 <div className='lesson-one-point-eight-content'>
                     <p className='lesson-one-point-eight-prompt'>
-                        Look at the graduted cylinder and enter the measurement you think the meniscus is at.
+                        Look at the graduted cylinder and enter the measurement you think the meniscus is at. <br />
+                        Hint: Make sure to measure from the bottom of the meniscus!
                     </p>
                     <div className="lesson-one-point-eight-cylinder-container">
                         <div className="lesson-one-point-eight-cylinderWaterContainer">
@@ -195,7 +196,7 @@ function LessonOnePointEight() {
 
                     <hr className="separator" />
                     <div className='lesson-one-point-eight-question'>
-                        <h1>Enter the measurement shown by the cursor:</h1>
+                        <h1>Enter the measurement shown:</h1>
                         <input 
                             type='text' 
                             className='lesson-one-point-eight-input' 

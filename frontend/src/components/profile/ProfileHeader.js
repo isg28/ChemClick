@@ -39,7 +39,7 @@ const ProfileHeader = () => {
         <div className="inner-container">
             <div className="logo-container">
                 <img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="logo" onClick = {handleDashboardClick} />
-                <span className="profile-title">[User]'s Profile Page</span>
+                <span className="profile-title">Profile Page</span>
             </div>
             <div className = "profile-picture">
                 <img src = {`${process.env.PUBLIC_URL}/defaultprofilepic.png`} alt="Default Profile" className = "profile-pic"/>

@@ -133,7 +133,7 @@ function LessonOnePointSix() {
                     onClick={() => navigate('/dashboard')}
                     alt="Home Lines"
                 />
-                <div className='insideheader'><h1>ChemClick Assignments</h1></div>
+                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
 
             <div className='lesson-one-point-six-box'>
@@ -178,6 +178,7 @@ function LessonOnePointSix() {
                     <div className="lesson-one-point-six-question">
                         <input
                             type="text"
+                            className = "lesson-one-point-six-input"
                             value={userInput}
                             onChange={(e) => setUserInput(e.target.value)}
                             placeholder="Enter your measurement (e.g., 3.4)"

@@ -117,7 +117,7 @@ html,body {
     width: 100%; 
 }
 
-.lesson-one-point-eight-question h1, .lesson-one-point-eight-box-title h1 {
+.lesson-one-point-eight-question h1, .lesson-one-point-eight-box-title h1  {
     font-size: 1.72rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;

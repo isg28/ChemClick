@@ -93,7 +93,7 @@ html,body {
     width: 100%; 
 }
 
-.lesson-one-point-four-question h1 {
+.lesson-one-point-four-question h1, .lesson-one-point-four-box-title h1 {
     font-size: 1.72rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
