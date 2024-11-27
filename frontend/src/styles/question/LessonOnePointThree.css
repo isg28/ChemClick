@@ -38,8 +38,12 @@ html,body {
     background-size: cover;
     background-position: center;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+    top: 120px;
     left: -200px;
     bottom: -110px;
+    max-height: 700px;
+    overflow-y: auto; 
+    overflow-x: hidden;
 }
 
 .lesson-one-point-three-box-title {
@@ -65,7 +69,7 @@ html,body {
     margin-bottom: 20px;
     border: 5px solid #015770;
     padding-bottom: 40px;
-    min-height: 400px;
+    min-height: 500px;
 
 }
 
@@ -209,6 +213,7 @@ html,body {
     border: 5px solid #237B31;
     border-radius: 10px;
     padding: 10px 20px;
+    margin: 10px;
     font-family: 'Orelega One', sans-serif;
     font-size: 1.25rem;
     cursor: pointer;

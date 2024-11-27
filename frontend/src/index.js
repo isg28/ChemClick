@@ -18,12 +18,14 @@ import StatisticsIndividual from './components/statisticsindividual/StatisticsIn
 import Congrats from './components/congrats/Congrats';
 import LessonOnePointOne from './components/question/LessonOnePointOne';
 import LessonOnePointTwo from './components/question/LessonOnePointTwo';
+import LessonOnePointThree from './components/question/LessonOnePointThree';
 import LessonOnePointFour from './components/question/LessonOnePointFour';
 import LessonOnePointFive from './components/question/LessonOnePointFive';
 import LessonOnePointSix from './components/question/LessonOnePointSix';
 import LessonOnePointSeven from './components/question/LessonOnePointSeven';
 import LessonOnePointEight from './components/question/LessonOnePointEight';
-import LessonOnePointThree from './components/question/LessonOnePointThree';
+import LessonOnePointTen from './components/question/LessonOnePointTen';
+import LessonOnePointEleven from './components/question/LessonOnePointEleven';
 
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -53,6 +55,8 @@ ReactDOM.render(
         <Route path = "/LessonOnePointSix" element = {<LessonOnePointSix/>}/>
         <Route path = "/LessonOnePointSeven" element = {<LessonOnePointSeven/>}/>
         <Route path = "/LessonOnePointEight" element = {<LessonOnePointEight/>}/>
+        <Route path = "/LessonOnePointTen" element = {<LessonOnePointTen/>}/>
+        <Route path = "/LessonOnePointEleven" element = {<LessonOnePointEleven/>}/>
         {/* ... etc. */}
       </Routes>
     </Router>

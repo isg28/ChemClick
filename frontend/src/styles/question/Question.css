@@ -205,7 +205,7 @@ html,body {
     top: 130px;
     right: calc((100vw - 1366px) / 2 - 20px);
     width: 380px;
-    height: 185px;
+    height: 200px;
     padding: 10px;
     background-color: #00D5D7;
     border-radius: 15px;
@@ -261,10 +261,10 @@ html,body {
 
 .goalbox {
     position: absolute;
-    top: 340px;
+    top: 355px;
     right: calc((100vw - 1366px) / 2 - 20px);
     width: 380px;
-    height: 185px;
+    height: 200px;
     padding: 10px;
     background-color: #00D5D7;
     border-radius: 15px;
@@ -316,10 +316,10 @@ html,body {
 
 .progressbox {
     position: absolute;
-    top: 550px;
+    top: 580px;
     right: calc((100vw - 1366px) / 2 - 20px);
     width: 380px;
-    height: 185px;
+    height: 250px;
     padding: 10px;
     background-color: #00D5D7;
     border-radius: 8px;
@@ -350,7 +350,7 @@ html,body {
     font-size: 2.25rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
-    position: absolute;
+    position: relative;
     text-align: center;
 }
 
@@ -365,7 +365,7 @@ html,body {
 
 .progressboxbar {
     width: 330px;
-    height: 85px;
+    height: 150px;
     background-color: #ffffff;
     border-radius: 5px;
     border: 5px solid #015770;

@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,body {
     height: 100%;
     overflow-x: hidden;
 }
 
-.lesson-one-point-five {
+.lesson-one-point-eleven {
     background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
     background-size: cover;
     background-position: center;
@@ -21,11 +21,11 @@ html, body {
     overflow: hidden;
 }
 
-.lesson-one-point-five-box {
+.lesson-one-point-eleven-box {
     position: relative;
     width: 90%;
     max-width: 1000px;
-    min-height: 700px;
+    min-height: 620px;
     background-color: #00D5D7;
     border-radius: 15px;
     border: 5px solid #ffffff;
@@ -46,7 +46,7 @@ html, body {
     overflow-x: hidden;
 }
 
-.lesson-one-point-five-box-title {
+.lesson-one-point-eleven-box-title {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
@@ -54,10 +54,11 @@ html, body {
     padding: 15px;
     text-align: center;
     margin-bottom: 20px;
-    
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
 }
 
-.lesson-one-point-five-content {
+.lesson-one-point-eleven-content {
     width: 100%;
     max-width: 950px;
     background-color: #ffffff;
@@ -70,10 +71,11 @@ html, body {
     margin-bottom: 20px;
     border: 5px solid #015770;
     padding-bottom: 40px;
-    min-height: 400px;
+    min-height: 760px;
+
 }
 
-.lesson-one-point-five-ruler-container {
+.lesson-one-point-eleven-cylinder-container {
     width: 100%;
     max-width: 800px;
     display: flex;
@@ -81,22 +83,28 @@ html, body {
     position: relative;
     margin: 20px 0;
     border: 2px solid #5f3838;
-    
 }
 
-.lesson-one-point-five-ruler-H {
-    width: 100%;
+.lesson-one-point-eleven-cylinder {
+    /* width: 17%; */
+    height: 100%;
 }
 
-.lesson-one-point-five-cursor {
-    position: absolute;
-    width: 3px;
-    height: 60px;
-    background-color: red;
-    top: 0;
+.lesson-one-point-eleven-cylinderWaterContainer {
+    min-height: 400px;
+    /* border: solid; */
+    overflow: hidden;
 }
 
-.lesson-one-point-five-question {
+.lesson-one-point-eleven-cylinderWater {
+    position: relative;
+    left: 22px;
+    width: 120px;
+    height: 100%;
+    opacity: 50%;
+}
+
+.lesson-one-point-eleven-question {
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -104,15 +112,15 @@ html, body {
     width: 100%; 
 }
 
-.lesson-one-point-five-question h1, .lesson-one-point-five-box-title h1 {
+.lesson-one-point-eleven-question h1, .lesson-one-point-eleven-box-title h1  {
     font-size: 1.72rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
-    margin: 0;
+    margin:0;
 }
 
-.lesson-one-point-five-prompt {
-    font-size: 2rem;
+.lesson-one-point-eleven-prompt {
+    font-size: 1.72rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
     color: #0a0a0a;
@@ -123,7 +131,7 @@ html, body {
     line-height: 1.5;
 }
 
-.lesson-one-point-five-input {
+.lesson-one-point-eleven-input {
     width: 37%; 
     height: 40px;
     border-radius: 15px;
@@ -144,7 +152,7 @@ html, body {
     position: relative;
 }
 
-.lesson-one-point-five-feedback {
+.lesson-one-point-eleven-feedback {
     font-size: 1.25rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: bold;
@@ -155,35 +163,35 @@ html, body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.lesson-one-point-five-feedback.correct {
+.lesson-one-point-eleven-feedback.correct {
     background-color: #e0f8e0;
     color: #237B31;
     border: 2px solid #237B31;
     opacity: 1;
 }
 
-.lesson-one-point-five-feedback.incorrect {
+.lesson-one-point-eleven-feedback.incorrect {
     background-color: #ffe6e6;
     color: #662e2e;
     border: 2px solid #c94444;
     opacity: 1;
 }
 
-.lesson-one-point-five-feedback.hidden {
+.lesson-one-point-eleven-feedback.hidden {
     opacity: 0;
     transform: translateY(-10px);
 }
 
-.lesson-one-point-five-box {
+.lesson-one-point-eleven-box {
     margin-top: 10px; 
     padding-bottom: 15px; 
 }
 
-.lesson-one-point-five-question {
+.lesson-one-point-eleven-question {
     gap: 8px; 
 }
 
-.lesson-one-point-five-submit, .lesson-one-point-five-next {
+.lesson-one-point-eleven-submit, .lesson-one-point-eleven-next {
     background-color: #E3F0CC;
     border: 5px solid #237B31;
     border-radius: 10px;
@@ -194,7 +202,7 @@ html, body {
     margin-top: -15px;
 }
 
-.lesson-one-point-five-submit:active, .lesson-one-point-five-next:active {
+.lesson-one-point-eleven-submit:active, .lesson-one-point-eleven-next:active {
     background-color: #98c844;
 }
 
