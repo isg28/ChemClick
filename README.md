@@ -37,7 +37,7 @@
 
 Code Blue has been tasked with creating a web application designed to facilitate learning of core high school chemistry concepts by serving as an interactive, dynamic, and autonomous learning tool.  The focus is to encourage high school students to learn by creating knowledge rather than just recollecting it. This website will house the curriculum of our client and will be designed with our client's students in mind.
 
-This project is being undertaken by the development team Code Blue, composed of undergraduate students majoring in Computer Science at California State University, Sacramento. Its members consist of Jessica Villanueva, Danica Galang, Isabel Santoyo-Garcia, Anthony Dominguez, Maria Valencia, Marilyn Sarabia, Zhen Zhao, and Oliver Jezildzic.
+This project is being undertaken by the development team Code Blue, composed of undergraduate students majoring in Computer Science at California State University, Sacramento. Its members consist of Jessica Villanueva, Danica Galang, Isabel Santoyo-Garcia, Anthony Dominguez, Maria Valencia, Marilyn Sarabia, Zhenkang Zhao, and Oliver Jezildzic.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
