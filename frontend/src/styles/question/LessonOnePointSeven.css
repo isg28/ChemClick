@@ -71,7 +71,7 @@ html,body {
     margin-bottom: 20px;
     border: 5px solid #015770;
     padding-bottom: 40px;
-    min-height: 700px;
+    min-height: 760px;
 
 }
 
@@ -85,51 +85,30 @@ html,body {
     border: 2px solid #5f3838;
 }
 
+.lesson-one-point-seven-currentMeasurement{
+    position: absolute;
+    left: 0;
+    padding: 5px;
+    max-height: 100px;
+}
+
 .lesson-one-point-seven-cylinder {
     height: 100%;
     /* display: block; */
 }
 
 .lesson-one-point-seven-cylinderWaterContainer {
-    position: relative;
     min-height: 400px;
+    /* border: solid; */
     overflow: hidden;
 }
 
 .lesson-one-point-seven-cylinderWater {
     position: relative;
-    left: 13px;
+    left: 22px;
     width: 120px;
     height: 100%;
     opacity: 50%;
-    border: solid 4px blue;
-    border-color: transparent transparent blue transparent;
-    border-radius: 0 0 100px 75%/100px;
-}
-
-.lesson-seven-filledWater {
-    position: absolute;
-    bottom: -10px;
-    left: 32px;
-    right: 8px;
-    background-color: rgba(0, 0, 255, 0.3); 
-    transition: height 0.3s ease, transform 0.3s ease;
-    border-radius: 0 0 20px 20px; 
-    transform-origin: bottom;
-    animation: idleRipple 3s infinite ease-in-out;
-    z-index: 1; 
-}
-
-@keyframes idleRipple {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.002); 
-    }
-    100% {
-         transform: scale(1);
-    }
 }
 
 .lesson-one-point-seven-question {
@@ -144,6 +123,13 @@ html,body {
     font-size: 1.72rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
+    margin:0;
+}
+
+.lesson-one-point-seven-currentMeasurement p {
+    font-size: 1.2rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: lighter;
     margin:0;
 }
 

@@ -11,67 +11,66 @@ function LessonOnePointEight() {
     };
 
     const positions = [
-        { value: "0", position: -103.5, type: 'on tick' },
-        { value: "0.1", position: -104.5, type: 'close to lower' },
-        { value: "0.2", position: -106.3, type: 'close to lower' },
-        { value: "0.3", position: -107.6, type: 'close to lower' },
-        { value: "0.4", position: -108.9, type: 'close to lower' },
-        { value: "0.5", position: -110.1, type: 'centered' },
-        { value: "0.6", position: -111.4, type: 'close to upper' },
-        { value: "0.7", position: -112.5, type: 'close to upper' },
-        { value: "0.8", position: -114, type: 'close to upper' },
-        { value: "0.9", position: -115.9, type: 'close to upper' },
-        { value: "1.0", position: -117.2, type: 'on tick' },
-        { value: "1.1", position: -118.4, type: 'close to lower' },
-        { value: "1.2", position: -119.6, type: 'close to lower' },
-        { value: "1.3", position: -121, type: 'close to lower' },
-        { value: "1.4", position: -122.5, type: 'close to lower' },
-        { value: "1.5", position: -123.9, type: 'centered' },
-        { value: "1.6", position: -125.1, type: 'close to upper' },
-        { value: "1.7", position: -126.5, type: 'close to upper' },
-        { value: "1.8", position: -127.8, type: 'close to upper' },
-        { value: "1.9", position: -129.7, type: 'close to upper' },
-        { value: "2.0", position: -131.5, type: 'on tick' },
-        { value: "2.1", position: -132.5, type: 'close to lower' },
-        { value: "2.2", position: -133.7, type: 'close to lower' },
-        { value: "2.3", position: -135.2, type: 'close to lower' },
-        { value: "2.4", position: -136.4, type: 'close to lower' },
-        { value: "2.5", position: -137.7, type: 'centered' },
-        { value: "2.6", position: -139, type: 'close to upper' },
-        { value: "2.7", position: -140.5, type: 'close to upper' },
-        { value: "2.8", position: -142, type: 'close to upper' },
-        { value: "2.9", position: -143.5, type: 'close to upper' },
-        { value: "3.0", position: -145.2, type: 'on tick' },
-        { value: "3.1", position: -146.5, type: 'close to lower' },
-        { value: "3.2", position: -148, type: 'close to lower' },
-        { value: "3.3", position: -149.5, type: 'close to lower' },
-        { value: "3.4", position: -150.7, type: 'close to lower' },
-        { value: "3.5", position: -151.7, type: 'centered' },
-        { value: "3.6", position: -153.2, type: 'close to upper' },
-        { value: "3.7", position: -154.5, type: 'close to upper' },
-        { value: "3.8", position: -156, type: 'close to upper' },
-        { value: "3.9", position: -158, type: 'close to upper' },
-        { value: "4.0", position: -159, type: 'on tick' },
-        { value: "4.1", position: -160, type: 'close to lower' },
-        { value: "4.2", position: -161.5, type: 'close to lower' },
-        { value: "4.3", position: -163, type: 'close to lower' },
-        { value: "4.4", position: -164.5, type: 'close to lower' },
-        { value: "4.5", position: -165.7, type: 'centered' },
-        { value: "4.6", position: -167, type: 'close to upper' },
-        { value: "4.7", position: -168.5, type: 'close to upper' },
-        { value: "4.8", position: -170, type: 'close to upper' },
-        { value: "4.9", position: -171.3, type: 'close to upper' },
-        { value: "5.0", position: -172.8, type: 'on tick' },
-        { value: "5.1", position: -174.2, type: 'close to lower' },
-        { value: "5.2", position: -175.5, type: 'close to lower' },
-        { value: "5.3", position: -177, type: 'close to lower' },
-        { value: "5.4", position: -178.2, type: 'close to lower' },
-        { value: "5.5", position: -179.5, type: 'centered' },
-        { value: "5.6", position: -181, type: 'close to upper' },
-        { value: "5.7", position: -182.5, type: 'close to upper' },
-        { value: "5.8", position: -184, type: 'close to upper' },
-        { value: "5.9", position: -185.5, type: 'close to upper' },
-        
+        { value: "5.9", position: -100, type: 'close to upper' },
+        { value: "5.8", position: -99, type: 'close to upper' },
+        { value: "5.7", position: -97, type: 'close to upper' },
+        { value: "5.6", position: -96, type: 'close to upper' },
+        { value: "5.5", position: -94.5, type: 'centered' },
+        { value: "5.4", position: -93, type: 'close to lower' },
+        { value: "5.3", position: -92, type: 'close to lower' },
+        { value: "5.2", position: -90.3, type: 'close to lower' },
+        { value: "5.1", position: -88.8, type: 'close to lower' },
+        { value: "5.0", position: -87.7, type: 'on tick' },
+        { value: "4.9", position: -86.5, type: 'close to upper' },
+        { value: "4.8", position: -85, type: 'close to upper' },
+        { value: "4.7", position: -83.7, type: 'close to upper' },
+        { value: "4.6", position: -82, type: 'close to upper' },
+        { value: "4.5", position: -80.5, type: 'centered' },
+        { value: "4.4", position: -79.5, type: 'close to lower' },
+        { value: "4.3", position: -78, type: 'close to lower' },
+        { value: "4.2", position: -76.6, type: 'close to lower' },
+        { value: "4.1", position: -75, type: 'close to lower' },
+        { value: "4.0", position: -74, type: 'on tick' },
+        { value: "3.9", position: -72.5, type: 'close to upper' },
+        { value: "3.8", position: -71, type: 'close to upper' },
+        { value: "3.7", position: -69.5, type: 'close to upper' },
+        { value: "3.6", position: -68, type: 'close to upper' },
+        { value: "3.5", position: -66.8, type: 'centered' },
+        { value: "3.4", position: -65.5, type: 'close to lower' },
+        { value: "3.3", position: -64, type: 'close to lower' },
+        { value: "3.2", position: -62.5, type: 'close to lower' },
+        { value: "3.1", position: -61, type: 'close to lower' },
+        { value: "3.0", position: -60, type: 'on tick' },
+        { value: "2.9", position: -58.5, type: 'close to upper' },
+        { value: "2.8", position: -57, type: 'close to upper' },
+        { value: "2.7", position: -55.5, type: 'close to upper' },
+        { value: "2.6", position: -54, type: 'close to upper' },
+        { value: "2.5", position: -52.7, type: 'centered' },
+        { value: "2.4", position: -51, type: 'close to lower' },
+        { value: "2.3", position: -50, type: 'close to lower' },
+        { value: "2.2", position: -48.5, type: 'close to lower' },
+        { value: "2.1", position: -47, type: 'close to lower' },
+        { value: "2.0", position: -46, type: 'on tick' },
+        { value: "1.9", position: -44.5, type: 'close to upper' },
+        { value: "1.8", position: -43, type: 'close to upper' },
+        { value: "1.7", position: -41.2, type: 'close to upper' },
+        { value: "1.6", position: -40, type: 'close to upper' },
+        { value: "1.5", position: -38.7, type: 'centered' },
+        { value: "1.4", position: -37.5, type: 'close to lower' },
+        { value: "1.3", position: -35.5, type: 'close to lower' },
+        { value: "1.2", position: -34, type: 'close to lower' },
+        { value: "1.1", position: -33, type: 'close to lower' },
+        { value: "1.0", position: -32, type: 'on tick' },
+        { value: "0.9", position: -31, type: 'close to upper' },
+        { value: "0.8", position: -29.5, type: 'close to upper' },
+        { value: "0.7", position: -27.5, type: 'close to upper' },
+        { value: "0.6", position: -26, type: 'close to upper' },
+        { value: "0.5", position: -24.5, type: 'centered' },
+        { value: "0.4", position: -23.5, type: 'close to lower' },
+        { value: "0.3", position: -22, type: 'close to lower' },
+        { value: "0.2", position: -20, type: 'close to lower' },
+        { value: "0.1", position: -19.5, type: 'close to lower' },
+        { value: "0.0", position: -18, type: 'on tick' },
     ];
 
     const questions = positions.map(pos => ({
@@ -87,6 +86,35 @@ function LessonOnePointEight() {
     const [feedbackClass, setFeedbackClass] = useState('hidden');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
     const [lastDigitAttempts, setLastDigitAttempts] = useState(0); 
+    const [bubbles, setBubbles] = useState([]); 
+
+    const addBubble = (isMovingDown) => {
+        if (Math.random() > 0.5) return; // 50% chance to create a bubble
+    
+        const filledWaterLeft = 42; 
+        const filledWaterWidth = 10; 
+    
+        const bubbleColors = [
+            "rgba(173, 216, 230, 0.2)", // Lighter blue with very low opacity
+            "rgba(200, 230, 255, 0.2)", // ^
+            "rgba(220, 240, 255, 0.1)", // Almost white with a hint of blue
+            "rgba(240, 255, 255, 0.4)", // Light cyan
+            "rgba(240, 248, 255, 0.8)", // Alice blue
+        ];
+
+        const newBubble = {
+            id: Date.now(),
+            size: Math.random() * 4 + 9, 
+            left: Math.random() * filledWaterWidth + filledWaterLeft, 
+            color: bubbleColors[Math.floor(Math.random() * bubbleColors.length)], 
+            duration: isMovingDown ? 1.5 : 2, 
+        };
+        setBubbles((prevBubbles) => [...prevBubbles, newBubble]);
+    
+        setTimeout(() => {
+            setBubbles((prevBubbles) => prevBubbles.filter((bubble) => bubble.id !== newBubble.id));
+        }, newBubble.duration * 1000); 
+    };
 
     useEffect(() => {
         const shuffleQuestions = () => {
@@ -102,6 +130,7 @@ function LessonOnePointEight() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentQuestionIndex]);
 
+
     const handleInputChange = (e) => {
         setUserAnswer(e.target.value);
     };
@@ -115,6 +144,10 @@ function LessonOnePointEight() {
         if (!validFormat) {
             setFeedback("Be sure to use the correct amount of digits: #.#");
             setFeedbackClass('incorrect');
+            setTimeout(() => {
+                setFeedback('');
+                setFeedbackClass('');
+            }, 2000);
             return;
         }
     
@@ -133,6 +166,10 @@ function LessonOnePointEight() {
             setFeedback("Your answer is valid; however, most chemists agree there is a better answer. Please try again.");
             setFeedbackClass('incorrect');
             setLastDigitAttempts(0); 
+            setTimeout(() => {
+                setFeedback('');
+                setFeedbackClass('');
+            }, 2500);
             return;
         }
     
@@ -150,11 +187,20 @@ function LessonOnePointEight() {
                 }
             }
             setFeedbackClass('incorrect');
+            setTimeout(() => {
+                setFeedback('');
+                setFeedbackClass('');
+            }, 2000);
             return;
         }
         setFeedback("The answer is incorrect. Please check your answer and try again.");
         setFeedbackClass('incorrect');
         setLastDigitAttempts(0); 
+        setFeedbackClass('incorrect');
+        setTimeout(() => {
+            setFeedback('');
+            setFeedbackClass('');
+        }, 2000);
     };
 
     const handleSubmitAnswer = () => {
@@ -190,7 +236,21 @@ function LessonOnePointEight() {
                     <div className="lesson-one-point-eight-cylinder-container">
                         <div className="lesson-one-point-eight-cylinderWaterContainer">
                             <img src={require('../../assets/question/gradCylinder.png')} className="lesson-one-point-eight-cylinder" alt="Graduated Cylinder" />
-                            <div className="lesson-one-point-eight-cylinderWater" style={{ top: randomizedQuestions[currentQuestionIndex]?.cursorPosition }}></div>
+                            <img src={require('../../assets/question/water.png')} className="lesson-one-point-eight-cylinderWater" alt="Water" style={{ top: randomizedQuestions[currentQuestionIndex]?.cursorPosition }} />
+                            {bubbles.map((bubble) => (
+                            <div
+                                key={bubble.id}
+                                className="bubble"
+                                style={{
+                                    width: `${bubble.size}px`,
+                                    height: `${bubble.size}px`,
+                                    left: `${bubble.left}%`,
+                                    bottom: bubble.bottom,
+                                    backgroundColor: bubble.color,
+                                    animationDuration: `${bubble.duration}s`,
+                                }}
+                            ></div>
+                            ))}
                         </div>
                     </div>
 
