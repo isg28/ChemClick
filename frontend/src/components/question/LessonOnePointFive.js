@@ -158,6 +158,7 @@ function LessonOnePointFive() {
         };
 
         setRandomizedQuestions(shuffleQuestions());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentQuestionIndex]);
 
     const handleInputChange = (e) => {

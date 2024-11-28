@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/question/Question.css';
-import '../../styles/question/LessonOnePointTen.css';
+import '../../styles/question/LessonOnePointTwelve.css';
 import { useNavigate } from 'react-router-dom';
 
-function LessonOnePointTen() {
+function LessonOnePointTwelve() {
     const navigate = useNavigate();
 
     const handlequestion = () => {
@@ -185,28 +185,25 @@ function LessonOnePointTen() {
     };
 
     return (
-        <div className='lesson-one-point-ten'>
+        <div className='lesson-one-point-twelve'>
             <div className='questionheader'>
                 <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
                 <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
             </div>
-            <div className='lesson-one-point-ten-box'>
-                <div className='lesson-one-point-ten-box-title'>
+            <div className='lesson-one-point-twelve-box'>
+                <div className='lesson-one-point-twelve-box-title'>
                     <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
                 </div>
-                <div className='lesson-one-point-ten-content'>
-                    <p className='lesson-one-point-ten-prompt'>
+                <div className='lesson-one-point-twelve-content'>
+                    <p className='lesson-one-point-twelve-prompt'>
                         Look at the graduted cylinder and use the up and down arrow keys to position the meniscus at the given measurement. <br />
                         Hint: Make sure to measure from the bottom of the meniscus!
                     </p>
-                    <div className="lesson-one-point-ten-cylinder-container">
-                        <div className="lesson-one-point-ten-currentMeasurement">
-                            <p>Current Measurement: {questions[currentPositionIndex].value} mL</p>
-                        </div>
-                        <div className="lesson-one-point-ten-cylinderWaterContainer">
-                            <img src={require('../../assets/question/gradCylinder2.png')} className="lesson-one-point-ten-cylinder" alt="Graduated Cylinder" />
-                            <img src={require('../../assets/question/water.png')} className="lesson-one-point-ten-cylinderWater" alt="Water" style={{ top: questions[currentPositionIndex]?.cursorPosition }} />
+                    <div className="lesson-one-point-twelve-cylinder-container">
+                        <div className="lesson-one-point-twelve-cylinderWaterContainer">
+                            <img src={require('../../assets/question/gradCylinder2.png')} className="lesson-one-point-twelve-cylinder" alt="Graduated Cylinder" />
+                            <img src={require('../../assets/question/water.png')} className="lesson-one-point-twelve-cylinderWater" alt="Water" style={{ top: questions[currentPositionIndex]?.cursorPosition }} />
                             {bubbles.map((bubble) => (
                             <div
                                 key={bubble.id}
@@ -225,19 +222,19 @@ function LessonOnePointTen() {
                     </div>
 
                     <hr className="separator" />
-                    <div className='lesson-one-point-ten-question'>
+                    <div className='lesson-one-point-twelve-question'>
                         <h1>Use the up and down arrow keys to show the measurement of {randomizedQuestions[currentQuestionIndex]?.value} mL.</h1>
                     </div>
                 </div>
 
                 <div className="submit-feedback-container">
                     {!isAnswerCorrect && (
-                        <button className='lesson-one-point-ten-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                        <button className='lesson-one-point-twelve-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
                     )}
                     {isAnswerCorrect && (
-                        <button className='lesson-one-point-ten-next' onClick={handleNextQuestion}>Next Question</button>
+                        <button className='lesson-one-point-twelve-next' onClick={handleNextQuestion}>Next Question</button>
                     )}
-                    <span className={`lesson-one-point-ten-feedback ${feedbackClass}`}>{feedback}</span>
+                    <span className={`lesson-one-point-twelve-feedback ${feedbackClass}`}>{feedback}</span>
                 </div>
             </div>
 
@@ -266,4 +263,4 @@ function LessonOnePointTen() {
     );
 }
 
-export default LessonOnePointTen;
+export default LessonOnePointTwelve;
