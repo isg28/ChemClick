@@ -56,6 +56,35 @@ We are building this project using the following:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- TIME LINE -->
+## Project Timeline
+At this moment, we've completed the first part of senior project (Fall semester 2024). We will continue this project in the Spring semester during the second part of senior project. Here is our projected timeline and what we expect to get done during that phase of the development process.
+
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/timeline.png" alt="Excel Sheet Timeline Estimation" width="750">
+</div>
+
+### Explanation
+This is a very high-level overview of what we plan to develop in the Spring. Thus, these are the major milestones that we hope to accomplish to be on track to present our final product for senior showcase. Within these major milestones will be multiple sub-tasks that we will individually assign to each developer with story points to indicate difficulty and time spent on the task. There will also be acceptance criteria that each developer must complete for their task in order for it to be considered finished and marked "done". 
+
+Additionally, as part of our project management, here is an example of the tasks that we have in the backlog that we will assign to sprints according to their priority.
+
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/backlog.png" alt="Jira Backlog of Tasks" width="750">
+</div>
+
+Finally, here is an example of a story that we've created sub-tasks for in Jira and assigned to developers whose responsibility it was to finish coding before the sprint ended.
+
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/jira.png" alt="Jira Story Example" width="750">
+</div>
+
+### Current Status
+Out of eight total sprints, we have finished four during the Fall semester and are looking forward to continue development in the next four sprints during the Spring semester of 2025.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- ERD -->
 ## Entity-Relationship Diagram (ERD)
 
