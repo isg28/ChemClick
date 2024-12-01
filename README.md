@@ -23,6 +23,7 @@
 ## Table of Contents
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
+  - [Project Timeline](#project-timeline)
   - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites-installing-nodejs-react-framework-python-and-mongodb)
