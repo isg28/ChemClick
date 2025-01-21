@@ -170,75 +170,81 @@ function LessonOnePointThree() {
             onMouseUp={handleMouseUp}
         >
             <div className='questionheader'>
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-            <div className='lesson-one-point-three-box'>
-                <div className='lesson-one-point-three-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Object Length</h1>
-                </div>
-                <div className='lesson-one-point-three-content'>
-                    <p className='lesson-one-point-three-prompt'>
-                        Measure the pencil length using the cursor and type your estimate in the box below.
-                    </p>
-                    <div className='lesson-one-point-three-measurement-container'>
-                        <img
-                            src={require('../../assets/question/pencil.png')}
-                            className='lesson-one-point-three-pencil'
-                            alt="Pencil"
-                            style={{ width: `${pencilLength * PIXELS_PER_INCH}px` }}
-                        />
-                        <div className='lesson-one-point-three-line' style={{ width: `${lineWidth}px` }}></div>
-                        <img
-                            src={require('../../assets/question/startingmeasurement.png')}
-                            className="lesson-one-point-three-starting-measurement"
-                            alt="Starting Measurement"
-                            onMouseDown={handleMouseDown}
-                            ref={startingMeasurementRef}
-                            style={{ cursor: 'pointer', left: `${leftPosition}px` }}
-                        />
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
                     </div>
-                    <div className="lesson-one-point-three-ruler-container">
-                        <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-three-ruler" alt="Ruler" />
-                    </div>
-                    <hr className="separator" />
-                    <div className="lesson-one-point-three-question">
-                        <input
-                            type="text"
-                            className = "lesson-one-point-three-input"
-                            value={userInput}
-                            onChange={(e) => setUserInput(e.target.value)}
-                            placeholder="Enter your measurement"
-                        />
-                    
-                        <button className='lesson-one-point-three-submit' onClick={handleSubmit}>Submit Answer</button>
-                    </div>
-                    <div className={`lesson-one-point-three-feedback ${feedbackClass}`}>
-                        <p>{feedbackMessage}</p>
-                    </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 </div>
             </div>
-            {/* Consistent for Each Question Page */}
-             <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img src={require('../../assets/question/Stars.png')} className='masterystars' alt="Mastery Stars"/>
+
+            <div className="question-page-main">
+                <div className='lesson-one-point-three-box'>
+                    <div className='lesson-one-point-three-box-innercont'>
+                        <div className='lesson-one-point-three-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Object Length</h1>
+                        </div>
+                        <div className='lesson-one-point-three-content'>
+                            <p className='lesson-one-point-three-prompt'>
+                                Measure the pencil length using the cursor and type your estimate in the box below.
+                            </p>
+                            <div className='lesson-one-point-three-measurement-container'>
+                                <img
+                                    src={require('../../assets/question/pencil.png')}
+                                    className='lesson-one-point-three-pencil'
+                                    alt="Pencil"
+                                    style={{ width: `${pencilLength * PIXELS_PER_INCH}px` }}
+                                />
+                                <div className='lesson-one-point-three-line' style={{ width: `${lineWidth}px` }}></div>
+                                <img
+                                    src={require('../../assets/question/startingmeasurement.png')}
+                                    className="lesson-one-point-three-starting-measurement"
+                                    alt="Starting Measurement"
+                                    onMouseDown={handleMouseDown}
+                                    ref={startingMeasurementRef}
+                                    style={{ cursor: 'pointer', left: `${leftPosition}px` }}
+                                />
+                            </div>
+                            <div className="lesson-one-point-three-ruler-container">
+                                <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-three-ruler" alt="Ruler" />
+                            </div>
+                            <hr className="separator" />
+                            <div className="lesson-one-point-three-question">
+                                <input
+                                    type="text"
+                                    className = "lesson-one-point-three-input"
+                                    value={userInput}
+                                    onChange={(e) => setUserInput(e.target.value)}
+                                    placeholder="Enter your measurement"
+                                />
+                            
+                                <button className='lesson-one-point-three-submit' onClick={handleSubmit}>Submit Answer</button>
+                            </div>
+                            <div className={`lesson-one-point-three-feedback ${feedbackClass}`}>
+                                <p>{feedbackMessage}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img src={require('../../assets/question/Checkmarks.png')} className='goalchecks' alt="Goal Checks"/>
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1>
-                    <h2>Current Topic Progress: 33%</h2>
-                </div>
-                <div className='progressboxbar'>
-                    <img src={require('../../assets/question/ProgressBar.jpg')} className='progressbar' alt="Progress Bar" />
-                </div>
+
+                {/* Consistent for Each Question Page */}
+                <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     );

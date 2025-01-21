@@ -9,6 +9,10 @@ function LessonOnePointSix() {
     const PIXELS_PER_INCH = 121;
     const INITIAL_POSITION = 130;
 
+    const handlequestion = () => {
+        navigate('/dashboard');
+    };
+
     // Generate positions dynamically
     const generatePositions = (start, end, step) => {
         const positions = [];
@@ -122,110 +126,95 @@ function LessonOnePointSix() {
             onMouseUp={handleMouseUp}
         >
             <div className='questionheader'>
-                <img
-                    src={require('../../assets/question/ChemClickLogo.png')}
-                    className='ChemClickLogoHeader'
-                    alt="Chem Click Logo"
-                />
-                <img
-                    src={require('../../assets/question/Home.png')}
-                    className='homelines'
-                    onClick={() => navigate('/dashboard')}
-                    alt="Home Lines"
-                />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-
-            <div className='lesson-one-point-six-box'>
-                <div className='lesson-one-point-six-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Advanced Measurement</h1>
-                </div>
-                <div className='lesson-one-point-six-content'>
-                    <p className='lesson-one-point-six-prompt'>
-                        Measure the pencil length using the cursor and type your estimate in the box below (to the nearest hundredth).
-                    </p>
-                    <img
-                        src={require('../../assets/question/pencil.png')}
-                        className='lesson-one-point-six-pencil'
-                        alt="Pencil"
-                        style={{
-                            width: `${pencilLength * PIXELS_PER_INCH}px`, // Adjusts dynamically
-                            height: '70px', // Ensures height scales proportionally
-                            position: 'absolute',
-                            left: '130px',
-                            top: '320px', // Keeps pencil aligned
-                        }}
-                    />
-                    <div
-                        className="lesson-one-point-six-dragger"
-                        style={{
-                            left: `${leftPosition}px`,
-                        }}
-                        onMouseDown={handleMouseDown}
-                    ></div>
-                    <div
-                        className='lesson-one-point-six-line'
-                        style={{ width: `${leftPosition - INITIAL_POSITION}px` }}
-                    ></div>
-                    <div className="lesson-one-point-six-ruler-container">
-                        <img
-                            src={require('../../assets/question/RulerH.png')}
-                            className="lesson-one-point-six-ruler"
-                            alt="Ruler"
-                        />
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
                     </div>
-                    <hr className="separator" />
-                    <div className="lesson-one-point-six-question">
-                        <input
-                            type="text"
-                            className = "lesson-one-point-six-input"
-                            value={userInput}
-                            onChange={(e) => setUserInput(e.target.value)}
-                            placeholder="Enter your measurement (e.g., 3.4)"
-                            aria-label="User Measurement Input"
-                        />
-                        <button
-                            className='lesson-one-point-six-submit'
-                            onClick={handleSubmit}
-                        >
-                            Submit Answer
-                        </button>
-                    </div>
-                    <div className={`lesson-one-point-six-feedback ${feedbackClass}`}>
-                        <p>{feedbackMessage}</p>
-                    </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 </div>
             </div>
 
-            {/* Consistent section for progress */}
-            <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img
-                        src={require('../../assets/question/Stars.png')}
-                        className='masterystars'
-                        alt="Mastery Stars"
-                    />
-                </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img
-                        src={require('../../assets/question/Checkmarks.png')}
-                        className='goalchecks'
-                        alt="Goal Checks"
-                    />
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1></div>
-                <div className='progressboxbar'>
-                    <img
-                        src={require('../../assets/question/ProgressBar.jpg')}
-                        className='progressbar'
-                        alt="Progress Bar"
-                    />
+            <div className="question-page-main">
+                <div className='lesson-one-point-six-box'>
+                    <div className='lesson-one-point-six-box-innercont'>
+                        <div className='lesson-one-point-six-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Advanced Measurement</h1>
+                        </div>
+                        <div className='lesson-one-point-six-content'>
+                            <p className='lesson-one-point-six-prompt'>
+                                Measure the pencil length using the cursor and type your estimate in the box below (to the nearest hundredth).
+                            </p>
+                            <img
+                                src={require('../../assets/question/pencil.png')}
+                                className='lesson-one-point-six-pencil'
+                                alt="Pencil"
+                                style={{
+                                    width: `${pencilLength * PIXELS_PER_INCH}px`, // Adjusts dynamically
+                                    height: '70px', // Ensures height scales proportionally
+                                    position: 'absolute',
+                                    left: '130px',
+                                    top: '320px', // Keeps pencil aligned
+                                }}
+                            />
+                            <div
+                                className="lesson-one-point-six-dragger"
+                                style={{
+                                    left: `${leftPosition}px`,
+                                }}
+                                onMouseDown={handleMouseDown}
+                            ></div>
+                            <div
+                                className='lesson-one-point-six-line'
+                                style={{ width: `${leftPosition - INITIAL_POSITION}px` }}
+                            ></div>
+                            <div className="lesson-one-point-six-ruler-container">
+                                <img
+                                    src={require('../../assets/question/RulerH.png')}
+                                    className="lesson-one-point-six-ruler"
+                                    alt="Ruler"
+                                />
+                            </div>
+                            <hr className="separator" />
+                            <div className="lesson-one-point-six-question">
+                                <input
+                                    type="text"
+                                    className = "lesson-one-point-six-input"
+                                    value={userInput}
+                                    onChange={(e) => setUserInput(e.target.value)}
+                                    placeholder="Enter your measurement (e.g., 3.4)"
+                                    aria-label="User Measurement Input"
+                                />
+                                <button
+                                    className='lesson-one-point-six-submit'
+                                    onClick={handleSubmit}
+                                >
+                                    Submit Answer
+                                </button>
+                            </div>
+                            <div className={`lesson-one-point-six-feedback ${feedbackClass}`}>
+                                <p>{feedbackMessage}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+                {/* Consistent section for progress */}
+                <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

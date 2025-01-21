@@ -266,85 +266,91 @@ function LessonOnePointEleven() {
 
     return (
         <div className='lesson-one-point-eleven'>
+
             <div className='questionheader'>
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-            <div className='lesson-one-point-eleven-box'>
-                <div className='lesson-one-point-eleven-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Hundredths Value</h1>
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
+                    </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 </div>
-                <div className='lesson-one-point-eleven-content'>
-                    <p className='lesson-one-point-eleven-prompt'>
-                        Look at the graduted cylinder and enter the measurement you think the meniscus is at. <br />
-                        Hint: Make sure to measure from the bottom of the meniscus!
-                    </p>
-                    <div className="lesson-one-point-eleven-cylinder-container">
-                        <div className="lesson-one-point-eleven-cylinderWaterContainer">
-                            <img src={require('../../assets/question/gradCylinder2.png')} className="lesson-one-point-eleven-cylinder" alt="Graduated Cylinder" />
-                            <img src={require('../../assets/question/water.png')} className="lesson-one-point-eleven-cylinderWater" alt="Water" style={{ top: randomizedQuestions[currentQuestionIndex]?.cursorPosition }} />
-                            {bubbles.map((bubble) => (
-                            <div
-                                key={bubble.id}
-                                className="bubble"
-                                style={{
-                                    width: `${bubble.size}px`,
-                                    height: `${bubble.size}px`,
-                                    left: `${bubble.left}%`,
-                                    bottom: bubble.bottom,
-                                    backgroundColor: bubble.color,
-                                    animationDuration: `${bubble.duration}s`,
-                                }}
-                            ></div>
-                            ))}
+            </div>
+
+            <div className="question-page-main">
+                <div className='lesson-one-point-eleven-box'>
+                    <div className='lesson-one-point-eleven-box-innercont'>
+                        <div className='lesson-one-point-eleven-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Hundredths Value</h1>
+                        </div>
+                        <div className='lesson-one-point-eleven-content'>
+                            <p className='lesson-one-point-eleven-prompt'>
+                                Look at the graduted cylinder and enter the measurement you think the meniscus is at. <br />
+                                Hint: Make sure to measure from the bottom of the meniscus!
+                            </p>
+                            <div className="lesson-one-point-eleven-cylinder-container">
+                                <div className="lesson-one-point-eleven-cylinderWaterContainer">
+                                    <img src={require('../../assets/question/gradCylinder2.png')} className="lesson-one-point-eleven-cylinder" alt="Graduated Cylinder" />
+                                    <img src={require('../../assets/question/water.png')} className="lesson-one-point-eleven-cylinderWater" alt="Water" style={{ top: randomizedQuestions[currentQuestionIndex]?.cursorPosition }} />
+                                    {bubbles.map((bubble) => (
+                                    <div
+                                        key={bubble.id}
+                                        className="bubble"
+                                        style={{
+                                            width: `${bubble.size}px`,
+                                            height: `${bubble.size}px`,
+                                            left: `${bubble.left}%`,
+                                            bottom: bubble.bottom,
+                                            backgroundColor: bubble.color,
+                                            animationDuration: `${bubble.duration}s`,
+                                        }}
+                                    ></div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <hr className="separator" />
+                            <div className='lesson-one-point-eleven-question'>
+                                <h1>Enter the measurement shown:</h1>
+                                <input 
+                                    type='text' 
+                                    className='lesson-one-point-eleven-input' 
+                                    placeholder='Enter the measurement here' 
+                                    value={userAnswer}
+                                    onChange={handleInputChange} 
+                                /> 
+                            </div>
+                        </div>
+
+                        <div className="submit-feedback-container">
+                            {!isAnswerCorrect && (
+                                <button className='lesson-one-point-eleven-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                            )}
+                            {isAnswerCorrect && (
+                                <button className='lesson-one-point-eleven-next' onClick={handleNextQuestion}>Next Question</button>
+                            )}
+                            <span className={`lesson-one-point-eleven-feedback ${feedbackClass}`}>{feedback}</span>
                         </div>
                     </div>
+                </div>
 
-                    <hr className="separator" />
-                    <div className='lesson-one-point-eleven-question'>
-                        <h1>Enter the measurement shown:</h1>
-                        <input 
-                            type='text' 
-                            className='lesson-one-point-eleven-input' 
-                            placeholder='Enter the measurement here' 
-                            value={userAnswer}
-                            onChange={handleInputChange} 
-                        /> 
+                {/* Consistent for Each Question Page */}
+                <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
                     </div>
-                </div>
-
-                <div className="submit-feedback-container">
-                    {!isAnswerCorrect && (
-                        <button className='lesson-one-point-eleven-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
-                    )}
-                    {isAnswerCorrect && (
-                        <button className='lesson-one-point-eleven-next' onClick={handleNextQuestion}>Next Question</button>
-                    )}
-                    <span className={`lesson-one-point-eleven-feedback ${feedbackClass}`}>{feedback}</span>
-                </div>
-            </div>
-
-            {/* Consistent for Each Question Page */}
-            <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img src={require('../../assets/question/Stars.png')} className='masterystars' alt="Mastery Stars"/>
-                </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img src={require('../../assets/question/Checkmarks.png')} className='goalchecks' alt="Goal Checks"/>
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1>
-                    <h2>Current Topic Progress: 33%</h2>
-                </div>
-                <div className='progressboxbar'>
-                    <img src={require('../../assets/question/ProgressBar.jpg')} className='progressbar' alt="Progress Bar" />
-                </div>
+                </div>     
             </div>
         </div>
     );

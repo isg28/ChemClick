@@ -9,6 +9,11 @@ html,body {
     overflow-x: hidden;
 }
 
+.side-column {
+    height: 90vh;
+    width: 33vw;
+}
+
 .Question {
     background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
     background-size: cover;
@@ -22,19 +27,17 @@ html,body {
     position: relative;
 }
 
-.questionheader {
-    width: 1400px;
-    height: 100px;
+
+.question-head-in {
+    height: 10vh;
+    width: 90vw;
     background-image: url('../../assets/question/RainbowBackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-color: #00D5D7;
     margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10px;
+    
     border-radius: 15px;
     border: 5px solid white;
     display: flex;
@@ -42,19 +45,19 @@ html,body {
     justify-content: flex-start;
     padding: 10px;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+}
 
+.question-page-main {
+    display: flex;
+    height: 87vh;
+    padding: 1%;
 }
 
 .insideheader {
-    width: 500px;
-    height: 70px;
     background-color: #ffffff;
-    border-radius: 5px;
-    border: 5px solid #015770;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 900px;
 }
 
 .insideheader h1 {
@@ -62,21 +65,26 @@ html,body {
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
     position: absolute;
-    left: 7%;
+    left: 11.5%;
+
+    background-color: #ffffff;
+    padding: 4px 8px;
+    border-radius: 20px;
+    border: 5px solid #015770;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1.5px;
 }
 
 .ChemClickLogoHeader {
     position: absolute;
     width: 55px;
-    left: 2.75%;
-    top: 22%;
+    left: 6.75%;
 }
 
 .homelines {
     position: absolute;
-    width: 60px;
-    right: 2%;
-    top: 22%;
+    width: 50px;
+    right: 7%;
     cursor: pointer;
 }
 
@@ -200,38 +208,47 @@ html,body {
     font-family: 'Orelega One', sans-serif;
 }
 
-.masterybox {
-    position: absolute;
-    top: 130px;
-    right: calc((100vw - 1366px) / 2 - 20px);
-    width: 380px;
-    height: 200px;
+.side-column-box {
+    width: 30vw;
+    max-width: 450px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    
     background-color: #00D5D7;
     border-radius: 15px;
     border: 5px solid #ffffff;
-    align-items: center;
-    margin: 0 auto;
-    justify-content: flex-start;
     background-image: url('../../assets/question/RainbowBackground.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
-
 }
 
-.masteryboxtitle {
-    width: 200px;
-    height: 60px;
+.side-column-box-holder {
+    display: flex;
+    flex-direction: column;
+    height: 52vh;
+    width: 33vw;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.side-column-box-title {
+    width: 80%;
+    max-width: 250px;
     background-color: #ffffff;
     border-radius: 5px;
     border: 5px solid #015770;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 75px;
 
+    font-size: 1.3vw;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
 }
 
 .masteryboxtitle h1 {
@@ -242,38 +259,23 @@ html,body {
     text-align: center;
 }
 
-.masteryboxstars {
-    width: 330px;
-    height: 85px;
+.side-column-box-info {
+    width: 90%;
+    max-width: 350px;
     background-color: #ffffff;
     border-radius: 5px;
     border: 5px solid #015770;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 11px;
-    margin-top: 10px;
+
+    font-size: 1.3vw;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
 }
 
 .masterystars {
     width: 300px;
-}
-
-.goalbox {
-    position: absolute;
-    top: 355px;
-    right: calc((100vw - 1366px) / 2 - 20px);
-    width: 380px;
-    height: 200px;
-    padding: 10px;
-    background-color: #00D5D7;
-    border-radius: 15px;
-    border: 5px solid #ffffff;
-    background-image: url('../../assets/question/RainbowBackground.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
 }
 
 .goalboxtitle {
@@ -312,25 +314,6 @@ html,body {
 
 .goalchecks {
     width: 300px;
-}
-
-.progressbox {
-    position: absolute;
-    top: 580px;
-    right: calc((100vw - 1366px) / 2 - 20px);
-    width: 380px;
-    height: 250px;
-    padding: 10px;
-    background-color: #00D5D7;
-    border-radius: 8px;
-    border: 5px solid #ffffff;
-    background-image: url('../../assets/question/RainbowBackground.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
-    border-radius: 15px;
-
 }
 
 .progressboxtitle {

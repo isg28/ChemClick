@@ -18,32 +18,34 @@ html,body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
 .lesson-one-point-four-box {
-    position: relative;
-    width: 90%;
-    max-width: 1000px;
-    min-height: 700px;
-    background-color: #00D5D7;
-    border-radius: 15px;
-    border: 5px solid #ffffff;
-    padding: 20px;
+    height: 66vh;
+    width: 66vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+}
+
+.lesson-one-point-four-box-innercont {
+    width: 60vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+
     background-image: url('../../assets/question/RainbowBackground.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
-    top: 120px;
-    left: -200px;
-    bottom: -110px;
-    max-height: 700px;
-    overflow-y: auto; 
-    overflow-x: hidden;
 }
 
 .lesson-one-point-four-box-title {
@@ -69,8 +71,6 @@ html,body {
     margin-bottom: 20px;
     border: 5px solid #015770;
     padding-bottom: 40px;
-    min-height: 400px;
-
 }
 
 .lesson-one-point-four-ruler-container {
@@ -98,14 +98,14 @@ html,body {
 }
 
 .lesson-one-point-four-question h1, .lesson-one-point-four-box-title h1 {
-    font-size: 1.72rem;
+    font-size: 1.3rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
     margin:0;
 }
 
 .lesson-one-point-four-prompt {
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
     color: #0a0a0a;
@@ -166,11 +166,6 @@ html,body {
 .lesson-one-point-four-feedback.hidden {
     opacity: 0;
     transform: translateY(-10px);
-}
-
-.lesson-one-point-four-box {
-    margin-top: 10px; 
-    padding-bottom: 15px; 
 }
 
 .lesson-one-point-four-question {

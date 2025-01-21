@@ -93,62 +93,67 @@ function LessonOnePointOne(){
         <div className='lesson-one-point-one' onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}>
             <div className='questionheader'>
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-            <div className='lesson-one-point-one-box'>
-                <div className='lesson-one-point-one-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
-                </div>
-                <div className='lesson-one-point-one-content'>
-                    <p className='lesson-one-point-one-prompt'>
-                        Click and drag the dot to create a line to the measurement listed below. Submit the answer when you are ready.
-                    </p>
-                    <div className='lesson-one-point-one-measurement-container'>
-                        <div className = 'lesson-one-point-one-line' style = {{width: `${lineWidth}px`}}></div>
-                        <img src ={require('../../assets/question/startingmeasurement.png')} className= "lesson-one-point-one-starting-measurement" alt= "Starting Measurment"
-                        onMouseDown={handleMouseDown} ref = {startingMeasurementRef}
-                        style={{ cursor: 'pointer', left: `${leftPosition}px`}}/>
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
                     </div>
-                    <div className="lesson-one-point-one-ruler-container">
-                        <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-one-ruler" alt="Ruler" />
-                    </div>
-
-                    <hr className="separator" />
-                    <div className='lesson-one-point-one-question'>
-                        <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
-                    </div>
-                </div>
-
-                <div className="submit-feedback-container">
-                    <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                    <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
-                    <p>{feedbackMessage}</p>
-                    </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 </div>
             </div>
+
+            <div className="question-page-main">
+                <div className='lesson-one-point-one-box'>
+                    <div className='lesson-one-point-one-box-innercont'>
+                        <div className='lesson-one-point-one-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
+                        </div>
+                        <div className='lesson-one-point-one-content'>
+                            <p className='lesson-one-point-one-prompt'>
+                                Click and drag the dot to create a line to the measurement listed below. Submit the answer when you are ready.
+                            </p>
+                            <div className='lesson-one-point-one-measurement-container'>
+                                <div className = 'lesson-one-point-one-line' style = {{width: `${lineWidth}px`}}></div>
+                                <img src ={require('../../assets/question/startingmeasurement.png')} className= "lesson-one-point-one-starting-measurement" alt= "Starting Measurment"
+                                onMouseDown={handleMouseDown} ref = {startingMeasurementRef}
+                                style={{ cursor: 'pointer', left: `${leftPosition}px`}}/>
+                            </div>
+                            <div className="lesson-one-point-one-ruler-container">
+                                <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-one-ruler" alt="Ruler" />
+                            </div>
+
+                            <hr className="separator" />
+                            <div className='lesson-one-point-one-question'>
+                                <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
+                            </div>
+                        </div>
+
+                        <div className="submit-feedback-container">
+                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
+                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
+                            <p>{feedbackMessage}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             {/* Consistent for Each Question Page */}
-            <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img src={require('../../assets/question/Stars.png')} className='masterystars' alt="Mastery Stars"/>
-                </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img src={require('../../assets/question/Checkmarks.png')} className='goalchecks' alt="Goal Checks"/>
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1>
-                    <h2>Current Topic Progress: 33%</h2>
-                </div>
-                <div className='progressboxbar'>
-                    <img src={require('../../assets/question/ProgressBar.jpg')} className='progressbar' alt="Progress Bar" />
-                </div>
+                <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                    </div>
+                </div>    
             </div>
         </div>
     );

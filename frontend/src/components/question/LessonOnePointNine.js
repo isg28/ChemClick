@@ -186,78 +186,84 @@ function LessonOnePointNine() {
 
     return (
         <div className='lesson-one-point-nine'>
+
             <div className='questionheader'>
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-            <div className='lesson-one-point-nine-box'>
-                <div className='lesson-one-point-nine-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
+                    </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
                 </div>
-                <div className='lesson-one-point-nine-content'>
-                    <p className='lesson-one-point-nine-prompt'>
-                        Look at the graduted cylinder and use the up and down arrow keys to position the meniscus at the given measurement. <br />
-                        Hint: Make sure to measure from the bottom of the meniscus!
-                    </p>
-                    <div className="lesson-one-point-nine-cylinder-container">
-                        <div className="lesson-one-point-nine-cylinderWaterContainer">
-                            <img src={require('../../assets/question/gradCylinder.png')} className="lesson-one-point-nine-cylinder" alt="Graduated Cylinder" />
-                            <img src={require('../../assets/question/water.png')} className="lesson-one-point-nine-cylinderWater" alt="Water" style={{ top: questions[currentPositionIndex]?.cursorPosition }} />
-                            {bubbles.map((bubble) => (
-                            <div
-                                key={bubble.id}
-                                className="bubble"
-                                style={{
-                                    width: `${bubble.size}px`,
-                                    height: `${bubble.size}px`,
-                                    left: `${bubble.left}%`,
-                                    bottom: bubble.bottom,
-                                    backgroundColor: bubble.color,
-                                    animationDuration: `${bubble.duration}s`,
-                                }}
-                            ></div>
-                            ))}
+            </div>
+
+            <div className="question-page-main">
+                <div className='lesson-one-point-nine-box'>
+                    <div className='lesson-one-point-nine-box-innercont'>
+                        <div className='lesson-one-point-nine-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
+                        </div>
+                        <div className='lesson-one-point-nine-content'>
+                            <p className='lesson-one-point-nine-prompt'>
+                                Look at the graduted cylinder and use the up and down arrow keys to position the meniscus at the given measurement. <br />
+                                Hint: Make sure to measure from the bottom of the meniscus!
+                            </p>
+                            <div className="lesson-one-point-nine-cylinder-container">
+                                <div className="lesson-one-point-nine-cylinderWaterContainer">
+                                    <img src={require('../../assets/question/gradCylinder.png')} className="lesson-one-point-nine-cylinder" alt="Graduated Cylinder" />
+                                    <img src={require('../../assets/question/water.png')} className="lesson-one-point-nine-cylinderWater" alt="Water" style={{ top: questions[currentPositionIndex]?.cursorPosition }} />
+                                    {bubbles.map((bubble) => (
+                                    <div
+                                        key={bubble.id}
+                                        className="bubble"
+                                        style={{
+                                            width: `${bubble.size}px`,
+                                            height: `${bubble.size}px`,
+                                            left: `${bubble.left}%`,
+                                            bottom: bubble.bottom,
+                                            backgroundColor: bubble.color,
+                                            animationDuration: `${bubble.duration}s`,
+                                        }}
+                                    ></div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <hr className="separator" />
+                            <div className='lesson-one-point-nine-question'>
+                                <h1>Use the up and down arrow keys to show the measurement of {randomizedQuestions[currentQuestionIndex]?.value} mL.</h1>
+                            </div>
+                        </div>
+
+                        <div className="submit-feedback-container">
+                            {!isAnswerCorrect && (
+                                <button className='lesson-one-point-nine-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                            )}
+                            {isAnswerCorrect && (
+                                <button className='lesson-one-point-nine-next' onClick={handleNextQuestion}>Next Question</button>
+                            )}
+                            <span className={`lesson-one-point-nine-feedback ${feedbackClass}`}>{feedback}</span>
                         </div>
                     </div>
-
-                    <hr className="separator" />
-                    <div className='lesson-one-point-nine-question'>
-                        <h1>Use the up and down arrow keys to show the measurement of {randomizedQuestions[currentQuestionIndex]?.value} mL.</h1>
-                    </div>
                 </div>
-
-                <div className="submit-feedback-container">
-                    {!isAnswerCorrect && (
-                        <button className='lesson-one-point-nine-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
-                    )}
-                    {isAnswerCorrect && (
-                        <button className='lesson-one-point-nine-next' onClick={handleNextQuestion}>Next Question</button>
-                    )}
-                    <span className={`lesson-one-point-nine-feedback ${feedbackClass}`}>{feedback}</span>
-                </div>
-            </div>
 
             {/* Consistent for Each Question Page */}
-            <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img src={require('../../assets/question/Stars.png')} className='masterystars' alt="Mastery Stars"/>
-                </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img src={require('../../assets/question/Checkmarks.png')} className='goalchecks' alt="Goal Checks"/>
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1>
-                    <h2>Current Topic Progress: 33%</h2>
-                </div>
-                <div className='progressboxbar'>
-                    <img src={require('../../assets/question/ProgressBar.jpg')} className='progressbar' alt="Progress Bar" />
-                </div>
+            <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     );

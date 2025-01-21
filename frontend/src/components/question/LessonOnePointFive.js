@@ -251,67 +251,71 @@ function LessonOnePointFive() {
     return (
         <div className='lesson-one-point-five'>
             <div className='questionheader'>
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                <div className='insideheader'><h1>ChemClicks Assignments</h1></div>
-            </div>
-            <div className='lesson-one-point-five-box'>
-                <div className='lesson-one-point-five-box-title'>
-                    <h1>Unit One: Uncertainty in Measurement - Hundredths Value</h1>
-                </div>
-                <div className='lesson-one-point-five-content'>
-                    <p className='lesson-one-point-five-prompt'>
-                        Look at the cursor's position on the scale and type the measurement you think it shows.
-                    </p>
-                    <div className="lesson-one-point-five-ruler-container">
-                        <img src={require('../../assets/question/RulerH.png')} className="lesson-one-point-five-ruler-H" alt="RulerH" />
-                        <div className="lesson-one-point-five-cursor" style={{ left: randomizedQuestions[currentQuestionIndex]?.cursorPosition }}></div>
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
                     </div>
+                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
+                </div>
+            </div>
 
-                    <hr className="separator" />
-                    <div className='lesson-one-point-five-question'>
-                        <h1>Enter the measurement shown by the cursor:</h1>
-                        <input
-                            type='text'
-                            className='lesson-one-point-five-input'
-                            placeholder='Enter the measurement here'
-                            value={userAnswer}
-                            onChange={handleInputChange}
-                        />
+            <div className="question-page-main">
+                <div className='lesson-one-point-five-box'>
+                    <div className='lesson-one-point-five-box-innercont'>
+                        <div className='lesson-one-point-five-box-title'>
+                            <h1>Unit One: Uncertainty in Measurement - Hundredths Value</h1>
+                        </div>
+                        <div className='lesson-one-point-five-content'>
+                            <p className='lesson-one-point-five-prompt'>
+                                Look at the cursor's position on the scale and type the measurement you think it shows.
+                            </p>
+                            <div className="lesson-one-point-five-ruler-container">
+                                <img src={require('../../assets/question/RulerH.png')} className="lesson-one-point-five-ruler-H" alt="RulerH" />
+                                <div className="lesson-one-point-five-cursor" style={{ left: randomizedQuestions[currentQuestionIndex]?.cursorPosition }}></div>
+                            </div>
+
+                            <hr className="separator" />
+                            <div className='lesson-one-point-five-question'>
+                                <h1>Enter the measurement shown by the cursor:</h1>
+                                <input
+                                    type='text'
+                                    className='lesson-one-point-five-input'
+                                    placeholder='Enter the measurement here'
+                                    value={userAnswer}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="submit-feedback-container">
+                            {!isAnswerCorrect && (
+                                <button className='lesson-one-point-five-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                            )}
+                            {isAnswerCorrect && (
+                                <button className='lesson-one-point-five-next' onClick={handleNextQuestion}>Next Question</button>
+                            )}
+                            <span className={`lesson-one-point-five-feedback ${feedbackClass}`}>{feedback}</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="submit-feedback-container">
-                    {!isAnswerCorrect && (
-                        <button className='lesson-one-point-five-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
-                    )}
-                    {isAnswerCorrect && (
-                        <button className='lesson-one-point-five-next' onClick={handleNextQuestion}>Next Question</button>
-                    )}
-                    <span className={`lesson-one-point-five-feedback ${feedbackClass}`}>{feedback}</span>
-                </div>
-            </div>
-
-            {/* Consistent for Each Question Page */}
-            <div className='masterybox'>
-                <div className='masteryboxtitle'><h1>Mastery</h1></div>
-                <div className='masteryboxstars'>
-                    <img src={require('../../assets/question/Stars.png')} className='masterystars' alt="Mastery Stars" />
-                </div>
-            </div>
-            <div className='goalbox'>
-                <div className='goalboxtitle'><h1>Goal</h1></div>
-                <div className='goalboxchecks'>
-                    <img src={require('../../assets/question/Checkmarks.png')} className='goalchecks' alt="Goal Checks" />
-                </div>
-            </div>
-            <div className='progressbox'>
-                <div className='progressboxtitle'><h1>Progress</h1>
-                    <h2>Current Topic Progress: 33%</h2>
-                </div>
-                <div className='progressboxbar'>
-                    <img src={require('../../assets/question/ProgressBar.jpg')} className='progressbar' alt="Progress Bar" />
-                </div>
+                {/* Consistent for Each Question Page */}
+                <div className="side-column">
+                    <div className="side-column-box-holder">
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Mastery</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Goal</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                        <div className='side-column-box'>
+                            <div className='side-column-box-title'><h1>Progress</h1></div>
+                            <div className='side-column-box-info'>Placeholder</div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     );
