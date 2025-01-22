@@ -2,9 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import '../../styles/question/Question.css';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/question/LessonOnePointSix.css';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointSix() {
     const navigate = useNavigate();
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.6'; 
+        
+    const [goal, setGoal] = useState(); 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5;
 
     const PIXELS_PER_INCH = 121;
     const INITIAL_POSITION = 130;
@@ -48,9 +58,26 @@ function LessonOnePointSix() {
     };    
 
     useEffect(() => {
+        if (!studentId) {
+            console.error('Student ID not found');
+            navigate('/login'); // Redirect to login if studentId is missing
+            return;
+        }
+        
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });
+        };
+        
+        initializeData();
         setLeftPosition(INITIAL_POSITION); // Reset dragger to the initial position
         generateRandomPencilLength(); // Generate a new random pencil length
-    }, []);
+    }, [studentId, lessonId, navigate]);
 
     // Handle mouse down event for drag
     const handleMouseDown = (e) => {
@@ -74,8 +101,8 @@ function LessonOnePointSix() {
     };
 
     // Handle submission and feedback logic
-  const handleSubmit = () => {
-    if (!userInput || isNaN(userInput)) {
+    const handleSubmit = async () => {
+        if (!userInput || isNaN(userInput)) {
         setFeedbackMessage("Please enter a valid number.");
         setFeedbackClass('incorrect');
         return;
@@ -99,10 +126,16 @@ function LessonOnePointSix() {
     if (userAnswer === correctAnswer) {
         setFeedbackMessage("Correct! Great job!");
         setFeedbackClass('correct');
+        await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
+            setCorrectAnswers, setProgress, setMasteryLevel,
+        }); 
         setTimeout(() => resetQuestion(), 2000);
     } else {
         setFeedbackMessage(`Incorrect. The correct answer was wrong, try again`);
         setFeedbackClass('incorrect');
+        await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+            setCorrectAnswers, setProgress, setMasteryLevel,
+        });
         setTimeout(() => {
             setFeedbackMessage('');
             setFeedbackClass('');
@@ -199,20 +232,42 @@ function LessonOnePointSix() {
                     </div>
                 </div>    
 
-                {/* Consistent section for progress */}
+                {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

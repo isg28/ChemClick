@@ -3,9 +3,19 @@ import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointFour.css';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointFour(){
     const navigate = useNavigate();
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.4'; 
+        
+    const [goal, setGoal] = useState(); 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5;
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -50,18 +60,40 @@ function LessonOnePointFour(){
 
                 {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

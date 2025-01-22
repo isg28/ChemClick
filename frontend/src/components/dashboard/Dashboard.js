@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardHeader from './DashboardHeader';
 import WelcomeBanner from './WelcomeBanner';
 import ClickToBegin from './ClickToBegin';
@@ -11,6 +11,193 @@ import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [unitData, setUnitData] = useState([]); 
+  const [currentUnit, setCurrentUnit] = useState(1); 
+  const [loading, setLoading] = useState(true); 
+  const [announcements, setAnnouncements] = useState([]);
+
+  const numberToWord = (num) => {
+    const numWords = [
+      "Zero", "One", "Two", "Three", "Four", 
+      "Five", "Six", "Seven", "Eight", "Nine", 
+      "Ten", "Eleven", "Twelve"
+    ];
+    if (num < 13) {
+      return numWords[num];
+    }
+    return num.toString(); 
+  };
+  
+  useEffect(() => {
+    fetch('http://localhost:8000/announcements/') 
+    .then((response) => {
+      if (!response.ok) throw new Error('Failed to fetch announcements');
+      return response.json();
+    })
+    .then((data) => {
+      const sortedAnnouncements = data.sort(
+        (a, b) => new Date(b.date) - new Date(a.date) // Sort announcements by date (newest first)
+      );
+      setAnnouncements(sortedAnnouncements);
+    })
+    .catch((error) => console.error('Error fetching announcements:', error));
+
+    fetch('http://localhost:8000/lessons/') 
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch lesson data');
+        return res.json();
+      })
+      .then((data) => {
+        const transformedData = [
+          {
+            number: 1,
+            title: 'Uncertainty in Measurement: Visible Scale',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson1'))
+              .map((lesson) => {
+                const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson1"
+                const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+                return {
+                  ...lesson,
+                  dateDue: formatDate(lesson.due_date),
+                  route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+                };
+              }),
+          },
+          {
+            number: 2,
+            title: 'Uncertainty in Measurements (Digital Scale-Balance)',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson2'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson2"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }
+            }),
+          },
+          {
+            number: 3,
+            title: 'Atomic Structure',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson3'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson3"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 4,
+            title: 'Periodic Table Classification',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson4'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson4"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 5,
+            title: 'Periodic Trends (Valence Electrons)',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson5'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson5"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 6,
+            title: 'Forming Monatomic Ions',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson6'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson6"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 7,
+            title: 'Periodic Trends (Using group number to predict charge of monatomic ion)',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson7'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson7"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 8,
+            title: 'Forming Ionic Compounds',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson8'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson8"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 9,
+            title: 'Writing the Formula of Ionic Compounds',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson9'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson9"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+        ];
+        // ^ format ex. Unit 2, Lesson 4 -> lesson2.4 (for the lesson id)
+        setUnitData(transformedData);
+
+        const inProgressLesson = data.find((lesson) => lesson.status === 'in-progress');
+        console.log('In-progress lesson:', inProgressLesson);
+        
+        if (inProgressLesson) {
+          const match = inProgressLesson.lesson_id.match(/lesson(\d+)\.\d+/);
+          if (match && match[1]) {
+            const unitNumber = parseInt(match[1], 10);
+            console.log('Parsed unit number:', unitNumber);
+            setCurrentUnit(unitNumber);
+          } else {
+            console.warn('Invalid lesson_id format:', inProgressLesson.lesson_id);
+          }
+        } else{
+          console.log('No in-progress lesson found, defaulting to unit 1');
+        }
+      })
+      .catch((error) => console.error('Error fetching unit data:', error))
+      .finally(() => setLoading(false));
+  }, []);
 
   const handleClickToBegin = () => {
     navigate('/question');
@@ -20,72 +207,35 @@ function Dashboard() {
     navigate(route);
   };
 
-  const unitData = [
-    {
-      number: 1,
-      title: "Uncertainty in Measurement: Visible Scale",
-      lessons: [
-        { name: "Lesson 1.1: Tenths Value", status: "completed", dateDue: "Oct. 30, 2024", dateSubmitted: "Nov. 1, 2024", route: "/LessonOnePointOne" },       
-        { name: "Lesson 1.2: Tenths Value", status: "completed", submittedLate: true, dateDue: "Nov. 10, 2024", dateSubmitted: "Nov. 11, 2024", route: "/LessonOnePointTwo" },
-        { name: "Lesson 1.3: Tenths Value", status: "in-progress", dateDue: "Nov. 18, 2024", route: "/LessonOnePointThree" },
-        { name: "Lesson 1.4: Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointFour" },
-        { name: "Lesson 1.5: Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointFive" },
-        { name: "Lesson 1.6: Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointSix" },
-        { name: "Lesson 1.7: Meniscus - Tenths Value", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointSeven" },
-        { name: "Lesson 1.8: Meniscus - Tenths Value", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointEight" },
-        { name: "Lesson 1.9: Meniscus - Tenths Value", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointNine" },
-        { name: "Lesson 1.10: Meniscus - Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointTen" },
-        { name: "Lesson 1.11: Meniscus - Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointEleven" },
-        { name: "Lesson 1.12: Meniscus - Hundredths Digit", status: "locked", dateDue: "[LOCKED]", route: "/LessonOnePointTwelve" }
-      ]
-    },
-    {
-      number: 2,
-      title: "Uncertainty in Measurements (Digital Scale-Balance)",
-      lessons: [
-        { name: "Lesson 2.1: Digital Scale-Balance", status: "locked", dateDue: "[LOCKED]" },
-        { name: "Lesson 2.2: Reading a Standard", status: "locked", dateDue: "[LOCKED]" }
-      ]
-    },
-    {
-      number: 3,
-      title: "Nomenclature: Symbols Name",
-      lessons: [
-        { name: "Periodic Table Symbols", status: "locked", dateDue: "[LOCKED]" },
-        { name: "Element Naming", status: "locked", dateDue: "[LOCKED]" }
-      ]
-    }
-  ];
-    
-  const currentUnit = 1;
-  const currentLessons = ["Visible Scale - Cylinder"]; // Hard coded for now
-
-  const announcementsData = [
-    {
-      author: "MATT BRIMBERRY",
-      date: "Jan 15, 2024, 2:20pm",
-      message: "Unit One, Lesson 1, due Friday. Make sure to turn in the certificate to Google Classroom!",
-    },
-    {
-      author: "MATT BRIMBERRY",
-      date: "Feb 1, 2024, 3:30pm",
-      message: "Don't forget to submit your Visible Scale - Ruler by the end of the week!",
-    },
-  ];
-
-  const sortedAnnouncements = announcementsData.sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return dateB - dateA; // Dates are sorted in descending order (newest first)
-  });
-
+  const formatDate = (isoDate) => {
+    if (!isoDate) return '[LOCKED]';
+    const date = new Date(isoDate);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'UTC',
+    });
+  };
+  
   return (
     <div className="Dashboard">
       <DashboardHeader />
       <WelcomeBanner />
-      <UnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} onLessonClick={handleLessonClick} />
+{/*       <UnitList units={unitData} currentUnit={currentUnit} currentLessons={currentLessons} onLessonClick={handleLessonClick} />
+ */}      
+      {loading ? (
+        <p>Loading lessons...</p>
+      ) : (
+        <UnitList
+          units={unitData}
+          currentUnit={currentUnit}
+          currentLessons={[]}
+          onLessonClick={handleLessonClick}
+        />
+      )}
       <ClickToBegin onClick = {handleClickToBegin} />
-      <Announcements announcements={sortedAnnouncements} />
+      <Announcements announcements={announcements} />
     </div>
   );
 }

@@ -76,20 +76,48 @@
     line-height: normal;
    
 }
-.teacherannouncements-content-box {
+
+.textarea-teacher {
     width: 100%; 
+    height: 150px;
+    padding: 10px; 
+    font-size: 1rem; 
+    font-family: 'Orelega One', cursive; 
+    color: black; 
+    background-color: lightgray; 
+    border: 3px solid #015770; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8); 
+    resize: none; 
+    line-height: 1.5; 
+    overflow-y: auto; 
+}
+
+.textarea-teacher:focus {
+    outline: none; 
+    border-color: #0288d1; 
+    box-shadow: 0 4px 10px rgba(2, 136, 209, 0.4); 
+}
+
+.teacherannouncements-content-wrapper {
+    display: flex;
+    flex-direction: column; 
+    width: 100%;
     height: 300px; 
-    padding: 20px; 
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px;
     background-color: white;
     border-radius: 10px;
     border: 3px solid #015770;
-    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
-    z-index: 1; 
-    overflow-y: auto; 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column-reverse;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8); 
     margin-top: 5px;
+}
+
+.teacherannouncements-content-box {
+    width: 100%; 
+    box-sizing: border-box;
+    flex-direction: column-reverse;
 }
 
 .teacherannouncement-message {
@@ -141,4 +169,85 @@
     cursor: pointer;
     border-radius: 30px ;
     margin-top: 5px;
+}
+
+.latest-message {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    border: 2px solid #0288d1;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 136, 209, 0.2);
+    animation: highlightPulse 2s ease-in-out; 
+}
+
+@keyframes highlightPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 136, 209, 0.2);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 6px 15px rgba(0, 136, 209, 0.4);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 10px rgba(0, 136, 209, 0.2);
+    }
+}
+
+.textarea-teacher-edit {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 1rem;
+    font-family: 'Orelega One', cursive;
+    background-color: lightgray;
+    border: 3px solid #015770;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
+    resize: none;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+
+.textarea-teacher-edit:focus {
+    outline: none;
+    border-color: #0288d1;
+    box-shadow: 0 4px 10px rgba(2, 136, 209, 0.4);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-button, .delete-button {
+    background-color: #008184;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Orelega One', cursive;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #009ca4;
+}
+
+.save-button, .cancel-button {
+    background-color: #008184;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Orelega One', cursive;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.save-button:hover, .cancel-button:hover {
+    background-color: #009ca4;
 }

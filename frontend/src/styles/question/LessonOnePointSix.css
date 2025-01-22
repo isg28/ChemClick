@@ -198,6 +198,7 @@ html, body {
     font-size: 1.25rem;
     cursor: pointer;
     margin-top: 10px; 
+    color: black;
 }
 
 .lesson-one-point-six-submit:active, .lesson-one-point-six-next:active {

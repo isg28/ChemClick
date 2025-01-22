@@ -33,6 +33,7 @@ function Login() {
           if (response.ok) {
               const data = await response.json();
               console.log(data.message);
+              localStorage.setItem('studentId', studentId);
               navigate('/dashboard'); 
           } else {
               const errorData = await response.json();

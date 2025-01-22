@@ -61,7 +61,8 @@
     overflow-y: auto; 
     box-sizing: border-box;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    box-sizing: border-box;
 }
 
 .announcement-message {

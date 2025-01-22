@@ -3,6 +3,7 @@ import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointOne.css';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointOne(){
     const navigate = useNavigate();
@@ -19,6 +20,15 @@ function LessonOnePointOne(){
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('');
 
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.1'; 
+    
+    const [goal, setGoal] = useState(); 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5;
 
     const generateRandomNumberAndPosition = () => {
         // Generate random number between 0.0 and 5.9
@@ -29,11 +39,28 @@ function LessonOnePointOne(){
 
     // Use effect to set initial state and call the new function
     useEffect(() => {
+        if (!studentId) {
+            console.error('Student ID not found');
+            navigate('/login'); // Redirect to login if studentId is missing
+            return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });
+        };
+
+        initializeData();
         setLeftPosition(85); // Ensure the starting position is 85px
         startingMeasurementRef.current.style.left = '85px';
 
         generateRandomNumberAndPosition();
-    }, []);
+    }, [studentId, lessonId, navigate]);
 
 
     // Start dragging and record initial click position
@@ -54,7 +81,7 @@ function LessonOnePointOne(){
     };
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const targetPosition = 85 + (randomNumber / 5.9) * 790;
         const currentLeft = parseFloat(startingMeasurementRef.current.style.left || '0');
         const tolerance = 8;
@@ -62,6 +89,9 @@ function LessonOnePointOne(){
         if (Math.abs(currentLeft - targetPosition) <= tolerance) {
             setFeedbackMessage("Correct! Moving to the next question.");
             setFeedbackClass('correct');
+            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            }); 
 
             setTimeout(() => {
                 setFeedbackMessage('');
@@ -78,6 +108,9 @@ function LessonOnePointOne(){
             setLineWidth(0);
             setLeftPosition(85);
             startingMeasurementRef.current.style.left = '85px';
+            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            });
             setTimeout(() => {
                 setFeedbackMessage('');
                 setFeedbackClass('');
@@ -137,23 +170,45 @@ function LessonOnePointOne(){
                     </div>
                 </div>
 
-            {/* Consistent for Each Question Page */}
+                {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     );

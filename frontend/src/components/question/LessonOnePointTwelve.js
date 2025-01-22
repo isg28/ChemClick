@@ -2,9 +2,19 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointTwelve.css';
 import { useNavigate } from 'react-router-dom';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointTwelve() {
     const navigate = useNavigate();
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.12'; 
+        
+    const [goal, setGoal] = useState(); 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5;
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -117,6 +127,23 @@ function LessonOnePointTwelve() {
     };
 
     useEffect(() => {
+        if (!studentId) {
+            console.error('Student ID not found');
+            navigate('/login'); // Redirect to login if studentId is missing
+            return;
+        }
+        
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });
+        };
+        
+        initializeData();
         const shuffleQuestions = () => {
             let shuffled = [...questions];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -128,7 +155,7 @@ function LessonOnePointTwelve() {
 
         setRandomizedQuestions(shuffleQuestions());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentQuestionIndex]);
+    }, [currentQuestionIndex, studentId, lessonId, navigate]);
 
     // event listener for arrow keys
     useEffect(() => {
@@ -150,7 +177,7 @@ function LessonOnePointTwelve() {
         };
     }, );
 
-    const validateAnswer = () => {
+    const validateAnswer = async () => {
         const correctAnswer = parseFloat(randomizedQuestions[currentQuestionIndex].value);
         const userAnswer = parseFloat(questions[currentPositionIndex].value);
     
@@ -158,10 +185,16 @@ function LessonOnePointTwelve() {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
+            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            }); 
             return;
         } else {
             setFeedback("Not quite right. Check your answer and try again!");
             setFeedbackClass('incorrect');
+            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            });
 
             setTimeout(() => {
                 setFeedback('');
@@ -247,23 +280,45 @@ function LessonOnePointTwelve() {
                     </div>
                 </div> 
 
-            {/* Consistent for Each Question Page */}
+                {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     );

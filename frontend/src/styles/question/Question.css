@@ -225,6 +225,7 @@ html,body {
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+    margin-bottom: 15px;
 }
 
 .side-column-box-holder {
@@ -251,14 +252,6 @@ html,body {
     font-weight: normal;
 }
 
-.masteryboxtitle h1 {
-    font-size: 2.25rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    position: absolute;
-    text-align: center;
-}
-
 .side-column-box-info {
     width: 90%;
     max-width: 350px;
@@ -274,8 +267,63 @@ html,body {
     font-weight: normal;
 }
 
-.masterystars {
-    width: 300px;
+.masterybox {
+    position: relative; 
+    padding: 1%;
+    margin: 0;    
+    margin-bottom: clamp(1rem, 0.8vw, 2.5rem); 
+}
+
+.masteryboxstars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem; 
+    font-size: 2rem; 
+    font-weight: bold;
+}
+
+.filled-star {
+    color: gold;
+    text-shadow: 0.5px 0.5px 1px black, -0.5px -0.5px 1px black;
+}
+
+.empty-star {
+    color: lightgray;
+    text-shadow: 0.5px 0.5px 1px black, -0.5px -0.5px 1px black;
+}
+
+.reward-box-left,
+.reward-box-right {
+    font-size: clamp(2rem, 3vw, 3.5rem); 
+    color: gold;
+    cursor: pointer;
+    position: absolute;
+    margin: 0;
+}
+
+.reward-box-left {
+   left: 80%; 
+   top: calc(-15% + 1rem);
+}
+
+.reward-box-right {
+    right: 80%;
+    top: calc(-15% + 1rem); 
+}
+
+.reward-box:hover::after {
+    position: absolute;
+    top: 120%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .goalboxtitle {
@@ -299,70 +347,53 @@ html,body {
     text-align: center;
 }
 
-.goalboxchecks {
-    width: 330px;
-    height: 85px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 5px solid #015770;
+.checked-box,
+.unchecked-box {
+    font-size: clamp(1.5rem, 1.5vw, 3rem);
+    color: lightgray;
+    text-shadow: 0.5px 0.5px 1px black, -0.5px -0.5px 1px black;
+}
+
+.checked-box {
+    color: green;
+}
+
+.progressbox {
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-left: 11px;
-    margin-top: 10px;
-}
-
-.goalchecks {
-    width: 300px;
-}
-
-.progressboxtitle {
-    width: 220px;
-    height: 60px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 5px solid #015770;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 65px;
-
-}
-
-.progressboxtitle h1 {
-    font-size: 2.25rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    position: relative;
-    text-align: center;
-}
-
-.progressboxtitle h2 {
-    font-size: 1.25rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    position: absolute;
-    text-align: center;
-    top: 77%
-}
-
-.progressboxbar {
-    width: 330px;
-    height: 150px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    border: 5px solid #015770;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 11px;
-    margin-top: 10px;
+    gap: 1vh;
+    
 }
 
 .progressbar {
-    width: 300px;
-    position: absolute;
-    top: 57%;
+    width: 80%; 
+    height: 2vh; 
+    background-color: #d3d3d3;
+    border-radius: 1em; 
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 1vh;
+}
+
+.progressbar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: calc(var(--progress, 0) * 1%);
+    background-color: #00cc44;
+    border-radius: 1em 0 0 1em;
+    transition: width 0.4s ease-in-out;
+}
+
+.progress-text {
+    font-size: 1.2rem;
+    font-family: 'Orelega One', sans-serif;
+    color: #000000;
+    text-align: center;
+    margin-top: 5px; 
 }
 
 .submitbutton {

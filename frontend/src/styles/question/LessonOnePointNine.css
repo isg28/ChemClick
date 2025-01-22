@@ -212,6 +212,7 @@ html,body {
     font-size: 1.25rem;
     cursor: pointer;
     margin-top: -15px;
+    color: black;
 }
 
 .lesson-one-point-nine-submit:active, .lesson-one-point-nine-next:active {

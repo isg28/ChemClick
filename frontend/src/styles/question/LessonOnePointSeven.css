@@ -220,6 +220,7 @@ html,body {
     font-size: 1.25rem;
     cursor: pointer;
     margin-top: -15px;
+    color: black;
 }
 
 .lesson-one-point-seven-submit:active, .lesson-one-point-seven-next:active {

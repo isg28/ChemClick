@@ -2,13 +2,48 @@ import React, { useState, useEffect } from 'react';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointTwo.css';
 import { useNavigate } from 'react-router-dom';
+//
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
+
 
 function LessonOnePointTwo() {
     const navigate = useNavigate();
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.2'; 
+
+    const [goal, setGoal] = useState(); //
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5; // ^
+    //const [lessonName, setLessonName] = useState('');
+    //const [unit, setUnit] = useState('');
 
     const handlequestion = () => {
         navigate('/dashboard');
     };
+
+    useEffect(() => {
+        if (!studentId) { //
+          console.error('Student ID not found');
+          navigate('/login');
+          return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });        
+        };
+    
+        initializeData();
+        // eslint-disable-line react-hooks/exhaustive-deps
+    }, [studentId, lessonId, navigate]); // ^
 
     // Cursor positions 
     // 0: 0%, 0.5: 8.27%
@@ -114,7 +149,7 @@ function LessonOnePointTwo() {
         setUserAnswer(e.target.value);
     };
 
-    const validateAnswer = () => {
+    const validateAnswer = async () => {
         const correctAnswer = parseFloat(randomizedQuestions[currentQuestionIndex].value);
         const userAnswerNum = parseFloat(userAnswer);
         const positionType = randomizedQuestions[currentQuestionIndex].positionType;
@@ -134,6 +169,9 @@ function LessonOnePointTwo() {
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
             setLastDigitAttempts(0); 
+            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            }); 
             return;
         }
     
@@ -158,14 +196,20 @@ function LessonOnePointTwo() {
                 }
             }
             setFeedbackClass('incorrect');
+            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            });
             return;
         }
         setFeedback("The answer is incorrect. Please check your answer and try again.");
         setFeedbackClass('incorrect');
+        await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+            setCorrectAnswers, setProgress, setMasteryLevel,
+        });
         setLastDigitAttempts(0); 
     };
 
-    const handleSubmitAnswer = () => {
+    const handleSubmitAnswer = async () => {
         validateAnswer();
     };
 
@@ -196,6 +240,8 @@ function LessonOnePointTwo() {
                 <div className='lesson-one-point-one-box-innercont'>
                     <div className='lesson-one-point-two-box-title'>
                         <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
+                        {/*    <h1>{`${lessonName}`}</h1> {/* ASK IF PREFERED OR NOT  */}
+
                     </div>
                     <div className='lesson-one-point-two-content'>
                         <p className='lesson-one-point-two-prompt'>
@@ -233,18 +279,40 @@ function LessonOnePointTwo() {
 
                 {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

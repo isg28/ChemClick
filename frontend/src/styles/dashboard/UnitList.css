@@ -117,11 +117,10 @@
 }
 
 .unit-details li {
-    position: relative;
     display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    margin-left: 20px;
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 10px;
     padding-bottom: 5px;
     border-bottom: 1px solid #ccc;
     font-family: 'Orelega One', cursive;
@@ -129,32 +128,21 @@
     color: #333;
 }
 
-.due-date {
-    position: absolute; 
-    right: 0; 
-    font-family: inherit;
-    font-size: 1.1rem;
-    color: inherit;
-    font-style: normal;
-    cursor: pointer;
+.lesson-name {
+    max-width: calc(100% - 150px);
+    word-wrap: break-word; 
+    word-break: break-word; 
+    display: inline-block; 
+    margin-right: 10px; 
 }
 
-.due-date .tooltip {
-    display: none; 
-    position: absolute;
-    top: 50%; 
-    right: 100%; 
-    transform: translateY(-50%); 
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-    white-space: nowrap;
-    z-index: 1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-right: 10px; 
+.due-date {
+    white-space: nowrap; 
+    text-align: right;
+    flex-shrink: 0; 
+    font-size: 1.1rem;
+    color: inherit;
+    margin-left: 10px; 
 }
 
 .due-date:hover .tooltip {
@@ -189,10 +177,6 @@ span.due-date, span.due-date:hover {
     transition: all 0.3s ease-in-out; 
 }
 
-.lesson-name {
-    flex-grow: 1;
-}
-
 .in-progress-lesson {
     background-color: #e5ffb5; 
     border-left: 5px solid #bff855;
@@ -212,4 +196,37 @@ span.due-date, span.due-date:hover {
 .locked-lesson .due-date {
     color: #999;
     font-weight: bold;
+}
+
+.completed-lesson .due-date {
+    position: relative; 
+    cursor: pointer;
+}
+
+.completed-lesson .due-date .tooltip {
+    display: none; 
+    position: absolute;
+    top: 50%; 
+    right: 100%; 
+    transform: translateY(-50%); 
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 10px; 
+}
+
+.completed-lesson .due-date:hover .tooltip {
+    display: block;
+}
+
+.completed-lesson .due-date:hover {
+    text-decoration: underline;
+    padding: 2px;
+    transition: all 0.3s ease-in-out;
 }

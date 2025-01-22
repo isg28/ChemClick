@@ -8,13 +8,20 @@ function Announcements({ announcements }) {
                 <h1 className="announcements-title">Announcements</h1>
             </div>
             <div className="announcements-content-box">
-                {announcements.map((announcement, index) => (
-                    <div key={index} className="announcement-message">
-                        <div className="announcement-author">{announcement.author}</div>
-                        <div className="announcement-date">Posted on: {announcement.date}</div>
-                        <div className="announcement-text">{announcement.message}</div>
-                    </div>
-                ))}
+            {announcements.map((announcement, index) => (
+                <div
+                    key={announcement.id}
+                    className={`announcement-message ${
+                    index === 0 ? 'latest-message' : ''
+                    }`}
+                    >
+                    <div className="teacherannouncement-author">{announcement.author}</div>
+                        <div className="teacherannouncement-date">
+                            Posted on: {new Date(announcement.date).toLocaleString()}
+                        </div>
+                    <div className="teacherannouncement-text">{announcement.message}</div>
+                </div>
+            ))}
             </div>
         </div>
     );

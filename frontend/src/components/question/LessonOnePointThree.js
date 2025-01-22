@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import '../../styles/question/Question.css';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/question/LessonOnePointThree.css';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointThree() {
     const navigate = useNavigate();
@@ -13,6 +14,16 @@ function LessonOnePointThree() {
     const handlequestion = () => {
         navigate('/dashboard');
     };
+
+    const studentId = localStorage.getItem('studentId'); 
+    const lessonId = 'lesson1.3'; 
+    
+    const [goal, setGoal] = useState(); 
+    const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [progress, setProgress] = useState(0); 
+    const [masteryLevel, setMasteryLevel] = useState(0); 
+    const { starsEarned, stars } = renderStars(masteryLevel);
+    const displayMedals = starsEarned >= 5;
 
     // !! All these had to be scaled to the pencil image, used your starting position (0) as a inital state! 
     const positions = [
@@ -96,10 +107,26 @@ function LessonOnePointThree() {
     };
 
     useEffect(() => {
+        if (!studentId) {
+            console.error('Student ID not found');
+            navigate('/login'); // Redirect to login if studentId is missing
+            return;
+        }
+         const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });
+        };
+        
+        initializeData();
         setLeftPosition(85); // Reset cursor position
         startingMeasurementRef.current.style.left = '85px';
         generateRandomPencilLength();
-    }, []);
+    }, [studentId, lessonId, navigate]);
 
     const handleMouseDown = (e) => {
         setIsDragging(true);
@@ -121,7 +148,7 @@ function LessonOnePointThree() {
     };
 
     // !! Did some changes here! 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const pencilTipPixel = leftPosition + pencilLength * PIXELS_PER_INCH;
 
 
@@ -138,6 +165,9 @@ function LessonOnePointThree() {
         if (userAnswer === correctAnswer) {
             setFeedbackMessage("Correct! Great job!");
             setFeedbackClass('correct');
+            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            }); 
             setTimeout(() => {
                 resetQuestion();
             }, 2000);
@@ -145,6 +175,9 @@ function LessonOnePointThree() {
             setFeedbackMessage("Incorrect. Check the measurement again!");
             //    setFeedbackMessage(`Incorrect. The correct measurement is ${correctAnswer.toFixed(1)} inches.`);
             setFeedbackClass('incorrect');
+            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            });
             setTimeout(() => {
                 setFeedbackMessage('');
                 setFeedbackClass('');
@@ -230,21 +263,43 @@ function LessonOnePointThree() {
 
                 {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Mastery</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
-                        </div>
+                <div className="side-column-box-holder">
+                    <div className="side-column-box masterybox">
+                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                        {displayMedals && (
+                            <>
+                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                🏅 
+                            </div>
+                        </>
+                        )}
+                        <div className="side-column-box-info masteryboxstars">{stars}</div>
+                    </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>
+                                {renderGoalChecks(goal, correctAnswers)}
+                            </div>
                         </div>
                         <div className='side-column-box'>
                             <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>Placeholder</div>
+                            <div className='side-column-box-info'>              
+                                <div className="progressbox">
+                                    <div
+                                        className="progressbar"
+                                        style={{ '--progress': progress }}
+                                    ></div>
+                                    <div className="progress-text">
+                                        Current Topic Progress: {progress.toFixed(2)}%
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     );
