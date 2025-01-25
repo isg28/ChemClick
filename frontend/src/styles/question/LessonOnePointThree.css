@@ -75,8 +75,8 @@ html,body {
 
 .lesson-one-point-three-pencil {
     position: absolute;
-    top: 280px; /* Above the ruler */
-    left: 85px; /* Align starting position with the cursor */
+    top: 320px; /* Above the ruler */
+    left: 235px; /* Align starting position with the cursor */
     height: auto;
     z-index: 15; /* Highest z-index for visibility */
     transition: width 0.2s ease; /* Smooth width adjustment */
@@ -94,7 +94,7 @@ html,body {
 .lesson-one-point-three-line {
     position: absolute;
     top: 475px;
-    left: 95px; /* Starting point for the line */
+    left: 235px; /* Starting point for the line */
     height: 2px;
     background-color: red;
     transform: translateY(-50%);
