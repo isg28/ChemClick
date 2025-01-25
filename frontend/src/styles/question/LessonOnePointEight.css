@@ -97,15 +97,16 @@ html,body {
 }
 
 .lesson-one-point-eight-cylinderWaterContainer {
+    position: relative;
     min-height: 400px;
     /* border: solid; */
     overflow: hidden;
 }
 
 .lesson-one-point-eight-cylinderWater {
-    position: relative;
+    position: absolute;
     left: 22px;
-    width: 120px;
+    width: 102px;
     height: 100%;
     opacity: 50%;
 }
