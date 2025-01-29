@@ -7,6 +7,11 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 
 function LessonOnePointFour(){
     const navigate = useNavigate();
+
+    const [randomNumber, setRandomNumber] = useState(0);
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [feedbackClass, setFeedbackClass] = useState('');
+
     const studentId = localStorage.getItem('studentId'); 
     const lessonId = 'lesson1.4'; 
         
@@ -19,6 +24,70 @@ function LessonOnePointFour(){
 
     const handlequestion = () => {
         navigate('/dashboard');
+    };
+
+    const generateRandomNumberAndPosition = () => {
+        const randomNum = (Math.random() * 5.99).toFixed(2);
+        setRandomNumber(randomNum);
+    };
+
+    useEffect(() => {
+        if (!studentId) {
+            console.error('Student ID not found');
+            navigate('/login'); // Redirect to login if studentId is missing
+            return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });
+        };
+
+        initializeData();
+
+        generateRandomNumberAndPosition();
+    }, [studentId, lessonId, navigate]);
+
+    const [sliderValue, setSliderValue] = useState(50);
+
+    const handleSliderChange = (event) => {
+        setSliderValue(event.target.value);
+    };
+
+    const handleSubmit = async () => {
+        const targetPosition = randomNumber;
+        
+        if (targetPosition == sliderValue/100) {
+            setFeedbackMessage("Correct! Moving to the next question.");
+            setFeedbackClass('correct');
+            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            }); 
+
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 2000);
+
+            setRandomNumber((Math.random() * 5.99).toFixed(2))
+        
+        } else {
+            setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
+            setFeedbackClass('incorrect');
+
+            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                setCorrectAnswers, setProgress, setMasteryLevel,
+            });
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 4000);
+        }
     };
 
     return (
@@ -43,8 +112,21 @@ function LessonOnePointFour(){
                             <p className='lesson-one-point-four-prompt'>
                                 Click and drag the dot to create a line to the measurement listed below. Submit the answer when you are ready.
                             </p>
-                            <div className='lesson-one-point-four-measurement-container'>
-                                
+                            <div className="lesson-one-point-four-measurement-container">
+                            <div 
+                                className="slider-value-display"
+                                style={{ left: `${(sliderValue / 600) * 100}%` }}
+                            >
+                                {sliderValue/100}
+                            </div>
+                                <input
+                                type="range"
+                                min="0"
+                                max="600"
+                                value={sliderValue}
+                                onChange={handleSliderChange}
+                                className="lesson-one-point-four-slider"
+                                />
                             </div>
                             <div className="lesson-one-point-four-ruler-container">
                                 <img src={require('../../assets/question/RulerH.png')} className="lesson-one-point-four-ruler" alt="Ruler" />
@@ -52,7 +134,13 @@ function LessonOnePointFour(){
 
                             <hr className="separator" />
                             <div className='lesson-one-point-four-question'>
-                                <h1>Click and drag the cursor to show the measurement of HOLDER inches. </h1>
+                                <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
+                            </div>
+                        </div>
+                        <div className="submit-feedback-container">
+                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
+                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
+                            <p>{feedbackMessage}</p>
                             </div>
                         </div>
                     </div>

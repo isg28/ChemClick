@@ -51,6 +51,7 @@ html,body {
     display: flex;
     height: 87vh;
     padding: 1%;
+    width: 93vw;
 }
 
 .insideheader {

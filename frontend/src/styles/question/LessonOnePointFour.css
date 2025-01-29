@@ -79,7 +79,6 @@ html,body {
     display: flex;
     justify-content: center;
     position: relative;
-    margin: 20px 0;
     border: 2px solid #5f3838;
 }
 
@@ -213,4 +212,50 @@ html,body {
     background-color: red;
     transform: translateY(-50%);
     z-index: 3;
+}
+
+.lesson-one-point-four-slider {
+    width: 100%;
+    margin-bottom: 10px;
+    appearance: none;
+    background: #ddd;
+    height: 6px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.lesson-one-point-four-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 4px; 
+    height: 20px; 
+    background: #015770; 
+    border: none;
+    cursor: pointer;
+}
+
+.lesson-one-point-four-slider::-moz-range-thumb {
+    width: 4px; 
+    height: 20px; 
+    background: #015770; 
+    border: none;
+    cursor: pointer;
+}
+
+.lesson-one-point-four-measurement-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.slider-value-display {
+    position: absolute;
+    top: -30px; 
+    font-size: 1.2rem;
+    color: #015770;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 5px;
+    transform: translateX(-50%); 
 }
