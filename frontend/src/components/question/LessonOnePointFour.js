@@ -62,7 +62,7 @@ function LessonOnePointFour(){
     const handleSubmit = async () => {
         const targetPosition = randomNumber;
         
-        if (targetPosition == sliderValue/100) {
+        if (targetPosition === sliderValue/100) {
             setFeedbackMessage("Correct! Moving to the next question.");
             setFeedbackClass('correct');
             await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,

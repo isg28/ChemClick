@@ -37,7 +37,7 @@ class LessonProgressSerializer(serializers.Serializer):
 class LessonDetailsSerializer(serializers.Serializer):
     lesson_id = serializers.CharField(max_length=50)
     name = serializers.CharField(max_length=100)  
-    status = serializers.ChoiceField(choices=['completed', 'in-progress', 'locked'], required=False)
+    status = serializers.ChoiceField(choices=['completed', 'in-progress', 'not-started', 'locked'], required=False)
     due_date = serializers.DateField(required=False, allow_null=True)  
     goal_level = serializers.IntegerField(default=0)
 

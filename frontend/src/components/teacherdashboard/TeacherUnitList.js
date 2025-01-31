@@ -134,6 +134,8 @@ function TeacherUnitList({ units, currentUnit }) {
         return 'completed';
       case 'in-progress':
         return 'teacherin-progress-lesson'; 
+      case 'not-started':
+        return 'not-started';
       case 'locked':
         return 'locked';
       default:
@@ -141,9 +143,10 @@ function TeacherUnitList({ units, currentUnit }) {
     }
   };
 
-  const getDueOrCompletedText = (status, dueDate) => {
+  const getStatusText = (status, dueDate) => {
     const formattedDate = formatDate(dueDate);
     if (status === 'locked') return '[LOCKED]';
+    if (status === 'not-started') return 'Not Started'
     if (status === 'completed') return `Completed: ${formattedDate}`;
     return `Due: ${formattedDate || 'N/A'}`;
   };
@@ -199,7 +202,7 @@ function TeacherUnitList({ units, currentUnit }) {
                         <span
                           className={`teacherdue-date ${lesson.status === 'completed' ? 'completed' : ''}`}
                         >
-                          {getDueOrCompletedText(lesson.status, lesson.dateDue)}
+                          {getStatusText(lesson.status, lesson.dateDue)}
                         </span>
                         <span className="edit-icon" onClick={() => handleEditClick(unitIndex, lessonIndex)}>
                           ✎
@@ -245,6 +248,7 @@ function TeacherUnitList({ units, currentUnit }) {
               >
                 <option value="completed">Completed</option>
                 <option value="in-progress">In Progress</option>
+                <option value="not-started">Not Started</option>
                 <option value="locked">Locked</option>
               </select>
             </label>

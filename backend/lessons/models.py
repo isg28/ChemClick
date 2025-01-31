@@ -13,7 +13,7 @@ class LessonProgress(me.Document):
         return f"Lesson: {self.lesson_id}, User: {self.user_id}"
     
 class LessonDetails(me.Document):
-    STATUS_CHOICES = ('completed', 'in-progress', 'locked')
+    STATUS_CHOICES = ('completed', 'in-progress', 'not-started', 'locked')
 
     lesson_id = me.StringField(max_length=50, unique=True)
     name = me.StringField(max_length=50)

@@ -134,6 +134,7 @@ function TeacherDashboard() {
           lessons: [
             { lesson_id: "lesson9.1", unit_id: 9, ...getLessonData(lessons, "lesson9.1") },
             { lesson_id: "lesson9.2", unit_id: 9, ...getLessonData(lessons, "lesson9.2") },
+            { lesson_id: "lesson9.3", unit_id: 9, ...getLessonData(lessons, "lesson9.3") }, // lesson for testing purposes -jess
           ]
         }
       ];
