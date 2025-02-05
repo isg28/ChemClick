@@ -65,19 +65,20 @@ function LessonTwoPointOne() {
 
     const handleSubmit = () => {
         const uncertainDigit = randomWeight.slice(-1); // Get the last digit of the displayed weight
-
+    
         if (userInput === uncertainDigit) {
             setFeedbackMessage("Correct!");
             setFeedbackClass("correct-feedback");
-            setCorrectAnswers(correctAnswers + 1);
-            setIsAnswerCorrect(true);
-
-            if (correctAnswers + 1 === 7) {
-                setFeedbackMessage("Congratulations! You passed.");
-            } else {
-                setTimeout(generateNewWeight, 1000);
-            }
-        } else {
+            setCorrectAnswers(prevCount => {
+                const newCount = prevCount + 1;
+                if (newCount === 7) {
+                    setFeedbackMessage("Congratulations! You passed.");
+                } else {
+                    setTimeout(generateNewWeight, 1000); // Automatically load a new question after 1 second
+                }
+                return newCount;
+            });
+     } else {
             setFeedbackMessage("When using a digital balance, the farthest-right digit displayed is the uncertain digit.");
             setFeedbackClass("error-feedback");
             setCorrectAnswers(0);
@@ -86,7 +87,13 @@ function LessonTwoPointOne() {
     };
 
     const handleNextQuestion = () => {
-        generateNewWeight();
+        if (isAnswerCorrect) {
+            generateNewWeight();
+            setIsAnswerCorrect(false); // Reset answer correctness for the next question
+        } else {
+            setFeedbackMessage("When using a digital balance, the farthest-right digit displayed is the uncertain digit.");
+            setFeedbackClass("error-feedback");
+        }
     };
 
     return (
@@ -125,11 +132,11 @@ function LessonTwoPointOne() {
 
                          <hr className="separator" />    
                             <div className="lesson-two-point-one-input-container">
-                            <h1>Enter the measurement shown:</h1>
+                            <h1> What is the uncertainty value? </h1>
                                 <input
                                     type="text"
                                     className="lesson-two-point-one-input"
-                                    placeholder='Enter the measurement here'
+                                    placeholder='Enter value here'
                                     value={userInput}
                                     onChange={handleInputChange}
                                 />
@@ -137,14 +144,13 @@ function LessonTwoPointOne() {
                                 </div>
 
                                 <div className="submit-feedback-container">
-                            {!isAnswerCorrect && (
-                                <button className='lesson-two-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                            )}
-                            {isAnswerCorrect && (
-                                <button className='lesson-two-point-one-next' onClick={handleNextQuestion}>Next Question</button>
-                            )}
-                            <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
-                        </div>
+                                 <button className='lesson-two-point-one-submit' onClick={handleSubmit}>
+                                     Submit Answer
+                                    </button>
+                                     <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>
+                                                     {feedbackMessage}
+                                                     </span>
+                                                            </div>
                     </div>
                 </div>
 
