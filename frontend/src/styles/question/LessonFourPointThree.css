@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-four-point-three {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lesson-four-point-three-box {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lesson-four-point-three-box-innercont {
+    width: 60vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+}
+
+.lesson-four-point-three-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson-four-point-three-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 3px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 5px solid #015770;
+    padding-bottom: 40px;
+    max-height: 75vh;
+    overflow-y: auto;
+
+}
+
+.lesson-four-point-three-question {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    width: 100%; 
+}
+
+.lesson-four-point-three-question h1, .lesson-four-point-three-box-title h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin:0;
+}
+
+.lesson-four-point-three-prompt {
+    font-size: 1.15rem; 
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: left; 
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.lesson-four-point-three-input {
+    width: 37%; 
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #015770;
+    background-color: #e7eae2;
+    padding: 10px;
+    font-size: 1.5rem; 
+    font-family: 'Orelega One', sans-serif;
+    text-align: center;
+}
+
+.color-block {
+    width: 80px;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 50px;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.677);
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.color-block:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.element-square {
+    position: relative;
+    width: 110%;
+    aspect-ratio: 1; 
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    font-size: 1rem; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+}
+
+.element-number {
+    font-size: calc(0.2rem + 0.5vw);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: black;
+}
+
+.element-symbol {
+    font-size: calc(0.6rem + 1vm);
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.element-name {
+    font-size: clamp(0.4rem, 0.5vw, 0.7rem); 
+    margin-top: 2px;
+    color: gray;
+    white-space: nowrap;
+}
+
+.periodic-table {
+    display: grid;
+    grid-template-rows: repeat(7, 1fr); 
+    grid-template-columns: repeat(18, 1fr);
+    gap: 4px;
+    margin: 15px auto;
+    max-width: 100%;
+    max-height: 100%; 
+    width: 100%;
+}
+
+.row {
+    display: contents;
+}
+
+.element-square:hover {
+    border: 2px solid #999;
+}
+
+.lesson-four-point-three-submit, .lesson-four-point-three-next {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: -8px;
+    color: black;
+}
+
+.color-key-container {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    gap: 20px; 
+    margin-bottom: 20px;
+}
+
+.color-keys {
+    display: flex;
+    gap: 10px; 
+}
+
+.right-side-buttons {
+    display: flex;
+    gap: 10px; 
+    margin-left: auto; 
+}
+
+.eraser-tool-button,
+.clear-all-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px; 
+    height: 50px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.element-square.null-space {
+    opacity: 0.5; 
+    pointer-events: none; 
+    border: 1px dashed #ccc; 
+}
+
+.lesson-four-point-three-category {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.lesson-four-point-three-category {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.lesson-four-point-three-category button {
+    background-color: #00aaff;
+    color: white;
+    font-size: 0.85rem; 
+    font-weight: bold;
+    padding: 8px 15px; 
+    border-radius: 6px; 
+    border: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; 
+}
+
+.lesson-four-point-three-category button.active {
+    background-color: #007acc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.03); 
+    text-decoration: underline; 
+}
+
+.lesson-four-point-three-category button:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.lesson-four-point-three-prompt ul {
+    margin-left: 20px; 
+    padding-left: 20px; 
+}
+
+.lesson-four-point-three-prompt ul li {
+    list-style-type: disc; 
+    margin-bottom: 5px;
+    line-height: 1.5; 
+}
+
+.lesson-four-point-three-prompt ul li u {
+    text-decoration: underline;
+    font-weight: normal; 
+}
+
+.eraser-tool-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    background-color: #ee7171;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.eraser-tool-button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.clear-all-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 50px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    background-color: #ee7171;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clear-all-button:hover {
+    transform: scale(1.1); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.vertical-divider {
+    width: 2px; 
+    background-color: #ccc; 
+    height: 50px; 
+    margin: 0 20px; 
+}
+
+.submit-feedback-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 8px; 
+    margin-top: 5px;
+    position: relative;
+}
+
+.lesson-four-point-three-feedback {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    line-height: 1.6;
+    border: 2px solid #ff0000;
+}
+
+.lesson-four-point-three-feedback.correct {
+    background-color: #f9f9f9;
+    color: #062c0c; 
+    border: 2px solid #34e451; 
+}
+  
+.lesson-four-point-three-feedback.incorrect {
+    background-color: #f9f9f9;
+    color: #662e2e; 
+    border: 2px solid #ff0000; 
+}
+  
+.lesson-four-point-three-feedback h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.lesson-four-point-three-feedback h4 {
+    margin-top: 10px;
+    color: #555;
+}
+
+.lesson-four-point-three-feedback ul {
+    margin: 10px 0;
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.lesson-four-point-three-feedback li {
+    margin-bottom: 5px;
+}
+
+.lesson-four-point-three-feedback p {
+    margin: 5px 0;
+}
+
+
+.lesson-four-point-three-feedback.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+}

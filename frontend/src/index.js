@@ -32,6 +32,11 @@ import LessonTwoPointOne from './components/question/LessonTwoPointOne';
 import LessonTwoPointFour from './components/question/LessonTwoPointFour';
 import LessonTwoPointTwo from './components/question/LessonTwoPointTwo';
 
+
+import LessonFourPointOne from './components/question/LessonFourPointOne';
+import LessonFourPointTwo from './components/question/LessonFourPointTwo';
+import LessonFourPointThree from './components/question/LessonFourPointThree';
+
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
 ReactDOM.render(
@@ -66,6 +71,13 @@ ReactDOM.render(
         <Route path = "/LessonTwoPointOne" element = {<LessonTwoPointOne/>}/>
         <Route path = "/LessonTwoPointFour" element = {<LessonTwoPointFour/>}/>
         <Route path = "/LessonTwoPointTwo" element = {<LessonTwoPointTwo/>}/>
+
+
+        <Route path = "/LessonFourPointOne" element = {<LessonFourPointOne/>}/>
+        <Route path = "/LessonFourPointTwo" element = {<LessonFourPointTwo/>}/>
+        <Route path = "/LessonFourPointThree" element = {<LessonFourPointThree/>}/>
+
+
         {/* ... etc. */}
       </Routes>
     </Router>
