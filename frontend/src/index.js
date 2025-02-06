@@ -31,6 +31,7 @@ import LessonOnePointTwelve from './components/question/LessonOnePointTwelve';
 import LessonTwoPointOne from './components/question/LessonTwoPointOne';
 import LessonTwoPointFour from './components/question/LessonTwoPointFour';
 import LessonTwoPointTwo from './components/question/LessonTwoPointTwo';
+import LessonTwoPointThree from './components/question/LessonTwoPointThree';
 
 
 import LessonFourPointOne from './components/question/LessonFourPointOne';
@@ -71,6 +72,7 @@ ReactDOM.render(
         <Route path = "/LessonTwoPointOne" element = {<LessonTwoPointOne/>}/>
         <Route path = "/LessonTwoPointFour" element = {<LessonTwoPointFour/>}/>
         <Route path = "/LessonTwoPointTwo" element = {<LessonTwoPointTwo/>}/>
+        <Route path = "/LessonTwoPointThree" element = {<LessonTwoPointThree/>}/>
 
 
         <Route path = "/LessonFourPointOne" element = {<LessonFourPointOne/>}/>
