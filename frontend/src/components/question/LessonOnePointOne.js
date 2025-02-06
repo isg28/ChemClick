@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
@@ -7,22 +7,14 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 
 function LessonOnePointOne(){
     const navigate = useNavigate();
-    const startingMeasurementRef = useRef(null);
 
-    const handlequestion = () => {
-        navigate('/dashboard');
-    };
-    const [offsetX, setOffsetX] = useState(0);
-    const [isDragging, setIsDragging] = useState(false);
-    const [lineWidth, setLineWidth] = useState(0);
     const [randomNumber, setRandomNumber] = useState(0);
-    const [leftPosition, setLeftPosition] = useState(85);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('');
 
     const studentId = localStorage.getItem('studentId'); 
     const lessonId = 'lesson1.1'; 
-    
+        
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [progress, setProgress] = useState(0); 
@@ -30,14 +22,15 @@ function LessonOnePointOne(){
     const { starsEarned, stars } = renderStars(masteryLevel);
     const displayMedals = starsEarned >= 5;
 
-    const generateRandomNumberAndPosition = () => {
-        // Generate random number between 0.0 and 5.9
-        const randomNum = (Math.random() * 5.9).toFixed(1);
-        setRandomNumber(randomNum);
-
+    const handlequestion = () => {
+        navigate('/dashboard');
     };
 
-    // Use effect to set initial state and call the new function
+    const generateRandomNumberAndPosition = () => {
+        const randomNum = (Math.random() * 5.99).toFixed(1);
+        setRandomNumber(randomNum);
+    };
+
     useEffect(() => {
         if (!studentId) {
             console.error('Student ID not found');
@@ -56,37 +49,20 @@ function LessonOnePointOne(){
         };
 
         initializeData();
-        setLeftPosition(85); // Ensure the starting position is 85px
-        startingMeasurementRef.current.style.left = '85px';
 
         generateRandomNumberAndPosition();
     }, [studentId, lessonId, navigate]);
 
+    const [sliderValue, setSliderValue] = useState(50);
 
-    // Start dragging and record initial click position
-    const handleMouseDown = (e) => {
-        setIsDragging(true);
-        setOffsetX(e.clientX - e.target.getBoundingClientRect().left);
+    const handleSliderChange = (event) => {
+        setSliderValue(event.target.value);
     };
-
-
-    const handleMouseMove = (e) => {
-        if (isDragging) {
-            const newLeft = e.clientX - offsetX;
-            if (newLeft >= 85 && newLeft <= 889) { // Adjust boundaries as per container width
-                document.querySelector('.lesson-one-point-one-starting-measurement').style.left = `${newLeft}px`;
-                setLineWidth(newLeft - 85); // Update the line width based on position
-            }
-        }
-    };
-
 
     const handleSubmit = async () => {
-        const targetPosition = 85 + (randomNumber / 5.9) * 790;
-        const currentLeft = parseFloat(startingMeasurementRef.current.style.left || '0');
-        const tolerance = 8;
+        const targetPosition = randomNumber;
         
-        if (Math.abs(currentLeft - targetPosition) <= tolerance) {
+        if (parseFloat(targetPosition) === parseFloat((sliderValue / 100).toFixed(1))) {
             setFeedbackMessage("Correct! Moving to the next question.");
             setFeedbackClass('correct');
             await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
@@ -97,17 +73,13 @@ function LessonOnePointOne(){
                 setFeedbackMessage('');
                 setFeedbackClass('');
             }, 2000);
+
+            setRandomNumber((Math.random() * 5.99).toFixed(1))
         
-            setRandomNumber((Math.random() * 5.9).toFixed(1));
-            setLineWidth(0);
-            setLeftPosition(85);
-            startingMeasurementRef.current.style.left = '85px';
         } else {
             setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
             setFeedbackClass('incorrect');
-            setLineWidth(0);
-            setLeftPosition(85);
-            startingMeasurementRef.current.style.left = '85px';
+
             await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
                 setCorrectAnswers, setProgress, setMasteryLevel,
             });
@@ -118,13 +90,8 @@ function LessonOnePointOne(){
         }
     };
 
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
-
     return (
-        <div className='lesson-one-point-one' onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}>
+        <div className='lesson-one-point-one'>
             <div className='questionheader'>
                 <div className="question-head-in">
                     <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
@@ -143,13 +110,23 @@ function LessonOnePointOne(){
                         </div>
                         <div className='lesson-one-point-one-content'>
                             <p className='lesson-one-point-one-prompt'>
-                                Click and drag the dot to create a line to the measurement listed below. Submit the answer when you are ready.
+                                Click and drag the cursor to the indicated measurement below. You may also use the arrow keys for more precision. Submit the answer when you are ready.
                             </p>
-                            <div className='lesson-one-point-one-measurement-container'>
-                                <div className = 'lesson-one-point-one-line' style = {{width: `${lineWidth}px`}}></div>
-                                <img src ={require('../../assets/question/startingmeasurement.png')} className= "lesson-one-point-one-starting-measurement" alt= "Starting Measurment"
-                                onMouseDown={handleMouseDown} ref = {startingMeasurementRef}
-                                style={{ cursor: 'pointer', left: `${leftPosition}px`}}/>
+                            <div className="lesson-one-point-one-measurement-container">
+                            <div 
+                                className="slider-value-display"
+                                style={{ left: `${(sliderValue / 600) * 100}%` }}
+                            >
+                                {sliderValue/100}
+                            </div>
+                                <input
+                                type="range"
+                                min="0"
+                                max="600"
+                                value={sliderValue}
+                                onChange={handleSliderChange}
+                                className="lesson-one-point-one-slider"
+                                />
                             </div>
                             <div className="lesson-one-point-one-ruler-container">
                                 <img src={require('../../assets/question/ruler.png')} className="lesson-one-point-one-ruler" alt="Ruler" />
@@ -160,7 +137,6 @@ function LessonOnePointOne(){
                                 <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
                             </div>
                         </div>
-
                         <div className="submit-feedback-container">
                             <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
                             <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
@@ -202,7 +178,7 @@ function LessonOnePointOne(){
                                         style={{ '--progress': progress }}
                                     ></div>
                                     <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
+                                        Current Topic Progress: {progress.toFixed(1)}%
                                     </div>
                                 </div>
                             </div>
@@ -213,5 +189,6 @@ function LessonOnePointOne(){
         </div>
     );
 }
+
 
 export default LessonOnePointOne;
