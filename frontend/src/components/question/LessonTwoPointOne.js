@@ -14,11 +14,11 @@ function LessonTwoPointOne() {
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
     const { starsEarned, stars } = renderStars(masteryLevel);
-    const displayMedals = starsEarned >= 7;
+    const displayMedals = starsEarned >= 5;
 
-    const [randomWeight, setRandomWeight] = useState(0);
+    const [randomNumber, setRandomNumber] = useState(0);
     const [userInput, setUserInput] = useState("");
-    const [feedbackMessage, setFeedbackMessage] = useState("");
+    const [feedbackMessage, setFeedback] = useState("");
     const [feedbackClass, setFeedbackClass] = useState("hidden");
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
@@ -26,85 +26,80 @@ function LessonTwoPointOne() {
         navigate('/dashboard');
     };
 
-      useEffect(() => {
-            if (!studentId) { //
-              console.error('Student ID not found');
-              navigate('/login');
-              return;
-            }
+    const generateRandNum = () => {
+        const randomNum = (Math.random() * 0.99 + 10).toFixed(1);
+        setRandomNumber(randomNum);
+    };
 
-             const initializeData = async () => {
-                        await fetchLessonData(lessonId, setGoal);
-                        await fetchLessonProgress(studentId, lessonId, {
-                            setCorrectAnswers,
-                            setProgress,
-                            setMasteryLevel,
-                            setGoal,
-                        });        
-                    };
-                
-                    initializeData();
-                }, [studentId, lessonId, navigate]);
-
-    // Function to generate a random weight with one decimal place
-    const generateNewWeight = () => {
-        const newWeight = (Math.random() * (999.9 - 1.0) + 1.0).toFixed(1); // Random weight between 1.0g and 999.9g
-        setRandomWeight(newWeight);
-        setUserInput("");
-        setFeedbackMessage("");
-        setFeedbackClass("hidden");
+    const getTenthsPlace = (num) => {
+        return Math.floor((num * 10) % 10);
     };
 
     useEffect(() => {
-        generateNewWeight();
-    }, []);
+        if (!studentId) { 
+            console.error('Student ID not found');
+            navigate('/login');
+            return;
+        }
 
-    const handleInputChange = (event) => {
-        setUserInput(event.target.value);
-    };
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(studentId, lessonId, {
+                setCorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+            });        
+        };
+                
+        initializeData();
+        generateRandNum();
+    }, [studentId, lessonId, navigate]);
 
-    const handleSubmit = () => {
-        const uncertainDigit = randomWeight.slice(-1); // Get the last digit of the displayed weight
+    const validateAnswer = async () => {
+            const correctAnswer = getTenthsPlace(randomNumber).toString();
+        
+            if (userInput === correctAnswer) {
+                setFeedback('Correct!');
+                setFeedbackClass('correct');
+                setIsAnswerCorrect(true);
+                await CorrectResponses({ studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                    setCorrectAnswers, setProgress, setMasteryLevel,
+                });
+            } else {
+                setFeedback(`Incorrect. The uncertain digit is the farthest right digit.`);
+                setFeedbackClass('incorrect');
+                await IncorrectResponses({ studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
+                    setCorrectAnswers, setProgress, setMasteryLevel,
+                });
+                setTimeout(() => {
+                    setFeedback('');
+                    setFeedbackClass('');
+                }, 2500);
+            }
+        };
     
-        if (userInput === uncertainDigit) {
-            setFeedbackMessage("Correct!");
-            setFeedbackClass("correct-feedback");
-            setCorrectAnswers(prevCount => {
-                const newCount = prevCount + 1;
-                if (newCount === 7) {
-                    setFeedbackMessage("Congratulations! You passed.");
-                } else {
-                    setTimeout(generateNewWeight, 1000); // Automatically load a new question after 1 second
-                }
-                return newCount;
-            });
-     } else {
-            setFeedbackMessage("When using a digital balance, the farthest-right digit displayed is the uncertain digit.");
-            setFeedbackClass("error-feedback");
-            setCorrectAnswers(0);
+        const handleSubmitAnswer = () => {
+            validateAnswer();
+        };
+    
+        const handleNextQuestion = () => {
+            generateRandNum();
+            setFeedback('');
+            setFeedbackClass('hidden');
             setIsAnswerCorrect(false);
-        }
-    };
-
-    const handleNextQuestion = () => {
-        if (isAnswerCorrect) {
-            generateNewWeight();
-            setIsAnswerCorrect(false); // Reset answer correctness for the next question
-        } else {
-            setFeedbackMessage("When using a digital balance, the farthest-right digit displayed is the uncertain digit.");
-            setFeedbackClass("error-feedback");
-        }
-    };
+            setUserInput('');
+        };
 
     return (
         <div className='lesson-two-point-one'>
-        <div className='questionheader'>
-            <div className="question-head-in">
-                <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                <div className='insideheader'>
-                    <h1>ChemClicks Assignments</h1>
-                </div>
-                <img src={require('../../assets/question/Home.png')} className='homelines' alt="Home" />
+            <div className='questionheader'>
+                <div className="question-head-in">
+                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+                    <div className='insideheader'>
+                        <h1>ChemClicks Assignments</h1>
+                    </div>
+                <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
             </div>
         </div>
 
@@ -112,47 +107,37 @@ function LessonTwoPointOne() {
             <div className='lesson-two-point-one-box'>
                 <div className='lesson-two-point-one-box-innercont'>
                     <div className='lesson-two-point-one-box-title'>
-                        <h1>Unit Two: Uncertainty in Measurement - Digital Scale </h1>
+                        <h1>Unit Two: Identifying the Uncertain Digit </h1>
                     </div>
                     <div className="lesson-two-point-one-content">
                         <p className='lesson-two-point-one-prompt'>
-                            Observe the digital scale reading and enter the uncertainty value (the tenths place digit).
+                            Observe the digital scale reading and enter the uncertaint digit (tenths place).
                         </p>
-                        
-                        <div className='lesson-two-point-one-scale-container'>
-                            <img
-                             src={require('../../assets/question/scale.png')} 
-                            className="lesson-two-point-one-scale" 
-                            alt="Digital Scale" 
-                            />
-                            <div className='lesson-two-point-one-scale-display'>
-                                {randomWeight} g
+                        <div className='lesson-two-point-one-container'>
+                            <div className='lesson-two-point-one-reading-container'>
+                                <img src={require('../../assets/question/scale.png')} className="lesson-two-point-one-scale" alt="Scale" />
+                                <h3 className='lesson-two-point-one-scale-reading'>{randomNumber}</h3>
                             </div>
                         </div>
 
-                         <hr className="separator" />    
-                            <div className="lesson-two-point-one-input-container">
-                            <h1> What is the uncertainty value? </h1>
-                                <input
-                                    type="text"
-                                    className="lesson-two-point-one-input"
-                                    placeholder='Enter value here'
-                                    value={userInput}
-                                    onChange={handleInputChange}
-                                />
-                                </div>
-                                </div>
+                        <hr className="separator" />    
+                        <div className="lesson-two-point-one-question">
+                            <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Enter the uncertain digit" />
+                            </div>
+                        </div>
 
-                                <div className="submit-feedback-container">
-                                 <button className='lesson-two-point-one-submit' onClick={handleSubmit}>
-                                     Submit Answer
-                                    </button>
-                                     <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>
-                                                     {feedbackMessage}
-                                                     </span>
-                                                            </div>
+                        <div className="submit-feedback-container">
+                            {!isAnswerCorrect && (
+                                <button className='lesson-two-point-one-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                            )}
+                            {isAnswerCorrect && (
+                                <button className='lesson-two-point-one-next' onClick={handleNextQuestion}>Next Question</button>
+                            )}
+                            <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
+                        </div>
                     </div>
                 </div>
+
 
             {/* Sidebar */}
             <div className="side-column">
@@ -197,7 +182,7 @@ function LessonTwoPointOne() {
                             <div className="progressbox">
                                 <div
                                     className="progressbar"
-                                    style={{ width: `${progress}%` }}
+                                    style={{ '--progress': progress }}
                                 ></div>
                                 <div className="progress-text">
                                     Current Topic Progress: {progress.toFixed(2)}%

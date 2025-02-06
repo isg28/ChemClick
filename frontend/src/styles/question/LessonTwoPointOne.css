@@ -32,6 +32,7 @@ html,body {
 
 .lesson-Two-point-one-box-innercont {
   width: 60vw;
+  max-height: 100vh;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -78,34 +79,40 @@ html,body {
   padding-bottom: 40px;
 }
 
-.lesson-two-point-one-scale-container {
-  width: 65%;
+.lesson-two-point-one-container {
+  width: 100%;
   max-width: 800px;
-  display: inline-block;
+  display: flex;
   justify-content: center;
   position: relative;
   margin: 20px 0;
   border: 2px solid #5f3838;
 }
 
+.lesson-two-point-four-reading-container {
+  position: relative;
+  max-width: 800px;
+  justify-content: center;
+  align-items: center;
+  /* border: solid; */
+}
+
 .lesson-two-point-one-scale {
   width: 100%;
-  display: block;
+  padding: 10%;
 
 }
 
-.lesson-two-point-one-scale-display{
+.lesson-two-point-one-scale-reading{
   position: absolute;
-    top: 66%; /* Adjust to align with the screen on the scale image */
-    left: 44%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Perfect centering */
-    font-size: 30px; /* Adjust font size */
-    font-weight: bold;
-    color: black; /* Or green if the screen is digital */
-    background-color: rgba(255, 255, 255, 0.7); /* Optional: Slight background to improve readability */
-    padding: 5px 10px;
-    border-radius: 5px;
-
+  color: #018570;
+  font-size: 40px;
+  font-family: 'Orelega One', sans-serif;
+  font-weight: normal;
+  left: 47%;  /* Center horizontally */
+  top: 70%;  /* Adjust this based on where the display should be */
+  transform: translate(-50%, -50%); /* Ensures proper centering */
+  text-align: center;
 }
 
 
@@ -138,28 +145,14 @@ html,body {
 
 
 .lesson-two-point-one-input {
-  width: 110%; 
+  width: 37%; 
   height: 40px;
-  text-align: center;
   border-radius: 15px;
   border: 2px solid #015770;
   background-color: #e7eae2;
   padding: 10px;
-  font-size: 1.3rem; 
+  font-size: 1.5rem; 
   font-family: 'Orelega One', sans-serif;
-  text-align: center;
-}
-
-.lesson-two-point-one-input-container{
-  display: flex;
-  flex-direction: column; 
-  align-items: center;
-  gap: 8px; 
-  margin-top: 5px;
-  position: relative;
-  font-size: 0.8rem;
-  font-family: 'Orelega One', sans-serif;
-  font-weight: normal;
   text-align: center;
 }
 
@@ -202,21 +195,15 @@ html,body {
   transform: translateY(-10px);
 }
 
-.lesson-two-point-one-box {
-  margin-top: 10px; 
-  padding-bottom: 15px; 
-}
-
 .lesson-two-point-one-submit, .lesson-two-point-one-next {
   background-color: #E3F0CC;
   border: 5px solid #237B31;
   border-radius: 10px;
   padding: 10px 20px;
-  margin: -10px;
   font-family: 'Orelega One', sans-serif;
   font-size: 1.25rem;
   cursor: pointer;
-  margin-top: -10px;
+  margin-top: -15px;
   color: black;
 }
 
