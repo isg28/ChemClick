@@ -127,7 +127,7 @@ function LessonTwoPointThree() {
                             <div className="lesson-two-point-three-container">
                                 <div className="lesson-two-point-three-reading-container">
                                     <img src={require('../../assets/question/scale.png')} className="lesson-two-point-three-scale" alt="Scale" />
-                                    <img src={require('../../assets/question/duck.png')} className="lesson-two-point-three-duck" alt="Duck" />
+                                    <img src={require('../../assets/question/frog.png')} className="lesson-two-point-three-frog" alt="Frog" />
                                     <h3 className="lesson-two-point-three-scale-reading">{randomNumber}</h3>
                                 </div>
                             </div>

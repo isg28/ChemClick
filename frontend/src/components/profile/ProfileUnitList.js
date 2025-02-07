@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/profile/ProfileUnitList.css';
+import {fetchLessonMastery} from '../../components/question/LessonUtils';
+
 
 function ProfileUnitList({ units, currentUnit }) {
   const navigate = useNavigate();
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
+  const studentId = localStorage.getItem('studentId'); 
+  const [masteryLevels, setMasteryLevels] = useState({});
+
 
   const toggleUnit = (index) => {
     const newOpenUnits = [...openUnits];
     newOpenUnits[index] = !newOpenUnits[index];
     setOpenUnits(newOpenUnits);
-  };
+
+};
+
 
   const checkLessonsCompleted = (unit) => {
     if (unit.lessons.every((lesson) => lesson.status === 'completed')) return "Completed";
@@ -30,6 +37,12 @@ function ProfileUnitList({ units, currentUnit }) {
     if(checkLessonsCompleted(unit) === 'Completed')
       navigate('/congrats');
   };
+
+  useEffect(() => {
+    if (studentId) {
+        fetchLessonMastery(studentId, setMasteryLevels);
+    }
+  }, [studentId]); // Fetch only when studentId changes
 
 
   return (
@@ -66,16 +79,16 @@ function ProfileUnitList({ units, currentUnit }) {
                       <thead>
                           <tr>
                             <th className="lessonResultstableHeader">Lesson</th>
-                            <th className="QAresultstableHeader">Questions Asked</th>
                             <th className="timeResultsTableHeader">Progression Status</th>
+                            <th className="QAresultstableHeader">Mastery Level</th>
                           </tr>
                         </thead>
                         <tbody>
                           {unit.lessons.map((lesson, lessonIndex) => (
                             <tr key={lessonIndex}>
                               <td className="lessonResultstableCell">{lesson.name}</td>
-                              <td className="QAresultsTableCell">{lesson.questionsAsked || 'N/A'}</td>
                               <td className="timeResultsTableCell">{getStatusText(lesson.status) || 'N/A'}</td>
+                              <td className="QAresultsTableCell">{masteryLevels[lesson.lesson_id] + '%' || '0'}</td>              
                             </tr>
                           ))}
                         </tbody>

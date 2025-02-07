@@ -9,12 +9,23 @@ from .serializers import LessonDetailsSerializer
 
 
 class LessonProgressView(APIView):
-    def get(self, request, user_id, lesson_id):
-        progress = LessonProgress.objects.filter(user_id=user_id, lesson_id=lesson_id).first()
-        if progress:
-            serializer = LessonProgressSerializer(progress)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
+    def get(self, request, user_id=None, lesson_id=None):
+        if user_id and lesson_id:
+            progress = LessonProgress.objects.filter(user_id=user_id, lesson_id=lesson_id).first()
+            if progress:
+                serializer = LessonProgressSerializer(progress)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        elif user_id:
+            progress = LessonProgress.objects.filter(user_id=user_id)
+            if progress:
+                serializer = LessonProgressSerializer(progress, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({"message": "No progress found for user"}, status=status.HTTP_404_NOT_FOUND)
+
+        else:
+            return Response({"error": "User ID is required"}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
         serializer = LessonProgressSerializer(data=request.data)

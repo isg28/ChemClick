@@ -9,7 +9,7 @@ html,body {
     overflow-x: hidden;
 }
 
-.lesson-two-point-three {
+.lesson-two-point-five {
     background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
     background-size: cover;
     background-position: center;
@@ -22,7 +22,7 @@ html,body {
     overflow: hidden;
 }
 
-.lesson-two-point-three-box {
+.lesson-two-point-five-box {
     height: 66vh;
     width: 66vw;
     display: flex;
@@ -30,7 +30,7 @@ html,body {
     align-items: center;
 }
 
-.lesson-two-point-three-box-innercont {
+.lesson-two-point-five-box-innercont {
     width: 60vw;
     max-height: 100vh; /* Ensure the height is constrained to the viewport */
     padding: 10px;
@@ -52,7 +52,7 @@ html,body {
     overflow-x: hidden;
 }
 
-.lesson-two-point-three-box-title {
+.lesson-two-point-five-box-title {
     width: 100%;
     background-color: #ffffff;
     border-radius: 5px;
@@ -64,7 +64,7 @@ html,body {
     font-weight: normal;
 }
 
-.lesson-two-point-three-content {
+.lesson-two-point-five-content {
     width: 100%;
     max-width: 950px;
     background-color: #ffffff;
@@ -79,7 +79,7 @@ html,body {
     padding-bottom: 40px;
 }
 
-.lesson-two-point-three-container {
+.lesson-two-point-five-container {
     width: 100%;
     max-width: 800px;
     display: flex;
@@ -90,7 +90,7 @@ html,body {
     border: 2px solid #5f3838;
 }
 
-.lesson-two-point-three-reading-container {
+.lesson-two-point-five-reading-container {
     position: relative;
     max-width: 800px;
     justify-content: center;
@@ -98,20 +98,20 @@ html,body {
     /* border: solid; */
 }
 
-.lesson-two-point-three-scale {
+.lesson-two-point-five-scale {
     width: 100%;
     padding: 10%;
 }
 
-.lesson-two-point-three-frog {
+.lesson-two-point-five-bear {
     position: absolute;
     width: 50%;
     right: 75px;
-    top: 10px;
+    /* top: 10px; */
     padding: 11%;
 }
 
-.lesson-two-point-three-scale-reading {
+.lesson-two-point-five-scale-reading {
     position: absolute;
     color: #018570;
     right: 135px;
@@ -121,7 +121,7 @@ html,body {
     font-weight: normal;
 }
 
-.lesson-two-point-three-question {
+.lesson-two-point-five-question {
     display: flex;
     align-items: center; 
     justify-content: center; 
@@ -129,21 +129,21 @@ html,body {
     width: 100%; 
 }
 
-.lesson-two-point-three-answer1, .lesson-two-point-three-answer2 {
+.lesson-two-point-five-answer1, .lesson-two-point-five-answer2 {
     background-color: #ffffff;
     /* text-align: center; */
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
 } 
 
-.lesson-two-point-three-question h1, .lesson-two-point-three-box-title h1 {
+.lesson-two-point-five-question h1, .lesson-two-point-five-box-title h1 {
     font-size: 1.3rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
     margin:0;
 }
 
-.lesson-two-point-three-currentMeasurement p {
+.lesson-two-point-five-currentMeasurement p {
     font-size: 1.2rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: lighter;
@@ -151,7 +151,7 @@ html,body {
     color: #015770;
 }
 
-.lesson-two-point-three-prompt {
+.lesson-two-point-five-prompt {
     font-size: 1.3rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
@@ -163,7 +163,7 @@ html,body {
     line-height: 1.5;
 }
 
-.lesson-two-point-three-input {
+.lesson-two-point-five-input {
     width: 37%; 
     height: 40px;
     border-radius: 15px;
@@ -184,7 +184,7 @@ html,body {
     position: relative;
 }
 
-.lesson-two-point-three-feedback {
+.lesson-two-point-five-feedback {
     font-size: 1.25rem;
     font-family: 'Orelega One', sans-serif;
     font-weight: bold;
@@ -195,31 +195,31 @@ html,body {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.lesson-two-point-three-feedback.correct {
+.lesson-two-point-five-feedback.correct {
     background-color: #e0f8e0;
     color: #237B31;
     border: 2px solid #237B31;
     opacity: 1;
 }
 
-.lesson-two-point-three-feedback.incorrect {
+.lesson-two-point-five-feedback.incorrect {
     background-color: #ffe6e6;
     color: #662e2e;
     border: 2px solid #c94444;
     opacity: 1;
 }
 
-.lesson-two-point-three-feedback.hidden {
+.lesson-two-point-five-feedback.hidden {
     opacity: 0;
     transform: translateY(-10px);
 }
 
-.lesson-two-point-three-box {
+.lesson-two-point-five-box {
     margin-top: 10px; 
     padding-bottom: 15px; 
 }
 
-.lesson-two-point-three-submit, .lesson-two-point-three-next {
+.lesson-two-point-five-submit, .lesson-two-point-five-next {
     background-color: #E3F0CC;
     border: 5px solid #237B31;
     border-radius: 10px;
@@ -231,7 +231,7 @@ html,body {
     color: black;
 }
 
-.lesson-two-point-three-submit:active, .lesson-two-point-three-next:active {
+.lesson-two-point-five-submit:active, .lesson-two-point-five-next:active {
     background-color: #98c844;
 }
 
@@ -242,5 +242,3 @@ html,body {
     margin-top: 20px;
     margin-bottom: 10px;
 }
-
-
