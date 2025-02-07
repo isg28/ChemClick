@@ -40,6 +40,9 @@ import LessonFourPointOne from './components/question/LessonFourPointOne';
 import LessonFourPointTwo from './components/question/LessonFourPointTwo';
 import LessonFourPointThree from './components/question/LessonFourPointThree';
 
+import LessonFivePointOne from './components/question/LessonFivePointOne';
+
+
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
 ReactDOM.render(
@@ -82,6 +85,9 @@ ReactDOM.render(
         <Route path = "/LessonFourPointOne" element = {<LessonFourPointOne/>}/>
         <Route path = "/LessonFourPointTwo" element = {<LessonFourPointTwo/>}/>
         <Route path = "/LessonFourPointThree" element = {<LessonFourPointThree/>}/>
+
+
+        <Route path = "/LessonFivePointOne" element = {<LessonFivePointOne/>}/>
 
 
         {/* ... etc. */}
