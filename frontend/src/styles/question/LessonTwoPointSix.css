@@ -1,0 +1,244 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-two-point-six {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lesson-two-point-six-box {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lesson-two-point-six-box-innercont {
+    width: 60vw;
+    max-height: 100vh; /* Ensure the height is constrained to the viewport */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.lesson-two-point-six-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.lesson-two-point-six-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 3px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 5px solid #015770;
+    padding-bottom: 40px;
+}
+
+.lesson-two-point-six-container {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px 0;
+    border: 2px solid #5f3838;
+}
+
+.lesson-two-point-six-reading-container {
+    position: relative;
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
+    /* border: solid; */
+}
+
+.lesson-two-point-six-scale {
+    width: 100%;
+    padding: 10%;
+}
+
+.lesson-two-point-six-frog {
+    position: absolute;
+    width: 50%;
+    right: 75px;
+    /* top: 10px; */
+    padding: 11%;
+}
+
+.lesson-two-point-six-scale-reading {
+    position: absolute;
+    color: #018570;
+    right: 135px;
+    top: 215px;
+    font-size: 30px;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.lesson-two-point-six-question {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    width: 100%; 
+}
+
+.lesson-two-point-six-answer1, .lesson-two-point-six-answer2 {
+    background-color: #ffffff;
+    /* text-align: center; */
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+} 
+
+.lesson-two-point-six-question h1, .lesson-two-point-six-box-title h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin:0;
+}
+
+.lesson-two-point-six-currentMeasurement p {
+    font-size: 1.2rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: lighter;
+    margin:0;
+    color: #015770;
+}
+
+.lesson-two-point-six-prompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.lesson-two-point-six-input {
+    width: 37%; 
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #015770;
+    background-color: #e7eae2;
+    padding: 10px;
+    font-size: 1.5rem; 
+    font-family: 'Orelega One', sans-serif;
+    text-align: center;
+}
+
+.submit-feedback-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 8px; 
+    margin-top: 5px;
+    position: relative;
+}
+
+.lesson-two-point-six-feedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lesson-two-point-six-feedback.correct {
+    background-color: #e0f8e0;
+    color: #237B31;
+    border: 2px solid #237B31;
+    opacity: 1;
+}
+
+.lesson-two-point-six-feedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+    opacity: 1;
+}
+
+.lesson-two-point-six-feedback.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.lesson-two-point-six-box {
+    margin-top: 10px; 
+    padding-bottom: 15px; 
+}
+
+.lesson-two-point-six-submit, .lesson-two-point-six-next {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: -15px;
+    color: black;
+}
+
+.lesson-two-point-six-submit:active, .lesson-two-point-six-next:active {
+    background-color: #98c844;
+}
+
+.separator {
+    width: 102%; 
+    border: none;
+    border-top: 4px solid #015770;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}

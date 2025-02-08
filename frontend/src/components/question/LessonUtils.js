@@ -173,6 +173,28 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
     }
 };
 
+export const fetchLessonMastery = async (studentId, setUserMastery) => {
+    try {
+        const response = await fetch(`http://localhost:8000/lessons/progress/${studentId}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch mastery levels");
+        }
+        const data = await response.json();
+
+        // Convert response data into an object with lesson_id as the key
+        const masteryMap = data.reduce((acc, lesson) => {
+            acc[lesson.lesson_id] = lesson.mastery_level || '0';
+            return acc;
+        }, {});
+
+        setUserMastery(masteryMap);
+    } catch (error) {
+        console.error("Error fetching mastery levels:", error);
+        setUserMastery({}); // Set empty object if error occurs
+    }
+};
+
+
 
 
 export const createLessonProgress = async ( studentId, lessonId, goal ) => {

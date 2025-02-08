@@ -1,0 +1,30 @@
+/* Wrapper for the dropped ion and delete button */
+.ion-wrapper {
+    position: relative;
+}
+
+/* Initially hide the delete button */
+.delete-button {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+}
+
+/* Show the delete button when the ion is hovered */
+.ion-wrapper:hover .delete-button {
+    display: block; /* Show the button when hovering over the wrapper */
+}
+
+/* Style for the image */
+.dropped-ion {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
