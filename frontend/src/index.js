@@ -42,6 +42,8 @@ import LessonFourPointThree from './components/question/LessonFourPointThree';
 
 import LessonFivePointOne from './components/question/LessonFivePointOne';
 
+import LessonEightPointOne from './components/question/LessonEightPointOne';
+
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -88,6 +90,8 @@ ReactDOM.render(
 
 
         <Route path = "/LessonFivePointOne" element = {<LessonFivePointOne/>}/>
+
+        <Route path = "/LessonEightPointOne" element = {<LessonEightPointOne/>}/>
 
 
         {/* ... etc. */}
