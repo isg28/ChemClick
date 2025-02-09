@@ -14,16 +14,24 @@ import NegativeIon2 from "../../assets/question/-2ioncomb-transparent.png";
 import PositiveIon3 from "../../assets/question/+3ioncomb-transparent.png";
 import NegativeIon3 from "../../assets/question/-3ioncomb-transparent.png";
 
-const ItemTypes = {
-    ION: "ion",
+const ionImages = {
+    "+1": PositiveIon,
+    "-1": NegativeIon,
+    "+2": PositiveIon2,
+    "-2": NegativeIon2,
+    "+3": PositiveIon3,
+    "-3": NegativeIon3,
 };
 
-function Ion({ src, type }) {
+const ItemType = "ION";
+
+// Draggable Ion Component
+const DraggableIon = ({ ionType, src }) => {
     const [{ isDragging }, drag] = useDrag(() => ({
-        type: ItemTypes.ION,
-        item: { type },
+        type: ItemType,
+        item: { ionType, src },
         collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
+            isDragging: !!monitor.isDragging(),
         }),
     }));
 
@@ -31,95 +39,98 @@ function Ion({ src, type }) {
         <img
             ref={drag}
             src={src}
-            alt={`${type} ion`}
-            className={`ion ${isDragging ? "dragging" : ""}`}
-            style={{ opacity: isDragging ? 0.5 : 1,
-                width: "70px",
-                height:"70px",
-                cursor:"grab",
-            }}
+            alt={`Ion ${ionType}`}
+            className="ion-comb-image"
+            style={{ width: '50px', height: '50px', opacity: isDragging ? 0.5 : 1, cursor: 'grab' }}
         />
     );
-}
+};
 
-function DropZone({ onDrop, ionsDropped, setIonsDropped }) {
-    const [{ canDrop, isOver }, drop] = useDrop(() => ({
-        accept: ItemTypes.ION,
-        drop: onDrop,
+// Drop Zone Component
+const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
+    const [{ isOver }, drop] = useDrop(() => ({
+        accept: ItemType,
+        drop: (item) => onDrop(item),
         collect: (monitor) => ({
-            isOver: monitor.isOver(),
-            canDrop: monitor.canDrop(),
+            isOver: !!monitor.isOver(),
         }),
     }));
 
-    const isActive = canDrop && isOver;
-    let backgroundColor = "white";
-    if (isActive) backgroundColor = "lightgreen";
-    else if (canDrop) backgroundColor = "lightblue";
-
-    const handleDelete = (index) => {
-        setIonsDropped((prev) => prev.filter((_, i) => i !== index));
+    const handleRemoveIon = (index) => {
+        onRemoveIon(index); // Calls the onRemoveIon function passed as prop
     };
 
     return (
         <div
             ref={drop}
-            className="dropzone"
+            className="drop-zone"
             style={{
-                backgroundColor,
-                width: "100%",
-                height: "100%",
-                border: "1px dashed black",
-                position: "relative",
+                width: "200px",
+                height: "200px",
+                border: "2px dashed gray",
+                backgroundColor: isOver ? "#d3f9d8" : "#f0f0f0",
                 display: "flex",
                 flexWrap: "wrap",
                 alignItems: "center",
                 justifyContent: "center",
+                padding: "10px",
+                flexDirection: "column",
             }}
         >
-            {ionsDropped.map((ion, index) => (
-                <div key={index} style={{ position: 'relative' }}>
-                    <img
-                        src={ion.src}
-                        alt={`${ion.type} ion`}
-                        className="dropped-ion"
-                        style={{
-                            width: "70px",
-                            height: "70px",
-                            margin: "5px",
-                        }}
-                    />
-                    <button
-                        onClick={() => handleDelete(index)}
-                        style={{
-                            position: 'absolute',
-                            top: '0',
-                            right: '0',
-                            backgroundColor: 'red',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '50%',
-                            padding: '5px',
-                            cursor: 'pointer',
-                        }}
-                    >
+            {droppedIons.length === 0 ? (
+                <p>Drop Ions Here</p>
+            ) : (
+                droppedIons.map((ion, index) => (
+                    <div key={index} style={{ position: 'relative' }}>
+                        <img
+                            src={ion.src}
+                            alt={`Dropped Ion ${ion.ionType}`}
+                            className="dropped-ion-image"
+                            style={{ width: "70px", height: "70px" }}
+                        />
+                        <button
+                            onClick={() => handleRemoveIon(index)}
+                            style={{
+                                position: 'absolute',
+                                top: '0',
+                                right: '0',
+                                background: 'red',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '50%',
+                                width: '20px',
+                                height: '20px',
+                                cursor: 'pointer',
+                            }}
+                        >
                         X
-                    </button>
-                </div>
-            ))}
+                        </button>
+                    </div>
+                ))
+            )}
         </div>
     );
-}
+};
 
+function getRandomIonImage() {
+    const ionTypes = Object.keys(ionImages);
+    const randomIonType = ionTypes[Math.floor(Math.random() * ionTypes.length)];
+    return ionImages[randomIonType];
+}
 function LessonEightPointOne(){
     const navigate = useNavigate();
 
     const [randomNumber, setRandomNumber] = useState(0);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('');
+    const [randomIon, setRandomIon] = useState(getRandomIonImage()); // Random ion image state
     const [ions, setIons] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
-    const [ionsDropped, setIonsDropped] = useState([]);
+    const [animateIons, setAnimateIons] = useState(false);
+    const [droppedIons, setDroppedIons] = useState([]);
+    const [canSubmit, setCanSubmit] = useState(false);
+    const [questionText, setQuestionText] = useState('');  // Add state for question text
+
 
     const studentId = localStorage.getItem('studentId'); 
     const lessonId = 'lesson8.1'; 
@@ -136,8 +147,14 @@ function LessonEightPointOne(){
     };
 
     const generateRandomNumberAndPosition = () => {
-        const randomNum = (Math.random() * 2 + 1).toFixed(0);
-        setRandomNumber(randomNum);
+        // Restrict random number to valid values based on ion type
+        const randomNum = randomIon === PositiveIon3 || randomIon === NegativeIon3
+            ? Math.floor(Math.random() * 3) + 1 // Generates 1, 2, or 3 for +3/-3 ions
+            : randomIon === PositiveIon2 || randomIon === NegativeIon2
+            ? Math.floor(Math.random() * 2) + 1 // Generates 1 or 2 for +2/-2 ions
+            : 1 // Default behavior for other ions
+    
+        setRandomNumber(randomNum);  // Update the random number state
     };
 
     useEffect(() => {
@@ -163,70 +180,145 @@ function LessonEightPointOne(){
     }, [studentId, lessonId, navigate]);
 
     const handleDrop = (item) => {
-        let src;
-        switch (item.type) {
-            case "+1":
-                src = PositiveIon;
-                break;
-            case "-1":
-                src = NegativeIon;
-                break;
-            case "+2":
-                src = PositiveIon2;
-                break;
-            case "-2":
-                src = NegativeIon2;
-                break;
-            case "+3":
-                src = PositiveIon3;
-                break;
-            case "-3":
-                src = NegativeIon3;
-                break;
-            default:
-                src = "";
-        }
-        setIonsDropped((prev) => [
-            ...prev,
-            { type: item.type, src },
-        ]);
-
-        // Check if ions are balanced (equal number of + and - ions)
-        const positiveCount = [...ionsDropped, item].filter((ion) => ion.type.startsWith("+")).length;
-        const negativeCount = [...ionsDropped, item].filter((ion) => ion.type.startsWith("-")).length;
-        setIsCorrect(positiveCount === negativeCount);
+        setDroppedIons((prev) => [...prev, item]);
     };
 
-    // Check if the ions dropped are balanced (charge sum = 0)
-    const checkIfCorrect = () => {
-        const totalCharge = ionsDropped.reduce((sum, ion) => {
-            switch (ion.type) {
-                case "+1":
-                    return sum + 1;
-                case "-1":
-                    return sum - 1;
-                case "+2":
-                    return sum + 2;
-                case "-2":
-                    return sum - 2;
-                case "+3":
-                    return sum + 3;
-                case "-3":
-                    return sum - 3;
-                default:
-                    return sum;
+    const handleRemoveIon = (index) => {
+        setDroppedIons((prev) => prev.filter((_, i) => i !== index)); // Remove the ion at the given index
+    };
+
+    const isPositiveIon = randomIon === PositiveIon || randomIon === PositiveIon2 || randomIon === PositiveIon3;
+
+    const getIonTypeFromPath = (path) => {
+        // Extract the ion type from the image path, e.g., +3 or -3
+        if (path.includes("+3")) return "+3";
+        if (path.includes("-3")) return "-3";
+        if (path.includes("+2")) return "+2";
+        if (path.includes("-2")) return "-2";
+        if (path.includes("+1")) return "+1";
+        if (path.includes("-1")) return "-1";
+        return null;  // Return null if no match
+    };
+
+    
+
+    const getQuestionText = () => {
+        const ionType = getIonTypeFromPath(randomIon);  // Get ion type from image path
+    
+        console.log("Ion Type:", ionType);  // Debugging
+    
+        // Check for +1 or -1 ions
+        if (ionType === "+1" || ionType === "-1") {
+            return 'For this question, please use the +/- 1 combs to balance this ion.';
+        }
+    
+        // Check for +2 or -2 ions
+        if (ionType === "+2" || ionType === "-2") {
+            if (randomNumber === 1) {
+                return 'For this question, please use the +/- 1 combs to balance this ion.';
+            } else if (randomNumber === 2) {
+                return 'For this question, please use the +/- 2 combs to balance this ion.';
             }
-        }, 0);
-        return totalCharge === 0;
+        }
+    
+        // Check for +3 or -3 ions
+        if (ionType === "+3" || ionType === "-3") {
+            console.log("Random Number for +3 ion: ", randomNumber);  // Debugging
+    
+            if (randomNumber === 1) {
+                return 'For this question, please use the +/- 3 combs to balance this ion.';
+            } else if (randomNumber === 2) {
+                return 'For this question, please use the +/- 2 and the +/- 1 combs to balance this ion.';
+            } else if (randomNumber === 3) {
+                return 'For this question, please use the +/- 1 combs to balance this ion.';
+            }
+        }
+    
+        // Default return if no conditions match
+        return ''; 
+    };
+
+
+    const isCorrectCombination = () => {
+        const ionCounts = droppedIons.reduce((counts, ion) => {
+            counts[ion.ionType] = (counts[ion.ionType] || 0) + 1;
+            return counts;
+        }, {});
+    
+        // Check combinations based on ion type and random number
+    
+        if (randomIon === PositiveIon) {
+            return ionCounts["-1"] === 1; // +1 ion, should have one -1 comb
+        }
+    
+        if (randomIon === NegativeIon) {
+            return ionCounts["+1"] === 1; // -1 ion, should have one +1 comb
+        }
+    
+        if (randomIon === PositiveIon2) {
+            if (randomNumber === 1) {
+                return ionCounts["-1"] === 2; // +2 ion with randomNumber 1, should have two -1 combs
+            } else if (randomNumber === 2) {
+                return ionCounts["-2"] === 1; // +2 ion with randomNumber 2, should have one -2 comb
+            }
+        }
+    
+        if (randomIon === NegativeIon2) {
+            if (randomNumber === 1) {
+                return ionCounts["+1"] === 2; // -2 ion with randomNumber 1, should have two +1 combs
+            } else if (randomNumber === 2) {
+                return ionCounts["+2"] === 1; // -2 ion with randomNumber 2, should have one +2 comb
+            }
+        }
+    
+        if (randomIon === PositiveIon3) {
+            if (randomNumber === 1) {
+                return ionCounts["-3"] === 1; // +3 ion with randomNumber 1, should have one -3 comb
+            } else if (randomNumber === 2) {
+                return ionCounts["-2"] === 1 && ionCounts["-1"] === 1; // +3 ion with randomNumber 2, should have one -2 and two -1 combs
+            } else if (randomNumber === 3) {
+                return ionCounts["-1"] === 3; // +3 ion with randomNumber 3, should have three -1 combs
+            }
+        }
+    
+        if (randomIon === NegativeIon3) {
+            if (randomNumber === 1) {
+                return ionCounts["+3"] === 1; // -3 ion with randomNumber 1, should have one +3 comb
+            } else if (randomNumber === 2) {
+                return ionCounts["+2"] === 1 && ionCounts["+1"] === 1; // -3 ion with randomNumber 2, should have one +2 and two +1 combs
+            } else if (randomNumber === 3) {
+                return ionCounts["+1"] === 3; // -3 ion with randomNumber 3, should have three +1 combs
+            }
+        }
+    
+        return false; // Default return for invalid combination
     };
 
     const handleSubmit = () => {
-        setIsCorrect(checkIfCorrect()); // Check if the ion charges balance to 0
-        setFeedbackMessage(isCorrect ? "Correct!" : "Correct!");
-        setFeedbackClass(isCorrect ? "correct" : "incorrect");
-        generateRandomNumberAndPosition(); // Generate a new random question
-        setIonsDropped([]); // Reset ions dropped after submit
+        if (isCorrectCombination()) {
+            setFeedbackMessage('Correct!');
+            setFeedbackClass('correct');
+            setDroppedIons([]); // Reset dropped ions for the next question
+    
+            // Update random ion and number in sequence with a slight delay for smooth transition
+            setTimeout(() => {
+                setRandomIon(getRandomIonImage()); // Generate a new random ion
+                generateRandomNumberAndPosition(); // Generate new random number
+            }, 100); // Delay to allow state updates to happen sequentially
+        } else {
+            setFeedbackMessage('Incorrect. Please look closely at the combs that need to be used to balance out the ion!');
+            setFeedbackClass('incorrect');
+        }
     };
+
+    useEffect(() => {
+        console.log("randomIon:", randomIon);
+        console.log("randomNumber:", randomNumber);
+        const questionText = getQuestionText();
+        console.log("Updated Question:", questionText);
+        setQuestionText(questionText);  // Update state for question text dynamically
+    }, [randomIon, randomNumber]);
+    
 
     return (
         <DndProvider backend={HTML5Backend}>
@@ -249,29 +341,38 @@ function LessonEightPointOne(){
                         </div>
                         <div className='lesson-one-point-one-content'>
                             <p className='lesson-one-point-one-prompt'>
-                                Create the specified amount of ions using the combs provided. Drag the combs together with your mouse to create a rectangle, simulating an ion. To delete a comb, press the red X.
+                                Each comb simulates a charge. Click and drag the provided combs to balance the ion, creating a neutral charge. Drag the appropriate combs into the dropzone with your mouse to create a rectangle, simulating a balanced ion.
                             </p>
                             <div className="lesson-one-point-one-measurement-container">
-                                <div className= "ions-container">
-                                <Ion src={NegativeIon2} type="-2" />
-                                <Ion src={PositiveIon} type="+1" />
-                                <Ion src={PositiveIon3} type="+3" />
-                                <Ion src={NegativeIon} type="-1" />
-                                <Ion src={PositiveIon2} type="+2" />
-                                <Ion src={NegativeIon3} type="-3" />
+                                <div className="ions-container-top" style={{ flexDirection: isPositiveIon ? 'row-reverse' : 'row' }}>
+                                <DropZone onDrop={handleDrop} droppedIons={droppedIons} onRemoveIon={handleRemoveIon}/>
+                                    {/* Random ion image */}
+                                    <img
+                                        src={randomIon}
+                                        alt="Random Ion"
+                                        className="random-ion-image"
+                                        style={{ width: '100px', height: '100px' }}
+                                    />
                                 </div>
-                                <DropZone onDrop={handleDrop} ionsDropped ={ionsDropped} setIonsDropped={setIonsDropped}/>
+                            {/* Separator */}
+                            <div className="separator-line"></div>
 
-                            </div>
+                        <div className="ions-container-bottom">
+                            {/* Ion combs images */}
+                            {Object.keys(ionImages).map((ionType) => (
+                                <DraggableIon key={ionType} ionType={ionType} src={ionImages[ionType]} />
+                            ))}
+                        </div>
+                </div>
 
 
                             <hr className="separator" />
                             <div className='lesson-one-point-one-question'>
-                                <h1>Click and drag the provided combs to create the {randomNumber} ion. </h1>
+                                <h1> {getQuestionText()} </h1>
                             </div>
                         </div>
                         <div className="submit-feedback-container">
-                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
+                            <button className='lesson-one-point-one-submit' onClick={handleSubmit} >Submit Answer</button>
                             <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
