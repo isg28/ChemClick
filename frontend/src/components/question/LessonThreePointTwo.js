@@ -419,106 +419,109 @@ function LessonThreePointTwo() {
     };
 
     return (
-        <div className='lesson-three-point-two'>
-
-            <div className='questionheader'>
-                <div className="question-head-in">
-                    <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
-                    <div className='insideheader'>
-                        <h1>ChemClicks Assignments</h1>
-                    </div>
-                    <img src={require('../../assets/question/Home.png')} className='homelines' onClick={handlequestion} alt="Home Lines" />
-                </div>
-            </div>
-
-            <div className="question-page-main">
-                <div className='lesson-three-point-two-box'>
-                    <div className='lesson-three-point-two-box-innercont'>
-                        <div className='lesson-three-point-two-box-title'>
-                            <h1>Unit Three: Atomic Structure - 2:8:8:2 Pattern</h1>
-                        </div>
-                        <div className='lesson-three-point-two-content'>
-                            <p className='lesson-three-point-two-prompt'>
-                                Look at the element <strong>{randomizedQuestions[currentQuestionIndex]?.nameType}</strong> and enter the amount of electrons you think the element requires. <br />
-                                Hint: Think of the order the element appears in the Periodic Table!
-                            </p>
-                                <div className="lesson-three-point-two-cylinder-container">
-                                    <div className="lesson-three-point-two-cylinderWaterContainer">
-                                    {randomizedQuestions[currentQuestionIndex] && (
-                                        <img 
-                                            src={require(`../../assets/question/${randomizedQuestions[currentQuestionIndex].imagepath}`)}
-                                            className="lesson-one-point-eight-cylinder"
-                                            alt={`${randomizedQuestions[currentQuestionIndex].nameType} structure`}
-                                        />
-                                    )}                                 
-                                    </div>
-                                    <div className="electron-container">
-                                    {predefinedPositions.map((pos, index) => (
-                                        <div
-                                        key={index}
-                                        className={`electron ${selectedElectrons.includes(index) ? "selected" : ""}`}
-                                        style={{ left: pos.x, top: pos.y }}
-                                        onClick={() => handleElectronClick(index)}
-                                        ></div>
-                                    ))}
-                                </div>
-                                </div>
-                        </div>
-
-                        <div className="submit-feedback-container">
-                            {!isAnswerCorrect && (
-                                <button className='lesson-three-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
-                            )}
-                            {isAnswerCorrect && (
-                                <button className='lesson-three-point-two-next' onClick={handleNextQuestion}>Next Question</button>
-                            )}
-                            <span className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Consistent for Each Question Page */}
-                <div className="side-column">
-                <div className="side-column-box-holder">
-                    <div className="side-column-box masterybox">
-                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
-                        {displayMedals && (
-                            <>
-                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
-                                🏅 
-                            </div>
-                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
-                                🏅 
-                            </div>
-                        </>
-                        )}
-                        <div className="side-column-box-info masteryboxstars">{stars}</div>
-                    </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>
-                                {renderGoalChecks(goal, correctAnswers)}
-                            </div>
-                        </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>              
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ '--progress': progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div className='lesson-three-point-two'>
+      <div className='questionheader'>
+        <div className="question-head-in">
+          <img src={require('../../assets/question/ChemClickLogo.png')} className='ChemClickLogoHeader' alt="Chem Click Logo" />
+          <div className='insideheader'>
+            <h1>ChemClicks Assignments</h1>
+          </div>
+          <img src={require('../../assets/question/Home.png')} className='homelines' onClick={() => { handlequestion() }} alt="Home Lines" />
         </div>
-    );
-}
+      </div>
+
+      <div className="question-page-main">
+        <div className='lesson-three-point-two-box'>
+          <div className='lesson-three-point-two-box-innercont'>
+            <div className='lesson-three-point-two-box-title'>
+              <h1>Unit Three: Atomic Structure - Valence Electrons</h1>
+            </div>
+            <div className='lesson-three-point-two-content'>
+              <p className='lesson-three-point-two-prompt'>
+                Look at the element <strong>{randomizedQuestions[currentQuestionIndex]?.nameType}</strong> and click the amount of electrons you think the element requires. <br />
+                Hint: Click on the red dots until they are all blue!
+              </p>
+              <div className="lesson-three-point-two-cylinder-container">
+                <div className="lesson-three-point-two-cylinderWaterContainer">
+                  {randomizedQuestions[currentQuestionIndex] && (
+                    <img 
+                      src={require(`../../assets/question/${randomizedQuestions[currentQuestionIndex].imagepath}`)}
+                      className="lesson-one-point-eight-cylinder"
+                      alt={`${randomizedQuestions[currentQuestionIndex].nameType} structure`}
+                    />
+                  )}
+                </div>
+                <div className="electron-container">
+                  {predefinedPositions.map((pos, index) => (
+                    <div
+                      key={index}
+                      className={`electron ${selectedElectrons.includes(index) ? "selected" : ""}`}
+                      style={{ left: pos.x, top: pos.y }}
+                      onClick={() => handleElectronClick(index)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="submit-feedback-container">
+              {!isAnswerCorrect ? (
+                <button className='lesson-three-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+              ) : (
+                <button className='lesson-three-point-two-next' onClick={handleNextQuestion}>Next Question</button>
+              )}
+              <span className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Sidebar Section */}
+        <div className="side-column">
+          <div className="side-column-box-holder">
+            <div className="side-column-box masterybox">
+              <div className="side-column-box-title masteryboxtitle">
+                <h1>Mastery</h1>
+              </div>
+              {displayMedals && (
+                <>
+                  <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                    🏅 
+                  </div>
+                  <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                    🏅 
+                  </div>
+                </>
+              )}
+              <div className="side-column-box-info masteryboxstars">{stars}</div>
+            </div>
+
+            <div className='side-column-box'>
+              <div className='side-column-box-title'>
+                <h1>Goal</h1>
+              </div>
+              <div className='side-column-box-info'>
+                {renderGoalChecks(goal, correctAnswers)}
+              </div>
+            </div>
+
+            <div className='side-column-box'>
+              <div className='side-column-box-title'>
+                <h1>Progress</h1>
+              </div>
+              <div className='side-column-box-info'>
+                <div className="progressbox">
+                  <div className="progressbar" style={{ '--progress': progress }}></div>
+                  <div className="progress-text">
+                    Current Topic Progress: {progress.toFixed(2)}%
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LessonThreePointTwo;
