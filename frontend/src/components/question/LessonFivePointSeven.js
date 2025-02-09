@@ -4,12 +4,12 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 
 
 import '../../styles/question/Question.css';
-import '../../styles/question/LessonFivePointOne.css';
+import '../../styles/question/LessonFivePointSeven.css';
 
-function LessonFivePointOne() {
+function LessonFivePointSeven() {
   const navigate = useNavigate();
   const studentId = localStorage.getItem('studentId');
-  const lessonId = 'lesson5.1';
+  const lessonId = 'lesson5.7';
 
   const [goal, setGoal] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -57,7 +57,7 @@ function LessonFivePointOne() {
       return;
     }
 
-    if (selectedAnswer === 'The number of valence electrons is equal to the group number.') {
+    if (selectedAnswer === 'The number of valence electrons is equal to the last digit of the group number.') {
       setIsCorrect(true);
       await CorrectResponses({
         studentId, 
@@ -133,7 +133,7 @@ function LessonFivePointOne() {
   }
 
   return (
-    <div className="LessonFivePointOne">
+    <div className="LessonFivePointSeven">
       <div className="questionheader">
         <div className="question-head-in">
           <img
@@ -154,23 +154,23 @@ function LessonFivePointOne() {
       </div>
 
       <div className="question-page-main">
-        <div className="LessonFivePointOneBox">
-          <div className="LessonFivePointOneBoxInnercont">
-            <div className="LessonFivePointOneBoxTitle">
-              <h1>Unit Five: Periodic Trends (Valence Electrons) - Group 1</h1>
+        <div className="LessonFivePointSevenBox">
+          <div className="LessonFivePointSevenBoxInnercont">
+            <div className="LessonFivePointSevenBoxTitle">
+              <h1>Unit Five: Periodic Trends (Valence Electrons) - Group 17</h1>
             </div>
-            <div className="LessonFivePointOneContent">
-              <p className="LessonFivePointOnePrompt">
-              How does Group 1's group number relate to its valence electrons?</p>
-              <div className="LessonFivePointOneRow">
-                <div className="LessonFivePointOneImageContainer">
+            <div className="LessonFivePointSevenContent">
+              <p className="LessonFivePointSevenPrompt">
+              How does Group 17's group number relate to its valence electrons?</p>
+              <div className="LessonFivePointSevenRow">
+                <div className="LessonFivePointSevenImageContainer">
                   <img
-                    src={require('../../assets/question/Group1.png')}
-                    alt="Group 1"
+                    src={require('../../assets/question/Group17.png')}
+                    alt="Group 17"
                     className="scrollable-image"
                   />
                 </div>
-                <div className="LessonFivePointOneInput">
+                <div className="LessonFivePointSevenInput">
                   {options.map(function (option, index) {
                     return (
                       <div key={index} style={{ marginBottom: '10px' }}>
@@ -194,13 +194,13 @@ function LessonFivePointOne() {
                 </div>
               </div>
               {feedbackMessage !== '' && (
-                <div className={'LessonFivePointOneFeedback ' + (isCorrect ? 'correct' : 'incorrect')}>
+                <div className={'LessonFivePointSevenFeedback ' + (isCorrect ? 'correct' : 'incorrect')}>
                   {feedbackMessage}
                 </div>
               )}
             </div>
             <div className="submit-feedback-container">
-              <button className="LessonFivePointOneSubmit" onClick={handleButtonClick}>
+              <button className="LessonFivePointSevenSubmit" onClick={handleButtonClick}>
                 {buttonText}
               </button>
             </div>
@@ -250,4 +250,4 @@ function LessonFivePointOne() {
   );
 }
 
-export default LessonFivePointOne;
+export default LessonFivePointSeven;
