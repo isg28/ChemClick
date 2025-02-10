@@ -171,7 +171,7 @@ function LessonFivePointNine() {
                         </div>
                         <div className="LessonFivePointNineContent">
                             <p className="LessonFivePointNinePrompt">
-                                How is an element's group number related to its
+                            How does Group 18's group number relate to its
                                 valence electrons?
                             </p>
                             <div className="LessonFivePointNineRow">
