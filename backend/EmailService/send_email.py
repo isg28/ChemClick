@@ -14,7 +14,7 @@ db = client['ChemClicks']
 collection = db['lesson_progress']
 
 # Email configuration
-matt_email = "zz8720209@gmail.com" #change with Matt's email when ready
+matt_email = "example@email.com" #change with Matt's email when ready
 sender_email = "chemclicks@gmail.com"
 sender_password = "ltig qxgb vxzn scsh"  # Gmail SMTP password
 smtp_server = "smtp.gmail.com"
