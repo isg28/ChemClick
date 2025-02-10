@@ -10,12 +10,12 @@ import {
 } from "./LessonUtils";
 
 import "../../styles/question/Question.css";
-import "../../styles/question/LessonFivePointEight.css";
+import "../../styles/question/LessonFivePointTwelve.css";
 
-function LessonFivePointEight() {
+function LessonFivePointTwelve() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem("studentId");
-    const lessonId = "lesson5.8";
+    const lessonId = "lesson5.12";
 
     const [goal, setGoal] = useState(null);
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -63,7 +63,7 @@ function LessonFivePointEight() {
 
         if (
             selectedAnswer ===
-            "It is not."
+            "The number of valence electrons is equal to the last digit of the group number."
         ) {
             setIsCorrect(true);
             await CorrectResponses({
@@ -79,21 +79,6 @@ function LessonFivePointEight() {
                 setMasteryLevel,
             });
             setFeedbackMessage("Correct! Click done to go to the Dashboard.");
-        } else if(selectedAnswer === "The number of valence electrons is equal to the group number.") {
-            setIsCorrect(false);
-            await IncorrectResponses({
-                studentId,
-                lessonId,
-                correctAnswers,
-                progress,
-                masteryLevel,
-                goal,
-                starsEarned,
-                setCorrectAnswers,
-                setProgress,
-                setMasteryLevel,
-            });
-            setFeedbackMessage("Take a look at helium.  How many valence electrons does it have?");
         } else {
             setIsCorrect(false);
             await IncorrectResponses({
@@ -154,8 +139,63 @@ function LessonFivePointEight() {
         setSelectedAnswer(e.target.value);
     }
 
+    const images = [
+        require("../../assets/question/Group13.png"),
+        require("../../assets/question/Group14.png"),
+        require("../../assets/question/Group15.png"),
+        require("../../assets/question/Group16.png"),
+        require("../../assets/question/Group17.png"),
+        require("../../assets/question/Group18.png")
+    ];
+    
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [showImageFeedback, setShowImageFeedback] = useState(false);
+    const [imageFeedbackMessage, setImageFeedbackMessage] = useState("Click and scroll through the images to view previous answers");
+
+    function prevImage() {
+        const newIndex = (currentIndex - 1 + images.length) % images.length;
+        setCurrentIndex(newIndex);
+        updateImageFeedback(newIndex);
+    }
+
+    function nextImage() {
+        const newIndex = (currentIndex + 1) % images.length;
+        setCurrentIndex(newIndex);
+        updateImageFeedback(newIndex);
+    }
+
+    function updateImageFeedback(index) {
+        switch (index) {
+            case 0:
+                setImageFeedbackMessage("Group 13: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 1:
+                setImageFeedbackMessage("Group 14: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 2:
+                setImageFeedbackMessage("Group 15: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 3:
+                setImageFeedbackMessage("Group 16: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 4:
+                setImageFeedbackMessage("Group 17: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 5:
+                setImageFeedbackMessage("Group 18: It is not.");
+                break;
+            default:
+                break;
+        }
+    }
+
+    function handleImageClick() {
+        setShowImageFeedback(true);
+        setTimeout(() => setShowImageFeedback(false), 6000);
+    }
+
     return (
-        <div className="LessonFivePointEight">
+        <div className="LessonFivePointTwelve">
             <div className="questionheader">
                 <div className="question-head-in">
                     <img
@@ -176,28 +216,38 @@ function LessonFivePointEight() {
             </div>
 
             <div className="question-page-main">
-                <div className="LessonFivePointEightBox">
-                    <div className="LessonFivePointEightBoxInnercont">
-                        <div className="LessonFivePointEightBoxTitle">
+                <div className="LessonFivePointTwelveBox">
+                    <div className="LessonFivePointTwelveBoxInnercont">
+                        <div className="LessonFivePointTwelveBoxTitle">
                             <h1>
                                 Unit Five: Periodic Trends (Valence Electrons) -
-                                Group 18
+                                Group 13 - 18
                             </h1>
                         </div>
-                        <div className="LessonFivePointEightContent">
-                            <p className="LessonFivePointEightPrompt">
-                                How does Group 18's group number relate to its
-                                valence electrons?
+                        <div className="LessonFivePointTwelveContent">
+                            <p className="LessonFivePointTwelvePrompt">
+                                How does Group 13 through Group 18's group number relate to its
+                                valence electrons? View previous answers through images
                             </p>
-                            <div className="LessonFivePointEightRow">
-                                <div className="LessonFivePointEightImageContainer">
+                            <div className="LessonFivePointTwelveRow">
+                                <div className="LessonFivePointTwelveImageSelector">
+                                    <div className="LessonFivePointTwelveArrows">
+                                        <button className="LessonFiveArrowLeft" onClick={prevImage}>&#10094;</button>
+                                        <button className="LessonFiveArrowRight" onClick={nextImage}>&#10095;</button>
+                                    </div>
+                                    <div className="LessonFivePointTwelveImageContainer">
                                     <img
-                                        src={require("../../assets/question/Group18.png")}
-                                        alt="Group 18"
+                                        id="LessonFiveSliderImage"
+                                        src={images[currentIndex]}
+                                        alt="Group Element"
                                         className="scrollable-image"
+                                        onClick={handleImageClick}
+                                        style={{ cursor: "pointer" }}
                                     />
+                                    </div>
                                 </div>
-                                <div className="LessonFivePointEightInput">
+
+                                <div className="LessonFivePointTwelveInput">
                                     {options.map(function (option, index) {
                                         return (
                                             <div
@@ -231,10 +281,15 @@ function LessonFivePointEight() {
                                     })}
                                 </div>
                             </div>
+                            {showImageFeedback && (
+                                <div className="LessonFivePointTwelveFeedback image-feedback">
+                                    {imageFeedbackMessage}
+                                </div>
+                            )}
                             {feedbackMessage !== "" && (
                                 <div
                                     className={
-                                        "LessonFivePointEightFeedback " +
+                                        "LessonFivePointTwelveFeedback " +
                                         (isCorrect ? "correct" : "incorrect")
                                     }
                                 >
@@ -244,7 +299,7 @@ function LessonFivePointEight() {
                         </div>
                         <div className="submit-feedback-container">
                             <button
-                                className="LessonFivePointEightSubmit"
+                                className="LessonFivePointTwelveSubmit"
                                 onClick={handleButtonClick}
                             >
                                 {buttonText}
@@ -310,4 +365,4 @@ function LessonFivePointEight() {
     );
 }
 
-export default LessonFivePointEight;
+export default LessonFivePointTwelve;

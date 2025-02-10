@@ -171,13 +171,13 @@ function LessonFivePointTen() {
                         </div>
                         <div className="LessonFivePointTenContent">
                             <p className="LessonFivePointTenPrompt">
-                                How is an element's group number related to its
+                                How does Group 18's group number relate to its
                                 valence electrons?
                             </p>
                             <div className="LessonFivePointTenRow">
                                 <div className="LessonFivePointTenImageContainer">
                                     <img
-                                        src={require("../../assets/question/Group18-FadedHe.png")}
+                                        src={require("../../assets/question/Group18-Faded-wo-He.png")}
                                         alt="Group 18"
                                         className="scrollable-image"
                                     />

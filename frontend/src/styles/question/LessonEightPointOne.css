@@ -1,30 +1,78 @@
-/* Wrapper for the dropped ion and delete button */
-.ion-wrapper {
+.dropzone {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed black;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    transition: background-color 0.3s ease-in-out;
 }
 
-/* Initially hide the delete button */
-.delete-button {
+
+.dropped-ion {
+    width: 70px;
+    height: 70px;
+}
+
+.delete-btn {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: 0;
+    right: 0;
     background-color: red;
     color: white;
     border: none;
     border-radius: 50%;
     padding: 5px;
     cursor: pointer;
-    display: none; /* Hidden by default */
 }
 
-/* Show the delete button when the ion is hovered */
-.ion-wrapper:hover .delete-button {
-    display: block; /* Show the button when hovering over the wrapper */
+/* Correct Answer Animation */
+.merge-animation {
+    animation: mergeEffect 5s ease-in-out forwards;
 }
 
-/* Style for the image */
-.dropped-ion {
-    width: 40px;
-    height: 40px;
-    margin: 5px;
+@keyframes mergeEffect {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+/* Feedback Styling */
+.feedback {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.feedback.correct { color: green; }
+.feedback.incorrect { color: red; }
+
+
+.ions-container-bottom {
+    display: flex; /* Use flex to stack ion combs vertically */
+    flex-direction: row; /* Stack ion combs vertically */
+    align-items: center; /* Center the combs horizontally */
+    gap: 10px; /* Space between each ion comb */
+}
+
+.ions-container-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.separator-line {
+    width: 100%; /* Full width separator */
+    background-color: #000; /* Black vertical line */
+    height: 1px; /* Thin line */
+}
+
+.lesson-one-point-one-measurement-container {
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center the content horizontally */
+    gap: 20px; /* Space between top container, separator, and bottom container */
 }
