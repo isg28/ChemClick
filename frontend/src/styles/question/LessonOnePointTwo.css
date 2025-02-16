@@ -204,3 +204,48 @@ html,body {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+.completion-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.completion-modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 400px;
+}
+
+.completion-modal-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.completion-modal-content p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.completion-modal-content button {
+    background-color: #00D5D7;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.completion-modal-content button:hover {
+    background-color: #00b0b3;
+}

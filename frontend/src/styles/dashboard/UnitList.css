@@ -136,13 +136,20 @@
     margin-right: 10px; 
 }
 
+.due-date-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 4px; 
+    align-items: flex-end; 
+    text-align: right; 
+    margin-left: auto; 
+}
+
 .due-date {
-    white-space: nowrap; 
-    text-align: right;
-    flex-shrink: 0; 
     font-size: 1.1rem;
     color: inherit;
-    margin-left: 10px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .due-date:hover .tooltip {
@@ -230,3 +237,22 @@ span.due-date, span.due-date:hover {
     padding: 2px;
     transition: all 0.3s ease-in-out;
 }
+
+.progress-bar-container {
+    width: 100px; 
+    height: 4px; 
+    background-color: #e0e0e0; 
+    border-radius: 4px;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    cursor: pointer;
+    align-self: flex-end; 
+    cursor: default;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4CAF50; 
+    transition: width 0.4s ease-in-out;
+}
+

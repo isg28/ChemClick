@@ -88,7 +88,7 @@ function ProfileUnitList({ units, currentUnit }) {
                             <tr key={lessonIndex}>
                               <td className="lessonResultstableCell">{lesson.name}</td>
                               <td className="timeResultsTableCell">{getStatusText(lesson.status) || 'N/A'}</td>
-                              <td className="QAresultsTableCell">{masteryLevels[lesson.lesson_id] + '%' || '0'}</td>              
+                              <td className="QAresultsTableCell">{(masteryLevels[lesson.lesson_id] ?? 0) + '%'}</td>
                             </tr>
                           ))}
                         </tbody>

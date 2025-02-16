@@ -15,12 +15,14 @@ const LessonThreePointOne = () => {
     const shellSizes = [120, 180, 240, 300];
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
     const [selectedElement, setSelectedElement] = useState({});
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
-    const { starsEarned, stars } = renderStars(masteryLevel);
-    const [feedback, setFeedback] = useState('');
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const [feedback, setFeedback] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('hidden');
     const displayMedals = starsEarned >= 5;
     const handlequestion = () => {
@@ -64,15 +66,23 @@ const LessonThreePointOne = () => {
                 await fetchLessonData(lessonId, setGoal);
                 await fetchLessonProgress(studentId, lessonId, {
                     setCorrectAnswers,
+                    setIncorrectAnswers,
                     setProgress,
                     setMasteryLevel,
                     setGoal,
-                });
+                    setTotalAttempts,
+                }); 
             };
 
             initializeData();
 
         }, [selectedElement, studentId, lessonId, navigate]);
+
+        useEffect(() => {
+            if (progress === 100) {
+                setShowCompletionModal(true);
+            }
+        }, [progress]);
     
   const addElectron = () => {
     if (electrons.length < 20) {
@@ -123,17 +133,8 @@ const LessonThreePointOne = () => {
         setIsAnswerCorrect(true);
         setFeedback('Correct!');
         setFeedbackClass('correct');
-        await CorrectResponses({
-                        studentId, 
-                        lessonId, 
-                        correctAnswers, 
-                        progress, 
-                        masteryLevel, 
-                        goal,
-                        starsEarned,
-                        setCorrectAnswers, 
-                        setProgress, 
-                        setMasteryLevel,
+        await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         }); 
         return;
         
@@ -141,50 +142,23 @@ const LessonThreePointOne = () => {
     else if(protons.length !== correctAnswer && electrons.length !== expectedElectrons){
         setFeedback("Incorrect amount of protons and electrons. Try again!");
         setFeedbackClass('incorrect');
-        await IncorrectResponses({
-                    studentId, 
-                    lessonId, 
-                    correctAnswers, 
-                    progress, 
-                    masteryLevel, 
-                    goal, 
-                    starsEarned,
-                    setCorrectAnswers, 
-                    setProgress, 
-                    setMasteryLevel,
-        }); 
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
     }
     else if (protons.length !== correctAnswer) {
         setFeedback("Incorrect amount of protons. Try again!");
         setFeedbackClass('incorrect');
-        await IncorrectResponses({
-                    studentId, 
-                    lessonId, 
-                    correctAnswers, 
-                    progress, 
-                    masteryLevel, 
-                    goal, 
-                    starsEarned,
-                    setCorrectAnswers, 
-                    setProgress, 
-                    setMasteryLevel,
-        }); 
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
     }
     else if (electrons.length !== expectedElectrons) {
         setFeedback("Incorrect amount of electrons. Try again!");
         setFeedbackClass('incorrect');
-        await IncorrectResponses({
-                    studentId, 
-                    lessonId, 
-                    correctAnswers, 
-                    progress, 
-                    masteryLevel, 
-                    goal, 
-                    starsEarned,
-                    setCorrectAnswers, 
-                    setProgress, 
-                    setMasteryLevel,
-        }); 
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
     }
     setTimeout(() => {
         setFeedback('');
@@ -316,23 +290,18 @@ const nextQuestion = () => {
                             {renderGoalChecks(goal, correctAnswers)}
                         </div>
                     </div>
-
-                    <div className='side-column-box'>
-                        <div className='side-column-box-title'>
-                            <h1>Progress</h1>
-                        </div>
-                        <div className='side-column-box-info'>
-                            <div className="progressbox">
-                                <div className="progressbar" style={{ '--progress': progress }}></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
+        {showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                    </div>
+                </div>
+            )}
     </div>
     );
 };

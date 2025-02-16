@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/dashboard/UnitList.css';
 
-function UnitList({ units, currentUnit, onLessonClick }) {
+function UnitList({ units, currentUnit, onLessonClick, progressData}) {
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
 
   const toggleUnit = (index) => {
@@ -61,10 +61,7 @@ function UnitList({ units, currentUnit, onLessonClick }) {
 
       <div className="unitlist-content">
         {units.map((unit, index) => (
-          <div
-            key={index}
-            className={`unit-item ${currentUnit === unit.number ? 'current-unit' : ''}`}
-          >
+          <div key={index} className={`unit-item ${currentUnit === unit.number ? 'current-unit' : ''}`}>
             <div className="unit-title" onClick={() => toggleUnit(index)}>
               <span className="unit-number">{unit.number}</span>
               <span className="unit-text">{unit.title}</span>
@@ -73,31 +70,42 @@ function UnitList({ units, currentUnit, onLessonClick }) {
             {openUnits[index] && (
               <div className="unit-details">
                 <ul>
-                  {unit.lessons.map((lesson, lessonIndex) => (
-                    <li 
-                      key={lessonIndex} 
-                      className={`${getStatusClass(lesson.status)} lesson-item`}
-                    >
-                      <span 
-                        onClick={() => lesson.route && onLessonClick(lesson.route)}
-                        style={{ cursor: lesson.route ? 'pointer' : 'default' }}
-                      >
-                        {lessonIndex + 1}. {lesson.name}
-                      </span>
-                      <span 
-                        className="due-date" 
-                        style={{ cursor: lesson.status === 'in-progress' || lesson.status === 'locked' ? 'default' : 'pointer' }}
-                      >
-                        {getStatusText(lesson)}
-                        {lesson.status === 'completed' && (
-                          <span className="tooltip">
-                            Due: {lesson.dateDue} <br />
-                            Submitted on: {lesson.dateSubmitted}
+                  {unit.lessons.map((lesson, lessonIndex) => {
+                    const rawProgress = progressData[lesson.lesson_id] ?? 0;
+                    const formattedProgress =
+                      rawProgress % 1 === 0 ? rawProgress.toFixed(0) : rawProgress.toFixed(1);
+
+                    return (
+                      <li key={lessonIndex} className={`${getStatusClass(lesson.status)} lesson-item`}>
+                        <div className="lesson-info">
+                          <span
+                            onClick={() => lesson.route && onLessonClick(lesson.route)}
+                            style={{ cursor: lesson.route ? 'pointer' : 'default' }}
+                          >
+                            {lessonIndex + 1}. {lesson.name}
                           </span>
-                        )}
-                      </span>
-                    </li>
-                  ))}
+                          
+                        </div>
+                          {/* Due Date */}
+                          <div className="due-date-container">
+                          <span className="due-date">
+                            {getStatusText(lesson)}
+                            {lesson.status === 'completed' && (
+                              <span className="tooltip">
+                                Due: {lesson.dateDue} <br />
+                                Submitted on: {lesson.dateSubmitted}
+                              </span>
+                            )}
+                          </span>
+                            {lesson.status !== 'locked' && (
+                              <div className="progress-bar-container">
+                                <div className="progress-bar" style={{ width: `${rawProgress}%` }}></div>
+                              </div>
+                            )}
+                          </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             )}

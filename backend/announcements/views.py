@@ -32,11 +32,13 @@ class AnnouncementView(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, id, *args, **kwargs):
-        try:
-            announcement = Announcement.objects.get(id=id)
-        except Announcement.DoesNotExist:
-            return Response({"error": "Announcement not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        announcement.delete()
-        return Response({"message": "Announcement deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, id=None, *args, **kwargs):
+        if id:
+            try:
+                announcement = Announcement.objects.get(id=id)
+            except Announcement.DoesNotExist:
+                return Response({"error": "Announcement not found"}, status=status.HTTP_404_NOT_FOUND)
+            announcement.delete()
+            return Response({"message": "Announcement deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        Announcement.objects.all().delete()
+        return Response({"message": "All announcements deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

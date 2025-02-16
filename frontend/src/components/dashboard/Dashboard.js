@@ -15,6 +15,8 @@ function Dashboard() {
   const [currentUnit, setCurrentUnit] = useState(1); 
   const [loading, setLoading] = useState(true); 
   const [announcements, setAnnouncements] = useState([]);
+  const [progressData, setProgressData] = useState({});
+  const studentId = localStorage.getItem('studentId'); 
 
   const numberToWord = (num) => {
     const numWords = [
@@ -149,7 +151,7 @@ function Dashboard() {
           },
           {
             number: 8,
-            title: 'Forming Ionic Compounds',
+            title: 'Monatomic Ions',
             lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson8'))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson8"
@@ -163,10 +165,24 @@ function Dashboard() {
           },
           {
             number: 9,
-            title: 'Writing the Formula of Ionic Compounds',
+            title: 'Ionic Compounds',
             lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson9'))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson9"
+              const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
+              return {
+                ...lesson,
+                dateDue: formatDate(lesson.due_date),
+                route: `/Lesson${numberToWord(parseInt(unit.replace("lesson", ""), 10))}Point${numberToWord(lessonNumber)}`,
+              }            
+            }),
+          },
+          {
+            number: 10,
+            title: 'Ionic Compounds (Polyatomic Ions)',
+            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson10'))
+            .map((lesson) => {
+              const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson10"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
               return {
                 ...lesson,
@@ -198,6 +214,26 @@ function Dashboard() {
       .catch((error) => console.error('Error fetching unit data:', error))
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!studentId) {
+      console.error("No student ID found");
+      return;
+    }
+
+    fetch(`http://localhost:8000/lessons/progress/${studentId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Progress Data:", data);
+        const progressMap = data.reduce((acc, item) => {
+          acc[item.lesson_id] = item.progress; 
+          return acc;
+        }, {});
+        setProgressData(progressMap); 
+      })
+      .catch((error) => console.error('Fetch Error:', error));
+  }, [studentId]);
+  
 
   const handleClickToBegin = () => {
     navigate('/question');
@@ -232,6 +268,7 @@ function Dashboard() {
           currentUnit={currentUnit}
           currentLessons={[]}
           onLessonClick={handleLessonClick}
+          progressData={progressData}
         />
       )}
       <ClickToBegin onClick = {handleClickToBegin} />

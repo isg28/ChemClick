@@ -11,10 +11,12 @@ function LessonTwoPointOne() {
     
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
-    const { starsEarned, stars } = renderStars(masteryLevel);
-    const displayMedals = starsEarned >= 5;
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const displayMedals = starsEarned >= 5;
 
     const [randomNumber, setRandomNumber] = useState(0);
     const [userInput, setUserInput] = useState("");
@@ -46,15 +48,23 @@ function LessonTwoPointOne() {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
                 setCorrectAnswers,
+                setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
+                setTotalAttempts,
             });        
         };
                 
         initializeData();
         generateRandNum();
     }, [studentId, lessonId, navigate]);
+
+    useEffect(() => {
+        if (progress === 100) {
+            setShowCompletionModal(true);
+        }
+    }, [progress]);
 
     const validateAnswer = async () => {
             const correctAnswer = getTenthsPlace(randomNumber).toString();
@@ -63,14 +73,14 @@ function LessonTwoPointOne() {
                 setFeedback('Correct!');
                 setFeedbackClass('correct');
                 setIsAnswerCorrect(true);
-                await CorrectResponses({ studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-                    setCorrectAnswers, setProgress, setMasteryLevel,
-                });
+                await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                    setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+                }); 
             } else {
                 setFeedback(`Incorrect. The uncertain digit is the farthest right digit.`);
                 setFeedbackClass('incorrect');
-                await IncorrectResponses({ studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-                    setCorrectAnswers, setProgress, setMasteryLevel,
+                await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                    setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
                 });
                 setTimeout(() => {
                     setFeedback('');
@@ -173,28 +183,19 @@ function LessonTwoPointOne() {
                             {renderGoalChecks(goal, correctAnswers)}
                         </div>
                     </div>
-
-                    <div className="side-column-box">
-                        <div className="side-column-box-title">
-                            <h1>Progress</h1>
-                        </div>
-                        <div className="side-column-box-info">
-                            <div className="progressbox">
-                                <div
-                                    className="progressbar"
-                                    style={{ '--progress': progress }}
-                                ></div>
-                                <div className="progress-text">
-                                    Current Topic Progress: {progress.toFixed(2)}%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+        </div>
+        {showCompletionModal && (
+            <div className="completion-modal">
+                <div className="completion-modal-content">
+                    <h2>🎉 Congratulations! 🎉</h2>
+                    <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                    <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                </div>
             </div>
-            </div>
-        
+        )}
+    </div>
     );
         
 }

@@ -137,9 +137,12 @@ function LessonEightPointOne(){
         
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
-    const { starsEarned, stars } = renderStars(masteryLevel);
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
 
     const handlequestion = () => {
@@ -168,16 +171,24 @@ function LessonEightPointOne(){
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
                 setCorrectAnswers,
+                setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
-            });
+                setTotalAttempts,
+            });   
         };
 
         initializeData();
 
         generateRandomNumberAndPosition();
     }, [studentId, lessonId, navigate]);
+
+    useEffect(() => {
+        if (progress === 100) {
+            setShowCompletionModal(true);
+        }
+    }, [progress]);
 
     const handleDrop = (item) => {
         setDroppedIons((prev) => [...prev, item]);
@@ -294,10 +305,13 @@ function LessonEightPointOne(){
         return false; // Default return for invalid combination
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (isCorrectCombination()) {
             setFeedbackMessage('Correct!');
             setFeedbackClass('correct');
+            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            }); 
             setDroppedIons([]); // Reset dropped ions for the next question
     
             // Update random ion and number in sequence with a slight delay for smooth transition
@@ -308,6 +322,9 @@ function LessonEightPointOne(){
         } else {
             setFeedbackMessage('Incorrect. Please look closely at the combs that need to be used to balance out the ion!');
             setFeedbackClass('incorrect');
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            });
         }
     };
 
@@ -403,23 +420,18 @@ function LessonEightPointOne(){
                                 {renderGoalChecks(goal, correctAnswers)}
                             </div>
                         </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>              
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ '--progress': progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(1)}%
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+            {showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                    </div>
+                </div>
+            )}
         </div>
     </DndProvider>
         

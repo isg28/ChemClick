@@ -10,6 +10,8 @@ class LessonProgressSerializer(serializers.Serializer):
     user_id = serializers.CharField(max_length=40)
     lesson_id = serializers.CharField(max_length=40)
     correct_answers = serializers.IntegerField(default=0)
+    incorrect_answers = serializers.IntegerField(default=0)
+    total_attempts = serializers.IntegerField(default=0)
     mastery_level = serializers.FloatField(default=0.0)
     progress = serializers.FloatField(default=0.0)
     goal_level = serializers.IntegerField(default=0) 
@@ -19,6 +21,8 @@ class LessonProgressSerializer(serializers.Serializer):
             user_id=validated_data['user_id'],
             lesson_id=validated_data['lesson_id'],
             correct_answers=validated_data.get('correct_answers', 0),
+            incorrect_answers=validated_data.get('incorrect_answers', 0),
+            total_attempts=validated_data.get('total_attempts', 0),
             mastery_level=validated_data.get('mastery_level', 0.0),
             progress=validated_data.get('progress', 0.0),
             goal_level=validated_data.get('goal_level', 0),  
@@ -28,11 +32,16 @@ class LessonProgressSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.correct_answers = validated_data.get('correct_answers', instance.correct_answers)
+        instance.incorrect_answers = validated_data.get('incorrect_answers', instance.incorrect_answers) 
+        instance.total_attempts = validated_data.get('total_attempts', instance.total_attempts)  
         instance.mastery_level = validated_data.get('mastery_level', instance.mastery_level)
         instance.progress = validated_data.get('progress', instance.progress)
         instance.goal_level = validated_data.get('goal_level', instance.goal_level) 
         instance.save()
         return instance
+    
+    def validate_total_attempts(self, value):
+        return value if value is not None else 0
 
 class LessonDetailsSerializer(serializers.Serializer):
     lesson_id = serializers.CharField(max_length=50)

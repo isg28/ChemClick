@@ -5,12 +5,14 @@ class LessonProgress(me.Document):
     user_id = me.StringField(required=True)
     lesson_id = me.StringField(required=True)
     correct_answers = me.IntField(default=0)
+    incorrect_answers = me.IntField(default=0)
+    total_attempts = me.IntField(default=0.0)
     mastery_level = me.FloatField(default=0.0)
     progress = me.FloatField(default=0.0)
     goal_level = me.IntField(default=0)  
     
     def __str__(self):
-        return f"Lesson: {self.lesson_id}, User: {self.user_id}"
+        return f"Lesson: {self.lesson_id}, User: {self.user_id}, Total Attempts: {self.total_attempts}"
     
 class LessonDetails(me.Document):
     STATUS_CHOICES = ('completed', 'in-progress', 'not-started', 'locked')

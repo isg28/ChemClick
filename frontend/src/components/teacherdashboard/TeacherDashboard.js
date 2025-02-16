@@ -69,8 +69,6 @@ function TeacherDashboard() {
             { lesson_id: "lesson4.1", unit_id: 4, ...getLessonData(lessons, "lesson4.1") },
             { lesson_id: "lesson4.2", unit_id: 4, ...getLessonData(lessons, "lesson4.2") },
             { lesson_id: "lesson4.3", unit_id: 4, ...getLessonData(lessons, "lesson4.3") },
-            { lesson_id: "lesson4.4", unit_id: 4, ...getLessonData(lessons, "lesson4.4") },
-            { lesson_id: "lesson4.5", unit_id: 4, ...getLessonData(lessons, "lesson4.5") },
           ]
         },
         {
@@ -88,6 +86,8 @@ function TeacherDashboard() {
             { lesson_id: "lesson5.8", unit_id: 5, ...getLessonData(lessons, "lesson5.8") },
             { lesson_id: "lesson5.9", unit_id: 5, ...getLessonData(lessons, "lesson5.9") },
             { lesson_id: "lesson5.10", unit_id: 5, ...getLessonData(lessons, "lesson5.10") },
+            { lesson_id: "lesson5.11", unit_id: 5, ...getLessonData(lessons, "lesson5.11") },
+            { lesson_id: "lesson5.12", unit_id: 5, ...getLessonData(lessons, "lesson5.12") },
           ]
         },
         {
@@ -117,26 +117,47 @@ function TeacherDashboard() {
             { lesson_id: "lesson7.8", unit_id: 7, ...getLessonData(lessons, "lesson7.8") },
             { lesson_id: "lesson7.9", unit_id: 7, ...getLessonData(lessons, "lesson7.9") },
             { lesson_id: "lesson7.10", unit_id: 7, ...getLessonData(lessons, "lesson7.10") },
+            { lesson_id: "lesson7.11", unit_id: 7, ...getLessonData(lessons, "lesson7.11") },
+            { lesson_id: "lesson7.12", unit_id: 7, ...getLessonData(lessons, "lesson7.12") },
           ]
         },
         {
           unit_id: 8,
           number: 8,
-          title: "Forming Ionic Compounds",
+          title: "Monatomic Ions",
           lessons: [
             { lesson_id: "lesson8.1", unit_id: 8, ...getLessonData(lessons, "lesson8.1") },
+            { lesson_id: "lesson8.2", unit_id: 8, ...getLessonData(lessons, "lesson8.2") },
+            { lesson_id: "lesson8.3", unit_id: 8, ...getLessonData(lessons, "lesson8.3") },
+            { lesson_id: "lesson8.4", unit_id: 8, ...getLessonData(lessons, "lesson8.4") },
           ]
         },
         {
           unit_id: 9,
           number: 9,
-          title: "Writing the Formula of Ionic Compounds",
+          title: "Ionic Compounds",
           lessons: [
             { lesson_id: "lesson9.1", unit_id: 9, ...getLessonData(lessons, "lesson9.1") },
             { lesson_id: "lesson9.2", unit_id: 9, ...getLessonData(lessons, "lesson9.2") },
-            { lesson_id: "lesson9.3", unit_id: 9, ...getLessonData(lessons, "lesson9.3") }, // lesson for testing purposes -jess
+            { lesson_id: "lesson9.3", unit_id: 9, ...getLessonData(lessons, "lesson9.3") },
+            { lesson_id: "lesson9.4", unit_id: 9, ...getLessonData(lessons, "lesson9.4") },
+            { lesson_id: "lesson9.5", unit_id: 9, ...getLessonData(lessons, "lesson9.5") },
+            { lesson_id: "lesson9.6", unit_id: 9, ...getLessonData(lessons, "lesson9.6") },
+            { lesson_id: "lesson9.7", unit_id: 9, ...getLessonData(lessons, "lesson9.7") },
+            { lesson_id: "lesson9.8", unit_id: 9, ...getLessonData(lessons, "lesson9.8") },
+            { lesson_id: "lesson9.9", unit_id: 9, ...getLessonData(lessons, "lesson9.9") },
           ]
-        }
+        },
+        {
+          unit_id: 10,
+          number: 10,
+          title: "Ionic Compounds (Polyatomic Ions)",
+          lessons: [
+            { lesson_id: "lesson10.1", unit_id: 10, ...getLessonData(lessons, "lesson10.1") },
+            { lesson_id: "lesson10.2", unit_id: 10, ...getLessonData(lessons, "lesson10.2") },
+            { lesson_id: "lesson10.3", unit_id: 10, ...getLessonData(lessons, "lesson10.3") },
+          ]
+        },
       ];
       setUnitData(updatedUnits);
       const current = determineCurrentUnit(updatedUnits);
@@ -243,6 +264,26 @@ function TeacherDashboard() {
     fetchAnnouncements();
   }, [fetchLessonData, fetchAnnouncements]);
 
+  const deleteAllAnnouncements = async () => {
+    const userConfirmed = window.confirm(
+      'Are you sure you want to delete ALL announcements? This action cannot be undone.'
+    );
+    if (userConfirmed) {
+      try {
+        const response = await fetch('http://localhost:8000/announcements/', {
+          method: 'DELETE',
+        });
+  
+        if (response.ok) {
+          setAnnouncements([]);
+        }
+      } catch (error) {
+        console.error('Error deleting all announcements:', error);
+      }
+    }
+  };
+  
+
 
   useEffect(() => {
     if (announcementsRef.current) {
@@ -260,7 +301,7 @@ function TeacherDashboard() {
         <TeacherUnitList units={unitData} currentUnit={currentUnit} />
       )}
         <TeacherAnnouncements announcements={announcements} postAnnouncement={postAnnouncement}   editAnnouncement={editAnnouncement}
-                deleteAnnouncement={deleteAnnouncement} announcementsRef={announcementsRef}/>
+                deleteAnnouncement={deleteAnnouncement} deleteAllAnnouncements = {deleteAllAnnouncements} announcementsRef={announcementsRef}/>
       </div>
   );
 }

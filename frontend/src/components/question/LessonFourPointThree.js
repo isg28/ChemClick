@@ -11,10 +11,12 @@ function LessonFourPointThree() {
 
     const [goal, setGoal] = useState();
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0);
     const [masteryLevel, setMasteryLevel] = useState(0);
-    const { starsEarned, stars } = renderStars(masteryLevel);
-    const displayMedals = starsEarned >= 5;
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const displayMedals = starsEarned >= 5;
 
     const [activeColor, setActiveColor] = useState(null);
     const [activeCategory, setActiveCategory] = useState('metallic'); // Default: 'metallic'
@@ -43,14 +45,22 @@ function LessonFourPointThree() {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
                 setCorrectAnswers,
+                setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
-            });
+                setTotalAttempts,
+            }); 
         };
 
         initializeData();
     }, [studentId, lessonId, navigate]);
+
+    useEffect(() => {
+        if (progress === 100) {
+            setShowCompletionModal(true);
+        }
+    }, [progress]);
 
     const elements = [
         // Row 1
@@ -313,8 +323,8 @@ function LessonFourPointThree() {
         if (correctMetallic === totalMetallic && correctGroup === totalGroup && Object.keys(groupMistakes).length === 0 && Object.keys(metallicMistakes).length === 0) {
             setIsCorrect(true);
             setFeedbackMessage('🎉 Correct! You can proceed to the next question.');
-            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned, 
-                    setCorrectAnswers, setProgress, setMasteryLevel,
+            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
         } else {
             const metallicFeedback = Object.keys({ ...metallicMissing, ...metallicMistakes }).map((type) => {
@@ -582,25 +592,18 @@ function LessonFourPointThree() {
                                 {renderGoalChecks(goal, correctAnswers)}
                             </div>
                         </div>
-                        <div className="side-column-box">
-                            <div className="side-column-box-title">
-                                <h1>Progress</h1>
-                            </div>
-                            <div className="side-column-box-info">
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ '--progress': progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+            {showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

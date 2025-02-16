@@ -11,10 +11,12 @@ function LessonOnePointEleven() {
         
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
-    const { starsEarned, stars } = renderStars(masteryLevel);
-    const displayMedals = starsEarned >= 5;
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const displayMedals = starsEarned >= 5;
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -137,10 +139,12 @@ function LessonOnePointEleven() {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
                 setCorrectAnswers,
+                setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
-            });
+                setTotalAttempts,
+            });  
         };
         
         initializeData();
@@ -156,6 +160,12 @@ function LessonOnePointEleven() {
         setRandomizedQuestions(shuffleQuestions());
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentQuestionIndex, studentId, lessonId, navigate]);
+
+    useEffect(() => {
+        if (progress === 100) {
+            setShowCompletionModal(true);
+        }
+    }, [progress]);
 
     useEffect(() => {
         const handleScroll = (event) => {
@@ -205,8 +215,8 @@ function LessonOnePointEleven() {
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
             setLastDigitAttempts(0); 
-            await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
-                setCorrectAnswers, setProgress, setMasteryLevel,
+            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             return;
         }
@@ -253,9 +263,9 @@ function LessonOnePointEleven() {
                 }
             }
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-                setCorrectAnswers, setProgress, setMasteryLevel,
-            }); 
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            });
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
@@ -266,9 +276,9 @@ function LessonOnePointEleven() {
         if (userWhole !== correctWhole) {
             setFeedback("The whole number is incorrect. Check the scale and try again.");
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-                setCorrectAnswers, setProgress, setMasteryLevel,
-            }); 
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            });
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
@@ -280,9 +290,9 @@ function LessonOnePointEleven() {
         setFeedbackClass('incorrect');
         setLastDigitAttempts(0); 
         setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-            setCorrectAnswers, setProgress, setMasteryLevel,
-        }); 
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
         setTimeout(() => {
             setFeedback('');
             setFeedbackClass('');
@@ -396,23 +406,18 @@ function LessonOnePointEleven() {
                                 {renderGoalChecks(goal, correctAnswers)}
                             </div>
                         </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>              
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ '--progress': progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+            {showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

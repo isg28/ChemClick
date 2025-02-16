@@ -19,10 +19,12 @@ function LessonFivePointTen() {
 
     const [goal, setGoal] = useState(null);
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0);
     const [masteryLevel, setMasteryLevel] = useState(0);
 
-    const { starsEarned, stars } = renderStars(masteryLevel);
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
 
     const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -46,11 +48,13 @@ function LessonFivePointTen() {
         async function initializeData() {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
-                setCorrectAnswers: setCorrectAnswers,
-                setProgress: setProgress,
-                setMasteryLevel: setMasteryLevel,
-                setGoal: setGoal,
-            });
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });  
         }
         initializeData();
     }, [studentId, lessonId, navigate]);
@@ -66,32 +70,14 @@ function LessonFivePointTen() {
             "It is not."
         ) {
             setIsCorrect(true);
-            await CorrectResponses({
-                studentId,
-                lessonId,
-                correctAnswers,
-                progress,
-                masteryLevel,
-                goal,
-                starsEarned,
-                setCorrectAnswers,
-                setProgress,
-                setMasteryLevel,
-            });
+            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            }); 
             setFeedbackMessage("Correct! Click done to go to the Dashboard.");
         } else {
             setIsCorrect(false);
-            await IncorrectResponses({
-                studentId,
-                lessonId,
-                correctAnswers,
-                progress,
-                masteryLevel,
-                goal,
-                starsEarned,
-                setCorrectAnswers,
-                setProgress,
-                setMasteryLevel,
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setFeedbackMessage("Incorrect. Please try again.");
         }
@@ -269,23 +255,6 @@ function LessonFivePointTen() {
                             </div>
                             <div className="side-column-box-info">
                                 {renderGoalChecks(goal, correctAnswers)}
-                            </div>
-                        </div>
-                        <div className="side-column-box">
-                            <div className="side-column-box-title">
-                                <h1>Progress</h1>
-                            </div>
-                            <div className="side-column-box-info">
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ "--progress": progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress:{" "}
-                                        {progress.toFixed(2)}%
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

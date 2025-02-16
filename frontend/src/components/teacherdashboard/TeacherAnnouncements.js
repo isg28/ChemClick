@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import '../../styles/teacherdashboard/TeacherAnnouncements.css';
 
-function TeacherAnnouncements({ announcements, postAnnouncement, editAnnouncement, deleteAnnouncement, announcementsRef }) {
+function TeacherAnnouncements({ announcements, postAnnouncement, editAnnouncement, deleteAnnouncement, deleteAllAnnouncements, announcementsRef }) {
   const [newMessage, setNewMessage] = useState('');
   const [editMessage, setEditMessage] = useState('');
   const [editingIndex, setEditingIndex] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   const handlePost = () => {
-    if (newMessage.trim()) {
-      postAnnouncement('MATT BRIMBERRY', newMessage);
-      setNewMessage(''); // Clear input field after posting
+    if (!newMessage.trim()) {
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 7000); 
+      return;
     }
+    postAnnouncement('MATT BRIMBERRY', newMessage);
+    setNewMessage(''); // Clear input field after posting
   };
   
   const handleEdit = (index, currentMessage) => {
@@ -45,13 +49,18 @@ function TeacherAnnouncements({ announcements, postAnnouncement, editAnnouncemen
           <h1 className="teacherannouncements-title">Announcements</h1>
         </div>
         <div className="teacherannouncements-writing-box">
+          {showToast && <div className="toast-notification">⚠️ Please enter a message!</div>}
+
           <textarea
             className="textarea-teacher"
             placeholder="Write your announcement here..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-          />
-          <div className="post" onClick={handlePost}>Post</div>
+          />          
+          <div className="button-container">
+            <div className="post" onClick={handlePost}>Post</div>
+            <div className="delete-all" onClick={deleteAllAnnouncements}>Delete All</div>
+          </div>
         </div>
         <div className="teacherannouncements-content-wrapper">
           <div className="teacherannouncements-content-box" ref={announcementsRef}>

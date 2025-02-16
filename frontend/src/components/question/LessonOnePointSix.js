@@ -11,10 +11,12 @@ function LessonOnePointSix() {
         
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
+    const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+    const [totalAttempts, setTotalAttempts] = useState(0);
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
-    const { starsEarned, stars } = renderStars(masteryLevel);
-    const displayMedals = starsEarned >= 5;
+    const [showCompletionModal, setShowCompletionModal] = useState(false); 
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const displayMedals = starsEarned >= 5;
 
     const PIXELS_PER_INCH = 121;
     const INITIAL_POSITION = 130;
@@ -68,16 +70,24 @@ function LessonOnePointSix() {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(studentId, lessonId, {
                 setCorrectAnswers,
+                setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
-            });
+                setTotalAttempts,
+            });     
         };
         
         initializeData();
         setLeftPosition(INITIAL_POSITION); // Reset dragger to the initial position
         generateRandomPencilLength(); // Generate a new random pencil length
     }, [studentId, lessonId, navigate]);
+
+    useEffect(() => {
+        if (progress === 100) {
+            setShowCompletionModal(true);
+        }
+    }, [progress]);
 
     // Handle mouse down event for drag
     const handleMouseDown = (e) => {
@@ -126,15 +136,15 @@ function LessonOnePointSix() {
     if (userAnswer === correctAnswer) {
         setFeedbackMessage("Correct! Great job!");
         setFeedbackClass('correct');
-        await CorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal,starsEarned,
-            setCorrectAnswers, setProgress, setMasteryLevel,
+        await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         }); 
         setTimeout(() => resetQuestion(), 2000);
     } else {
         setFeedbackMessage(`Incorrect. The correct answer was wrong, try again`);
         setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, progress, masteryLevel, goal, starsEarned,
-            setCorrectAnswers, setProgress, setMasteryLevel,
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
         setTimeout(() => {
             setFeedbackMessage('');
@@ -255,23 +265,18 @@ function LessonOnePointSix() {
                                 {renderGoalChecks(goal, correctAnswers)}
                             </div>
                         </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Progress</h1></div>
-                            <div className='side-column-box-info'>              
-                                <div className="progressbox">
-                                    <div
-                                        className="progressbar"
-                                        style={{ '--progress': progress }}
-                                    ></div>
-                                    <div className="progress-text">
-                                        Current Topic Progress: {progress.toFixed(2)}%
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
+            {showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
