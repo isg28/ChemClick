@@ -212,7 +212,7 @@ html,body {
 .side-column-box {
     width: 30vw;
     max-width: 450px;
-    padding: 10px;
+    padding: 3%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -247,7 +247,8 @@ html,body {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    margin: 5%;
+    padding: 2%;
     font-size: 1.3vw;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
@@ -262,7 +263,7 @@ html,body {
     display: flex;
     align-items: center;
     justify-content: center;
-
+    padding: 2%;
     font-size: 1.3vw;
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
@@ -270,7 +271,7 @@ html,body {
 
 .masterybox {
     position: relative; 
-    padding: 1%;
+    padding: 3%;
     margin: 0;    
     margin-bottom: clamp(1rem, 0.8vw, 2.5rem); 
 }
