@@ -3,8 +3,8 @@ import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointOne.css';
-import '../../styles/question/LessonEightPointOne.css';
-import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
+import '../../styles/question/LessonNinePointOne.css';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from './LessonUtils';
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import PositiveIon from "../../assets/question/+1ioncomb-transparent.png";
@@ -117,7 +117,7 @@ function getRandomIonImage() {
     const randomIonType = ionTypes[Math.floor(Math.random() * ionTypes.length)];
     return ionImages[randomIonType];
 }
-function LessonEightPointOne(){
+function LessonNinePointOne(){
     const navigate = useNavigate();
 
     const [randomNumber, setRandomNumber] = useState(0);
@@ -133,7 +133,7 @@ function LessonEightPointOne(){
 
 
     const studentId = localStorage.getItem('studentId'); 
-    const lessonId = 'lesson8.1'; 
+    const lessonId = 'lesson9.1'; 
         
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -354,7 +354,7 @@ function LessonEightPointOne(){
                 <div className='lesson-one-point-one-box'>
                     <div className='lesson-one-point-one-box-innercont'>
                         <div className='lesson-one-point-one-box-title'>
-                            <h1>Unit Eight: Ionic Compounds</h1>
+                            <h1>Unit Nine: Ionic Compounds</h1>
                         </div>
                         <div className='lesson-one-point-one-content'>
                             <p className='lesson-one-point-one-prompt'>
@@ -439,4 +439,4 @@ function LessonEightPointOne(){
 }
 
 
-export default LessonEightPointOne;
+export default LessonNinePointOne;

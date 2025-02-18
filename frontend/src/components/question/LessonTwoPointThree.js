@@ -30,8 +30,12 @@ function LessonTwoPointThree() {
     };
 
     const generateRandNum = () => {
-        const randomNum = (Math.random() * 0.99 + 5).toFixed(2);
-        setRandomNumber(parseFloat(randomNum));
+        const x = (Math.random().toFixed(1)); // 50/50 chance the reading on the scale will pass
+        if (x <= 0.5){
+            setRandomNumber((Math.random() * 0.09 + 5).toFixed(2));
+        } else {
+            setRandomNumber((Math.random() * 0.99 + 5).toFixed(2));
+        }
     }
 
     const getTenthsPlace = (num) => {

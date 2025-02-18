@@ -30,8 +30,12 @@ function LessonTwoPointSix() {
     };
 
     const generateRandNum = () => {
-        const randomNum = (Math.random() * 0.99 + 5).toFixed(3);
-        setRandomNumber(randomNum);
+        const x = (Math.random().toFixed(1)); // 50/50 chance the reading on the scale will pass
+        if (x <= 0.5){
+            setRandomNumber((Math.random() * 0.09 + 5).toFixed(3));
+        } else {
+            setRandomNumber((Math.random() * 0.99 + 5).toFixed(3));
+        }
     }
 
     const getHundredthsPlace = (num) => {
