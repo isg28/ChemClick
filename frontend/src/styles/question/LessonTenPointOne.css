@@ -1,0 +1,252 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-ten-point-one {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lesson-ten-point-one-box {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.lesson-ten-point-one-box-innercont {
+    width: 60vw;
+    height: 100vh; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+}
+
+.lesson-ten-point-one-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson-ten-point-one-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 3px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 5px solid #015770;
+    padding-bottom: 40px;
+}
+
+.lesson-two-point-one-question {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 10px; 
+    width: 100%; 
+}
+
+.lesson-ten-point-one-question h1, .lesson-ten-point-one-box-title h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin:0;
+}
+
+.lesson-ten-point-one-prompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.lesson-ten-point-one-feedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.lesson-ten-point-one-feedback.correct {
+    background-color: #e0f8e0;
+    color: #237B31;
+    border: 2px solid #237B31;
+    opacity: 1;
+}
+
+.lesson-ten-point-one-feedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+    opacity: 1;
+}
+
+.lesson-ten-point-one-feedback.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.lesson-ten-point-one-question {
+    gap: 8px; 
+}
+
+.lesson-ten-point-one-submit, .lesson-ten-point-one-next {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: -20px;
+    color: black;
+}
+
+.submit-feedback-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; 
+    height: 100px;
+    margin-top: 20px; 
+}
+
+.lesson-ten-point-one-submit:active, .lesson-ten-point-one-next:active {
+    background-color: #98c844;
+}
+
+.ion-table-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.ion-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2x auto;
+    font-size: 18px;
+}
+
+.ion-table th, .ion-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.ion-table th {
+    background-color: #f2f2f2;
+}
+
+.drop-zone {
+    width: 60px;  
+    height: 40px;
+    border: 3px dashed #0a66c2;  
+    background-color: rgba(10, 102, 194, 0.1);  
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.drop-zone:hover, .drop-zone:focus {
+    border-color: #004aad;  
+    background-color: rgba(10, 102, 194, 0.2);
+    box-shadow: 0px 0px 10px rgba(10, 102, 194, 0.5);
+}
+
+.drop-zone.filled {
+    background-color: #004aad; 
+    color: white;
+    font-weight: bold;
+    border-color: #003580;
+}
+
+.draggable-symbol {
+    display: inline-block;
+    padding: 12px;
+    margin: 8px;
+    border: 2px solid #003580;
+    background-color: #004aad;
+    color: white;
+    font-weight: bold;
+    cursor: grab;
+    border-radius: 5px;
+    transition: transform 0.1s ease-in-out;
+}
+
+.draggable-symbol:hover {
+    transform: scale(1.1);
+    background-color: #002d72;
+
+}
+
+.draggable-symbol:active {
+    cursor: grabbing;
+}
+
+.symbols-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.draggable-symbol:active {
+    cursor: grabbing;
+}
+
+.warning-feedback {
+    color: #D9534F; 
+    font-weight: bold;
+    margin-top: 10px;
+}

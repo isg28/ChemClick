@@ -1,0 +1,350 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-ten-point-two {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lesson-ten-point-two-box {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.lesson-ten-point-two-box-innercont {
+    width: 60vw;
+    height: 100vh; 
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+
+    overflow-y: auto; 
+    scrollbar-width: thin; 
+}
+
+.lesson-ten-point-two-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson-ten-point-two-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 3px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 5px solid #015770;
+    padding-bottom: 40px;
+}
+
+.lesson-ten-point-two-question h1, .lesson-ten-point-two-box-title h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin:0;
+}
+
+.lesson-ten-point-two-prompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.quiz-container h2 {
+    font-size: 1.8rem;
+    color: #000000;
+    margin-bottom: 15px;
+    text-align: center;
+    min-height: 50px; 
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid #00d5d7;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    margin-bottom: 15px; 
+}
+
+.input-container input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    width: 100%; 
+}
+
+.lesson-ten-point-two-delete-button {
+    width: 40px;
+    height: 40px;
+    background-color: #fae3e1; 
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+.quiz-container input {
+    all: unset; 
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.quiz-container input:focus {
+    border-color: #015770;
+    box-shadow: 0 0 5px rgba(1, 87, 112, 0.5);
+}
+
+.symbol-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+    gap: 10px;
+}
+
+.arrow-button {
+    width: 40px;
+    height: 40px;
+    background-color: #226fd3 !important;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease-in-out;
+}
+
+.arrow-button:first-child {
+    margin-right: 10px;
+}
+
+.arrow-button:last-child {
+    margin-left: 10px;
+}
+
+.letter-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 280px; 
+}
+
+.letter-row-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 100px; 
+}
+
+.letter-button {
+    width: 40px;
+    height: 40px;
+    background: #00d5d7;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 6px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.letter-button:hover {
+    background: #015770;
+}
+
+.symbol-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.symbol-row {
+    display: flex;
+    justify-content: center; 
+    width: 320px; 
+    min-height: 40px; 
+}
+
+.symbol-row p {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.symbol-row button {
+    background: #004aad;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s;
+    flex: 1; 
+    max-width: 50px; 
+}
+
+/* Specific bold styling for subscripts */
+.symbol-row:nth-child(1) button { 
+    font-weight: bold !important; 
+}
+
+/* Specific bold styling for ion charges */
+.symbol-row:nth-child(4) button { 
+    font-weight: bold !important; 
+}
+
+.symbol-row button:hover {
+    background: #00d5d7;
+}
+
+.subscript, sub,
+.superscript, sup {
+    font-size: 1.1rem;
+    font-family: 'Orelega One', sans-serif; 
+    font-weight: normal; 
+    line-height: 1; 
+    vertical-align: baseline; 
+}
+
+.symbol-row button,
+.letter-button,
+.delete-button {
+    font-weight: normal; 
+}
+
+.lesson-ten-point-two-exponent{
+    font-weight: bold;
+}
+
+.input-container input {
+    font-weight: normal; 
+}
+
+.feedback {
+    font-size: 1.4rem;
+    margin-top: 10px;
+}
+
+.feedback.correct {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.feedback.incorrect {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.hint {
+    font-size: 1.2rem;
+    color: #251c0d;
+    font-style: italic;
+}
+
+.floating-tooltip {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.85);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    white-space: nowrap;
+    pointer-events: none; 
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+}
+
+.case-toggle-button {
+    width: 120px; 
+    height: 50px; 
+}
+
+.symbol-row .case-toggle-button {
+    flex-shrink: 0; /* Prevents the button from shrinking */
+    min-width: 80px; 
+}
+
+.lesson-ten-point-two-separator {
+    width: 3px; 
+    height: 40px; 
+    background-color: black;
+    margin: 0 10px; 
+    display: flex; 
+    align-items: center; 
+}
+
+.lesson-ten-point-two-separator {
+    border: 1px solid rgb(41, 38, 38) !important;
+}
+
+
+
+
+
+
+
+
