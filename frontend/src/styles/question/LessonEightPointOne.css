@@ -84,6 +84,7 @@ html,body {
     max-width: 800px;
     min-height: 200px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -92,11 +93,33 @@ html,body {
 }
 
 .lesson-eight-point-one-container p {
-    font-size: 1.3rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: lighter;
-    margin:0;
-    color: #015770;
+    font-size: 1.7rem;
+    font-family: 'Times New Roman', sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #001F3F;
+}
+
+.lesson-eight-point-one-question-box {
+    width: 30%;
+    min-height: 150px;
+    position: relative;
+    background-color: rgba(0, 213, 215, 0.5);
+    background: linear-gradient(to bottom, rgba(0, 213, 215, 0.5), rgba(0, 213, 215, 0.75));
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border: 5px solid #015770;
+}
+
+.lesson-eight-point-one-question-box p {
+    color: #001F3F;
 }
 
 .lesson-eight-point-one-question {
@@ -141,6 +164,7 @@ html,body {
 .submit-feedback-container {
     align-items: center;
     position: relative;
+    max-height: 50px;
 }
 
 .lesson-eight-point-one-feedback {

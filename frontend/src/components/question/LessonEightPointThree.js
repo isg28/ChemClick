@@ -31,26 +31,28 @@ function LessonEightPointThree() {
     };
 
     const ions = [
-        { symbol: "Be2+", name: "Beryllium Ion", category: "positive2" },
-        { symbol: "Mg2+", name: "Magnesium Ion", category: "positive2" },
-        { symbol: "Sr2+", name: "Strontium Ion", category: "positive2" },
-        { symbol: "Ba2+", name: "Barium Ion", category: "positive2" },
-        { symbol: "Ra2+", name: "Radium Ion", category: "positive2" },
-        { symbol: "Zn2+", name: "Zinc Ion", category: "positive2" },
-        { symbol: "Ca2+", name: "Calcium Ion", category: "positive2" },
-        { symbol: "Al3+", name: "Aluminum Ion", category: "positive3" },
+        { symbol: "Be²⁻", name: "beryllium ion", category: "positive2", input: "Be2-" },
+        { symbol: "Mg²⁻", name: "magnesium ion", category: "positive2", input: "Mg2-" },
+        { symbol: "Sr²⁻", name: "strontium ion", category: "positive2", input: "Sr2-" },
+        { symbol: "Ba²⁻", name: "barium ion", category: "positive2", input: "Ba2-" },
+        { symbol: "Ra²⁻", name: "radium ion", category: "positive2", input: "Ra2-" },
+        { symbol: "Zn²⁻", name: "zinc ion", category: "positive2", input: "Zn2-" },
+        { symbol: "Ca²⁻", name: "calcium ion", category: "positive2", input: "Ca2-" },
+        { symbol: "Al³⁻", name: "aluminum ion", category: "positive3", input: "Al3-" },
     ];
 
     const questions = ions.flatMap(ion => [   
         {
             type: 'symbol', // Prompt for the symbol given the name
-            prompt: `What is the symbol for a ${ion.name}?`,
-            answer: ion.symbol,
+            text: 'What is the symbol for:',
+            prompt: ion.name,
+            answer: ion.input,
             category: ion.category,
         },
         {
             type: 'name', // Prompt for the name given the symbol
-            prompt: `What is the name of the ion with the symbol ${ion.symbol}?`,
+            text: 'What is the name for:',
+            prompt: ion.symbol,
             answer: ion.name,
             category: ion.category,
         }
@@ -101,7 +103,7 @@ function LessonEightPointThree() {
         const currentQuestion = randomizedQuestions[currentQuestionIndex];
         const correctAnswer = currentQuestion.answer;
     
-        if (userInput.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+        if (userInput.trim() === correctAnswer) {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
@@ -111,7 +113,11 @@ function LessonEightPointThree() {
             return;
         } else {
             if(currentQuestion.type === 'name'){
-                setFeedback("Not quite right, remember cations end with an 'Ion' in the name!");
+                if(userInput.trim().toLowerCase() === correctAnswer){
+                    setFeedback("Use lowercase!");
+                } else {
+                    setFeedback("Not quite right, remember cations end with an 'ion' in the name!");
+                }
             } else {    // then it's a symbol question
                 if(currentQuestion.category === 'positive'){
                     setFeedback("Not quite right, remember cations are positively charged!");
@@ -134,6 +140,9 @@ function LessonEightPointThree() {
 
 
     const handleSubmitAnswer = () => {
+        if(isAnswerCorrect){     // prevents user from pressing enter multiple times
+            return;
+        }
         validateAnswer();
     };
 
@@ -171,18 +180,25 @@ function LessonEightPointThree() {
                         <div className='lesson-eight-point-one-content'>
                             <p className='lesson-eight-point-one-prompt'>
                                 Given the {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'name of a positive multi-charge monatomic ion, provide its symbol.'
-                                            : 'symbol of a positive multi-charge monatomic ion, provide its name.'}
+                                            ? 'name of a monatomic ion, provide its symbol.'
+                                            : 'symbol of a monatomic ion, provide its name.'}
                                 <br /> Example input: {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'Ba2+'
-                                            : 'Barium Ion'}
+                                            ? 'Ba²⁺'
+                                            : 'hydrogen ion'}
                             </p>
                             <div className="lesson-eight-point-one-container">
                                 {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
-                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                    <p>{randomizedQuestions[currentQuestionIndex].text}</p>
                                 ) : (
                                     <p>Loading question...</p>
                                 )}
+                                <div className="lesson-eight-point-one-question-box">
+                                {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
+                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                ) : (
+                                    <p>...</p>
+                                )}
+                                </div>
                             </div>
 
                             <hr className="separator" />
