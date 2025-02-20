@@ -15,7 +15,8 @@ class LessonProgressSerializer(serializers.Serializer):
     mastery_level = serializers.FloatField(default=0.0)
     progress = serializers.FloatField(default=0.0)
     goal_level = serializers.IntegerField(default=0) 
-
+    email_sent = serializers.BooleanField(default=False)
+    
     def create(self, validated_data):
         lesson_progress = LessonProgress(
             user_id=validated_data['user_id'],
@@ -26,6 +27,7 @@ class LessonProgressSerializer(serializers.Serializer):
             mastery_level=validated_data.get('mastery_level', 0.0),
             progress=validated_data.get('progress', 0.0),
             goal_level=validated_data.get('goal_level', 0),  
+            email_sent=validated_data.get('email_sent', False),
         )
         lesson_progress.save()
         return lesson_progress

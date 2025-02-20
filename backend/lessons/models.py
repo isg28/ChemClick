@@ -10,7 +10,8 @@ class LessonProgress(me.Document):
     mastery_level = me.FloatField(default=0.0)
     progress = me.FloatField(default=0.0)
     goal_level = me.IntField(default=0)  
-    
+    email_sent = me.BooleanField(default = False)
+
     def __str__(self):
         return f"Lesson: {self.lesson_id}, User: {self.user_id}, Total Attempts: {self.total_attempts}"
     
