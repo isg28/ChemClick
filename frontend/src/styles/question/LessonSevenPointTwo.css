@@ -1,0 +1,190 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.LessonSevenPointTwo {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.LessonSevenPointTwoBox {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LessonSevenPointTwoBoxInnercont {
+    width: 60vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00d5d7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+}
+
+.LessonSevenPointTwoBoxTitle {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.LessonSevenPointTwoBoxTitle h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.LessonSevenPointTwoContent {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 5px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+.LessonSevenPointTwoPrompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 1000px;
+    line-height: 1.5;
+}
+
+.LessonSevenPointTwoRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.LessonSevenPointTwoInput {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    overflow: auto;
+    resize: none;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    text-align: left;
+    height: 250px;
+    padding-top: 15px;
+
+
+}
+
+
+.LessonSevenPointTwoImageContainer {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    height: 250px;
+    overflow-y: scroll; 
+    margin: 0;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+}
+
+.LessonSevenPointTwoImageContainer::-webkit-scrollbar {
+    width:8px; 
+}
+
+.LessonSevenPointTwoImageContainer::-webkit-scrollbar-thumb {
+    background: #a0a0a0;
+    border-radius: 5px;
+}
+
+
+
+.LessonSevenPointTwoImageContainer .scrollable-image {
+    width: 100%;
+    height: auto;
+}
+
+
+.LessonSevenPointTwoFeedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.LessonSevenPointTwoFeedback.correct {
+    background-color: #e0f8e0;
+    margin-top: 15px;
+    color: #237b31;
+    border: 2px solid #237b31;
+}
+
+.LessonSevenPointTwoFeedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+    margin-top: 15px;
+
+}
+
+.LessonSevenPointTwoSubmit, .LessonSevenPointTwoNext {
+    background-color: #e3f0cc;
+    border: 5px solid #237b31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: -15px;
+    color: black;
+}
+
+.LessonSevenPointTwoSubmit:active, .LessonSevenPointTwoNext:active {
+    background-color: #98c844;
+}
+
