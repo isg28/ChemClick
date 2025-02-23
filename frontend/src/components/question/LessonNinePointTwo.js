@@ -4,6 +4,7 @@ import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointOne.css';
 import '../../styles/question/LessonNinePointOne.css';
+import '../../styles/question/LessonNinePointTwo.css';
 import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from './LessonUtils';
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -112,28 +113,28 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
     );
 };
 
-function getRandomIonImage() {
-    const ionTypes = Object.keys(ionImages);
-    const randomIonType = ionTypes[Math.floor(Math.random() * ionTypes.length)];
-    return ionImages[randomIonType];
-}
-function LessonNinePointOne(){
+const questions = [
+    "Using the combs, create the ionic compound between aluminum (Al) and chlorine (Cl). Then write the explicit formula.",
+    "Using the combs, create the ionic compound for potassium (K) and oxygen (O). Then write the explicit formula.",
+    "Using the combs, create the ionic compound for sodium (Na) and sulfur (S). Then write the explicit formula.",
+    "Using the combs, create the ionic compound for calcium (Ca) and fluorine (F). Then write the explicit formula."
+];
+
+function LessonNinePointTwo(){
     const navigate = useNavigate();
 
-    const [randomNumber, setRandomNumber] = useState(0);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('');
-    const [randomIon, setRandomIon] = useState(getRandomIonImage()); // Random ion image state
     const [ions, setIons] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
-    const [animateIons, setAnimateIons] = useState(false);
-    const [droppedIons, setDroppedIons] = useState([]);
+    const [droppedIons1, setDroppedIons1] = useState([]);
+    const [droppedIons2, setDroppedIons2] = useState([]);
     const [canSubmit, setCanSubmit] = useState(false);
     const [questionText, setQuestionText] = useState('');  // Add state for question text
 
 
     const studentId = localStorage.getItem('studentId'); 
-    const lessonId = 'lesson9.1'; 
+    const lessonId = 'lesson9.2'; 
         
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -145,19 +146,9 @@ function LessonNinePointOne(){
     const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
 
+
     const handlequestion = () => {
         navigate('/dashboard');
-    };
-
-    const generateRandomNumberAndPosition = () => {
-        // Restrict random number to valid values based on ion type
-        const randomNum = randomIon === PositiveIon3 || randomIon === NegativeIon3
-            ? Math.floor(Math.random() * 3) + 1 // Generates 1, 2, or 3 for +3/-3 ions
-            : randomIon === PositiveIon2 || randomIon === NegativeIon2
-            ? Math.floor(Math.random() * 2) + 1 // Generates 1 or 2 for +2/-2 ions
-            : 1 // Default behavior for other ions
-    
-        setRandomNumber(randomNum);  // Update the random number state
     };
 
     useEffect(() => {
@@ -181,7 +172,7 @@ function LessonNinePointOne(){
 
         initializeData();
 
-        generateRandomNumberAndPosition();
+        setQuestionText(questions[Math.floor(Math.random() * questions.length)]);
     }, [studentId, lessonId, navigate]);
 
     useEffect(() => {
@@ -190,15 +181,22 @@ function LessonNinePointOne(){
         }
     }, [progress]);
 
-    const handleDrop = (item) => {
-        setDroppedIons((prev) => [...prev, item]);
+    const handleDropZone1 = (item) => {
+        setDroppedIons1((prev) => [...prev, item]);
     };
 
-    const handleRemoveIon = (index) => {
-        setDroppedIons((prev) => prev.filter((_, i) => i !== index)); // Remove the ion at the given index
+    const handleRemoveIonZone1 = (index) => {
+        setDroppedIons1((prev) => prev.filter((_, i) => i !== index)); // Remove the ion at the given index
     };
 
-    const isPositiveIon = randomIon === PositiveIon || randomIon === PositiveIon2 || randomIon === PositiveIon3;
+    const handleDropZone2 = (item) => {
+        setDroppedIons2((prev) => [...prev, item]);
+    };
+    
+    const handleRemoveIonZone2 = (index) => {
+        setDroppedIons2((prev) => prev.filter((_, i) => i!== index)); // Remove the ion at the given index
+    };
+
 
     const getIonTypeFromPath = (path) => {
         // Extract the ion type from the image path, e.g., +3 or -3
@@ -211,131 +209,6 @@ function LessonNinePointOne(){
         return null;  // Return null if no match
     };
 
-    
-
-    const getQuestionText = () => {
-        const ionType = getIonTypeFromPath(randomIon);  // Get ion type from image path
-        console.log("Ion Type:", ionType);  
-    
-        console.log("Ion Type:", ionType);  // Debugging
-    
-        // Check for +1 or -1 ions
-        if (ionType === "+1" || ionType === "-1") {
-            return 'For this question, please use the +/- 1 combs to balance this ion.';
-        }
-    
-        // Check for +2 or -2 ions
-        if (ionType === "+2" || ionType === "-2") {
-            if (randomNumber === 1) {
-                return 'For this question, please use the 1 +/- combs to balance this ion.';
-            } else if (randomNumber === 2) {
-                return 'For this question, please use the 2 +/- combs to balance this ion.';
-            }
-        }
-    
-        // Check for +3 or -3 ions
-        if (ionType === "+3" || ionType === "-3") {
-            console.log("Random Number for +3 ion: ", randomNumber);  // Debugging
-    
-            if (randomNumber === 1) {
-                return 'For this question, please use the 3 +/- combs to balance this ion.';
-            } else if (randomNumber === 2) {
-                return 'For this question, please use the 2 +/- and the 1 +/- combs to balance this ion.';
-            } else if (randomNumber === 3) {
-                return 'For this question, please use the 1 +/- combs to balance this ion.';
-            }
-        }
-    
-        // Default return if no conditions match
-        return ''; 
-    };
-
-
-    const isCorrectCombination = () => {
-        const ionCounts = droppedIons.reduce((counts, ion) => {
-            counts[ion.ionType] = (counts[ion.ionType] || 0) + 1;
-            return counts;
-        }, {});
-    
-        // Check combinations based on ion type and random number
-    
-        if (randomIon === PositiveIon) {
-            return ionCounts["-1"] === 1; // +1 ion, should have one -1 comb
-        }
-    
-        if (randomIon === NegativeIon) {
-            return ionCounts["+1"] === 1; // -1 ion, should have one +1 comb
-        }
-    
-        if (randomIon === PositiveIon2) {
-            if (randomNumber === 1) {
-                return ionCounts["-1"] === 2; // +2 ion with randomNumber 1, should have two -1 combs
-            } else if (randomNumber === 2) {
-                return ionCounts["-2"] === 1; // +2 ion with randomNumber 2, should have one -2 comb
-            }
-        }
-    
-        if (randomIon === NegativeIon2) {
-            if (randomNumber === 1) {
-                return ionCounts["+1"] === 2; // -2 ion with randomNumber 1, should have two +1 combs
-            } else if (randomNumber === 2) {
-                return ionCounts["+2"] === 1; // -2 ion with randomNumber 2, should have one +2 comb
-            }
-        }
-    
-        if (randomIon === PositiveIon3) {
-            if (randomNumber === 1) {
-                return ionCounts["-3"] === 1; // +3 ion with randomNumber 1, should have one -3 comb
-            } else if (randomNumber === 2) {
-                return ionCounts["-2"] === 1 && ionCounts["-1"] === 1; // +3 ion with randomNumber 2, should have one -2 and two -1 combs
-            } else if (randomNumber === 3) {
-                return ionCounts["-1"] === 3; // +3 ion with randomNumber 3, should have three -1 combs
-            }
-        }
-    
-        if (randomIon === NegativeIon3) {
-            if (randomNumber === 1) {
-                return ionCounts["+3"] === 1; // -3 ion with randomNumber 1, should have one +3 comb
-            } else if (randomNumber === 2) {
-                return ionCounts["+2"] === 1 && ionCounts["+1"] === 1; // -3 ion with randomNumber 2, should have one +2 and two +1 combs
-            } else if (randomNumber === 3) {
-                return ionCounts["+1"] === 3; // -3 ion with randomNumber 3, should have three +1 combs
-            }
-        }
-    
-        return false; // Default return for invalid combination
-    };
-
-    const handleSubmit = async () => {
-        if (isCorrectCombination()) {
-            setFeedbackMessage('Correct!');
-            setFeedbackClass('correct');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-                            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-            }); 
-            setDroppedIons([]); // Reset dropped ions for the next question
-    
-            // Update random ion and number in sequence with a slight delay for smooth transition
-            setTimeout(() => {
-                setRandomIon(getRandomIonImage()); // Generate a new random ion
-                generateRandomNumberAndPosition(); // Generate new random number
-            }, 100); // Delay to allow state updates to happen sequentially
-        } else {
-            setFeedbackMessage('Incorrect. Please look closely at the combs that need to be used to balance out the ion!');
-            setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-            });
-        }
-    };
-
-    useEffect(() => {
-        console.log("randomIon:", randomIon);
-        console.log("randomNumber:", randomNumber);
-        const questionText = getQuestionText();
-        console.log("Updated Question:", questionText);
-        setQuestionText(questionText);  // Update state for question text dynamically
-    }, [randomIon, randomNumber]);
     
 
     return (
@@ -359,18 +232,20 @@ function LessonNinePointOne(){
                         </div>
                         <div className='lesson-one-point-one-content'>
                             <p className='lesson-one-point-one-prompt'>
-                                Each comb simulates an ion. Click and drag the provided combs to make an ionic compound, creating a neutral charge. Drag the appropriate combs into the dropzone with your mouse to create a rectangle, simulating an ionic compound.
+                                Click and drag the provided combs to make an ionic compound, creating a neutral charge. Drag the appropriate combs into the dropzone with your mouse to create a rectangle, simulating an ionic compound.
                             </p>
                             <div className="lesson-one-point-one-measurement-container">
-                                <div className="ions-container-top" style={{ flexDirection: isPositiveIon ? 'row-reverse' : 'row' }}>
-                                <DropZone onDrop={handleDrop} droppedIons={droppedIons} onRemoveIon={handleRemoveIon}/>
-                                    {/* Random ion image */}
-                                    <img
-                                        src={randomIon}
-                                        alt="Random Ion"
-                                        className="random-ion-image"
-                                        style={{ width: '100px', height: '100px' }}
-                                    />
+                                <div className="ions-container-top">
+                                <DropZone
+                                            onDrop={handleDropZone1}
+                                            droppedIons={droppedIons1}
+                                            onRemoveIon={handleRemoveIonZone1}
+                                        />
+                                <DropZone
+                                            onDrop={handleDropZone2}
+                                            droppedIons={droppedIons2}
+                                            onRemoveIon={handleRemoveIonZone2}
+                                        />
                                 </div>
                             {/* Separator */}
                             <div className="separator-line"></div>
@@ -386,11 +261,28 @@ function LessonNinePointOne(){
 
                             <hr className="separator" />
                             <div className='lesson-one-point-one-question'>
-                                <h1> {getQuestionText()} </h1>
+                                <h1> {questionText} </h1>
+                                <div className="formula-input-container">
+                                <div className="formula-row">
+                                    <div className="base-group">
+                                        <input type="text" className="formula-input base-input" placeholder="Base" />
+                                        <div className="exponent-group">
+                                            <input type="text" className="formula-input super-input" placeholder="Charge" />
+                                            <input type="text" className="formula-input sub-input" placeholder="Ion" />
+                                        </div>
+                                        <input type="text" className="formula-input base-input" placeholder="Base" />
+                                        <div className="exponent-group">
+                                            <input type="text" className="formula-input super-input" placeholder="Charge" />
+                                            <input type="text" className="formula-input sub-input" placeholder="Ion" />
+                                        </div>
+                                    </div>
+                            
+                                </div>
                             </div>
                         </div>
+                    </div>
                         <div className="submit-feedback-container">
-                            <button className='lesson-one-point-one-submit' onClick={handleSubmit} >Submit Answer</button>
+                            <button className='lesson-one-point-one-submit' >Submit Answer</button>
                             <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
@@ -440,4 +332,4 @@ function LessonNinePointOne(){
 }
 
 
-export default LessonNinePointOne;
+export default LessonNinePointTwo;
