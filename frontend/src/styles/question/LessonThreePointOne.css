@@ -150,7 +150,7 @@ html,body {
     text-align: center;
 }
 
-.submit-feedback-container {
+.submit-feedback-container-three-point-one {
     display: flex;
     flex-direction: column; 
     align-items: center;
@@ -223,7 +223,7 @@ html,body {
 
 }
 
-.bohr-model-container {
+.bohr-model-container-three-point-one {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -238,7 +238,7 @@ html,body {
 
 }
   
-.nucleus {
+.nucleus-three-point-one {
     width: 125px;
     height: 125px;
     background-color: orange;
@@ -256,7 +256,7 @@ html,body {
     
 }
   
-.proton {
+.proton-three-point-one {
     width: 12px;
     height: 12px;
     background-color: blue;
@@ -295,7 +295,7 @@ html,body {
     
 }
   
-.controls {
+.controls-three-point-one {
     display:flex;
     margin-top: 10px;
     align-items: center;
@@ -321,13 +321,11 @@ button:hover {
     align-items: center;
     justify-content: center;
 }
-.nucleus.selected {
+.nucleus-three-point-one.selected {
     
     border: 3px solid darkred; 
     box-shadow: 0 0 10px rgba(139, 0, 0, 0.7); 
     transition: border 0.2s ease, box-shadow 0.2s ease;
-    
-   
     
 }
 

@@ -374,11 +374,11 @@ function LessonThreePointTwo() {
                   </svg>
                 </div>
                   
-                <div className="electron-container ">
+                <div className="electron-container-three-point-two ">
                   {predefinedPositions.map((pos, index) => (
                     <div
                       key={index}
-                      className={`electron ${selectedElectrons.includes(index) ? "selected" : ""}`}
+                      className={`electron-three-point-two ${selectedElectrons.includes(index) ? "selected" : ""}`}
                       style={{ left: pos.x, top: pos.y, zIndex: 200}}
                       onClick={() => handleElectronClick(index)}
                     ></div>
@@ -387,7 +387,7 @@ function LessonThreePointTwo() {
                 </div>
             </div>
 
-            <div className="submit-feedback-container">
+            <div className="submit-feedback-container-three-point-two">
               {!isAnswerCorrect ? (
                 <button className='lesson-three-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
               ) : (

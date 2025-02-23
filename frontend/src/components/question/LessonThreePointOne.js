@@ -269,10 +269,10 @@ const nextQuestion = () => {
                         </p>
                         <div className="lesson-three-point-one-cylinder-container">
                             <div className="lesson-three-point-one-cylinderWaterContainer">
-                                <div className="bohr-model-section">
-                                    <div className="bohr-model-container">
-                                    <div className={`nucleus ${isNucleusSelected ? "selected" : ""}`}onClick={handleNucleusClick} style={{zIndex: 400, transition: 'all 0.2s ease',}}>
-                                        <span className="proton-counter" style={{
+                                <div className="bohr-model-section-three-point-one">
+                                    <div className="bohr-model-container-three-point-one">
+                                    <div className={`nucleus-three-point-one ${isNucleusSelected ? "selected" : ""}`}onClick={handleNucleusClick} style={{zIndex: 400, transition: 'all 0.2s ease',}}>
+                                        <span className="proton-counter-three-point-one" style={{
                                             position: 'absolute', 
                                             color: 'white', 
                                             fontSize: '1.2rem', 
@@ -294,7 +294,7 @@ const nextQuestion = () => {
                                             );
                                         })}
                                     </div>
-                                    <div className="shells-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                    <div className="shells-container-three-point-one" style={{ position: 'relative', width: '100%', height: '100%' }}>
                                         {electronShells.map((_, shellIndex) => {
                                         const shellRadius = shellSizes[shellIndex];
                                         let borderColor = 'rgba(0, 0, 0, 0.3)'; 
@@ -316,7 +316,7 @@ const nextQuestion = () => {
                                         return (
                                             <div
                                                 key={`shell-ring-${shellIndex}`}
-                                                className={`shell-visual-ring ${selectedShellIndex === shellIndex ? "selected" : ""}`}
+                                                className={`shell-visual-ring-three-point-one ${selectedShellIndex === shellIndex ? "selected" : ""}`}
                                                 style={{
                                                     position: 'absolute',
                                                     top: '50%',
@@ -373,7 +373,7 @@ const nextQuestion = () => {
                                                 const { x, y } = getElectronPosition(shellIndex, eIndex, shellRadius);
                                                 return (
                                                     <motion.div
-                                                    key={`electron-${shellIndex}-${eIndex}`}
+                                                    key={`electron-three-point-one${shellIndex}-${eIndex}`}
                                                     className="electron-three-point-one"
                                                     style={{
                                                         position: 'absolute',
@@ -402,11 +402,11 @@ const nextQuestion = () => {
                         </div>                    
                     </div>
                 </div>
-                <div className="submit-feedback-container">
-                                {!isAnswerCorrect ? (<button className='lesson-three-point-two-submit' onClick={handleCheckAnswer}>Submit Answer</button>)
-                                    : (<button className='lesson-three-point-two-submit' onClick={nextQuestion}>Next Question</button>
+                <div className="submit-feedback-container-three-point-one">
+                                {!isAnswerCorrect ? (<button className='lesson-three-point-one-submit' onClick={handleCheckAnswer}>Submit Answer</button>)
+                                    : (<button className='lesson-three-point-one-submit' onClick={nextQuestion}>Next Question</button>
                                                                         )}
-              <span className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+              <span className={`lesson-three-point-one-feedback ${feedbackClass}`}>{feedback}</span>
             </div>
             </div>  
         </div>                           
