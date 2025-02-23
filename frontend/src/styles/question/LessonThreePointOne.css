@@ -32,7 +32,7 @@ html,body {
 
 .lesson-three-point-one-box-innercont {
     width: 60vw;
-    max-height: 100vh; /* Ensure the height is constrained to the viewport */
+    max-height: 100vh; 
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -241,7 +241,7 @@ html,body {
 .nucleus {
     width: 125px;
     height: 125px;
-    background-color: rgb(0, 213, 255);
+    background-color: orange;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -250,12 +250,16 @@ html,body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s;
+    
 }
   
 .proton {
     width: 12px;
     height: 12px;
-    background-color: darkred;
+    background-color: blue;
     border-radius: 50%;
     position: absolute;
 }
@@ -285,7 +289,7 @@ html,body {
 .electron-three-point-one {
     width: 15px;
     height: 15px;
-    background-color: blue;
+    background-color: red;
     border-radius: 50%;
     position: absolute;
     
@@ -317,4 +321,34 @@ button:hover {
     align-items: center;
     justify-content: center;
 }
+.nucleus.selected {
+    
+    border: 3px solid darkred; 
+    box-shadow: 0 0 10px rgba(139, 0, 0, 0.7); 
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    
+   
+    
+}
+
+.shell.selected {
+    border: 3px solid black !important;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.shell-visual-ring {
+    opacity: 1;
+    color: black;
+    transition: all 0.2s ease;
+  }
   
+  .shell-visual-ring.selected {
+    opacity: 1;
+    color: black;
+  }
+  
+  .shell-click-zone:hover + .shell-visual-ring {
+    border-color: rgba(5, 0, 0, 0.6);
+    opacity: 0.7;
+  }

@@ -23,28 +23,30 @@ function LessonThreePointTwo() {
     };
 
     const names = [
-        { value: "1",  name: 'Hydrogen', imagepath: 'Hydrogen.png'},
-        { value: "2",  name: 'Helium', imagepath: 'Helium.png' },
-        { value: "3",  name: 'Lithium', imagepath: 'Lithium.png'},
-        { value: "4",  name: 'Beryllium', imagepath: 'Beryllium.png'},
-        { value: "5",  name: 'Boron', imagepath: 'Boron.png'},
-        { value: "6",  name: 'Carbon', imagepath: 'Carbon.png'},
-        { value: "7",  name: 'Nitrogen', imagepath: 'Nitrogen.png'},
-        { value: "8",  name: 'Oxygen', imagepath: 'Oxygen.png'},
-        { value: "9",  name: 'Fluorine', imagepath: 'Fluorine.png'},
-        { value: "10", name: 'Neon', imagepath: 'Neon.png'},
-        { value: "11", name: 'Sodium', imagepath: 'Sodium.png'},
-        { value: "12", name: 'Magnesium', imagepath: 'Magnesium.png'},
-        { value: "13", name: 'Aluminum', imagepath: 'Aluminum.png'},
-        { value: "14", name: 'Silicon', imagepath: 'Silicon.png'},
-        { value: "15", name: 'Phosphorous', imagepath: 'Phosphorous.png'},
-        { value: "16", name: 'Sulfur', imagepath: 'Sulfur.png'},
-        { value: "17", name: 'Chlorine', imagepath: 'Chlorine.png'},
-        { value: "18", name: 'Argon', imagepath: 'Argon.png'},
-        { value: "19", name: 'Potassium', imagepath: 'Potassium.png'},
-        { value: "20", name: 'Calcium', imagepath: 'Calcium.png'},
+        { value: "1",  name: 'Hydrogen', imagepath: 'Hydrogen.png', atomicnumber: 1},
+        { value: "2",  name: 'Helium', imagepath: 'Helium.png', atomicnumber:  2},
+        { value: "1",  name: 'Lithium', imagepath: 'Lithium.png', atomicnumber: 3},
+        { value: "2",  name: 'Beryllium', imagepath: 'Beryllium.png', atomicnumber: 4},
+        { value: "3",  name: 'Boron', imagepath: 'Boron.png', atomicnumber: 5},
+        { value: "4",  name: 'Carbon', imagepath: 'Carbon.png', atomicnumber: 6},
+        { value: "5",  name: 'Nitrogen', imagepath: 'Nitrogen.png', atomicnumber: 7},
+        { value: "6",  name: 'Oxygen', imagepath: 'Oxygen.png', atomicnumber: 8},
+        { value: "7",  name: 'Fluorine', imagepath: 'Fluorine.png', atomicnumber: 9},
+        { value: "8", name: 'Neon', imagepath: 'Neon.png', atomicnumber: 10},
+        { value: "1", name: 'Sodium', imagepath: 'Sodium.png', atomicnumber: 11},
+        { value: "2", name: 'Magnesium', imagepath: 'Magnesium.png', atomicnumber: 12},
+        { value: "3", name: 'Aluminum', imagepath: 'Aluminum.png', atomicnumber: 13},
+        { value: "4", name: 'Silicon', imagepath: 'Silicon.png', atomicnumber: 14},
+        { value: "5", name: 'Phosphorous', imagepath: 'Phosphorous.png', atomicnumber: 15},
+        { value: "6", name: 'Sulfur', imagepath: 'Sulfur.png', atomicnumber: 16},
+        { value: "7", name: 'Chlorine', imagepath: 'Chlorine.png', atomicnumber: 17},
+        { value: "8", name: 'Argon', imagepath: 'Argon.png', atomicnumber: 18},
+        { value: "1", name: 'Potassium', imagepath: 'Potassium.png', atomicnumber: 19},
+        { value: "2", name: 'Calcium', imagepath: 'Calcium.png', atomicnumber: 20},
         
     ];
+    
+    const shellRadii = [42, 61, 80, 97];
 
     const electronPositions = {
         Hydrogen: [{x:"48.7%", y:"30.3%"}],
@@ -53,34 +55,29 @@ function LessonThreePointTwo() {
             {x:"48.6%", y: "64.3%"},
           ],
           Lithium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
           ],
          Beryllium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
           ],
           Boron: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
           ],
           Carbon: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+             
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
             {x:"51%", y: "71%"},
           ],
           Nitrogen: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+             
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
@@ -88,8 +85,7 @@ function LessonThreePointTwo() {
             {x:"71.5%", y: "49.4%"},
           ],
          Oxygen: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
@@ -98,8 +94,7 @@ function LessonThreePointTwo() {
             {x:"71.5%", y: "44.5%"},
           ],
           Fluorine: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
@@ -109,8 +104,7 @@ function LessonThreePointTwo() {
             {x:"46.3%", y: "23%"},
           ],
           Neon: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
+            
             {x:"26.26%", y: "44.29%"},
             {x:"26.2%", y: "49.4%"},
             {x:"46.1%", y: "71%"},
@@ -122,75 +116,30 @@ function LessonThreePointTwo() {
           ],
 
           Sodium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
           ],
 
           Magnesium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"}
           ],
           Aluminum: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
           ],
            Silicon: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
             {x:"19.3%", y: "49.4%"},
           ],
           Phosphorous: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
@@ -198,16 +147,7 @@ function LessonThreePointTwo() {
             {x:"78.4%", y: "44.5%"},
           ],
           Sulfur: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
@@ -216,16 +156,7 @@ function LessonThreePointTwo() {
             {x:"78.4%", y: "49.6%"},
           ],
           Chlorine: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
@@ -235,16 +166,7 @@ function LessonThreePointTwo() {
             {x:"51.1%", y: "77.8%"},
           ],
           Argon: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
+            
             {x:"51.1%", y: "15.8%"},
             {x:"46.3%", y: "15.8%"},
             {x:"19.3%", y: "44.4%"},
@@ -255,45 +177,11 @@ function LessonThreePointTwo() {
             {x:"46.2%", y: "77.8%"},
           ],
           Potassium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
-            {x:"51.1%", y: "15.8%"},
-            {x:"46.4%", y: "15.8%"},
-            {x:"19.3%", y: "44.4%"},
-            {x:"19.3%", y: "49.4%"},
-            {x:"78.4%", y: "44.5%"},
-            {x:"78.4%", y: "49.6%"},
-            {x:"51.1%", y: "77.8%"},
-            {x:"46.2%", y: "77.8%"},
+            
             {x:"46.7%", y: "8.7%"},
           ],
           Calcium: [
-            {x:"48.7%", y:"30.3%"},
-            {x:"48.6%", y: "64.3%"}, 
-            {x:"26.26%", y: "44.29%"},
-            {x:"26.2%", y: "49.4%"},
-            {x:"46.1%", y: "71%"},
-            {x:"51%", y: "71%"},
-            {x:"71.5%", y: "49.4%"},
-            {x:"71.5%", y: "44.5%"},
-            {x:"46.3%", y: "23%"},
-            {x:"51%", y: "23%"},
-            {x:"51.1%", y: "15.8%"},
-            {x:"46.4%", y: "15.8%"},
-            {x:"19.3%", y: "44.4%"},
-            {x:"19.3%", y: "49.4%"},
-            {x:"78.4%", y: "44.5%"},
-            {x:"78.4%", y: "49.6%"},
-            {x:"51.1%", y: "77.8%"},
-            {x:"46.2%", y: "77.8%"},
+            
             {x:"46.7%", y: "8.7%"},
             {x:"51.4%", y: "8.8%"},
           ],
@@ -301,20 +189,21 @@ function LessonThreePointTwo() {
     const questions = names.map(pos => ({
         value: pos.value,
         nameType: pos.name,
-        imagepath: pos.imagepath
+        imagepath: pos.imagepath,
+        atomicnumber: pos.atomicnumber
     }));
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [randomizedQuestions, setRandomizedQuestions] = useState([]);
-    const [userAnswer, setUserAnswer] = useState('');
     const [feedback, setFeedback] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('hidden');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-    const [lastDigitAttempts, setLastDigitAttempts] = useState(0); 
     const currentElement = randomizedQuestions[currentQuestionIndex] || {};
     const predefinedPositions = electronPositions[currentElement.nameType] || [];
     const [selectedElectrons, setSelectedElectrons] = useState([]);
     const [electronCount, setElectronCount] = useState(0);
+    const [highlightedShell, setHighlightedShell] = useState(null);
+
 
     useEffect(() => {
         if (!studentId) {
@@ -366,7 +255,18 @@ function LessonThreePointTwo() {
             return newSelected;
         });
     };
-
+    const determineShell = (name, atomicnumber) => {
+      if (["Hydrogen", "Helium"].includes(name)) return 1;
+      if (["Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon"].includes(name)) {
+          return atomicnumber <= 2 ? 1 : 2;
+      }
+      if (["Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorous", "Sulfur", "Chlorine", "Argon"].includes(name)) {
+          return atomicnumber  <= 2 ? 1 : atomicnumber  <= 10 ? 2 : 3;
+      }
+      return atomicnumber  <= 2 ? 1 : atomicnumber  <= 10 ? 2 : atomicnumber  <= 18 ? 3 : 4;
+  };
+  
+  
     const validateAnswer = async () => {
         const correctAnswer = parseInt(randomizedQuestions[currentQuestionIndex].value);
         
@@ -374,15 +274,24 @@ function LessonThreePointTwo() {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
-            setLastDigitAttempts(0); 
+            
+            setHighlightedShell(null);
             await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             return;
         }
-        setFeedback(`Incorrect. You selected ${electronCount} electrons, but ${currentElement.nameType} needs ${correctAnswer} electrons.`);
+       let incorrectShell = determineShell(currentElement.nameType, currentElement.atomicnumber);
+       if (electronCount < correctAnswer) {
+        incorrectShell = determineShell(currentElement.nameType, currentElement.atomicnumber);
+    } else if (electronCount > correctAnswer) {
+        incorrectShell = determineShell(currentElement.nameType, currentElement.atomicnumber);
+    }
+        setHighlightedShell(incorrectShell)
+        setFeedback("Incorrect. Valence electrons are the electrons inside the valence shell");
         setFeedbackClass('incorrect');
-        setLastDigitAttempts(0); 
+        
+        
         await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
           setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
@@ -399,15 +308,15 @@ function LessonThreePointTwo() {
     const handleNextQuestion = () => {
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
-            setUserAnswer('');
             setFeedback('');
             setFeedbackClass('hidden');
             setIsAnswerCorrect(false);
             setSelectedElectrons([]); 
             setElectronCount(0); 
+            setHighlightedShell(null);
         }
     };
-
+    
     return (
     <div className='lesson-three-point-two'>
       <div className='questionheader'>
@@ -428,30 +337,54 @@ function LessonThreePointTwo() {
             </div>
             <div className='lesson-three-point-two-content'>
               <p className='lesson-three-point-two-prompt'>
-                Look at the element <strong>{randomizedQuestions[currentQuestionIndex]?.nameType}</strong> and click the amount of electrons you think the element requires. <br />
-                Hint: Click on the red dots until they are all blue!
+                Look at the Bohr Model for the element <strong>{randomizedQuestions[currentQuestionIndex]?.nameType}</strong>. Click on each valence electron, until all the valence electrons are purple 
               </p>
-              <div className="lesson-three-point-two-cylinder-container">
-                <div className="lesson-three-point-two-cylinderWaterContainer">
+              <div className="lesson-three-point-two-bohr-container">
+                  <div className="lesson-three-point-two-bohrmodelcontainer">       
                   {randomizedQuestions[currentQuestionIndex] && (
                     <img 
                       src={require(`../../assets/question/${randomizedQuestions[currentQuestionIndex].imagepath}`)}
-                      className="lesson-one-point-eight-cylinder"
-                      alt={`${randomizedQuestions[currentQuestionIndex].nameType} structure`}
+                      className="lesson-three-point-two-cylinder"
+                      alt={`${randomizedQuestions[currentQuestionIndex].nameType} structure`} 
                     />
                   )}
+                  <svg
+                    viewBox="0 0 250 258"
+                    style={{ 
+                      position: "absolute", 
+                      top: 0, 
+                      left: 0, 
+                      width: "100%", 
+                      height: "100%", 
+                      pointerEvents: "none"
+                    }}
+                  >
+                    {shellRadii.map((radius, index) => (
+                      <circle
+                        key={index}
+                        cx="125"
+                        cy="125"
+                        r={radius}
+                        fill="none"
+                        stroke={highlightedShell === index + 1 ? "red" : "clear"}
+                        strokeWidth={highlightedShell === index + 1 ? 2 : 2} 
+                        className={highlightedShell === index + 1 ? "highlighted-shell" : ""}
+                      />
+                    ))}
+                  </svg>
                 </div>
-                <div className="electron-container">
+                  
+                <div className="electron-container ">
                   {predefinedPositions.map((pos, index) => (
                     <div
                       key={index}
                       className={`electron ${selectedElectrons.includes(index) ? "selected" : ""}`}
-                      style={{ left: pos.x, top: pos.y }}
+                      style={{ left: pos.x, top: pos.y, zIndex: 200}}
                       onClick={() => handleElectronClick(index)}
                     ></div>
                   ))}
                 </div>
-              </div>
+                </div>
             </div>
 
             <div className="submit-feedback-container">

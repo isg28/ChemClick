@@ -9,22 +9,28 @@ const LessonThreePointOne = () => {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
     const lessonId = 'lesson3.1'; 
-    const [electrons, setElectrons] = useState([]);
     const [protons, setProtons] = useState([]);
-    const electronShells = [2, 8, 8, 2]; // Max electrons per shell
+    const electronShells = [2, 8, 8, 2];
     const shellSizes = [120, 180, 240, 300];
+    const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+    const [selectedElement, setSelectedElement] = useState({});
+    const [feedback, setFeedback] = useState('');
+    const [feedbackClass, setFeedbackClass] = useState('hidden');
+    const [isNucleusSelected, setIsNucleusSelected] = useState(false);
+    const [selectedShellIndex, setSelectedShellIndex] = useState(null);
+    const [shellElectrons, setShellElectrons] = useState(new Array(electronShells.length).fill(0));
     const [goal, setGoal] = useState(); 
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [incorrectAnswers, setIncorrectAnswers] = useState(0);
     const [totalAttempts, setTotalAttempts] = useState(0);
-    const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-    const [selectedElement, setSelectedElement] = useState({});
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
-    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const [feedback, setFeedback] = useState('');
-    const [feedbackClass, setFeedbackClass] = useState('hidden');
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
+    const [distribution, setExpectedDistribution] = useState([0, 0, 0, 0]);
+    const [submitted, setSubmitted] = useState(false);
+    
     const handlequestion = () => {
         navigate('/dashboard');
     };
@@ -54,7 +60,7 @@ const LessonThreePointOne = () => {
         const randomElement = names[Math.floor(Math.random() * names.length)];
         setSelectedElement(randomElement);
     }, []); 
-
+    
     useEffect(() => {
             if (!studentId) {
                 console.error('Student ID not found');
@@ -63,35 +69,59 @@ const LessonThreePointOne = () => {
             }
             
             const initializeData = async () => {
-                await fetchLessonData(lessonId, setGoal);
-                await fetchLessonProgress(studentId, lessonId, {
-                    setCorrectAnswers,
-                    setIncorrectAnswers,
-                    setProgress,
-                    setMasteryLevel,
-                    setGoal,
-                    setTotalAttempts,
-                }); 
-            };
+                        await fetchLessonData(lessonId, setGoal);
+                        await fetchLessonProgress(studentId, lessonId, {
+                            setCorrectAnswers,
+                            setIncorrectAnswers,
+                            setProgress,
+                            setMasteryLevel,
+                            setGoal,
+                            setTotalAttempts,
+                        }); 
+                    };
 
             initializeData();
 
         }, [selectedElement, studentId, lessonId, navigate]);
 
-        useEffect(() => {
+    useEffect(() => {
             if (progress === 100) {
                 setShowCompletionModal(true);
             }
         }, [progress]);
+    useEffect(() => {
+        if (selectedElement?.value) {
+              const atomicNumber = parseInt(selectedElement.value, 10);
+               setExpectedDistribution(getExpectedElectronDistribution(atomicNumber));
+               setShellElectrons([0, 0, 0, 0]);
+               setSubmitted(false);
+        }
+    }, [selectedElement]);
     
+  
   const addElectron = () => {
-    if (electrons.length < 20) {
-      setElectrons([...electrons, electrons.length + 1]);
+    if (selectedShellIndex !== null) {
+      const currentElectronsInShell = shellElectrons[selectedShellIndex];
+      const maxElectronsInShell = electronShells[selectedShellIndex];
+      
+      if (currentElectronsInShell < maxElectronsInShell) {
+        const updatedShellElectrons = [...shellElectrons];
+        updatedShellElectrons[selectedShellIndex] = currentElectronsInShell + 1;
+        setShellElectrons(updatedShellElectrons);
+      }
     }
   };
   
   const removeElectron = () => {
-    setElectrons(electrons.slice(0, -1));
+    if (selectedShellIndex !== null) {
+      const currentElectronsInShell = shellElectrons[selectedShellIndex];
+  
+      if (currentElectronsInShell > 0) {
+        const updatedShellElectrons = [...shellElectrons];
+        updatedShellElectrons[selectedShellIndex] = currentElectronsInShell - 1;
+        setShellElectrons(updatedShellElectrons);
+      }
+    }
   };
   
   const addProton = () => {
@@ -104,12 +134,13 @@ const LessonThreePointOne = () => {
     setProtons(protons.slice(0, -1));
   };
 
-  const getShellElectrons = (shellIndex) => {
-    let count = 0;
-    for (let i = 0; i <= shellIndex; i++) {
-      count += electronShells[i] || 0;
-    }
-    return electrons.length >= count ? electronShells[shellIndex] : Math.max(0, electrons.length - (count - electronShells[shellIndex]));
+  const handleNucleusClick = () => {
+    setIsNucleusSelected(prevState => !prevState);
+  
+  };
+
+  const handleShellClick = (shellIndex) => {
+    setSelectedShellIndex(prevIndex => (prevIndex === shellIndex ? null : shellIndex));
   };
 
   const getElectronPosition = (shellIndex, electronIndex, shellRadius) => {
@@ -126,55 +157,91 @@ const LessonThreePointOne = () => {
     return { x, y };
   };
   const checkAnswer = async () => {
-    const correctAnswer = parseInt(selectedElement.value, 10);
-    const expectedElectrons = correctAnswer; 
+    const atomicNumber = parseInt(selectedElement.value, 10); 
+    const expectedElectrons = atomicNumber;
+    const expectedDistribution = getExpectedElectronDistribution(atomicNumber);
+    setSubmitted(true);
 
-    if (protons.length === correctAnswer && electrons.length === correctAnswer) {
-        setIsAnswerCorrect(true);
-        setFeedback('Correct!');
-        setFeedbackClass('correct');
-        await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-        }); 
-        return;
+    if (protons.length !== atomicNumber) {
+        setFeedback("Incorrect amount of protons. Edit the Nucleus and Try again!");
+        setFeedbackClass('incorrect');
+        setIsAnswerCorrect(false);
+        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
+          });
+          return;
         
-    } 
-    else if(protons.length !== correctAnswer && electrons.length !== expectedElectrons){
-        setFeedback("Incorrect amount of protons and electrons. Try again!");
-        setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-        });
     }
-    else if (protons.length !== correctAnswer) {
-        setFeedback("Incorrect amount of protons. Try again!");
+
+    const totalElectrons = shellElectrons.reduce((sum, count) => sum + count, 0);
+    if (totalElectrons !== expectedElectrons) {
+        setFeedback("Incorrect total number of electrons. Look at the selected red shells and try again!");
         setFeedbackClass('incorrect');
+        setIsAnswerCorrect(false);
         await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-        });
-    }
-    else if (electrons.length !== expectedElectrons) {
-        setFeedback("Incorrect amount of electrons. Try again!");
-        setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-        });
+                  setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
+                });
+        return;
     }
     setTimeout(() => {
         setFeedback('');
         setFeedbackClass('');
     }, 2000);
+
+    for (let i = 0; i < electronShells.length; i++) {
+        if (shellElectrons[i] !== expectedDistribution[i]) {
+            setFeedback('Incorrect electron arrangement. look at the red shells (2:8:8:2)');
+            setFeedbackClass('incorrect');
+            setIsAnswerCorrect(false);
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
+              });
+              return;
+        }
+    }
+
+    setFeedback('Correct!');
+    setFeedbackClass('correct');
+    setIsAnswerCorrect(true);
+    await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                    setCorrectAnswers, setMasteryLevel, setTotalAttempts,
+                }); 
+    return;
 };
+
+
+const getExpectedElectronDistribution = (atomicNumber) => { 
+    let remainingElectrons = atomicNumber;
+    
+    for (let i = 0; i < electronShells.length; i++) {
+        if (remainingElectrons > electronShells[i]) {
+            distribution[i] = electronShells[i]; 
+            remainingElectrons -= electronShells[i];
+        } else {
+            distribution[i] = remainingElectrons; 
+            break;
+        }
+    }
+    return distribution;
+    
+};
+
+const handleCheckAnswer = () => { 
+    checkAnswer();
+}
 
 const nextQuestion = () => {
     const randomElement = names[Math.floor(Math.random() * names.length)];
     setSelectedElement(randomElement);
     setProtons([]);
-    setElectrons([]);
+    setShellElectrons([]);
     setIsAnswerCorrect(false);
     setFeedback('');
     setFeedbackClass('hidden');
-
+    setShellElectrons(new Array(electronShells.length).fill(0));
+    setIsNucleusSelected(false);
+    setSelectedShellIndex(null);
+    setSubmitted(false);
   };
 
   return (
@@ -204,7 +271,16 @@ const nextQuestion = () => {
                             <div className="lesson-three-point-one-cylinderWaterContainer">
                                 <div className="bohr-model-section">
                                     <div className="bohr-model-container">
-                                    <div className="nucleus">
+                                    <div className={`nucleus ${isNucleusSelected ? "selected" : ""}`}onClick={handleNucleusClick} style={{zIndex: 400, transition: 'all 0.2s ease',}}>
+                                        <span className="proton-counter" style={{
+                                            position: 'absolute', 
+                                            color: 'white', 
+                                            fontSize: '1.2rem', 
+                                            fontWeight: 'bold', 
+                                            textAlign: 'center'
+                                        }}>
+                                            {protons.length}
+                                        </span>
                                         {protons.map((_, index) => {
                                             const { x, y } = getProtonPosition(index, 45); 
                                             return (
@@ -218,46 +294,116 @@ const nextQuestion = () => {
                                             );
                                         })}
                                     </div>
-                                    <div className="shells">
-                                        {electronShells.map((maxElectrons, shellIndex) => {
+                                    <div className="shells-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                        {electronShells.map((_, shellIndex) => {
                                         const shellRadius = shellSizes[shellIndex];
-                                        const electronsInShell = getShellElectrons(shellIndex);
-
+                                        let borderColor = 'rgba(0, 0, 0, 0.3)'; 
+    
+                                        
+                                        if (selectedShellIndex === shellIndex) {
+                                            borderColor = 'rgba(0, 0, 255, 0.5)'; 
+                                        }
+                                        
+                                        
+                                        if (submitted) {
+                                            
+                                            if (shellElectrons[shellIndex] === distribution[shellIndex]) {
+                                                borderColor = 'rgba(0, 255, 0, 0.7)';
+                                            } else {
+                                                borderColor = 'rgba(255, 0, 0, 0.7)'; 
+                                            }
+    }
                                         return (
                                             <div
-                                            key={shellIndex}
-                                            className={`shell ${electronsInShell > 0 ? 'active' : 'inactive'}`}
-                                            style={{ width: shellRadius * 2, height: shellRadius * 2 }}
-                                            >
-                                            {Array.from({ length: electronsInShell }).map((_, eIndex) => {
+                                                key={`shell-ring-${shellIndex}`}
+                                                className={`shell-visual-ring ${selectedShellIndex === shellIndex ? "selected" : ""}`}
+                                                style={{
+                                                    position: 'absolute',
+                                                    top: '50%',
+                                                    left: '50%',
+                                                    width: shellRadius * 2,
+                                                    height: shellRadius * 2,
+                                                    borderRadius: '50%',
+                                                    border: `3px solid ${borderColor}`,
+                                                    boxShadow: selectedShellIndex === shellIndex ? '0 0 8px rgba(0, 0, 0, 0.5)' : 'none',
+                                                    transform: 'translate(-50%, -50%)',
+                                                    transition: 'all 0.2s ease',
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                        
+                                        
+                                        {electronShells.map((_, shellIndex) => {
+                                            const outerRadius = shellSizes[shellIndex];
+                                            const innerRadius = shellIndex > 0 ? shellSizes[shellIndex - 1] : 0;
+                                            
+                                            return (
+                                            <div
+                                                key={`click-zone-${shellIndex}`}
+                                                onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleShellClick(shellIndex);
+                                                }}
+                                                className="shell-click-zone"
+                                                style={{
+                                                position: 'absolute',
+                                                top: '50%',
+                                                left: '50%',
+                                                width: outerRadius * 2, 
+                                                height: outerRadius * 2,
+                                                borderRadius: '50%',
+                                                transform: 'translate(-50%, -50%)',
+                                                cursor: 'pointer',
+                                                clipPath: `circle(${outerRadius}px) not(circle(${innerRadius}px))`,
+                                                zIndex: 300 - shellIndex, 
+                                                }}
+                                            />
+                                            );
+                                        })}
+                                        
+                                        
+                                        {electronShells.map((maxElectrons, shellIndex) => {
+                                            const shellRadius = shellSizes[shellIndex];
+                                            const electronsInShell = shellElectrons[shellIndex];
+                                            
+                                            return electronsInShell > 0 && (
+                                            <React.Fragment key={`electrons-shell-${shellIndex}`}>
+                                                {Array.from({ length: electronsInShell }).map((_, eIndex) => {
                                                 const { x, y } = getElectronPosition(shellIndex, eIndex, shellRadius);
                                                 return (
-                                                <motion.div
-                                                    key={eIndex}
+                                                    <motion.div
+                                                    key={`electron-${shellIndex}-${eIndex}`}
                                                     className="electron-three-point-one"
                                                     style={{
-                                                    transform: `translate(0%, 0%) translate(${x}px, ${y}px)`,
+                                                        position: 'absolute',
+                                                        top: '50%',
+                                                        left: '50%',
+                                                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                                                        pointerEvents: 'none',
+                                                        zIndex: 200,
                                                     }}
-                                                />
+                                                    />
                                                 );
-                                            })}
-                                            </div>
-                                        );
+                                                })}
+                                            </React.Fragment>
+                                            );
                                         })}
-                                    </div>
+                                        </div>
+                                                                            
                                 </div>
                                 <div className="controls">
-                                    <button onClick={addElectron}>Add Electron</button>
-                                    <button onClick={removeElectron}>Remove Electron</button>
-                                    <button onClick={addProton}>Add Proton</button>
-                                    <button onClick={removeProton}>Remove Proton</button>
+                                    <button disabled={selectedShellIndex === null} onClick={addElectron}>Add Electron ({shellElectrons})</button>
+                                    <button disabled={selectedShellIndex === null} onClick={removeElectron}>Remove Electron</button>
+                                    <button disabled={!isNucleusSelected} onClick={addProton}>Add Proton</button>
+                                    <button disabled={!isNucleusSelected} onClick={removeProton}>Remove Proton</button>
                                 </div>
                             </div>    
                         </div>                    
                     </div>
                 </div>
                 <div className="submit-feedback-container">
-                                {!isAnswerCorrect ? (<button className='lesson-three-point-two-submit' onClick={checkAnswer}>Check Answer</button>)
+                                {!isAnswerCorrect ? (<button className='lesson-three-point-two-submit' onClick={handleCheckAnswer}>Submit Answer</button>)
                                     : (<button className='lesson-three-point-two-submit' onClick={nextQuestion}>Next Question</button>
                                                                         )}
               <span className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
@@ -290,10 +436,7 @@ const nextQuestion = () => {
                             {renderGoalChecks(goal, correctAnswers)}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        {showCompletionModal && (
+                    {showCompletionModal && (
                 <div className="completion-modal">
                     <div className="completion-modal-content">
                         <h2>🎉 Congratulations! 🎉</h2>
@@ -302,7 +445,14 @@ const nextQuestion = () => {
                     </div>
                 </div>
             )}
-    </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+    
+    
     );
 };
 export default LessonThreePointOne;
