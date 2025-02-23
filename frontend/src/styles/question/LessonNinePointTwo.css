@@ -1,0 +1,45 @@
+.formula-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Grouping bases side by side */
+.base-group {
+    display: flex;
+    gap: 10px; /* Space between the two base inputs */
+}
+
+.formula-input {
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Base input (same size) */
+.base-input {
+    width: 60px;
+    height: 50px;
+}
+
+/* Superscript input (smaller, raised above bases) */
+.super-input {
+    width: 40px;
+    height: 30px;
+    font-size: 14px;
+    position: relative;
+    bottom: 15px;
+    margin-left: 20px; /* Adjust position to align with base */
+}
+
+/* Subscript input (smaller, lowered below bases) */
+.sub-input {
+    width: 40px;
+    height: 30px;
+    font-size: 14px;
+    position: relative;
+    top: 15px;
+    margin-left: 20px; /* Adjust position to align with base */
+} 

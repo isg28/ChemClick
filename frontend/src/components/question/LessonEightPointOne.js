@@ -31,24 +31,26 @@ function LessonEightPointOne() {
     };
 
     const ions = [
-        { symbol: "H+", name: "Hydrogen Ion" },
-        { symbol: "Li+", name: "Lithium Ion" },
-        { symbol: "Na+", name: "Sodium Ion" },
-        { symbol: "K+", name: "Potassium Ion" },
-        { symbol: "Rb+", name: "Rubidium Ion" },
-        { symbol: "Cs+", name: "Cesuyn Ion" },
-        { symbol: "Ag+", name: "Silver Ion" },
+        { symbol: "H¹⁺", name: "hydrogen ion", input: "H1+" },
+        { symbol: "Li¹⁺", name: "lithium ion", input: "Li1+" },
+        { symbol: "Na¹⁺", name: "sodium ion", input: "Na1+" },
+        { symbol: "K¹⁺", name: "potassium ion", input: "K1+" },
+        { symbol: "Rb¹⁺", name: "rubidium ion", input: "Rb1+" },
+        { symbol: "Cs¹⁺", name: "cesium ion", input: "Cs1+" },
+        { symbol: "Ag¹⁺", name: "silver ion", input: "Ag1+" },
     ];
 
     const questions = ions.flatMap(ion => [   
         {
             type: 'symbol', // Prompt for the symbol given the name
-            prompt: `What is the symbol for a ${ion.name}?`,
-            answer: ion.symbol,
+            text: 'What is the symbol for:',
+            prompt: ion.name,
+            answer: ion.input,
         },
         {
             type: 'name', // Prompt for the name given the symbol
-            prompt: `What is the name of the ion with the symbol ${ion.symbol}?`,
+            text: 'What is the name for:',
+            prompt: ion.symbol,
             answer: ion.name,
         }
     ]);
@@ -98,7 +100,7 @@ function LessonEightPointOne() {
         const currentQuestion = randomizedQuestions[currentQuestionIndex];
         const correctAnswer = currentQuestion.answer;
     
-        if (userInput.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+        if (userInput.trim() === correctAnswer) {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
@@ -108,7 +110,11 @@ function LessonEightPointOne() {
             return;
         } else {
             if(currentQuestion.type === 'name'){
-                setFeedback("Not quite right, remember cations end with an 'Ion' in the name!");
+                if(userInput.trim().toLowerCase() === correctAnswer){
+                    setFeedback("Use lowercase!");
+                } else {
+                    setFeedback("Not quite right, remember cations end with an 'ion' in the name!");
+                }
             } else {    // then it's a symbol question
                 setFeedback("Not quite right, remember cations are positively charged!");
             }
@@ -127,6 +133,9 @@ function LessonEightPointOne() {
 
 
     const handleSubmitAnswer = () => {
+        if(isAnswerCorrect){    // prevents user from pressing enter multiple times
+            return;
+        }
         validateAnswer();
     };
 
@@ -164,18 +173,25 @@ function LessonEightPointOne() {
                         <div className='lesson-eight-point-one-content'>
                             <p className='lesson-eight-point-one-prompt'>
                                 Given the {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'name of a positive monatomic ion, provide its symbol.'
-                                            : 'symbol of a positive monatomic ion, provide its name.'}
+                                            ? 'name of a monatomic ion, provide its symbol.'
+                                            : 'symbol of a monatomic ion, provide its name.'}
                                 <br /> Example input: {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'H+'
-                                            : 'Hydrogen Ion'}
+                                            ? 'Ba²⁺'
+                                            : 'hydrogen ion'}
                             </p>
                             <div className="lesson-eight-point-one-container">
                                 {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
-                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                    <p>{randomizedQuestions[currentQuestionIndex].text}</p>
                                 ) : (
                                     <p>Loading question...</p>
                                 )}
+                                <div className="lesson-eight-point-one-question-box">
+                                {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
+                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                ) : (
+                                    <p>...</p>
+                                )}
+                                </div>
                             </div>
 
                             <hr className="separator" />

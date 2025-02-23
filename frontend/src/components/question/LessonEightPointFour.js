@@ -31,45 +31,47 @@ function LessonEightPointFour() {
     };
 
     const ions = [
-        { symbol: "H+", name: "Hydrogen Ion", category: "positive" },
-        { symbol: "Li+", name: "Lithium Ion", category: "positive" },
-        { symbol: "Na+", name: "Sodium Ion", category: "positive" },
-        { symbol: "K+", name: "Potassium Ion", category: "positive" },
-        { symbol: "Rb+", name: "Rubidium Ion", category: "positive" },
-        { symbol: "Cs+", name: "Cesuyn Ion", category: "positive" },
-        { symbol: "Ag+", name: "Silver Ion", category: "positive" },
-        { symbol: "Be2+", name: "Beryllium Ion", category: "positive2" },
-        { symbol: "Mg2+", name: "Magnesium Ion", category: "positive2" },
-        { symbol: "Sr2+", name: "Strontium Ion", category: "positive2" },
-        { symbol: "Ba2+", name: "Barium Ion", category: "positive2" },
-        { symbol: "Ra2+", name: "Radium Ion", category: "positive2" },
-        { symbol: "Zn2+", name: "Zinc Ion", category: "positive2" },
-        { symbol: "Ca2+", name: "Calcium Ion", category: "positive2" },
-        { symbol: "Al3+", name: "Aluminum Ion", category: "positive3" },
-        { symbol: "H-", name: "Hyrdride", category: "negative" },
-        { symbol: "F-", name: "Fluoride", category: "negative" },
-        { symbol: "Cl-", name: "Chloride", category: "negative" },
-        { symbol: "Br-", name: "Bromide", category: "negative" },
-        { symbol: "I-", name: "Iodide", category: "negative" },
-        { symbol: "O2-", name: "Oxide", category: "negative2" },
-        { symbol: "S2-", name: "Sulfide", category: "negative2" },
-        { symbol: "Se2-", name: "Selenide", category: "negative2" },
-        { symbol: "Te2-", name: "Telluride", category: "negative2" },
-        { symbol: "N3-", name: "Nitride", category: "negative3" },
-        { symbol: "P3-", name: "Phosphide", category: "negative3" },
-        { symbol: "As3-", name: "Arsenide", category: "negative3" },
+        { symbol: "H¹⁺", name: "hydrogen ion", category: "positive", input: "H1+" },
+        { symbol: "Li¹⁺", name: "lithium ion", category: "positive", input: "Li1+" },
+        { symbol: "Na¹⁺", name: "sodium ion", category: "positive", input: "Na1+" },
+        { symbol: "K¹⁺", name: "potassium ion", category: "positive", input: "K1+" },
+        { symbol: "Rb¹⁺", name: "rubidium ion", category: "positive", input: "Rb1+" },
+        { symbol: "Cs¹⁺", name: "cesium ion", category: "positive", input: "Cs1+" },
+        { symbol: "Ag¹⁺", name: "silver ion", category: "positive", input: "Ag1+" },
+        { symbol: "Be²⁻", name: "beryllium ion", category: "positive2", input: "Be2-" },
+        { symbol: "Mg²⁻", name: "magnesium ion", category: "positive2", input: "Mg2-" },
+        { symbol: "Sr²⁻", name: "strontium ion", category: "positive2", input: "Sr2-" },
+        { symbol: "Ba²⁻", name: "barium ion", category: "positive2", input: "Ba2-" },
+        { symbol: "Ra²⁻", name: "radium ion", category: "positive2", input: "Ra2-" },
+        { symbol: "Zn²⁻", name: "zinc ion", category: "positive2", input: "Zn2-" },
+        { symbol: "Ca²⁻", name: "calcium ion", category: "positive2", input: "Ca2-" },
+        { symbol: "Al³⁻", name: "aluminum ion", category: "positive3", input: "Al3-" },
+        { symbol: "H¹⁻", name: "hydride ion", category: "negative", input: "H1-" },
+        { symbol: "F¹⁻", name: "fluoride ion", category: "negative", input: "F1-" },
+        { symbol: "Cl¹⁻", name: "chloride ion", category: "negative", input: "Cl1-" },
+        { symbol: "Br¹⁻", name: "bromide ion", category: "negative", input: "Br1-" },
+        { symbol: "I¹⁻", name: "iodide ion", category: "negative", input: "I1-" },
+        { symbol: "O²⁻", name: "oxide ion", category: "negative2", input: "O2-" },
+        { symbol: "S²⁻", name: "sulfide ion", category: "negative2", input: "S2-" },
+        { symbol: "Se²⁻", name: "selenide ion", category: "negative2", input: "Se2-" },
+        { symbol: "Te²⁻", name: "telluride ion", category: "negative2", input: "Te2-" },
+        { symbol: "N³⁻", name: "nitride ion", category: "negative3", input: "N3-" },
+        { symbol: "P³⁻", name: "phosphide ion", category: "negative3", input: "P3-" },
+        { symbol: "As³⁻", name: "arsenide ion", category: "negative3", input: "As3-" },
     ];
 
     const questions = ions.flatMap(ion => [   
         {
             type: 'symbol', // Prompt for the symbol given the name
-            prompt: `What is the symbol for a ${ion.name}?`,
-            answer: ion.symbol,
+            text: 'What is the symbol for:',
+            prompt: ion.name,
+            answer: ion.input,
             category: ion.category,
         },
         {
             type: 'name', // Prompt for the name given the symbol
-            prompt: `What is the name of the ion with the symbol ${ion.symbol}?`,
+            text: 'What is the name for:',
+            prompt: ion.symbol,
             answer: ion.name,
             category: ion.category,
         }
@@ -120,7 +122,7 @@ function LessonEightPointFour() {
         const currentQuestion = randomizedQuestions[currentQuestionIndex];
         const correctAnswer = currentQuestion.answer;
     
-        if (userInput.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+        if (userInput.trim() === correctAnswer) {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
@@ -131,7 +133,7 @@ function LessonEightPointFour() {
         } else {
             if(currentQuestion.type === 'name'){
                 if(currentQuestion.category === 'positive'){
-                    setFeedback("Not quite right, remember cations end with an 'Ion' in the name!");
+                    setFeedback("Not quite right, remember cations end with an 'ion' in the name!");
                 } else {    // then it's negative
                     setFeedback("Not quite right, remember negatively charged ions end in -ide!");
                 }
@@ -161,6 +163,9 @@ function LessonEightPointFour() {
 
 
     const handleSubmitAnswer = () => {
+        if(isAnswerCorrect){     // prevents user from pressing enter multiple times
+            return;
+        }
         validateAnswer();
     };
 
@@ -201,15 +206,22 @@ function LessonEightPointFour() {
                                             ? 'name of a monatomic ion, provide its symbol.'
                                             : 'symbol of a monatomic ion, provide its name.'}
                                 <br /> Example input: {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'Ba2+'
-                                            : 'Hydrogen Ion'}
+                                            ? 'Ba²⁺'
+                                            : 'hydrogen ion'}
                             </p>
                             <div className="lesson-eight-point-one-container">
                                 {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
-                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                    <p>{randomizedQuestions[currentQuestionIndex].text}</p>
                                 ) : (
                                     <p>Loading question...</p>
                                 )}
+                                <div className="lesson-eight-point-one-question-box">
+                                {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
+                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                ) : (
+                                    <p>...</p>
+                                )}
+                                </div>
                             </div>
 
                             <hr className="separator" />

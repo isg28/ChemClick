@@ -1,6 +1,8 @@
 import smtplib
 import os
 import pymongo
+import schedule
+import time
 from pymongo import MongoClient
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -19,6 +21,16 @@ sender_email = "chemclicks@gmail.com"
 sender_password = "ltig qxgb vxzn scsh"  # Gmail SMTP password
 smtp_server = "smtp.gmail.com"
 smtp_port = 587
+
+def main():
+    student_data = get_students_with_completed_progress()
+    if student_data:
+        for student_id, lesson_id in student_data:
+            send_email(matt_email, student_id, lesson_id)
+            collection.update_many(
+                {"user_id": student_id, "lesson_id": lesson_id, "progress": 100},  
+                {"$set": {"email_sent": True}} 
+            )
 
 def send_email(matt_email, student_id, lesson_id):
     msg = MIMEMultipart()
@@ -44,25 +56,15 @@ def get_students_with_completed_progress():
     # Query for students with 100% progress
     students = collection.find({"progress": 100, "email_sent": {"$ne": True}})
     student_data = [(student.get("user_id"), student.get("lesson_id")) for student in students if student.get("user_id") is not None and student.get("lesson_id") is not None]
-    
     if student_data:
         return student_data
     else:
         print("No students found with 100% progress.")
-        return []
 
-# Fetch students and send emails
-try:
-    student_data = get_students_with_completed_progress()
-    if student_data:
-        for student_id, lesson_id in student_data:
-            send_email(matt_email, student_id, lesson_id)
-            collection.update_many(
-                {"user_id": student_id, "lesson_id": lesson_id, "progress": 100},  
-                {"$set": {"email_sent": True}} 
-            )
-    else:
-        print("No students found with completed progress.")
-finally:
-    # Close the MongoDB client
-    client.close()
+# Schedule the script to run every hour
+schedule.every(10).seconds.do(main)
+
+while True:
+    schedule.run_pending()
+    time.sleep(5)  # Wait a minute before checking again
+

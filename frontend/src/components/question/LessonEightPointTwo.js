@@ -31,22 +31,24 @@ function LessonEightPointTwo() {
     };
 
     const ions = [
-        { symbol: "H-", name: "Hyrdride" },
-        { symbol: "F-", name: "Fluoride" },
-        { symbol: "Cl-", name: "Chloride" },
-        { symbol: "Br-", name: "Bromide" },
-        { symbol: "I-", name: "Iodide" },
+        { symbol: "H¹⁻", name: "hydride ion", input: "H1-" },
+        { symbol: "F¹⁻", name: "fluoride ion", input: "F1-" },
+        { symbol: "Cl¹⁻", name: "chloride ion", input: "Cl1-" },
+        { symbol: "Br¹⁻", name: "bromide ion", input: "Br1-" },
+        { symbol: "I¹⁻", name: "iodide ion", input: "I1-" },
     ];
 
     const questions = ions.flatMap(ion => [   
         {
             type: 'symbol', // Prompt for the symbol given the name
-            prompt: `What is the symbol for a ${ion.name}?`,
-            answer: ion.symbol,
+            text: 'What is the symbol for:',
+            prompt: ion.name,
+            answer: ion.input
         },
         {
             type: 'name', // Prompt for the name given the symbol
-            prompt: `What is the name of the ion with the symbol ${ion.symbol}?`,
+            text: 'What is the name for:',
+            prompt: ion.symbol,
             answer: ion.name,
         }
     ]);
@@ -96,7 +98,7 @@ function LessonEightPointTwo() {
         const currentQuestion = randomizedQuestions[currentQuestionIndex];
         const correctAnswer = currentQuestion.answer;
     
-        if (userInput.trim().toLowerCase() === correctAnswer.toLowerCase()) {
+        if (userInput.trim() === correctAnswer) {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
@@ -106,7 +108,11 @@ function LessonEightPointTwo() {
             return;
         } else {
             if(currentQuestion.type === 'name'){
-                setFeedback("Not quite right, remember negatively charged ions end in -ide!");
+                if(userInput.trim().toLowerCase() === correctAnswer){
+                    setFeedback("Use lowercase!");
+                } else {
+                    setFeedback("Not quite right, remember negatively charged ions end in -ide!");
+                }
             } else {    // then it's a symbol question
                 setFeedback("Not quite right, remember monoatmomic ions ending in -ide are negatively charged!");
             }
@@ -125,6 +131,9 @@ function LessonEightPointTwo() {
 
 
     const handleSubmitAnswer = () => {
+        if(isAnswerCorrect){     // prevents user from pressing enter multiple times
+            return;
+        }
         validateAnswer();
     };
 
@@ -162,18 +171,25 @@ function LessonEightPointTwo() {
                         <div className='lesson-eight-point-one-content'>
                             <p className='lesson-eight-point-one-prompt'>
                                 Given the {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'name of a negative monatomic ion, provide its symbol.'
-                                            : 'symbol of a negative monatomic ion, provide its name.'}
+                                            ? 'name of a monatomic ion, provide its symbol.'
+                                            : 'symbol of a monatomic ion, provide its name.'}
                                 <br /> Example input: {randomizedQuestions[currentQuestionIndex]?.type === 'symbol'
-                                            ? 'H-'
-                                            : 'Hydride'}
+                                            ? 'Ba²⁺'
+                                            : 'hydrogen ion'}
                             </p>
                             <div className="lesson-eight-point-one-container">
                                 {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
-                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                    <p>{randomizedQuestions[currentQuestionIndex].text}</p>
                                 ) : (
                                     <p>Loading question...</p>
                                 )}
+                                <div className="lesson-eight-point-one-question-box">
+                                {randomizedQuestions.length > 0 && randomizedQuestions[currentQuestionIndex] ? (
+                                    <p>{randomizedQuestions[currentQuestionIndex].prompt}</p>
+                                ) : (
+                                    <p>...</p>
+                                )}
+                                </div>
                             </div>
 
                             <hr className="separator" />
