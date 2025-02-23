@@ -10,12 +10,12 @@ import {
 } from "./LessonUtils";
 
 import "../../styles/question/Question.css";
-import "../../styles/question/LessonFivePointEleven.css";
+import "../../styles/question/LessonSixPointOne.css";
 
-function LessonFivePointEleven() {
+function LessonSixPointOne() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem("studentId");
-    const lessonId = "lesson5.11";
+    const lessonId = "lesson5.12";
 
     const [goal, setGoal] = useState(null);
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -32,11 +32,33 @@ function LessonFivePointEleven() {
     const [feedbackMessage, setFeedbackMessage] = useState("");
     const [isCorrect, setIsCorrect] = useState(null);
 
-    const options = [
-        "The number of valence electrons is equal to the group number.",
-        "The number of valence electrons is equal to the last digit of the group number.",
-        "It is not.",
-    ];
+    const [valenceElectrons, setValenceElectrons] = useState(1);
+    const [charge, setCharge] = useState(0);
+    const [glow, setGlow] = useState(false);
+
+const electronPositions = [
+    { shell: 1, count: 2, radius: 40 },
+    { shell: 2, count: valenceElectrons, radius: 80 }
+];
+
+const handleAddElectron = () => {
+    if (valenceElectrons < 8) {
+    setValenceElectrons(valenceElectrons + 1);
+    setCharge(charge - 1);
+    }
+};
+
+const handleRemoveElectron = () => {
+    if (valenceElectrons > 0) {
+        setValenceElectrons(valenceElectrons - 1);
+        setCharge(charge + 1);
+    }
+};
+
+const handleNucleusClick = () => {
+    setGlow(true);
+    setTimeout(() => setGlow(false), 1000); // Remove glow after 1 second
+};
 
     useEffect(() => {
         if (!studentId) {
@@ -67,7 +89,7 @@ function LessonFivePointEleven() {
 
         if (
             selectedAnswer ===
-            "The number of valence electrons is equal to the group number."
+            "The number of valence electrons is equal to the last digit of the group number."
         ) {
             setIsCorrect(true);
             await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
@@ -76,9 +98,9 @@ function LessonFivePointEleven() {
             setFeedbackMessage("Correct! Click done to go to the Dashboard.");
         } else {
             setIsCorrect(false);
-             await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
-                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-             });
+            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            });
             setFeedbackMessage("Incorrect. Please try again.");
         }
         setIsSubmitted(true);
@@ -126,8 +148,12 @@ function LessonFivePointEleven() {
     }
 
     const images = [
-        require("../../assets/question/Group1.png"),
-        require("../../assets/question/Group2.png")
+        require("../../assets/question/Group13.png"),
+        require("../../assets/question/Group14.png"),
+        require("../../assets/question/Group15.png"),
+        require("../../assets/question/Group16.png"),
+        require("../../assets/question/Group17.png"),
+        require("../../assets/question/Group18.png")
     ];
     
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -147,19 +173,37 @@ function LessonFivePointEleven() {
     }
 
     function updateImageFeedback(index) {
-        if (index === 0) {
-            setImageFeedbackMessage("Group 1: The number of valence electrons is equal to the group number.");
-        } else if (index === 1) {
-            setImageFeedbackMessage("Group 2: The number of valence electrons is equal to the group number.");
+        switch (index) {
+            case 0:
+                setImageFeedbackMessage("Group 13: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 1:
+                setImageFeedbackMessage("Group 14: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 2:
+                setImageFeedbackMessage("Group 15: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 3:
+                setImageFeedbackMessage("Group 16: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 4:
+                setImageFeedbackMessage("Group 17: The number of valence electrons is equal to the last digit of the group number.");
+                break;
+            case 5:
+                setImageFeedbackMessage("Group 18: It is not.");
+                break;
+            default:
+                break;
         }
     }
 
     function handleImageClick() {
         setShowImageFeedback(true);
+        setTimeout(() => setShowImageFeedback(false), 6000);
     }
 
     return (
-        <div className="LessonFivePointEleven">
+        <div className="LessonSixPointOne">
             <div className="questionheader">
                 <div className="question-head-in">
                     <img
@@ -180,26 +224,26 @@ function LessonFivePointEleven() {
             </div>
 
             <div className="question-page-main">
-                <div className="LessonFivePointElevenBox">
-                    <div className="LessonFivePointElevenBoxInnercont">
-                        <div className="LessonFivePointElevenBoxTitle">
+                <div className="LessonSixPointOneBox">
+                    <div className="LessonSixPointOneBoxInnercont">
+                        <div className="LessonSixPointOneBoxTitle">
                             <h1>
                                 Unit Five: Periodic Trends (Valence Electrons) -
-                                Group 1 and Group 2
+                                Group 13 - 18
                             </h1>
                         </div>
-                        <div className="LessonFivePointElevenContent">
-                            <p className="LessonFivePointElevenPrompt">
-                                How does Group 1 and Group 2's group number relate to its
+                        <div className="LessonSixPointOneContent">
+                            <p className="LessonSixPointOnePrompt">
+                                How does Group 13 through Group 18's group number relate to its
                                 valence electrons? View previous answers through images
                             </p>
-                            <div className="LessonFivePointElevenRow">
-                                <div className="LessonFivePointElevenImageSelector">
-                                    <div className="LessonFivePointElevenArrows">
+                            <div className="LessonSixPointOneRow">
+                                <div className="LessonSixPointOneImageSelector">
+                                    <div className="LessonSixPointOneArrows">
                                         <button className="LessonFiveArrowLeft" onClick={prevImage}>&#10094;</button>
                                         <button className="LessonFiveArrowRight" onClick={nextImage}>&#10095;</button>
                                     </div>
-                                    <div className="LessonFivePointElevenImageContainer">
+                                    <div className="LessonSixPointOneImageContainer">
                                     <img
                                         id="LessonFiveSliderImage"
                                         src={images[currentIndex]}
@@ -211,49 +255,35 @@ function LessonFivePointEleven() {
                                     </div>
                                 </div>
 
-                                <div className="LessonFivePointElevenInput">
-                                    {options.map(function (option, index) {
-                                        return (
-                                            <div
-                                                key={index}
-                                                style={{ marginBottom: "10px" }}
-                                            >
-                                                <input
-                                                    type="radio"
-                                                    id={"option-" + index}
-                                                    name="mcq"
-                                                    value={option}
-                                                    checked={
-                                                        selectedAnswer ===
-                                                        option
-                                                    }
-                                                    onChange={
-                                                        handleOptionChange
-                                                    }
-                                                />
-                                                <label
-                                                    htmlFor={"option-" + index}
-                                                    style={{
-                                                        marginLeft: "10px",
-                                                        fontSize: "1.3rem",
-                                                    }}
-                                                >
-                                                    {option}
-                                                </label>
-                                            </div>
-                                        );
-                                    })}
+                                <div className="LessonSixPointOneInput">
+                                    <div className="LessonSix-bohr-model-container">
+                                        <h2>Bohr Model of Lithium</h2>
+                                        <div className= "LessonSix-bohr-model">
+                                            <div className="nucleus" onClick={handleNucleusClick}></div>
+                                                {electronPositions.map((shell, index) => (
+                                                <div key={index} className={`LessonSix-electron-shell ${glow ? 'glow' : ''}`} style={{ width: shell.radius * 2, height: shell.radius * 2 }}>
+                                                    {[...Array(shell.count)].map((_, i) => (
+                                                    <div key={i} className="electron" style={{ transform: `rotate(${(360 / shell.count) * i}deg) translate(${shell.radius}px) rotate(-${(360 / shell.count) * i}deg)` }}></div>
+                                                    ))}
+                                                </div>
+                                                ))}
+                                        </div>
+                                        <p>Valence Electrons: {valenceElectrons}</p>
+                                        <p>Charge: {charge > 0 ? `${charge}+` : charge < 0 ? `${Math.abs(charge)}-` : "0"}</p>
+                                        <button onClick={handleAddElectron}>Add Electron</button>
+                                        <button onClick={handleRemoveElectron}>Remove Electron</button>
+                                    </div>
                                 </div>
                             </div>
                             {showImageFeedback && (
-                                <div className="LessonFivePointElevenFeedback image-feedback">
+                                <div className="LessonSixPointOneFeedback image-feedback">
                                     {imageFeedbackMessage}
                                 </div>
                             )}
                             {feedbackMessage !== "" && (
                                 <div
                                     className={
-                                        "LessonFivePointElevenFeedback " +
+                                        "LessonSixPointOneFeedback " +
                                         (isCorrect ? "correct" : "incorrect")
                                     }
                                 >
@@ -263,7 +293,7 @@ function LessonFivePointEleven() {
                         </div>
                         <div className="submit-feedback-container">
                             <button
-                                className="LessonFivePointElevenSubmit"
+                                className="LessonSixPointOneSubmit"
                                 onClick={handleButtonClick}
                             >
                                 {buttonText}
@@ -312,4 +342,4 @@ function LessonFivePointEleven() {
     );
 }
 
-export default LessonFivePointEleven;
+export default LessonSixPointOne;

@@ -177,7 +177,6 @@ function LessonFivePointTwelve() {
 
     function handleImageClick() {
         setShowImageFeedback(true);
-        setTimeout(() => setShowImageFeedback(false), 6000);
     }
 
     return (
