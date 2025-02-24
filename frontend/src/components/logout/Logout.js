@@ -10,11 +10,11 @@ function Logout() {
       localStorage.removeItem('authToken');
 
       //after logging out, naviagtes to login 
-      navigate('/Login');
+      navigate('/');
     };
 
     const handleLogoClick = () => {
-      navigate('/Login');
+      navigate('/');
     };
 
     return (

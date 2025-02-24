@@ -13,6 +13,10 @@ function Home() {
         navigate('/accountcreation');
     };
 
+    const handleTeacherLogIn = () => {
+        navigate('/teacherlogin');
+    }
+
     return (
         <body>
             <div className="home-container">
@@ -27,7 +31,7 @@ function Home() {
                             </div>
 
                             <div className = 'home-button' onClick = {handleLogIn}>SIGN IN</div>
-
+                            <div className = 'home-button' onClick = {handleTeacherLogIn}>TEACHER SIGN IN</div>
                             <div className = 'home-button' onClick = {handleCreateAcc}>CREATE ACCOUNT</div>
 
                         </div>

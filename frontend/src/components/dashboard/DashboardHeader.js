@@ -2,8 +2,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/dashboard/DashboardHeader.css';
 
+
 const DashboardHeader = () => {
   const navigate = useNavigate();
+  
 
   const handleMenuBarClick = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
@@ -27,7 +29,13 @@ const DashboardHeader = () => {
     navigate('/profile');
   }
   const handleTeacherDashboardClick = () =>{
+    let user = localStorage.getItem('role');
+    if(user !== 'teacherId'){
+      alert('Admin access only');
+    }
+    else {
     navigate('/teacherdashboard');
+    }
   }
   const handleLogoutClick = () =>{
     navigate('/logout');

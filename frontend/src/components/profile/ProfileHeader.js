@@ -29,7 +29,13 @@ const ProfileHeader = () => {
     navigate('/profile');
   }
   const handleTeacherDashboardClick = () =>{
+    let user = localStorage.getItem('role');
+    if(user !== 'teacherId'){
+      alert('Admin access only');
+    }
+    else {
     navigate('/teacherdashboard');
+    }
   }
   const handleLogoutClick = () =>{
     navigate('/logout');

@@ -16,6 +16,7 @@ import NewPassword from './components/passwordreset/NewPassword';
 import Statistics from './components/statistics/Statistics';
 import StatisticsIndividual from './components/statisticsindividual/StatisticsIndividual';
 import Congrats from './components/congrats/Congrats';
+
 import LessonOnePointOne from './components/question/LessonOnePointOne';
 import LessonOnePointTwo from './components/question/LessonOnePointTwo';
 import LessonOnePointThree from './components/question/LessonOnePointThree';
@@ -28,14 +29,17 @@ import LessonOnePointNine from './components/question/LessonOnePointNine';
 import LessonOnePointTen from './components/question/LessonOnePointTen';
 import LessonOnePointEleven from './components/question/LessonOnePointEleven';
 import LessonOnePointTwelve from './components/question/LessonOnePointTwelve';
+
 import LessonThreePointOne from './components/question/LessonThreePointOne';
 import LessonThreePointTwo from './components/question/LessonThreePointTwo';
+
 import LessonTwoPointOne from './components/question/LessonTwoPointOne';
 import LessonTwoPointTwo from './components/question/LessonTwoPointTwo';
 import LessonTwoPointThree from './components/question/LessonTwoPointThree';
 import LessonTwoPointFour from './components/question/LessonTwoPointFour';
 import LessonTwoPointFive from './components/question/LessonTwoPointFive';
 import LessonTwoPointSix from './components/question/LessonTwoPointSix';
+
 import LessonFourPointOne from './components/question/LessonFourPointOne';
 import LessonFourPointTwo from './components/question/LessonFourPointTwo';
 import LessonFourPointThree from './components/question/LessonFourPointThree';
@@ -59,15 +63,18 @@ import LessonEightPointOne from './components/question/LessonEightPointOne';
 import LessonEightPointTwo from './components/question/LessonEightPointTwo';
 import LessonEightPointThree from './components/question/LessonEightPointThree';
 import LessonEightPointFour from './components/question/LessonEightPointFour';
+
 import LessonNinePointOne from './components/question/LessonNinePointOne';
 import LessonNinePointTwo from './components/question/LessonNinePointTwo';
 import LessonNinePointSix from './components/question/LessonNinePointSix';
-
 
 import LessonTenPointOne from './components/question/LessonTenPointOne';
 import LessonTenPointTwo from './components/question/LessonTenPointTwo';
 import LessonTenPointThree from './components/question/LessonTenPointThree';
 
+import TeacherLogin from './components/teacherlogin/TeacherLogin';
+
+import ProtectedRoute from "./ProtectedRoute";
 
 /*const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(*/
@@ -82,7 +89,14 @@ ReactDOM.render(
         <Route path = "/accountcreation" element = {<AccountCreation/>} />
         <Route path = "/profile" element = {<Profile/>} />
         <Route path = "/question" element = {<Question/>} />
-        <Route path = "/teacherdashboard" element = {<TeacherDashboard/>} />
+        <Route
+          path="/teacherdashboard"
+          element={
+            <ProtectedRoute>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
         <Route path = "/NewPassword" element = {<NewPassword/>} />
         <Route path = "/Statistics" element = {<Statistics/>} />
@@ -141,6 +155,8 @@ ReactDOM.render(
         <Route path = "/LessonTenPointOne" element = {<LessonTenPointOne/>}/>
         <Route path = "/LessonTenPointTwo" element = {<LessonTenPointTwo/>}/>
         <Route path = "/LessonTenPointThree" element = {<LessonTenPointThree/>}/>
+        
+        <Route path = "/teacherlogin" element = {<TeacherLogin/>}/>
 
 
         {/* ... etc. */}

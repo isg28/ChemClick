@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {useNavigate} from  'react-router-dom';
-import '../../styles/login/Login.css';
+import '../../styles/teacherlogin/TeacherLogin.css';
 
-function Login() {
+function TeacherLogin() {
   const navigate = useNavigate();
 
-  const [studentId, setStudentId] = useState('');
+  const [teacherId, setTeacherId] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -19,13 +19,13 @@ function Login() {
       }
 
       try {
-          const response = await fetch('http://localhost:8000/users/login/', {
+          const response = await fetch('http://localhost:8000/teacher/teacherlogin/', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
               body: JSON.stringify({
-                  student_id: studentId,
+                  teacher_id: teacherId,
                   password: password,
               }),
           });
@@ -33,8 +33,8 @@ function Login() {
           if (response.ok) {
               const data = await response.json();
               console.log(data.message);
-              localStorage.setItem('role','studentId', studentId);
-              navigate('/dashboard'); 
+              localStorage.setItem('role','teacherId', teacherId);
+              navigate('/teacherdashboard'); 
           } else {
               const errorData = await response.json();
               setErrorMessage(errorData.error ||'Login failed');
@@ -46,27 +46,27 @@ function Login() {
   };
 
   return (
-    <div className = 'Login'>
-      <div className = 'container'>
-        <div className = 'header'>
+    <div className = 'TeacherLogin'>
+      <div className = 'container-teacher'>
+        <div className = 'header-teacher'>
             <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "profile-logo" />
-          <div className = 'underline'></div>
+          <div className = 'underline-teacher'></div>
         </div>
         
-        <div className = 'input-box'>
-          <div className = 'inputs'>
-            <div className = "Student-ID">STUDENT ID</div>
-            <div className = 'input'>
+        <div className = 'input-box-teacher'>
+          <div className = 'inputs-teacher'>
+            <div className = "Student-ID-teacher">TEACHER ID</div>
+            <div className = 'input-teacher'>
               <input
                 type="text"
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
+                value={teacherId}
+                onChange={(e) => setTeacherId(e.target.value)}
               />
             </div>
           </div>
-          <div className = 'inputs'>
-            <div className = 'Password'>PASSWORD</div>
-            <div className = 'input'>
+          <div className = 'inputs-teacher'>
+            <div className = 'Password-teacher'>PASSWORD</div>
+            <div className = 'input-teacher'>
               <input
                 type="password"
                 value={password}
@@ -74,18 +74,18 @@ function Login() {
               />            
             </div>
           </div>
-          <div className = 'options'>
-            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password?</div>
-            <div className='create-account' onClick={() => navigate('/accountcreation')}>Create Account</div>
-            <div className = 'submit-container'>
+          <div className = 'options-teacher'>
+            <div className = 'forgot-password-teacher' onClick={() => navigate('/ConfirmEmail')}>Forgot Password?</div>
+            <div className = 'submit-container-teacher'>
             </div>
           </div>
           {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
-        <div className = 'submit' onClick = {handleSignIn}>SIGN IN</div>
+        <div className = 'submit-teacher' onClick = {handleSignIn}>SIGN IN</div>
+        
       </div>
     </div>
   </div>
   );
 }
 
-export default Login;
+export default TeacherLogin;
