@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+
+  .lesson-nine-point-nine {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  
+
+  .lesson-nine-point-nine-box {
+    height: 70vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .lesson-nine-point-nine-box-innercont {
+    width: 60vw;
+    max-height: 100vh;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1,87,112,0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+ 
+  .lesson-nine-point-nine-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Orelega One', sans-serif;
+  }
+  
+
+  .lesson-nine-point-nine-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 25px;
+    border: 3px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 5px solid #015770;
+  }
+  
+
+  .step-section {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .lesson-nine-point-nine-prompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+
+  .lesson-nine-point-nine-input {
+    width: 40%;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #015770;
+    background-color: #e7eae2;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-family: 'Orelega One', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+
+  .lesson-nine-point-nine-submit {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .lesson-nine-point-nine-submit:active {
+    background-color: #98c844;
+  }
+  
+  .explicit-formula-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .ion-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .ion-input-group label {
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.2rem;
+  }
+  
+  .superscript-input {
+    width: 50px;
+    text-align: center;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.2rem;
+    vertical-align: super;
+  }
+  
+  .subscript-input {
+    width: 50px;
+    text-align: center;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.2rem;
+    vertical-align: sub;
+  }
+  
+
+  .phrase-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+  }
+  
+  .phrase-word {
+    font-size: 1.5rem;
+    font-family: 'Orelega One', sans-serif;
+    padding: 5px 10px;
+    border: 2px solid #015770;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .phrase-word.selected {
+    background-color: #E3F0CC;
+  }
+  
+
+  .completed-answer {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #015770;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 80%;
+    text-align: center;
+    font-family: 'Orelega One', sans-serif;
+  }
+  
+
+  .feedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .feedback.correct {
+    background-color: #e0f8e0;
+    color: #237B31;
+    border: 2px solid #237B31;
+  }
+  
+
+  .feedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+  }
+  
+  .completion-message {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .completion-message button {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .completion-message button:active {
+    background-color: #98c844;
+  }
+
+  
