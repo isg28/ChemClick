@@ -286,7 +286,7 @@ const nextQuestion = () => {
                                             return (
                                             <motion.div
                                                 key={index}
-                                                className="proton"
+                                                className="proton-three-point-one"
                                                 style={{
                                                 transform: `translate(${x}px, ${y}px)` 
                                                 }}
