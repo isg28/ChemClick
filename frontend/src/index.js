@@ -30,15 +30,15 @@ import LessonOnePointTen from './components/question/LessonOnePointTen';
 import LessonOnePointEleven from './components/question/LessonOnePointEleven';
 import LessonOnePointTwelve from './components/question/LessonOnePointTwelve';
 
-import LessonThreePointOne from './components/question/LessonThreePointOne';
-import LessonThreePointTwo from './components/question/LessonThreePointTwo';
-
 import LessonTwoPointOne from './components/question/LessonTwoPointOne';
 import LessonTwoPointTwo from './components/question/LessonTwoPointTwo';
 import LessonTwoPointThree from './components/question/LessonTwoPointThree';
 import LessonTwoPointFour from './components/question/LessonTwoPointFour';
 import LessonTwoPointFive from './components/question/LessonTwoPointFive';
 import LessonTwoPointSix from './components/question/LessonTwoPointSix';
+
+import LessonThreePointOne from './components/question/LessonThreePointOne';
+import LessonThreePointTwo from './components/question/LessonThreePointTwo';
 
 import LessonFourPointOne from './components/question/LessonFourPointOne';
 import LessonFourPointTwo from './components/question/LessonFourPointTwo';
@@ -72,13 +72,11 @@ import LessonEightPointFour from './components/question/LessonEightPointFour';
 
 import LessonNinePointOne from './components/question/LessonNinePointOne';
 import LessonNinePointTwo from './components/question/LessonNinePointTwo';
+import LessonNinePointThree from './components/question/LessonNinePointThree';
 import LessonNinePointSix from './components/question/LessonNinePointSix';
 import LessonNinePointSeven from './components/question/LessonNinePointSeven';
 import LessonNinePointEight from './components/question/LessonNinePointEight';
 import LessonNinePointNine from './components/question/LessonNinePointNine';
-
-
-
 
 import LessonTenPointOne from './components/question/LessonTenPointOne';
 import LessonTenPointTwo from './components/question/LessonTenPointTwo';
@@ -126,8 +124,7 @@ ReactDOM.render(
         <Route path = "/LessonOnePointTen" element = {<LessonOnePointTen/>}/>
         <Route path = "/LessonOnePointEleven" element = {<LessonOnePointEleven/>}/>
         <Route path = "/LessonOnePointTwelve" element = {<LessonOnePointTwelve/>}/>
-        <Route path = "/LessonThreePointOne" element = {<LessonThreePointOne/>}/>
-        <Route path = "/LessonThreePointTwo" element = {<LessonThreePointTwo/>}/>
+
         <Route path = "/LessonTwoPointOne" element = {<LessonTwoPointOne/>}/>
         <Route path = "/LessonTwoPointTwo" element = {<LessonTwoPointTwo/>}/>
         <Route path = "/LessonTwoPointThree" element = {<LessonTwoPointThree/>}/>
@@ -135,11 +132,12 @@ ReactDOM.render(
         <Route path = "/LessonTwoPointFive" element = {<LessonTwoPointFive/>}/>
         <Route path = "/LessonTwoPointSix" element = {<LessonTwoPointSix/>}/>
 
+        <Route path = "/LessonThreePointOne" element = {<LessonThreePointOne/>}/>
+        <Route path = "/LessonThreePointTwo" element = {<LessonThreePointTwo/>}/>
 
         <Route path = "/LessonFourPointOne" element = {<LessonFourPointOne/>}/>
         <Route path = "/LessonFourPointTwo" element = {<LessonFourPointTwo/>}/>
         <Route path = "/LessonFourPointThree" element = {<LessonFourPointThree/>}/>
-
 
         <Route path = "/LessonFivePointOne" element = {<LessonFivePointOne/>}/>
         <Route path = "/LessonFivePointTwo" element = {<LessonFivePointTwo/>}/>
@@ -162,15 +160,14 @@ ReactDOM.render(
         <Route path = "/LessonSevenPointFour" element = {<LessonSevenPointFour/>}/>
         <Route path = "/LessonSevenPointFive" element = {<LessonSevenPointFive/>}/>
 
-
-
-
         <Route path = "/LessonEightPointOne" element = {<LessonEightPointOne/>}/>
         <Route path = "/LessonEightPointTwo" element = {<LessonEightPointTwo/>}/>
         <Route path = "/LessonEightPointThree" element = {<LessonEightPointThree/>}/>
         <Route path = "/LessonEightPointFour" element = {<LessonEightPointFour/>}/>
+
         <Route path = "/LessonNinePointOne" element = {<LessonNinePointOne/>}/>
         <Route path = "/LessonNinePointTwo" element = {<LessonNinePointTwo/>}/>
+        <Route path = "/LessonNinePointThree" element = {<LessonNinePointThree/>}/>
         <Route path = "/LessonNinePointSix" element = {<LessonNinePointSix/>}/>
         <Route path = "/LessonNinePointSeven" element = {<LessonNinePointSeven/>}/>
         <Route path = "/LessonNinePointEight" element = {<LessonNinePointEight/>}/>
