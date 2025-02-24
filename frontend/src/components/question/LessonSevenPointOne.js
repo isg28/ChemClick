@@ -53,11 +53,6 @@ function LessonSevenPointOne() {
     initializeData();
   }, [studentId, lessonId, navigate]);
 
-  function shuffleOptions() {
-    const shuffled = [...options].sort(() => Math.random() - 0.5);
-    setOptions(shuffled);
-  }
-
   async function handleSubmit() {
     if (selectedAnswer === '') {
       alert('Please select an answer.');
@@ -85,7 +80,6 @@ function LessonSevenPointOne() {
     } else if (selectedAnswer === 'The charge of an ion is equal to the group number.') {
       setIsCorrect(false);
       setFeedbackMessage('Take a look at hydrogen. What is the charge of its ion?');
-      shuffleOptions(); 
     } else {
       setIsCorrect(false);
       await IncorrectResponses({
@@ -104,7 +98,6 @@ function LessonSevenPointOne() {
         setTotalAttempts,
       });
       setFeedbackMessage('Incorrect. Please try again.');
-      shuffleOptions(); 
     }
     setIsSubmitted(true);
   }

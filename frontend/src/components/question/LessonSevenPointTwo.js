@@ -26,10 +26,10 @@ function LessonSevenPointTwo() {
   const [isCorrect, setIsCorrect] = useState(null);
 
   const [options, setOptions] = useState([
-    'The charge of an ion is equal to the group number.',
-    'The charge of an ion is equal to the last digit of the group number.',
     'The charge of an ion is equal to the group number minus 18.',
     'It does not.',
+    'The charge of an ion is equal to the group number.',
+    'The charge of an ion is equal to the last digit of the group number.',
   ]);
 
   useEffect(() => {
@@ -52,11 +52,6 @@ function LessonSevenPointTwo() {
     }
     initializeData();
   }, [studentId, lessonId, navigate]);
-
-  function shuffleOptions() {
-    const shuffled = [...options].sort(() => Math.random() - 0.5);
-    setOptions(shuffled);
-  }
 
   async function handleSubmit() {
     if (selectedAnswer === '') {
@@ -100,7 +95,6 @@ function LessonSevenPointTwo() {
         setTotalAttempts,
       });
       setFeedbackMessage('Incorrect. Please try again.');
-      shuffleOptions(); 
     }
     setIsSubmitted(true);
   }
@@ -171,7 +165,8 @@ function LessonSevenPointTwo() {
             </div>
             <div className="LessonSevenPointTwoContent">
               <p className="LessonSevenPointTwoPrompt">
-              How does the group number predict ion charges for Group 1 elements? Ignore hydrogen.</p>
+                How does the group number predict ion charges for Group 1 elements? Ignore hydrogen.
+              </p>
               <div className="LessonSevenPointTwoRow">
                 <div className="LessonSevenPointTwoImageContainer">
                   <img

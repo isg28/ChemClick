@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses } from './LessonUtils';
 
 import '../../styles/question/Question.css';
-import '../../styles/question/LessonSevenPointThree.css';
+import '../../styles/question/LessonSevenPointFive.css';
 
-function LessonSevenPointThree() {
+function LessonSevenPointFive() {
   const navigate = useNavigate();
   const studentId = localStorage.getItem('studentId');
-  const lessonId = 'lesson7.3';
+  const lessonId = 'lesson7.5';
 
   const [goal, setGoal] = useState(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -26,10 +26,10 @@ function LessonSevenPointThree() {
   const [isCorrect, setIsCorrect] = useState(null);
 
   const [options, setOptions] = useState([
-    'The charge of the ion is equal to the group number.',
-    'It cannot.',
-    'The charge of the ion is equal to the last digit of the group number.',
-    'The charge of the ion is equal to the group number minus 18.',
+    'The charge of an ion is equal to the group number minus 18.',
+    'The charge of an ion is equal to the group number.',
+    'The charge of an ion is equal to the last digit of the group number.',
+    'It does not.',
 
   ]);
 
@@ -60,7 +60,7 @@ function LessonSevenPointThree() {
       return;
     }
 
-    if (selectedAnswer === 'It cannot.') {
+    if (selectedAnswer === 'The charge of an ion is equal to the last digit of the group number.') {
       setIsCorrect(true);
       await CorrectResponses({
         studentId,
@@ -77,7 +77,7 @@ function LessonSevenPointThree() {
         setMasteryLevel,
         setTotalAttempts,
       });
-      setFeedbackMessage('Correct! You have to remember that hydrogen is an exception and its ion has a charge of negative one. Click done to go to the Dashboard.');
+      setFeedbackMessage('Correct! Click done to go to the Dashboard.');
     } else {
       setIsCorrect(false);
       await IncorrectResponses({
@@ -138,7 +138,7 @@ function LessonSevenPointThree() {
   }
 
   return (
-    <div className="LessonSevenPointThree">
+    <div className="LessonSevenPointFive">
       <div className="questionheader">
         <div className="question-head-in">
           <img
@@ -159,24 +159,24 @@ function LessonSevenPointThree() {
       </div>
 
       <div className="question-page-main">
-        <div className="LessonSevenPointThreeBox">
-          <div className="LessonSevenPointThreeBoxInnercont">
-            <div className="LessonSevenPointThreeBoxTitle">
-              <h1>Unit Seven: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Group 1 Part 3</h1>
+        <div className="LessonSevenPointFiveBox">
+          <div className="LessonSevenPointFiveBoxInnercont">
+            <div className="LessonSevenPointFiveBoxTitle">
+              <h1>Unit Seven: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Group 13</h1>
             </div>
-            <div className="LessonSevenPointThreeContent">
-              <p className="LessonSevenPointThreePrompt">
-                How can the group number determine the charge of a hydrogen ion?
+            <div className="LessonSevenPointFiveContent">
+              <p className="LessonSevenPointFivePrompt">
+                How does the group number predict the ion charge for elements in Group 13?
               </p>
-              <div className="LessonSevenPointThreeRow">
-                <div className="LessonSevenPointThreeImageContainer">
+              <div className="LessonSevenPointFiveRow">
+                <div className="LessonSevenPointFiveImageContainer">
                   <img
-                    src={require('../../assets/question/Group1_Part3_Ion.png')}
-                    alt="Group 1 Ion"
+                    src={require('../../assets/question/Group13_Ion.png')}
+                    alt="Group 13 Ion"
                     className="scrollable-image"
                   />
                 </div>
-                <div className="LessonSevenPointThreeInput">
+                <div className="LessonSevenPointFiveInput">
                   {options.map((option, index) => (
                     <div key={index} style={{ marginBottom: '10px' }}>
                       <input
@@ -198,13 +198,13 @@ function LessonSevenPointThree() {
                 </div>
               </div>
               {feedbackMessage !== '' && (
-                <div className={'LessonSevenPointThreeFeedback ' + (isCorrect ? 'correct' : 'incorrect')}>
+                <div className={'LessonSevenPointFiveFeedback ' + (isCorrect ? 'correct' : 'incorrect')}>
                   {feedbackMessage}
                 </div>
               )}
             </div>
             <div className="submit-feedback-container">
-              <button className="LessonSevenPointThreeSubmit" onClick={handleButtonClick}>
+              <button className="LessonSevenPointFiveSubmit" onClick={handleButtonClick}>
                 {buttonText}
               </button>
             </div>
@@ -243,4 +243,4 @@ function LessonSevenPointThree() {
   );
 }
 
-export default LessonSevenPointThree;
+export default LessonSevenPointFive;
