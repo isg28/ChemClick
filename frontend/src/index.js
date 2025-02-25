@@ -58,6 +58,26 @@ import LessonFivePointEleven from './components/question/LessonFivePointEleven';
 import LessonFivePointTwelve from './components/question/LessonFivePointTwelve';
 
 import LessonSixPointOne from './components/question/LessonSixPointOne';
+import LessonSixPointTwo from './components/question/LessonSixPointTwo';
+import LessonSixPointThree from './components/question/LessonSixPointThree';
+import LessonSixPointFour from './components/question/LessonSixPointFour';
+import LessonSixPointFive from './components/question/LessonSixPointFive';
+import LessonSixPointSix from './components/question/LessonSixPointSix';
+import LessonSixPointSeven from './components/question/LessonSixPointSeven';
+import LessonSixPointEight from './components/question/LessonSixPointEight';
+import LessonSixPointNine from './components/question/LessonSixPointNine';
+import LessonSixPointTen from './components/question/LessonSixPointTen';
+import LessonSixPointEleven from './components/question/LessonSixPointEleven';
+import LessonSixPointTwelve from './components/question/LessonSixPointTwelve';
+import LessonSixPointThirteen from './components/question/LessonSixPointThirteen';
+import LessonSixPointFourteen from './components/question/LessonSixPointFourteen';
+import LessonSixPointFifteen from './components/question/LessonSixPointFifteen';
+import LessonSixPointSixteen from './components/question/LessonSixPointSixteen';
+import LessonSixPointSeventeen from './components/question/LessonSixPointSeventeen';
+import LessonSixPointEighteen from './components/question/LessonSixPointEighteen';
+import LessonSixPointNineteen from './components/question/LessonSixPointNineteen';
+import LessonSixPointTwenty from './components/question/LessonSixPointTwenty';
+
 
 import LessonSevenPointOne from './components/question/LessonSevenPointOne';
 import LessonSevenPointTwo from './components/question/LessonSevenPointTwo';
@@ -153,6 +173,26 @@ ReactDOM.render(
         <Route path = "/LessonFivePointTwelve" element = {<LessonFivePointTwelve/>}/>
 
         <Route path = "/LessonSixPointOne" element = {<LessonSixPointOne/>}/>
+        <Route path = "/LessonSixPointTwo" element = {<LessonSixPointTwo/>}/>
+        <Route path = "/LessonSixPointThree" element={<LessonSixPointThree />} />
+        <Route path = "/LessonSixPointFour" element={<LessonSixPointFour />} />
+        <Route path = "/LessonSixPointFive" element={<LessonSixPointFive />} />
+        <Route path = "/LessonSixPointSix" element={<LessonSixPointSix />} />
+        <Route path = "/LessonSixPointSeven" element={<LessonSixPointSeven />} />
+        <Route path = "/LessonSixPointEight" element={<LessonSixPointEight />} />
+        <Route path = "/LessonSixPointNine" element={<LessonSixPointNine />} />
+        <Route path = "/LessonSixPointTen" element={<LessonSixPointTen />} />
+        <Route path = "/LessonSixPointEleven" element={<LessonSixPointEleven />} />
+        <Route path = "/LessonSixPointTwelve" element={<LessonSixPointTwelve />} />
+        <Route path = "/LessonSixPointThirteen" element={<LessonSixPointThirteen />} />
+        <Route path = "/LessonSixPointFourteen" element={<LessonSixPointFourteen />} />
+        <Route path = "/LessonSixPointFifteen" element={<LessonSixPointFifteen />} />
+        <Route path = "/LessonSixPointSixteen" element={<LessonSixPointSixteen />} />
+        <Route path = "/LessonSixPointSeventeen" element={<LessonSixPointSeventeen />} />
+        <Route path = "/LessonSixPointEighteen" element={<LessonSixPointEighteen />} />
+        <Route path = "/LessonSixPointNineteen" element={<LessonSixPointNineteen />} />
+        <Route path = "/LessonSixPointTwenty" element={<LessonSixPointTwenty />} />
+
 
         <Route path = "/LessonSevenPointOne" element = {<LessonSevenPointOne/>}/>
         <Route path = "/LessonSevenPointTwo" element = {<LessonSevenPointTwo/>}/>

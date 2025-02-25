@@ -12,10 +12,10 @@ import {
 import "../../styles/question/Question.css";
 import "../../styles/question/LessonSixPointOne.css";
 
-function LessonSixPointOne() {
+function LessonSixPointThree() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem("studentId");
-    const lessonId = "lesson6.1";
+    const lessonId = "lesson6.3";
 
     const [goal, setGoal] = useState(null);
     const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -46,12 +46,11 @@ function LessonSixPointOne() {
     ];
 
     const electronPositions = [
-        { shell: 1, count: 2, radius: 40 },
-        { shell: 2, count: valenceElectrons, radius: 80 }
+        { shell: 1, count: valenceElectrons, radius: 40 },
     ];
 
     const handleAddElectron = () => {
-        if (valenceElectrons < 8) {
+        if (valenceElectrons < 2) {
         setValenceElectrons(valenceElectrons + 1);
         setCharge(charge - 1);
         }
@@ -95,20 +94,13 @@ function LessonSixPointOne() {
     async function handleSubmit() {
         console.log(charge);
 
-        if (charge === 1) {
+        if (charge === -1) {
             setIsCorrect(true);
             await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             setFeedbackMessage("Correct! Click done to go to the Dashboard.");
-        } else if(charge === -7) {
-            setIsCorrect(false)
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-            });
-            setFeedbackMessage("This is a noble gas electron configuration, but there is a better answer.");
-        }
-        else {
+        } else {
             setIsCorrect(false);
             await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
@@ -183,7 +175,7 @@ function LessonSixPointOne() {
                         </div>
                         <div className="LessonSixPointOneContent">
                             <p className="LessonSixPointOnePrompt">
-                                Correctly form the noble gas configuration for Lithium. Three elements have been provided
+                                Correctly form the noble gas configuration for Hydrogen. Three elements have been provided
                                 for reference.
                             </p>
                             <div className="LessonSixPointOneRow">
@@ -204,7 +196,7 @@ function LessonSixPointOne() {
 
                                 <div className="LessonSixPointOneInput">
                                     <div className="LessonSix-bohr-model-container">
-                                        <h2>Bohr Model of Lithium</h2>
+                                        <h2>Bohr Model of Hydrogen</h2>
                                         <div className= "LessonSix-bohr-model">
                                             <div className="nucleus" onClick={handleNucleusClick}></div>
                                                 {electronPositions.map((shell, index) => (
@@ -289,4 +281,4 @@ function LessonSixPointOne() {
     );
 }
 
-export default LessonSixPointOne;
+export default LessonSixPointThree;
