@@ -114,7 +114,7 @@ function LessonEightPointTwo() {
                     setFeedback("Not quite right, remember negatively charged ions end in -ide!");
                 }
             } else {    // then it's a symbol question
-                setFeedback("Not quite right, remember monoatmomic ions ending in -ide are negatively charged!");
+                setFeedback("Not quite right, remember monatmomic ions ending in -ide are negatively charged!");
             }
             setFeedbackClass('incorrect');
             await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 

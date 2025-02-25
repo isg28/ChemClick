@@ -143,7 +143,7 @@ function LessonEightPointFour() {
                 } else if (currentQuestion.category === 'positive2' || currentQuestion.category === 'positive3'){
                     setFeedback("Make sure to check the positive charge!");
                 } else if (currentQuestion.category === 'negative') {
-                    setFeedback("Not quite right, remember monoatmomic ions ending in -ide are negatively charged!");
+                    setFeedback("Not quite right, remember monatmomic ions ending in -ide are negatively charged!");
                 } else {    // then it's a 2- or 3- anion
                     setFeedback("Make sure to check the negative charge!");
                 }

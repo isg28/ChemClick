@@ -54,7 +54,9 @@ function Dashboard() {
           {
             number: 1,
             title: 'Uncertainty in Measurement: Visible Scale',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson1'))
+            // filtering by regular expressions prevents lessons 10 
+            // and above from falling under this category too
+            lessons: data.filter((lesson) => /^lesson1\./.test(lesson.lesson_id)) 
               .map((lesson) => {
                 const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson1"
                 const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -68,7 +70,7 @@ function Dashboard() {
           {
             number: 2,
             title: 'Uncertainty in Measurements (Digital Scale-Balance)',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson2'))
+            lessons: data.filter((lesson) => /^lesson2\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson2"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -82,7 +84,7 @@ function Dashboard() {
           {
             number: 3,
             title: 'Atomic Structure',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson3'))
+            lessons: data.filter((lesson) => /^lesson3\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson3"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -96,7 +98,7 @@ function Dashboard() {
           {
             number: 4,
             title: 'Periodic Table Classification',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson4'))
+            lessons: data.filter((lesson) => /^lesson4\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson4"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -110,7 +112,7 @@ function Dashboard() {
           {
             number: 5,
             title: 'Periodic Trends (Valence Electrons)',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson5'))
+            lessons: data.filter((lesson) => /^lesson5\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson5"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -124,7 +126,7 @@ function Dashboard() {
           {
             number: 6,
             title: 'Forming Monatomic Ions',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson6'))
+            lessons: data.filter((lesson) => /^lesson6\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson6"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -138,7 +140,7 @@ function Dashboard() {
           {
             number: 7,
             title: 'Periodic Trends (Using group number to predict charge of monatomic ion)',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson7'))
+            lessons: data.filter((lesson) => /^lesson7\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson7"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -152,7 +154,7 @@ function Dashboard() {
           {
             number: 8,
             title: 'Monatomic Ions',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson8'))
+            lessons: data.filter((lesson) => /^lesson8\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson8"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -166,7 +168,7 @@ function Dashboard() {
           {
             number: 9,
             title: 'Ionic Compounds',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson9'))
+            lessons: data.filter((lesson) => /^lesson9\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson9"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
@@ -180,7 +182,7 @@ function Dashboard() {
           {
             number: 10,
             title: 'Ionic Compounds (Polyatomic Ions)',
-            lessons: data.filter((lesson) => lesson.lesson_id.startsWith('lesson10'))
+            lessons: data.filter((lesson) => /^lesson10\./.test(lesson.lesson_id))
             .map((lesson) => {
               const unit = lesson.lesson_id.split('.')[0]; // Extract "lesson10"
               const lessonNumber = parseInt(lesson.lesson_id.split('.')[1], 10); // Extract "#"
