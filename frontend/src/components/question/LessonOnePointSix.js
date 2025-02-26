@@ -7,6 +7,10 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 function LessonOnePointSix() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson1.6'; 
         
     const [goal, setGoal] = useState(); 
@@ -60,28 +64,28 @@ function LessonOnePointSix() {
     };    
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
+        if (!userId) { 
+            console.error('ID not found');
+            navigate('/login');
             return;
         }
         
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });     
+            });        
         };
         
         initializeData();
         setLeftPosition(INITIAL_POSITION); // Reset dragger to the initial position
         generateRandomPencilLength(); // Generate a new random pencil length
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -136,15 +140,15 @@ function LessonOnePointSix() {
     if (userAnswer === correctAnswer) {
         setFeedbackMessage("Correct! Great job!");
         setFeedbackClass('correct');
-        await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         }); 
         setTimeout(() => resetQuestion(), 2000);
     } else {
         setFeedbackMessage(`Incorrect. The correct answer was wrong, try again`);
         setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
         setTimeout(() => {
             setFeedbackMessage('');

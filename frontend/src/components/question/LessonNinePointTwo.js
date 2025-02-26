@@ -143,6 +143,10 @@ function LessonNinePointTwo(){
 
 
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson9.2'; 
         
     const [goal, setGoal] = useState(); 
@@ -165,28 +169,27 @@ function LessonNinePointTwo(){
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });   
+            });        
         };
-
         initializeData();
 
         setQuestionText(questions[Math.floor(Math.random() * questions.length)]);
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {

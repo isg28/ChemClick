@@ -6,7 +6,11 @@ import { renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Co
 
 function LessonNinePointThree() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId;   
   const lessonId = 'lesson9.3';
 
   const [goal, setGoal] = useState();
@@ -111,25 +115,27 @@ function LessonNinePointThree() {
 
   // Initialization: check for studentId, fetch lesson data/progress, and randomize questions.
   useEffect(() => {
-    if (!studentId) {
-      navigate('/login');
-      return;
-    }
-    const initializeData = async () => {
-      await fetchLessonData(lessonId, setGoal);
-      await fetchLessonProgress(studentId, lessonId, {
-        setCorrectAnswers,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setGoal,
-        setTotalAttempts,
-      });
-    };
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
     initializeData();
     setRandomizedQuestions(shuffleQuestions());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId, lessonId, navigate]);
+  }, [userId, lessonId, navigate, isTeacher]);
 
   // Show completion modal if progress reaches 100%
   useEffect(() => {
@@ -159,20 +165,8 @@ function LessonNinePointThree() {
     } else {
       setRemovalFeedback("You must remove both charges (superscripts) and any subscripts that are 1.");
       setStreak(0); // Reset streak on incorrect answer
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -194,21 +188,9 @@ function LessonNinePointThree() {
         setProgress((newStreak / goal) * 100); // Update progress based on streak
       }
 
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
 
       // Brief delay before moving to the next question
       setTimeout(() => {
@@ -217,20 +199,8 @@ function LessonNinePointThree() {
     } else {
       setTextFeedback("Incorrect. Please try again.");
       setStreak(0); // Reset streak on incorrect answer
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };

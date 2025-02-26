@@ -133,6 +133,10 @@ function LessonNinePointOne(){
 
 
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;      
     const lessonId = 'lesson9.1'; 
         
     const [goal, setGoal] = useState(); 
@@ -161,28 +165,28 @@ function LessonNinePointOne(){
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });   
+            });        
         };
 
         initializeData();
 
         generateRandomNumberAndPosition();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -310,8 +314,8 @@ function LessonNinePointOne(){
         if (isCorrectCombination()) {
             setFeedbackMessage('Correct!');
             setFeedbackClass('correct');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-                            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             setDroppedIons([]); // Reset dropped ions for the next question
     
@@ -323,8 +327,8 @@ function LessonNinePointOne(){
         } else {
             setFeedbackMessage('Incorrect. Please look closely at the combs that need to be used to balance out the ion!');
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
         }
     };

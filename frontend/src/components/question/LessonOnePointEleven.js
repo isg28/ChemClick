@@ -7,6 +7,10 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 function LessonOnePointEleven() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson1.11'; 
         
     const [goal, setGoal] = useState(); 
@@ -129,22 +133,22 @@ function LessonOnePointEleven() {
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
+        if (!userId) { 
+            console.error('ID not found');
+            navigate('/login');
             return;
         }
         
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });  
+            });        
         };
         
         initializeData();
@@ -159,7 +163,7 @@ function LessonOnePointEleven() {
 
         setRandomizedQuestions(shuffleQuestions());
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentQuestionIndex, studentId, lessonId, navigate]);
+    }, [currentQuestionIndex, userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -215,7 +219,7 @@ function LessonOnePointEleven() {
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
             setLastDigitAttempts(0); 
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             return;
@@ -263,7 +267,7 @@ function LessonOnePointEleven() {
                 }
             }
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setTimeout(() => {
@@ -276,7 +280,7 @@ function LessonOnePointEleven() {
         if (userWhole !== correctWhole) {
             setFeedback("The whole number is incorrect. Check the scale and try again.");
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setTimeout(() => {
@@ -290,8 +294,8 @@ function LessonOnePointEleven() {
         setFeedbackClass('incorrect');
         setLastDigitAttempts(0); 
         setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
         setTimeout(() => {
             setFeedback('');

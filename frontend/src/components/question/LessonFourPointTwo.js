@@ -6,7 +6,11 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 
 function LessonFourPointTwo() {
     const navigate = useNavigate();
-    const studentId = localStorage.getItem('studentId');
+    const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson4.2';
     
     const [goal, setGoal] = useState();
@@ -38,27 +42,27 @@ function LessonFourPointTwo() {
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login');
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });  
+            });        
         };
 
         initializeData();
         generateRandomQuestion();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -281,7 +285,7 @@ function LessonFourPointTwo() {
         if (correctCount === totalRequired && incorrectSelections === 0 && wrongColorCount === 0) {
             setIsCorrect(true);
             setFeedbackMessage('🎉 Correct! You can proceed to the next question.');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
         } else {
@@ -306,7 +310,7 @@ function LessonFourPointTwo() {
             );
             setIsCorrect(false);
             setFeedbackMessage(feedbackMessage);
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
         }

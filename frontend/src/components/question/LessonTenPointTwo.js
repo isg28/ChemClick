@@ -8,6 +8,10 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 function LessonTenPointTwo(){
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;      
     const lessonId = 'lesson10.2'; 
     
     const [goal, setGoal] = useState(); //
@@ -82,15 +86,15 @@ function LessonTenPointTwo(){
     };
 
     useEffect(() => {
-        if (!studentId) { //
-          console.error('Student ID not found');
+        if (!userId) { 
+          console.error('ID not found');
           navigate('/login');
           return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
@@ -102,7 +106,7 @@ function LessonTenPointTwo(){
     
         initializeData();
         // eslint-disable-line react-hooks/exhaustive-deps
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -129,16 +133,16 @@ function LessonTenPointTwo(){
             setIsAnswerCorrect(true);
             setFeedback("✅ Correct! Well done!");
             setFeedbackClass("correct-feedback");
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-                                    setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             setShowHint(false);
         } else {
             setIsAnswerCorrect(false);
             setFeedback(`❌ Incorrect. ${questionType === "symbol" ? "Make sure to enter the correct ion symbol" : "Make sure to enter the correct ion name."}`);
             setFeedbackClass("incorrect-feedback");
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
-                                    setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
     
             if (questionType === "symbol") {

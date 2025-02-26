@@ -8,7 +8,11 @@ import '../../styles/question/LessonFivePointOne.css';
 
 function LessonFivePointOne() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId;   
   const lessonId = 'lesson5.1';
 
   const [goal, setGoal] = useState(null);
@@ -34,16 +38,16 @@ function LessonFivePointOne() {
 
 
 
-  useEffect(() => {
-    if (!studentId) {
-      console.error('Student ID not found');
-      navigate('/login');
-      return;
-    }
+    useEffect(() => {
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
 
-    async function initializeData() {
-      await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
@@ -51,9 +55,11 @@ function LessonFivePointOne() {
                 setGoal,
                 setTotalAttempts,
             });        
-    }
-    initializeData();
-  }, [studentId, lessonId, navigate]);
+        };
+    
+        initializeData();
+        // eslint-disable-line react-hooks/exhaustive-deps
+    }, [userId, lessonId, navigate, isTeacher]);
 
   async function handleSubmit() {
     if (selectedAnswer === '') {
@@ -63,14 +69,14 @@ function LessonFivePointOne() {
 
     if (selectedAnswer === 'The number of valence electrons is equal to the group number.') {
       setIsCorrect(true);
-      await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-              setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       }); 
       setFeedbackMessage('Correct! Click done to go to the Dashboard.');
     } else {
       setIsCorrect(false);
-      await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-        setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
       setFeedbackMessage('Incorrect. Please try again.');
     }

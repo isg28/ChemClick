@@ -6,7 +6,11 @@ import { renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Co
 
 function LessonNinePointSix() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId;   
   const lessonId = 'lesson9.6';
 
   // State for progress tracking
@@ -91,25 +95,27 @@ function LessonNinePointSix() {
 
   // Initialization: check for studentId, fetch lesson data/progress, and randomize questions.
   useEffect(() => {
-    if (!studentId) {
-      navigate('/login');
-      return;
-    }
-    const initializeData = async () => {
-      await fetchLessonData(lessonId, setGoal);
-      await fetchLessonProgress(studentId, lessonId, {
-        setCorrectAnswers,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setGoal,
-        setTotalAttempts,
-      });
-    };
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
     initializeData();
     setRandomizedQuestions(shuffleQuestions());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId, lessonId, navigate]);
+  }, [userId, lessonId, navigate, isTeacher]);
 
   // Show completion modal if progress reaches 100%
   useEffect(() => {
@@ -136,20 +142,8 @@ function LessonNinePointSix() {
       setPhase("typing");
     } else {
       setRemovalFeedback("You must remove both words that describe numbers (one, two, three, etc) as well as the word 'ion'.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -158,41 +152,17 @@ function LessonNinePointSix() {
   const handleTextSubmit = async () => {
     if (textAnswer.trim().toLowerCase() === explicitName.toLowerCase()) {
       setTextFeedback("Correct!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       // Brief delay before moving to the next question
       setTimeout(() => {
         handleNextQuestion();
       }, 1000);
     } else {
       setTextFeedback("Incorrect. Please try again.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };

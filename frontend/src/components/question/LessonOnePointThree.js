@@ -16,6 +16,10 @@ function LessonOnePointThree() {
     };
 
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson1.3'; 
     
     const [goal, setGoal] = useState(); 
@@ -110,28 +114,28 @@ function LessonOnePointThree() {
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
+        if (!userId) { 
+            console.error('ID not found');
+            navigate('/login');
             return;
         }
-         const initializeData = async () => {
+        const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });
+            });        
         };
         
         initializeData();
         setLeftPosition(85); // Reset cursor position
         startingMeasurementRef.current.style.left = '85px';
         generateRandomPencilLength();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -176,7 +180,7 @@ function LessonOnePointThree() {
         if (userAnswer === correctAnswer) {
             setFeedbackMessage("Correct! Great job!");
             setFeedbackClass('correct');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             setTimeout(() => {
@@ -186,7 +190,7 @@ function LessonOnePointThree() {
             setFeedbackMessage("Incorrect. Check the measurement again!");
             //    setFeedbackMessage(`Incorrect. The correct measurement is ${correctAnswer.toFixed(1)} inches.`);
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setTimeout(() => {

@@ -8,6 +8,10 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 function LessonTenPointOne(){
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;      
     const lessonId = 'lesson10.1'; 
     
     const [goal, setGoal] = useState(); //
@@ -51,15 +55,15 @@ function LessonTenPointOne(){
     };
 
     useEffect(() => {
-        if (!studentId) { //
-          console.error('Student ID not found');
+        if (!userId) { 
+          console.error('ID not found');
           navigate('/login');
           return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
@@ -73,7 +77,7 @@ function LessonTenPointOne(){
         setSymbols([...allSymbols].sort(() => Math.random() - 0.5));
 
         // eslint-disable-line react-hooks/exhaustive-deps
-    }, [studentId, lessonId, navigate, allSymbols]);
+    }, [studentId, lessonId, navigate, allSymbols, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -151,8 +155,8 @@ function LessonTenPointOne(){
             setIsAnswerCorrect(true);
             setFeedback("✅ Correct! Well done!");
             setFeedbackClass("correct-feedback");
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-                            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
         } else {
             setIsAnswerCorrect(false);
@@ -164,8 +168,8 @@ function LessonTenPointOne(){
     
             setFeedback(errorMessage);
             setFeedbackClass("incorrect-feedback");
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
-                        setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
         }
     

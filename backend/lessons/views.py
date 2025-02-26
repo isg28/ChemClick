@@ -16,16 +16,13 @@ class LessonProgressView(APIView):
                 serializer = LessonProgressSerializer(progress)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
-        
+
         elif user_id:
             progress = LessonProgress.objects.filter(user_id=user_id)
             if progress:
                 serializer = LessonProgressSerializer(progress, many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response({"message": "No progress found for user"}, status=status.HTTP_404_NOT_FOUND)
-
-        else:
-            return Response({"error": "User ID is required"}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
         serializer = LessonProgressSerializer(data=request.data)
@@ -82,7 +79,6 @@ class LessonDetailView(APIView):
         serializer = LessonDetailsSerializer(data=request.data)
         if serializer.is_valid():
             try:
-                # Avoid duplicate creation
                 existing_lesson = LessonDetails.objects.get(lesson_id=serializer.validated_data["lesson_id"])
                 return Response({"error": "Lesson already exists"}, status=status.HTTP_400_BAD_REQUEST)
             except LessonDetails.DoesNotExist:

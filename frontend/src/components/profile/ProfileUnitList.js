@@ -8,7 +8,11 @@ function ProfileUnitList({ units, currentUnit }) {
   const navigate = useNavigate();
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
   const studentId = localStorage.getItem('studentId'); 
-  const [masteryLevels, setMasteryLevels] = useState({});
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId;  
+  const userId = isTeacher ? teacherId : studentId; 
+    const [masteryLevels, setMasteryLevels] = useState({});
 
 
   const toggleUnit = (index) => {
@@ -39,10 +43,10 @@ function ProfileUnitList({ units, currentUnit }) {
   };
 
   useEffect(() => {
-    if (studentId) {
-        fetchLessonMastery(studentId, setMasteryLevels);
+    if (userId) {
+        fetchLessonMastery(userId, isTeacher, setMasteryLevels);
     }
-  }, [studentId]); // Fetch only when studentId changes
+  }, [userId, isTeacher]); 
 
 
   return (

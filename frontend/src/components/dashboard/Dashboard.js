@@ -16,15 +16,37 @@ function Dashboard() {
   const [loading, setLoading] = useState(true); 
   const [announcements, setAnnouncements] = useState([]);
   const [progressData, setProgressData] = useState({});
-  const studentId = localStorage.getItem('studentId'); 
 
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = Boolean(teacherId);
+  const userId = isTeacher ? teacherId : studentId;
+  
+  if (isTeacher) {
+      console.log("✅ Logged in as Teacher");
+      console.log("Teacher ID:", teacherId);
+      localStorage.removeItem('studentId');  // Remove student ID to prevent conflicts
+  } else {
+      console.log("✅ Logged in as Student");
+      console.log("Student ID:", studentId);
+      localStorage.removeItem('teacherId');  // Remove teacher ID to prevent conflicts
+  }
+  
+  console.log("Student ID:", studentId);
+  console.log("Teacher ID:", teacherId);
+  console.log("User ID:", userId);
+  console.log("Is Teacher:", isTeacher);
+  
   const numberToWord = (num) => {
     const numWords = [
       "Zero", "One", "Two", "Three", "Four", 
       "Five", "Six", "Seven", "Eight", "Nine", 
-      "Ten", "Eleven", "Twelve"
+      "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", 
+      "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"
     ];
-    if (num < 13) {
+
+    if (num < 21) {
       return numWords[num];
     }
     return num.toString(); 
@@ -218,23 +240,31 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    if (!studentId) {
-      console.error("No student ID found");
+    if (!userId) {
+      console.error("No user ID found");
       return;
     }
 
-    fetch(`http://localhost:8000/lessons/progress/${studentId}`)
-      .then((res) => res.json())
+    const lessonProgressUrl = isTeacher 
+    ? `http://localhost:8000/teacherLessons/progress/${userId}` 
+    : `http://localhost:8000/lessons/progress/${userId}`; 
+
+
+    fetch(lessonProgressUrl)
+      .then((res) => {
+          if (!res.ok) throw new Error(`Failed to fetch progress for ${userId}`);
+          return res.json();
+      })
       .then((data) => {
-        console.log("Progress Data:", data);
-        const progressMap = data.reduce((acc, item) => {
-          acc[item.lesson_id] = item.progress; 
-          return acc;
-        }, {});
-        setProgressData(progressMap); 
+          console.log("Progress Data for", isTeacher ? "Teacher's Student View" : "Student:", data);
+          const progressMap = data.reduce((acc, item) => {
+              acc[item.lesson_id] = item.progress; 
+              return acc;
+          }, {});
+          setProgressData(progressMap); 
       })
       .catch((error) => console.error('Fetch Error:', error));
-  }, [studentId]);
+  }, [userId, isTeacher]);
   
 
   const handleClickToBegin = () => {

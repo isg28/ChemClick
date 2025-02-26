@@ -6,7 +6,11 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 
 function LessonFourPointThree() {
     const navigate = useNavigate();
-    const studentId = localStorage.getItem('studentId');
+    const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson4.3';
 
     const [goal, setGoal] = useState();
@@ -35,26 +39,26 @@ function LessonFourPointThree() {
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login');
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            }); 
+            });        
         };
 
         initializeData();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -323,7 +327,7 @@ function LessonFourPointThree() {
         if (correctMetallic === totalMetallic && correctGroup === totalGroup && Object.keys(groupMistakes).length === 0 && Object.keys(metallicMistakes).length === 0) {
             setIsCorrect(true);
             setFeedbackMessage('🎉 Correct! You can proceed to the next question.');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
         } else {

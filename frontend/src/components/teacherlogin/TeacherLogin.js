@@ -33,7 +33,10 @@ function TeacherLogin() {
           if (response.ok) {
               const data = await response.json();
               console.log(data.message);
-              localStorage.setItem('role','teacherId', teacherId);
+              localStorage.removeItem('studentId');
+              localStorage.setItem('teacherId', data.teacher_id);
+              localStorage.setItem('role', 'teacherId');
+
               navigate('/teacherdashboard'); 
           } else {
               const errorData = await response.json();

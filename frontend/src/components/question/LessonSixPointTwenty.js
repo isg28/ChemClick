@@ -14,7 +14,11 @@ import "../../styles/question/LessonSixPointOne.css";
 
 function LessonSixPointTwenty() {
     const navigate = useNavigate();
-    const studentId = localStorage.getItem("studentId");
+    const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = "lesson6.20";
 
     const [goal, setGoal] = useState(null);
@@ -74,38 +78,40 @@ function LessonSixPointTwenty() {
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error("Student ID not found");
-            navigate("/login");
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
-        async function initializeData() {
+        const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });  
-        }
+            });        
+        };
+    
         initializeData();
-    }, [studentId, lessonId, navigate]);
+        // eslint-disable-line react-hooks/exhaustive-deps
+    }, [userId, lessonId, navigate, isTeacher]);
 
     async function handleSubmit() {
         console.log(charge);
 
         if (charge === 2) {
             setIsCorrect(true);
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             setFeedbackMessage("Correct! Click done to go to the Dashboard.");
         } else {
             setIsCorrect(false);
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setFeedbackMessage("Incorrect. Please try again.");

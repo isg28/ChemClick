@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import TeacherLoginView
+from .views import TeacherLoginView, TeacherCheckView
 
 urlpatterns = [
     path('teacherlogin/', TeacherLoginView.as_view(), name='teacherlogin'),

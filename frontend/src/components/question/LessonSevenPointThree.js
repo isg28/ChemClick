@@ -7,7 +7,11 @@ import '../../styles/question/LessonSevenPointThree.css';
 
 function LessonSevenPointThree() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId;   
   const lessonId = 'lesson7.3';
 
   const [goal, setGoal] = useState(null);
@@ -33,26 +37,28 @@ function LessonSevenPointThree() {
 
   ]);
 
-  useEffect(() => {
-    if (!studentId) {
-      console.error('Student ID not found');
-      navigate('/login');
-      return;
-    }
+    useEffect(() => {
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
 
-    async function initializeData() {
-      await fetchLessonData(lessonId, setGoal);
-      await fetchLessonProgress(studentId, lessonId, {
-        setCorrectAnswers,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setGoal,
-        setTotalAttempts,
-      });
-    }
-    initializeData();
-  }, [studentId, lessonId, navigate]);
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
+    
+        initializeData();
+        // eslint-disable-line react-hooks/exhaustive-deps
+    }, [userId, lessonId, navigate, isTeacher]);
 
   async function handleSubmit() {
     if (selectedAnswer === '') {
@@ -62,38 +68,14 @@ function LessonSevenPointThree() {
 
     if (selectedAnswer === 'It cannot.') {
       setIsCorrect(true);
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setFeedbackMessage('Correct! You have to remember that hydrogen is an exception and its ion has a charge of negative one. Click done to go to the Dashboard.');
     } else {
       setIsCorrect(false);
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
       setFeedbackMessage('Incorrect. Please try again.');
     }

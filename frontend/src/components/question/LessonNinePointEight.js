@@ -13,7 +13,11 @@ import {
 
 function LessonNinePointEight() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId;   
   const lessonId = 'lesson9.8';
 
   // Progress & Mastery state
@@ -172,25 +176,27 @@ function LessonNinePointEight() {
 
   // Initialize lesson data and randomize questions
   useEffect(() => {
-    if (!studentId) {
-      navigate('/login');
-      return;
-    }
-    const initializeData = async () => {
-      await fetchLessonData(lessonId, setGoal);
-      await fetchLessonProgress(studentId, lessonId, {
-        setCorrectAnswers,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setGoal,
-        setTotalAttempts,
-      });
-    };
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
     initializeData();
     setRandomizedQuestions(shuffleQuestions());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentId, lessonId, navigate]);
+  }, [userId, lessonId, navigate, isTeacher]);
 
   // Show completion modal if progress reaches 100%
   useEffect(() => {
@@ -230,38 +236,14 @@ function LessonNinePointEight() {
     const currentQuestion = randomizedQuestions[currentQuestionIndex];
     if (canonicalizeFormula(explicitInput.trim()) === currentQuestion.explicit) {
       setExplicitFeedback("Correct explicit formula!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setPhase("removal");
     } else {
       setExplicitFeedback("Incorrect explicit formula. Make sure to use the smallest possible ratio of subscripts.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -284,20 +266,8 @@ function LessonNinePointEight() {
       setPhase("implicit");
     } else {
       setRemovalFeedback("Incorrect selection. Remove the quantity words and 'ion/ions'.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -306,40 +276,16 @@ function LessonNinePointEight() {
   const handleImplicitSubmit = async () => {
     if (implicitInput.trim().toLowerCase() === expectedImplicitName.toLowerCase()) {
       setImplicitFeedback("Correct implicit formula!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setTimeout(() => {
         handleNextQuestion();
       }, 1000);
     } else {
       setImplicitFeedback("Incorrect implicit formula. Please try again.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };

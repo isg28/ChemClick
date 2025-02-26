@@ -8,6 +8,10 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 const LessonThreePointOne = () => {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson3.1'; 
     const [protons, setProtons] = useState([]);
     const electronShells = [2, 8, 8, 2];
@@ -62,27 +66,26 @@ const LessonThreePointOne = () => {
     }, []); 
     
     useEffect(() => {
-            if (!studentId) {
-                console.error('Student ID not found');
-                navigate('/login'); 
-            return;
-            }
-            
-            const initializeData = async () => {
-                        await fetchLessonData(lessonId, setGoal);
-                        await fetchLessonProgress(studentId, lessonId, {
-                            setCorrectAnswers,
-                            setIncorrectAnswers,
-                            setProgress,
-                            setMasteryLevel,
-                            setGoal,
-                            setTotalAttempts,
-                        }); 
-                    };
+        if (!userId) { //
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
 
-            initializeData();
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
+        initializeData();
 
-        }, [selectedElement, studentId, lessonId, navigate]);
+        }, [selectedElement, userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
             if (progress === 100) {
@@ -166,9 +169,9 @@ const LessonThreePointOne = () => {
         setFeedback("Incorrect amount of protons. Edit the Nucleus and Try again!");
         setFeedbackClass('incorrect');
         setIsAnswerCorrect(false);
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-            setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
-          });
+        await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
           return;
         
     }
@@ -178,9 +181,9 @@ const LessonThreePointOne = () => {
         setFeedback("Incorrect total number of electrons. Look at the selected red shells and try again!");
         setFeedbackClass('incorrect');
         setIsAnswerCorrect(false);
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                  setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
-                });
+        await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+        });
         return;
     }
     setTimeout(() => {
@@ -193,9 +196,9 @@ const LessonThreePointOne = () => {
             setFeedback('Incorrect electron arrangement. look at the red shells (2:8:8:2)');
             setFeedbackClass('incorrect');
             setIsAnswerCorrect(false);
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                setIncorrectAnswers, setMasteryLevel, setTotalAttempts,
-              });
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            });
               return;
         }
     }
@@ -203,9 +206,9 @@ const LessonThreePointOne = () => {
     setFeedback('Correct!');
     setFeedbackClass('correct');
     setIsAnswerCorrect(true);
-    await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
-                    setCorrectAnswers, setMasteryLevel, setTotalAttempts,
-                }); 
+    await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+    }); 
     return;
 };
 

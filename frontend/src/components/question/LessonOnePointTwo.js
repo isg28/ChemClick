@@ -9,6 +9,11 @@ import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Cor
 function LessonOnePointTwo() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId; 
+    
     const lessonId = 'lesson1.2'; 
 
     const [goal, setGoal] = useState(); //
@@ -28,15 +33,15 @@ function LessonOnePointTwo() {
     };
 
     useEffect(() => {
-        if (!studentId) { //
-          console.error('Student ID not found');
+        if (!userId) { 
+          console.error('ID not found');
           navigate('/login');
           return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
@@ -48,7 +53,7 @@ function LessonOnePointTwo() {
     
         initializeData();
         // eslint-disable-line react-hooks/exhaustive-deps
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -180,7 +185,7 @@ function LessonOnePointTwo() {
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
             setLastDigitAttempts(0); 
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
             return;
@@ -207,14 +212,14 @@ function LessonOnePointTwo() {
                 }
             }
             setFeedbackClass('incorrect');
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             return;
         }
         setFeedback("The answer is incorrect. Please check your answer and try again.");
         setFeedbackClass('incorrect');
-        await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
+        await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
             setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
         setLastDigitAttempts(0); 

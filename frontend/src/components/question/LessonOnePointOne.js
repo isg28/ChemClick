@@ -13,6 +13,11 @@ function LessonOnePointOne(){
     const [feedbackClass, setFeedbackClass] = useState('');
 
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId; 
+    
     const lessonId = 'lesson1.1'; 
         
     const [goal, setGoal] = useState(); 
@@ -35,28 +40,28 @@ function LessonOnePointOne(){
     };
 
     useEffect(() => {
-        if (!studentId) {
-            console.error('Student ID not found');
-            navigate('/login'); // Redirect to login if studentId is missing
+        if (!userId) { 
+            console.error('ID not found');
+            navigate('/login');
             return;
-        }
+          }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            }); 
+            });        
         };
 
         initializeData();
 
         generateRandomNumberAndPosition();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -76,7 +81,7 @@ function LessonOnePointOne(){
         if (parseFloat(targetPosition) === parseFloat((sliderValue / 100).toFixed(1))) {
             setFeedbackMessage("Correct! Moving to the next question.");
             setFeedbackClass('correct');
-            await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
 
@@ -91,7 +96,7 @@ function LessonOnePointOne(){
             setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
             setFeedbackClass('incorrect');
 
-            await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
             setTimeout(() => {

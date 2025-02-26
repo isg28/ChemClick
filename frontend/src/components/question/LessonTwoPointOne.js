@@ -7,6 +7,10 @@ import { renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, Co
 function LessonTwoPointOne() {
     const navigate = useNavigate();
     const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+    
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
     const lessonId = 'lesson2.1'; 
     
     const [goal, setGoal] = useState(); 
@@ -38,15 +42,15 @@ function LessonTwoPointOne() {
     };
 
     useEffect(() => {
-        if (!studentId) { 
-            console.error('Student ID not found');
-            navigate('/login');
-            return;
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
         }
 
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
-            await fetchLessonProgress(studentId, lessonId, {
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
                 setCorrectAnswers,
                 setIncorrectAnswers,
                 setProgress,
@@ -58,7 +62,7 @@ function LessonTwoPointOne() {
                 
         initializeData();
         generateRandNum();
-    }, [studentId, lessonId, navigate]);
+    }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
         if (progress === 100) {
@@ -73,13 +77,13 @@ function LessonTwoPointOne() {
                 setFeedback('Correct!');
                 setFeedbackClass('correct');
                 setIsAnswerCorrect(true);
-                await CorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                     setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
                 }); 
             } else {
                 setFeedback(`Incorrect. The uncertain digit is the farthest right digit.`);
                 setFeedbackClass('incorrect');
-                await IncorrectResponses({studentId, lessonId, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                     setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
                 });
                 setTimeout(() => {

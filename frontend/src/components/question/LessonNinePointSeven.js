@@ -172,7 +172,11 @@ const DropZone = ({ droppedIons, onDrop, onRemoveIon }) => {
 
 function LessonNinePointSeven() {
   const navigate = useNavigate();
-  const studentId = localStorage.getItem('studentId');
+  const studentId = localStorage.getItem('studentId'); 
+  const teacherId = localStorage.getItem('teacherId'); 
+  
+  const isTeacher = !!teacherId; 
+  const userId = isTeacher ? teacherId : studentId; 
   const lessonId = 'lesson9.7';
 
   const [goal, setGoal] = useState();
@@ -210,23 +214,25 @@ function LessonNinePointSeven() {
   };
 
   useEffect(() => {
-    if (!studentId) {
-      navigate('/login');
-      return;
-    }
-    const initializeData = async () => {
-      await fetchLessonData(lessonId, setGoal);
-      await fetchLessonProgress(studentId, lessonId, {
-        setCorrectAnswers,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setGoal,
-        setTotalAttempts,
-      });
-    };
+        if (!userId) { 
+          console.error('ID not found');
+          navigate('/login');
+          return;
+        }
+
+        const initializeData = async () => {
+            await fetchLessonData(lessonId, setGoal);
+            await fetchLessonProgress(userId, lessonId, isTeacher, {
+                setCorrectAnswers,
+                setIncorrectAnswers,
+                setProgress,
+                setMasteryLevel,
+                setGoal,
+                setTotalAttempts,
+            });        
+        };
     initializeData();
-  }, [studentId, lessonId, navigate]);
+  }, [userId, lessonId, navigate, isTeacher]);
 
   useEffect(() => {
     if (progress === 100) {
@@ -250,20 +256,8 @@ function LessonNinePointSeven() {
       setCurrentStep(1);
     } else {
       setCompoundFeedback("Invalid compound. Use one type of cation and one type of anion in the correct ratio for neutrality.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -279,38 +273,14 @@ function LessonNinePointSeven() {
       parseInt(anionCountInput.trim(), 10) === compoundResult.anionCount
     ) {
       setTextFeedback("Correct explicit formula!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setCurrentStep(2);
     } else {
       setTextFeedback("Incorrect explicit formula. Check each component carefully.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -319,38 +289,14 @@ function LessonNinePointSeven() {
     if (!compoundResult) return;
     if (implicitFormulaInput.trim().toLowerCase() === compoundResult.implicitFormula.toLowerCase()) {
       setTextFeedback("Correct implicit formula!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setCurrentStep(3);
     } else {
       setTextFeedback("Incorrect implicit formula. Remember: omit charges and any '1's.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -359,38 +305,14 @@ function LessonNinePointSeven() {
     if (!compoundResult) return;
     if (explicitNameInput.trim().toLowerCase() === compoundResult.explicitName.toLowerCase()) {
       setTextFeedback("Correct explicit name!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setCurrentStep(4);
     } else {
       setTextFeedback("Incorrect explicit name. Check the wording carefully.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };
@@ -399,38 +321,14 @@ function LessonNinePointSeven() {
     if (!compoundResult) return;
     if (implicitNameInput.trim().toLowerCase() === compoundResult.implicitName.toLowerCase()) {
       setTextFeedback("Correct implicit name!");
-      await CorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setCorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
-      });
+      await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+                setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+      }); 
       setCurrentStep(5);
     } else {
       setTextFeedback("Incorrect implicit name. It should be the conventional compound name.");
-      await IncorrectResponses({
-        studentId,
-        lessonId,
-        correctAnswers,
-        incorrectAnswers,
-        totalAttempts,
-        progress,
-        masteryLevel,
-        goal,
-        starsEarned,
-        setIncorrectAnswers,
-        setProgress,
-        setMasteryLevel,
-        setTotalAttempts,
+      await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
       });
     }
   };

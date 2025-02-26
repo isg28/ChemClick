@@ -59,7 +59,7 @@ export const fetchLessonData = async (lessonId, setGoal) => {
     } 
 };
 
-export const fetchLessonProgress = async (studentId, lessonId, setProgressState) => {
+export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgressState) => {
     const { setCorrectAnswers, setIncorrectAnswers, setTotalAttempts, setProgress, setMasteryLevel, setGoal } = setProgressState;
 
     try {
@@ -72,8 +72,11 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
         const lessonData = await lessonDataResponse.json();
         const teacherGoalLevel = lessonData.goal_level;
 
-        // Fetch the student's progress
-        const progressResponse = await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}`);
+        const progressEndpoint = isTeacher
+            ? `http://localhost:8000/teacherLessons/progress/${userId}/${lessonId}/`
+            : `http://localhost:8000/lessons/progress/${userId}/${lessonId}/`;
+
+        const progressResponse = await fetch(progressEndpoint);
         if (progressResponse.ok) {
             const progressData = await progressResponse.json();
             const currentGoalLevel = progressData.goal_level;
@@ -90,7 +93,7 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
                         mastery_level: 0, 
                     };
 
-                    await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+                    await fetch(progressEndpoint, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(updatedProgressPayload),
@@ -111,7 +114,7 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
                         mastery_level: 0, // Reset mastery level when goal increases
                     };
 
-                    await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+                    await fetch(progressEndpoint, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(updatedProgressPayload),
@@ -129,7 +132,7 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
                         goal_level: teacherGoalLevel,
                     };
 
-                    await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+                    await fetch(progressEndpoint, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(resetProgressPayload),
@@ -152,30 +155,39 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
         } else if (progressResponse.status === 404) {
             console.warn('Progress not found. Creating a new entry.');
 
-            // Create new progress entry based on the teacher's goal level
             const newProgressPayload = {
-                user_id: studentId,
+                [isTeacher ? 'teacher_id' : 'user_id']: userId,
                 lesson_id: lessonId,
                 correct_answers: 0,
                 incorrect_answers: 0,
-                totalAttempts: 0,
+                total_attempts: 0,
                 mastery_level: 0,
                 progress: 0,
                 goal_level: teacherGoalLevel,
             };
 
-            await fetch('http://localhost:8000/lessons/progress', {
+            const postUrl = isTeacher
+                ? `http://localhost:8000/teacherLessons/progress/`
+                : `http://localhost:8000/lessons/progress/`;
+
+            const postResponse = await fetch(postUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newProgressPayload),
             });
 
-            setCorrectAnswers(0);
-            setIncorrectAnswers(0);
-            setProgress(0);
-            setMasteryLevel(0);
-            setGoal(teacherGoalLevel);
-        } else {
+            if (postResponse.ok) {
+                console.log('Progress created successfully');
+                setCorrectAnswers(0);
+                setIncorrectAnswers(0);
+                setProgress(0);
+                setMasteryLevel(0);
+                setGoal(teacherGoalLevel);
+            } else {
+                const errorData = await postResponse.json();
+                console.error('Failed to create progress:', errorData);
+            }
+    }else {
             console.error('Failed to fetch progress:', progressResponse.status);
         }
     } catch (error) {
@@ -183,12 +195,17 @@ export const fetchLessonProgress = async (studentId, lessonId, setProgressState)
     }
 };
 
-export const fetchLessonMastery = async (studentId, setUserMastery) => {
+export const fetchLessonMastery = async (userId, isTeacher, setUserMastery) => {
     try {
-        const response = await fetch(`http://localhost:8000/lessons/progress/${studentId}`);
+        const url = isTeacher
+            ? `http://localhost:8000/teacherLessons/progress/${userId}/`
+            : `http://localhost:8000/lessons/progress/${userId}/`;
+
+        const response = await fetch(url);
         if (!response.ok) {
-            throw new Error("Failed to fetch mastery levels");
+            throw new Error(`Failed to fetch mastery levels: ${response.status}`);
         }
+
         const data = await response.json();
 
         // Convert response data into an object with lesson_id as the key
@@ -204,12 +221,9 @@ export const fetchLessonMastery = async (studentId, setUserMastery) => {
     }
 };
 
-
-
-
-export const createLessonProgress = async ( studentId, lessonId, goal ) => {
+export const createLessonProgress = async (userId, isTeacher, lessonId, goal) => {
     const payload = {
-        user_id: studentId,
+        user_id: userId,
         lesson_id: lessonId,
         correct_answers: 0,
         incorrect_answers: 0,
@@ -217,8 +231,13 @@ export const createLessonProgress = async ( studentId, lessonId, goal ) => {
         progress: 0.0,
         goal_level: goal, 
     };
+
+    const url = isTeacher
+        ? `http://localhost:8000/teacherLessons/progress/`
+        : `http://localhost:8000/lessons/progress/`;
+
     try {
-        const response = await fetch('http://localhost:8000/lessons/progress', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -235,7 +254,8 @@ export const createLessonProgress = async ( studentId, lessonId, goal ) => {
     }
 };
 
-export const decreaseProgressAndGoal = async (studentId, lessonId, correctAnswers, progress, masteryLevel, goal, setProgressState) => {
+export const decreaseProgressAndGoal = async (userId, isTeacher, lessonId, correctAnswers, progress, masteryLevel, goal, setProgressState) => {
+
     const { setCorrectAnswers, setProgress } = setProgressState;
     const newCorrectAnswers = Math.max(correctAnswers - 1, 0); 
     const newProgress = Math.max(progress - (100 / goal), 0); 
@@ -245,8 +265,13 @@ export const decreaseProgressAndGoal = async (studentId, lessonId, correctAnswer
         progress: newProgress,
         mastery_level: masteryLevel, 
     };
+
+    const progressEndpoint = isTeacher
+        ? `http://localhost:8000/teacherLessons/progress/${userId}/${lessonId}/`
+        : `http://localhost:8000/lessons/progress/${userId}/${lessonId}/`;
+
     try {
-        const response = await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+        const response = await fetch(progressEndpoint, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -266,7 +291,8 @@ export const decreaseProgressAndGoal = async (studentId, lessonId, correctAnswer
 };
 
 export const CorrectResponses = async ({
-    studentId,
+    userId,
+    isTeacher,
     lessonId,
     correctAnswers,
     incorrectAnswers,
@@ -278,18 +304,20 @@ export const CorrectResponses = async ({
     setProgress,
     setMasteryLevel,
 }) => {
-    console.log("Before update: ", { correctAnswers, totalAttempts, progress });
+    if (progress === 100) {
+        return;
+    }
+
     const newCorrectAnswers = correctAnswers + 1;
     const newTotalAttempts = (totalAttempts || 0) + 1;
     const newProgress = Math.min((newCorrectAnswers / goal) * 100, 100);
     const newMasteryLevel = newProgress === 100 ? Math.round((newCorrectAnswers / newTotalAttempts) * 100) : 0;
-    if (newCorrectAnswers >= goal) {
-        console.log("Progress = 100%");
-    }
-    if(progress === 100){
-        return;
-    }
-    
+
+
+    const progressEndpoint = isTeacher
+        ? `http://localhost:8000/teacherLessons/progress/${userId}/${lessonId}/`
+        : `http://localhost:8000/lessons/progress/${userId}/${lessonId}/`;
+
 
     const payload = {
         correct_answers: newCorrectAnswers,
@@ -299,7 +327,7 @@ export const CorrectResponses = async ({
     };
 
     try {
-        const response = await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+        const response = await fetch(progressEndpoint, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -311,8 +339,6 @@ export const CorrectResponses = async ({
             setTotalAttempts(updatedProgress.total_attempts);
             setProgress(updatedProgress.progress);
             setMasteryLevel(updatedProgress.mastery_level);
-            console.log("After update: ", { newCorrectAnswers, newTotalAttempts, newProgress });
-
         }
     } catch (error) {
         console.error('Error updating progress:', error);
@@ -320,27 +346,30 @@ export const CorrectResponses = async ({
 };
 
 export const IncorrectResponses = async ({
-    studentId,
+    userId,
+    isTeacher,
     lessonId,
     correctAnswers,
     incorrectAnswers,
     totalAttempts, 
     goal,
+    progress,
     setIncorrectAnswers,
     setTotalAttempts,
     setProgress,
     setMasteryLevel,
 }) => {
-
-    const newIncorrectAnswers = incorrectAnswers + 1;
-    const newTotalAttempts = totalAttempts + 1; 
-
-    const newProgress = Math.min((correctAnswers / goal) * 100, 100);
-    const newMasteryLevel = newProgress === 100 ? Math.round((correctAnswers / newTotalAttempts) * 100) : 0;
-    if (newProgress >= 100) {
-        console.log("Progress is already 100%. No further updates.");
+    if (progress === 100) {
         return;
     }
+    const newIncorrectAnswers = incorrectAnswers + 1;
+    const newTotalAttempts = totalAttempts + 1; 
+    const newProgress = Math.min((correctAnswers / goal) * 100, 100);
+    const newMasteryLevel = newProgress === 100 ? Math.round((correctAnswers / newTotalAttempts) * 100) : 0;
+
+    const progressEndpoint = isTeacher
+        ? `http://localhost:8000/teacherLessons/progress/${userId}/${lessonId}/`
+        : `http://localhost:8000/lessons/progress/${userId}/${lessonId}/`;
 
     const payload = {
         incorrect_answers: newIncorrectAnswers,
@@ -348,10 +377,9 @@ export const IncorrectResponses = async ({
         progress: newProgress,
         mastery_level: newMasteryLevel,
     };
-    console.log("IncorrectResponses - PATCH payload:", JSON.stringify(payload));
 
     try {
-        const response = await fetch(`http://localhost:8000/lessons/progress/${studentId}/${lessonId}/`, {
+        const response = await fetch(progressEndpoint, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),

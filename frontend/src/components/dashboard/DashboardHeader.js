@@ -28,7 +28,7 @@ const DashboardHeader = () => {
   const handleProfileClick = () =>{
     navigate('/profile');
   }
-  const handleTeacherDashboardClick = () =>{
+  const handleTeacherDashboardClick = () => {
     let user = localStorage.getItem('role');
     if(user !== 'teacherId'){
       alert('Admin access only');
@@ -36,7 +36,8 @@ const DashboardHeader = () => {
     else {
     navigate('/teacherdashboard');
     }
-  }
+  };
+  
   const handleLogoutClick = () =>{
     navigate('/logout');
   }
