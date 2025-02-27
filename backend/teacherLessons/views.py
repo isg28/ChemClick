@@ -20,7 +20,6 @@ class TeacherLessonProgressView(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
             return Response({"message": "No progress found for teacher"}, status=status.HTTP_404_NOT_FOUND)
 
-        return Response({"error": "Teacher ID is required"}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
         serializer = TeacherLessonProgressSerializer(data=request.data)
@@ -29,12 +28,31 @@ class TeacherLessonProgressView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def patch(self, request, teacher_id, lesson_id):
-        progress = TeacherLessonProgress.objects.filter(teacher_id=teacher_id, lesson_id=lesson_id).first()
-        if progress:
+    def patch(self, request, teacher_id, lesson_id):  
+        try:
+            progress = TeacherLessonProgress.objects(teacher_id=teacher_id, lesson_id=lesson_id).first()
+            if not progress:
+                return Response({"error": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
+
             serializer = TeacherLessonProgressSerializer(progress, data=request.data, partial=True)
+
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
+            
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def delete(self, request, teacher_id, lesson_id):
+        try:
+            progress = TeacherLessonProgress.objects(teacher_id=teacher_id, lesson_id=lesson_id).first()
+            if not progress:
+                return Response({"error": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
+
+            progress.delete()  
+            return Response({"message": "Progress deleted successfully"}, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

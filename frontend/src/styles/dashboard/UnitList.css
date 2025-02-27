@@ -255,4 +255,30 @@ span.due-date, span.due-date:hover {
     background-color: #4CAF50; 
     transition: width 0.4s ease-in-out;
 }
+.submitted-late-lesson {
+    position: relative; 
+    cursor: pointer;
+}
+
+.submitted-late-lesson .tooltip {
+    display: none; 
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    white-space: nowrap;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
+}
+
+.submitted-late-lesson:hover .tooltip {
+    display: block;
+}
 

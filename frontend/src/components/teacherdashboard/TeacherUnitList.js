@@ -10,6 +10,7 @@ function TeacherUnitList({ units, currentUnit }) {
   const [editedData, setEditedData] = useState({}); 
   const [isCreating, setIsCreating] = useState(false); 
   const [modalScrollTop, setModalScrollTop] = useState(0);
+  const [shake, setShake] = useState(false);
 
 
 
@@ -78,6 +79,11 @@ function TeacherUnitList({ units, currentUnit }) {
   };
   
   const handleSaveClick = () => {
+    if (["completed", "in-progress", "not-started"].includes(editedData.status) && !editedData.dueDate) {
+      setShake(true); 
+      setTimeout(() => setShake(false), 600); 
+      return;
+    }
     const url = isCreating
       ? `http://localhost:8000/lessons/`
       : `http://localhost:8000/lessons/${editedData.lessonId}/`;
@@ -215,9 +221,9 @@ function TeacherUnitList({ units, currentUnit }) {
                         </span>
                       </div>
                       {openLessons[unitIndex][lessonIndex] && (
-                        <div>
-                          <TeacherProgressBox/>
-                        </div>
+                          <div>
+                              <TeacherProgressBox lessonId={lesson.lesson_id} />
+                          </div>
                       )}
                     </li>
                     ))}
@@ -254,13 +260,14 @@ function TeacherUnitList({ units, currentUnit }) {
             </label>
             <label>
               Due Date:
-              <input
-                type="date"
-                value={editedData.status === 'locked' ? '' : editedData.dueDate || ''}
-                onChange={(e) => handleInputChange('dueDate', e.target.value)}
-                placeholder={editedData.status === 'locked' ? 'mm/dd/yyyy' : ''}
-                disabled={editedData.status === 'locked'}
-              />
+                <input
+                  type="date"
+                  className={shake ? "shake" : ""} 
+                  value={editedData.status === "locked" ? "" : editedData.dueDate || ""}
+                  onChange={(e) => handleInputChange("dueDate", e.target.value)}
+                  placeholder={editedData.status === "locked" ? "mm/dd/yyyy" : ""}
+                  disabled={editedData.status === "locked"}
+                />
             </label>
             <label>
                 Goal Level:

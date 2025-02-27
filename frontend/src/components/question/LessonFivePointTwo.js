@@ -54,7 +54,7 @@ function LessonFivePointTwo() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });
         };
     
         initializeData();

@@ -251,3 +251,14 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.delete-icon {
+  cursor: pointer;
+  margin-left: 10px;
+  color: red;
+  font-size: 16px;
+}
+
+.delete-icon:hover {
+  color: darkred;
+}

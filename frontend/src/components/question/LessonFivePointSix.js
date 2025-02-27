@@ -48,13 +48,13 @@ function LessonFivePointSix() {
         const initializeData = async () => {
             await fetchLessonData(lessonId, setGoal);
             await fetchLessonProgress(userId, lessonId, isTeacher, {
-                setCorrectAnswers,
-                setIncorrectAnswers,
-                setProgress,
-                setMasteryLevel,
-                setGoal,
-                setTotalAttempts,
-            });        
+              setCorrectAnswers,
+              setIncorrectAnswers,
+              setProgress,
+              setMasteryLevel,
+              setGoal,
+              setTotalAttempts,
+          });      
         };
     
         initializeData();

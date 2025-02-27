@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'teacher',
+    'lessons', 
+    'teacherLessons',
 ]
 
 MIDDLEWARE = [

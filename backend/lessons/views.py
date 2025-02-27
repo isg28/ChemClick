@@ -6,7 +6,7 @@ from .models import LessonProgress
 from .serializers import LessonProgressSerializer
 from .models import LessonDetails
 from .serializers import LessonDetailsSerializer
-
+from users.models import User
 
 class LessonProgressView(APIView):
     def get(self, request, user_id=None, lesson_id=None):
@@ -36,8 +36,9 @@ class LessonProgressView(APIView):
         if progress:
             serializer = LessonProgressSerializer(progress, data=request.data, partial=True)
             if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
+                updated_progress = serializer.save()
+                updated_progress.update_status()
+                return Response(LessonProgressSerializer(updated_progress).data, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -93,3 +94,23 @@ class LessonDetailView(APIView):
             return Response({'message': 'Lesson deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
         except LessonDetails.DoesNotExist:
             return Response({'error': 'Lesson not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+class StudentProgressSummaryView(APIView):
+    def get(self, request, lesson_id):
+        try:
+            total_students = User.objects.count()  
+            progress_students = set(progress.user_id for progress in LessonProgress.objects.filter(lesson_id=lesson_id))
+            not_started_count = total_students - len(progress_students)
+            
+            not_started_but_clicked = LessonProgress.objects.filter(lesson_id=lesson_id, status="not-started").count()
+            in_progress = LessonProgress.objects.filter(lesson_id=lesson_id, status="in-progress").count()
+            completed = LessonProgress.objects.filter(lesson_id=lesson_id, status="completed").count()
+
+            return Response({
+                "not_started": not_started_count + not_started_but_clicked, 
+                "in_progress": in_progress,
+                "completed": completed
+            }, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

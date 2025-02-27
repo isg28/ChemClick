@@ -22,6 +22,7 @@ function LessonOnePointFive() {
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
     const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
+    
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -180,7 +181,7 @@ function LessonOnePointFive() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });               
         };
         initializeData();
         const shuffleQuestions = () => {

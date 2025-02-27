@@ -1,57 +1,171 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../styles/dashboard/UnitList.css';
+import { fetchUpdatedLessonProgress } from '../../components/question/LessonUtils';
 
-function UnitList({ units, currentUnit, onLessonClick, progressData}) {
+function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isTeacher }) {
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
+  const [updatedLessonProgress, setUpdatedLessonProgress] = useState({});
 
-  const toggleUnit = (index) => {
+  const toggleUnit = async (index, unitLessons = []) => {
+    if (!userId) {
+        console.error("Missing userId!");
+        return;
+    }
+
     const newOpenUnits = [...openUnits];
     newOpenUnits[index] = !newOpenUnits[index];
     setOpenUnits(newOpenUnits);
+
+    if (newOpenUnits[index]) {
+        const updates = {};
+
+        for (const lesson of unitLessons) {
+            let studentProgress = {};
+            let teacherProgress = {};
+            let lessonDetails = {};
+
+            // Fetch student progress
+            if (!isTeacher) {
+                try {
+                    studentProgress = await fetchUpdatedLessonProgress(userId, lesson.lesson_id, false) || {};
+                } catch (error) {
+                    console.error(`Failed to fetch student progress for lesson ${lesson.lesson_id}`, error);
+                }
+            }
+
+            // Fetch teacher progress
+            if (isTeacher) {
+                try {
+                    teacherProgress = await fetchUpdatedLessonProgress(userId, lesson.lesson_id, true) || {};
+                } catch (error) {
+                    console.error(`Failed to fetch teacher progress for lesson ${lesson.lesson_id}`, error);
+                }
+            }
+
+            // Fetch lesson details
+            try {
+                const lessonDetailsResponse = await fetch(`http://localhost:8000/lessons/${lesson.lesson_id}`);
+                lessonDetails = lessonDetailsResponse.ok ? await lessonDetailsResponse.json() : {};
+            } catch (error) {
+                console.error(`Failed to fetch lesson details for ${lesson.lesson_id}`, error);
+            }
+
+            const wasLate = studentProgress?.is_late || teacherProgress?.is_late || false;
+
+            const studentCompleted = studentProgress?.completion_timestamp;
+            const teacherCompleted = teacherProgress?.completion_timestamp;
+            const completedTimestamp = studentCompleted || teacherCompleted || null;
+
+            // Determine lesson status
+            let status = completedTimestamp
+                ? "completed"
+                : lessonDetails?.status || "not-started";
+
+            // If the lesson was late and not completed, mark as "Late"
+            if (wasLate && !completedTimestamp) {
+                status = "late";
+            }
+
+            // If lesson was submitted after being late, show "Submitted Late"
+            if (wasLate && completedTimestamp) {
+                status = "submitted-late";
+            }
+
+            updates[lesson.lesson_id] = {
+                studentData: studentProgress,
+                teacherProgress: teacherProgress,
+                lessonDetails: lessonDetails || { status: "locked" },
+                status: status,
+                dueDate: lessonDetails?.due_date || "No Due Date",
+            };
+        }
+        setUpdatedLessonProgress((prev) => ({ ...prev, ...updates }));
+    }
   };
 
-  const getStatusClass = (status) => {
+  const getStatusClass = (status, studentData, teacherProgress, lessonDetails) => {
+    const studentCompleted = studentData?.completion_timestamp || teacherProgress?.completion_timestamp;
+    const lessonInProgress = lessonDetails?.status === "in-progress"; 
+    const wasLate = studentData?.is_late || teacherProgress?.is_late || false;
+
+    if (studentCompleted && wasLate) {
+        return "submitted-late-lesson";
+    }
+
+    if (studentCompleted && lessonInProgress) {
+        return "completed-lesson in-progress-lesson"; 
+    }
+
     switch (status) {
-      case 'completed':
-        return 'completed-lesson';
-      case 'in-progress':
-        return 'in-progress-lesson';
-      case 'locked':
-        return 'locked-lesson';
-      default:
-        return '';
+        case "completed":
+            return "completed-lesson";
+        case "submitted-late":
+            return "submitted-late-lesson";  
+        case "in-progress":
+            return "in-progress-lesson";
+        case "locked":
+            return "locked-lesson";
+        case "late":
+            return "late-lesson"; 
+        default:
+            return "";
     }
   };
 
   const getStatusText = (lesson) => {
-    if (lesson.status === 'completed') {
-      const submittedText = lesson.submittedLate ? `Submitted (late)` : `Submitted`;
-      return (
-        <span className="status-text">
-          {submittedText}
-        </span>
-      );
+    const updatedLesson = updatedLessonProgress[lesson.lesson_id] || lesson;
+    const wasLate = updatedLesson.studentData?.is_late || updatedLesson.teacherProgress?.is_late || false;
+    const submitted = updatedLesson.studentData?.completion_timestamp || updatedLesson.teacherProgress?.completion_timestamp;
+    const dueDate = formatDate(updatedLesson.dueDate);
+    
+    const submittedDate = submitted
+        ? new Date(submitted).toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        })
+        : null;
+
+    if (wasLate && submitted) {
+        return ;
     }
-    if (lesson.status === 'in-progress') {
-      return (
-        <span className="status-text">
-          In Progress, Due: {lesson.dateDue}
-        </span>
-      );
+
+    if (submitted) {
+        return (
+          <span className="status-text">
+            Submitted
+          </span> // NOT LATE
+        );
     }
-    if (lesson.status === 'locked') {
-      return (
-        <span className="status-text">
-          Due: [LOCKED]
-        </span>
-      );
+
+    switch (updatedLesson.status) {
+        case 'in-progress':
+            return <span className="status-text">In Progress, Due: {dueDate}</span>;
+
+        case 'not-started':
+            return <span className="status-text">Not Started</span>;
+
+        case 'locked':
+            return <span className="status-text">Due: [LOCKED]</span>;
+
+        default:
+            return <span className="status-text">Past Due: {dueDate || "Unknown"}</span>;
     }
-    return (
-      <span className="status-text">
-        Past Due: {lesson.dateDue}
-      </span>
-    );
   };
+
+  const formatDate = (dateString) => {
+    if (!dateString || dateString === "No Due Date") return "No Due Date";
+    
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "Invalid Date"; 
+  
+    const options = { month: "long", day: "2-digit", year: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  };  
 
   return (
     <div className="unitlist-container">
@@ -62,7 +176,7 @@ function UnitList({ units, currentUnit, onLessonClick, progressData}) {
       <div className="unitlist-content">
         {units.map((unit, index) => (
           <div key={index} className={`unit-item ${currentUnit === unit.number ? 'current-unit' : ''}`}>
-            <div className="unit-title" onClick={() => toggleUnit(index)}>
+            <div className="unit-title" onClick={() => toggleUnit(index, unit.lessons)}>
               <span className="unit-number">{unit.number}</span>
               <span className="unit-text">{unit.title}</span>
               <span className="triangle">{openUnits[index] ? '▲' : '▶'}</span>
@@ -71,12 +185,20 @@ function UnitList({ units, currentUnit, onLessonClick, progressData}) {
               <div className="unit-details">
                 <ul>
                   {unit.lessons.map((lesson, lessonIndex) => {
+                    const lessonData = updatedLessonProgress[lesson.lesson_id] || lesson;
                     const rawProgress = progressData[lesson.lesson_id] ?? 0;
                     const formattedProgress =
                       rawProgress % 1 === 0 ? rawProgress.toFixed(0) : rawProgress.toFixed(1);
-
-                    return (
-                      <li key={lessonIndex} className={`${getStatusClass(lesson.status)} lesson-item`}>
+                      return (
+                        <li 
+                          key={lessonIndex} 
+                          className={`lesson-item ${getStatusClass(
+                              lessonData.status, 
+                              lessonData.studentData, 
+                              lessonData.teacherProgress,  
+                              lessonData.lessonDetails     
+                          )}`}
+                        >
                         <div className="lesson-info">
                           <span
                             onClick={() => lesson.route && onLessonClick(lesson.route)}
@@ -84,25 +206,56 @@ function UnitList({ units, currentUnit, onLessonClick, progressData}) {
                           >
                             {lessonIndex + 1}. {lesson.name}
                           </span>
-                          
                         </div>
-                          {/* Due Date */}
-                          <div className="due-date-container">
+                        <div className="due-date-container">
                           <span className="due-date">
                             {getStatusText(lesson)}
-                            {lesson.status === 'completed' && (
+                            {lessonData.status === 'completed'  && (
                               <span className="tooltip">
-                                Due: {lesson.dateDue} <br />
-                                Submitted on: {lesson.dateSubmitted}
+                                Due: {formatDate(lessonData.dueDate)} <br />
+                                Submitted on: {lessonData.teacherProgress?.completion_timestamp || lessonData.studentData?.completion_timestamp
+                                    ? new Date(
+                                        lessonData.teacherProgress?.completion_timestamp || lessonData.studentData?.completion_timestamp
+                                      ).toLocaleString("en-US", {
+                                        timeZone: "America/Los_Angeles",
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit",
+                                        hour: "2-digit",
+                                        minute: "2-digit",
+                                        hour12: true,
+                                      })
+                                    : " "}
+                              </span>
+                              )}
+                              {lessonData.status === 'submitted-late'  && (
+                              <span className="status-text submitted-late-lesson">
+                                Submitted Late
+                                <span className="tooltip">
+                                  Past Due: {formatDate(lessonData.dueDate)} <br />
+                                  Submitted on: {lessonData.teacherProgress?.completion_timestamp || lessonData.studentData?.completion_timestamp
+                                      ? new Date(
+                                          lessonData.teacherProgress?.completion_timestamp || lessonData.studentData?.completion_timestamp
+                                        ).toLocaleString("en-US", {
+                                          timeZone: "America/Los_Angeles",
+                                          year: "numeric",
+                                          month: "2-digit",
+                                          day: "2-digit",
+                                          hour: "2-digit",
+                                          minute: "2-digit",
+                                          hour12: true,
+                                        })
+                                      : " "}
+                                </span>
                               </span>
                             )}
                           </span>
-                            {lesson.status !== 'locked' && (
-                              <div className="progress-bar-container">
-                                <div className="progress-bar" style={{ width: `${rawProgress}%` }}></div>
-                              </div>
-                            )}
-                          </div>
+                          {lessonData.status !== 'locked' && (
+                            <div className="progress-bar-container">
+                              <div className="progress-bar" style={{ width: `${rawProgress}%` }}></div>
+                            </div>
+                          )}
+                        </div>
                       </li>
                     );
                   })}

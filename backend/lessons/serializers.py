@@ -5,7 +5,6 @@ from .models import LessonDetails
 from datetime import datetime
 
 
-
 class LessonProgressSerializer(serializers.Serializer):
     user_id = serializers.CharField(max_length=40)
     lesson_id = serializers.CharField(max_length=40)
@@ -16,30 +15,31 @@ class LessonProgressSerializer(serializers.Serializer):
     progress = serializers.FloatField(default=0.0)
     goal_level = serializers.IntegerField(default=0) 
     email_sent = serializers.BooleanField(default=False)
+    completion_timestamp = serializers.DateTimeField(
+        format="%Y-%m-%dT%H:%M:%S.%fZ", required=False, allow_null=True
+    )
+    status = serializers.CharField(read_only=True)
+    is_late = serializers.BooleanField(read_only=True)
     
     def create(self, validated_data):
-        lesson_progress = LessonProgress(
-            user_id=validated_data['user_id'],
-            lesson_id=validated_data['lesson_id'],
-            correct_answers=validated_data.get('correct_answers', 0),
-            incorrect_answers=validated_data.get('incorrect_answers', 0),
-            total_attempts=validated_data.get('total_attempts', 0),
-            mastery_level=validated_data.get('mastery_level', 0.0),
-            progress=validated_data.get('progress', 0.0),
-            goal_level=validated_data.get('goal_level', 0),  
-            email_sent=validated_data.get('email_sent', False),
-        )
-        lesson_progress.save()
+        lesson_progress = LessonProgress(**validated_data)
+        lesson_progress.update_status()  
         return lesson_progress
 
     def update(self, instance, validated_data):
         instance.correct_answers = validated_data.get('correct_answers', instance.correct_answers)
-        instance.incorrect_answers = validated_data.get('incorrect_answers', instance.incorrect_answers) 
-        instance.total_attempts = validated_data.get('total_attempts', instance.total_attempts)  
+        instance.incorrect_answers = validated_data.get('incorrect_answers', instance.incorrect_answers)
+        instance.total_attempts = validated_data.get('total_attempts', instance.total_attempts)
         instance.mastery_level = validated_data.get('mastery_level', instance.mastery_level)
         instance.progress = validated_data.get('progress', instance.progress)
-        instance.goal_level = validated_data.get('goal_level', instance.goal_level) 
+        instance.goal_level = validated_data.get('goal_level', instance.goal_level)
+        
+        instance.progress = validated_data.get('progress', instance.progress)
+        if instance.progress == 100 and not instance.completion_timestamp:
+            instance.completion_timestamp = datetime.utcnow()  
+        instance.update_status()
         instance.save()
+        
         return instance
     
     def validate_total_attempts(self, value):

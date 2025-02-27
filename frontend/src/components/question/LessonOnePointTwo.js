@@ -48,7 +48,7 @@ function LessonOnePointTwo() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });
         };
     
         initializeData();

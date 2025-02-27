@@ -24,11 +24,11 @@ function Dashboard() {
   const userId = isTeacher ? teacherId : studentId;
   
   if (isTeacher) {
-      console.log("✅ Logged in as Teacher");
+      console.log("Logged in as Teacher");
       console.log("Teacher ID:", teacherId);
       localStorage.removeItem('studentId');  // Remove student ID to prevent conflicts
   } else {
-      console.log("✅ Logged in as Student");
+      console.log("Logged in as Student");
       console.log("Student ID:", studentId);
       localStorage.removeItem('teacherId');  // Remove teacher ID to prevent conflicts
   }
@@ -301,6 +301,8 @@ function Dashboard() {
           currentLessons={[]}
           onLessonClick={handleLessonClick}
           progressData={progressData}
+          userId={userId}
+          isTeacher={isTeacher}
         />
       )}
       <ClickToBegin onClick = {handleClickToBegin} />

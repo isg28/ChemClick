@@ -152,6 +152,7 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
             }
 
             setGoal(teacherGoalLevel);
+            return progressData
         } else if (progressResponse.status === 404) {
             console.warn('Progress not found. Creating a new entry.');
 
@@ -394,5 +395,23 @@ export const IncorrectResponses = async ({
         }
     } catch (error) {
         console.error('Error updating incorrect answers:', error);
+    }
+};
+
+export const fetchUpdatedLessonProgress = async (userId, lessonId, isTeacher) => {
+    const progressEndpoint = isTeacher
+        ? `http://localhost:8000/teacherLessons/progress/${userId}/${lessonId}/`
+        : `http://localhost:8000/lessons/progress/${userId}/${lessonId}/`;
+
+    try {
+        const response = await fetch(progressEndpoint);
+        if (!response.ok) {
+            return null;
+        }
+
+        const progressData = await response.json();
+        return progressData;
+    } catch (error) {
+        return null;
     }
 };

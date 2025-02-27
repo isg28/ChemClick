@@ -58,7 +58,8 @@ function LessonFivePointTwelve() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });
+      
         };
         initializeData();
     }, [userId, lessonId, navigate, isTeacher]);

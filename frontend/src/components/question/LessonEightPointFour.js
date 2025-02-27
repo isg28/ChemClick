@@ -106,7 +106,7 @@ function LessonEightPointFour() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });   
         };
         
         initializeData();

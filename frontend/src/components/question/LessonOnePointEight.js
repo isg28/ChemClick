@@ -20,7 +20,9 @@ function LessonOnePointEight() {
     const [progress, setProgress] = useState(0); 
     const [masteryLevel, setMasteryLevel] = useState(0); 
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
-    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    const displayMedals = starsEarned >= 5;
+    const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    
+    const displayMedals = starsEarned >= 5;
+    
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -148,7 +150,7 @@ function LessonOnePointEight() {
                 setMasteryLevel,
                 setGoal,
                 setTotalAttempts,
-            });        
+            });          
         };
         
         initializeData();
