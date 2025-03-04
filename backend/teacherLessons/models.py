@@ -45,4 +45,4 @@ class TeacherLessonProgress(me.Document):
         self.save()
         
     def __str__(self):
-        return f"Lesson: {self.lesson_id}, Teacher: {self.teacher_id}, Status: {self.status}"
+        return f"Lesson: {self.lesson_id}, User: {self.teacher_id}, Total Attempts: {self.total_attempts}, Status: {self.get_status()}"

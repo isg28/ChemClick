@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import '../../styles/question/Question.css';
 import '../../styles/question/LessonTenPointThree.css';
 import { useNavigate } from 'react-router-dom';
-import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
+import { renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses } from '../../components/question/LessonUtils';
 
 function LessonTenPointThree() {
     const navigate = useNavigate();
@@ -25,27 +25,27 @@ function LessonTenPointThree() {
 
     // Cations (Metal Ions)
     const metal = useMemo(() => [
-        { name: "Sodium", symbol: "Na⁺" },
-        { name: "Potassium", symbol: "K⁺" },
-        { name: "Calcium", symbol: "Ca²⁺" },
-        { name: "Magnesium", symbol: "Mg²⁺" },
-        { name: "Aluminum", symbol: "Al³⁺" },
-        { name: "Iron (II)", symbol: "Fe²⁺" },
-        { name: "Iron (III)", symbol: "Fe³⁺" },
-        { name: "Copper (I)", symbol: "Cu⁺" },
-        { name: "Copper (II)", symbol: "Cu²⁺" }
+        { name: "Sodium", symbol: "Na", charge: 1 },
+        { name: "Potassium", symbol: "K", charge: 1 },
+        { name: "Calcium", symbol: "Ca", charge: 2 },
+        { name: "Magnesium", symbol: "Mg", charge: 2 },
+        { name: "Aluminum", symbol: "Al", charge: 3 },
+        { name: "Iron(II)", symbol: "Fe", charge: 2 },
+        { name: "Iron(III)", symbol: "Fe", charge: 3 },
+        { name: "Copper(I)", symbol: "Cu", charge: 1 },
+        { name: "Copper(II)", symbol: "Cu", charge: 2 }
     ], []);
 
-    // Polyatomic Anions
+    // Polyatomic Anions 
     const polyatomicIons = useMemo(() => [
-        { name: "Sulfate", symbol: "SO₄²⁻" },
-        { name: "Nitrate", symbol: "NO₃⁻" },
-        { name: "Phosphate", symbol: "PO₄³⁻" },
-        { name: "Carbonate", symbol: "CO₃²⁻" },
-        { name: "Hydroxide", symbol: "OH⁻" },
-        { name: "Chlorate", symbol: "ClO₃⁻" },
-        { name: "Acetate", symbol: "C₂H₃O₂⁻" },
-        { name: "Permanganate", symbol: "MnO₄⁻" }
+        { name: "Sulfate", symbol: "SO₄", charge: -2 },
+        { name: "Nitrate", symbol: "NO₃", charge: -1 },
+        { name: "Phosphate", symbol: "PO₄", charge: -3 },
+        { name: "Carbonate", symbol: "CO₃", charge: -2 },
+        { name: "Hydroxide", symbol: "OH", charge: -1 },
+        { name: "Chlorate", symbol: "ClO₃", charge: -1 },
+        { name: "Acetate", symbol: "C₂H₃O₂", charge: -1 },
+        { name: "Permanganate", symbol: "MnO₄", charge: -1 }
     ], []);
 
     const [currentCompound, setCurrentCompound] = useState({});
@@ -60,9 +60,9 @@ function LessonTenPointThree() {
 
     useEffect(() => {
         if (!userId) { 
-          console.error('ID not found');
-          navigate('/login');
-          return;
+            console.error('ID not found');
+            navigate('/login');
+            return;
         }
 
         const initializeData = async () => {
@@ -78,7 +78,6 @@ function LessonTenPointThree() {
         };
     
         initializeData();
-        // eslint-disable-line react-hooks/exhaustive-deps
     }, [userId, lessonId, navigate, isTeacher]);
 
     useEffect(() => {
@@ -87,84 +86,68 @@ function LessonTenPointThree() {
         }
     }, [progress]);
 
-    // Generate New Ionic Compound
     const getNextCompound = useCallback(() => {
-        const randomCation = metal[Math.floor(Math.random() * metal.length)];
-        const randomAnion = polyatomicIons[Math.floor(Math.random() * polyatomicIons.length)];
-    
-        if (randomCation && randomAnion) { 
-            const compoundName = `${randomCation.name} ${randomAnion.name}`;
+        let randomCation, randomAnion, cationCount, anionCount;
         
-            setCurrentCompound({ 
-                cation: randomCation,  
-                anion: randomAnion, 
-                name: compoundName 
-            });
-    
-            setUserInput('');
-            setFeedback('');
-            setIsAnswerCorrect(false);
-        }
-    }, [metal, polyatomicIons]);
+        do {
+            randomCation = metal[Math.floor(Math.random() * metal.length)];
+            randomAnion = polyatomicIons[Math.floor(Math.random() * polyatomicIons.length)];
 
+            const lcm = (a, b) => (a * b) / gcd(a, b);
+            const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+
+            const chargeLCM = lcm(randomCation.charge, Math.abs(randomAnion.charge));
+            cationCount = chargeLCM / randomCation.charge;
+            anionCount = chargeLCM / Math.abs(randomAnion.charge);
+        } while (!randomCation || !randomAnion);
+
+        const formatSubscript = (num) => (num > 1 ? num.toString().split("").map(n => String.fromCharCode(0x2080 + parseInt(n))).join("") : "");
+
+        const formattedCation = `${randomCation.symbol}${formatSubscript(cationCount)}`;
+        const formattedAnion = anionCount > 1 ? `(${randomAnion.symbol})${formatSubscript(anionCount)}` : randomAnion.symbol;
+
+        const compoundSymbol = `${formattedCation}${formattedAnion}`;
+        const compoundName = `${randomCation.name} ${randomAnion.name}`;
+
+        setCurrentCompound({ 
+            cation: randomCation,  
+            anion: randomAnion, 
+            name: compoundName,
+            symbol: compoundSymbol
+        });
+
+        setUserInput('');
+        setFeedback('');
+        setIsAnswerCorrect(false);
+    }, [metal, polyatomicIons]);
+    
     useEffect(() => {
         getNextCompound();
     }, [getNextCompound]);
-    
-    const normalizeMetalName = (name) => {
-        return name
-            .toLowerCase()
-            .replace(/\s*\(?I+\)?/g, " ($&)")
-            .replace(/\s+/g, " ") 
-            .trim(); // Removes leading/trailing spaces
-    };
-    
+
     const handleSubmitAnswer = async () => {
-        let normalizedUserInput = normalizeMetalName(userInput.trim());
-        let normalizedCorrectAnswer = normalizeMetalName(currentCompound.name);
+        const romanNumeralRegex = /\((i{1,3}|iv|v|vi{0,3}|ix|x)\)/gi;
     
-        console.log("User Input:", `"${normalizedUserInput}"`);
-        console.log("Correct Answer:", `"${normalizedCorrectAnswer}"`);
+        let formattedInput = userInput.replace(romanNumeralRegex, (match) => match.toUpperCase());
+        formattedInput = formattedInput.toLowerCase().replace(romanNumeralRegex, (match) => match.toUpperCase());
     
-        if (normalizedUserInput === normalizedCorrectAnswer) {
+        if (formattedInput !== userInput) {
+            setFeedback("⚠️ Please enter your answer in lowercase, but keep Roman numerals capitalized (e.g., iron(III)).");
+            return;
+        }
+    
+        if (formattedInput.trim() === currentCompound.name.toLowerCase().replace(romanNumeralRegex, (match) => match.toUpperCase())) {
             setIsAnswerCorrect(true);
             setFeedback("✅ Correct! Well done!");
             setFeedbackClass("correct-feedback");
-            await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
+            await CorrectResponses({ userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
-            }); 
+            });
         } else {
             setIsAnswerCorrect(false);
-            let hintMessage = "❌ Incorrect. Try again!";
-    
-            const userAnswerParts = normalizedUserInput.split(" ");
-            const correctParts = normalizedCorrectAnswer.split(" ");
-    
-            let userCation = userAnswerParts.slice(0, -1).join(" "); 
-            let userAnion = userAnswerParts[userAnswerParts.length - 1];
-            let correctCation = correctParts.slice(0, -1).join(" ");
-            let correctAnion = correctParts[correctParts.length - 1];
-    
-            let gotCationCorrect = userCation === correctCation;
-            let gotAnionCorrect = userAnion === correctAnion;
-    
-            if (gotCationCorrect && !gotAnionCorrect) {
-                hintMessage += ` Hint: You got the metal correct! Now focus on the polyatomic ion.`;
-            } else if (!gotCationCorrect && gotAnionCorrect) {
-                hintMessage += ` Hint: You got the polyatomic ion correct! Now check the metal name.`;
-            }
-    
-            // Special Hint for Iron & Copper (Roman Numerals)
-            if (!gotCationCorrect && (currentCompound.cation.name.includes("Iron") || currentCompound.cation.name.includes("Copper"))) {
-                const romanNumeral = currentCompound.cation.name.match(/\((I+)\)/); 
-                if (romanNumeral) {
-                    hintMessage += ` The correct metal name includes ${romanNumeral[0]}. Remember to leave a space between the metal name and the Roman numeral in parentheses.`;
-                }
-            }
-    
-            setFeedback(hintMessage);
+            setFeedback("❌ Incorrect. Try again!");
             setFeedbackClass("incorrect-feedback");
-            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
+            await IncorrectResponses({ userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
         }
@@ -198,21 +181,26 @@ function LessonTenPointThree() {
                         <div className="quiz-container">
                         <p className='lesson-ten-point-three-prompt'>
                             These are ionic compounds with polyatomic ions. <br />
-                            Write the name for: <u>
-                                {currentCompound.cation && currentCompound.anion 
-                                    ? `${currentCompound.cation.symbol} ${currentCompound.anion.symbol}`
-                                    : "Loading..."}
-                            </u>
+                            Write the name for:  
+                            <p className="lesson-ten-point-three-symbol">
+                                {" "+ currentCompound.symbol || "Loading..."}
+                            </p>
                         </p>
+
                         <div className="input-section">
                             <div className="input-container">
-                                <input
-                                    type="text"
-                                    value={userInput}
-                                    onChange={(e) => setUserInput(e.target.value)}
-                                    placeholder="Type the compound name..."
-                                />
+                            <input
+                                type="text"
+                                value={userInput}
+                                onChange={(e) => setUserInput(e.target.value)}
+                                placeholder="Type the compound name"
+                            />
+
                             </div>
+                            <p className="lowercase-hint">
+                                * Please enter your answer in lowercase except for Roman numerals (which should be uppercase).<br />
+                                * Make sure there's no space between the ion name and parentheses. Example: <code>iron(III)</code>, not <code>iron (III)</code>.<br />
+                            </p>
                         </div>
 
                         <div className="lesson-ten-point-three-submit-feedback-container">

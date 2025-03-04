@@ -105,3 +105,28 @@ html,body {
     margin-top: 30px;
     position: relative;
 }
+
+.lowercase-hint {
+    font-size: 1rem;
+    color: #d35400;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.lesson-ten-point-three-symbol {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.input-container input {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2rem;
+}
+
+.lesson-one-point-three-feedback {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

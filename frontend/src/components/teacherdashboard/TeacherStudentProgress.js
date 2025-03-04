@@ -9,10 +9,12 @@ const TeacherProgressBox = ({ lessonId }) => {
         in_progress: 0,
         completed: 0
     });
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStudentProgress = async () => {
             try {
+                setLoading(true);
                 const response = await fetch(`http://localhost:8000/lessons/studentProgress/${lessonId}/`);
                 if (!response.ok) throw new Error("Failed to fetch progress");
                 
@@ -20,6 +22,8 @@ const TeacherProgressBox = ({ lessonId }) => {
                 setStudentProgress(data);
             } catch (error) {
                 console.error("Error fetching student progress:", error);
+            } finally{
+                setLoading(false);
             }
         };
 
@@ -30,6 +34,12 @@ const TeacherProgressBox = ({ lessonId }) => {
 
     return (
         <div className="student-progress-wrapper">
+            {loading ? (
+                <div className="loading-message">
+                    <h3>Loading student progress...</h3>
+                </div>
+            ) : (
+            <>
            <div className='student-progress-not-started'>
             <h3>Students Not Started: {studentProgress.not_started}</h3>
            </div>
@@ -42,6 +52,8 @@ const TeacherProgressBox = ({ lessonId }) => {
            <div className='student-progress-button'>
             <h3 onClick={() => navigate('/statistics')}>View Full Statistics</h3> 
            </div>
+           </>
+            )}
         </div>
     );
 };

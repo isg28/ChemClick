@@ -29,21 +29,15 @@ class TeacherLessonProgressView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, teacher_id, lesson_id):  
-        try:
-            progress = TeacherLessonProgress.objects(teacher_id=teacher_id, lesson_id=lesson_id).first()
-            if not progress:
-                return Response({"error": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
-
+        progress = TeacherLessonProgress.objects.filter(teacher_id=teacher_id, lesson_id=lesson_id).first()
+        if progress:
             serializer = TeacherLessonProgressSerializer(progress, data=request.data, partial=True)
-
             if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            
+                updated_progress = serializer.save()
+                updated_progress.update_status()
+                return Response(TeacherLessonProgressSerializer(updated_progress).data, status=status.HTTP_200_OK)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response({"message": "Progress not found"}, status=status.HTTP_404_NOT_FOUND)
         
     def delete(self, request, teacher_id, lesson_id):
         try:

@@ -268,14 +268,14 @@ function LessonTenPointOne(){
             
                             </div>
 
-                            <div className="submit-feedback-container">
+                            <div className="lesson-ten-point-one-submit-feedback-container">
                                 {!isAnswerCorrect && (
-                                    <button className='lesson-one-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                                    <button className='lesson-ten-point-one-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
                                 )}
                                 {isAnswerCorrect && (
-                                    <button className='lesson-one-point-two-next' onClick={handleNextQuestion}>Next Question</button>
+                                    <button className='lesson-ten-point-one-next' onClick={handleNextQuestion}>Next Question</button>
                                 )}
-                                <span className={`lesson-one-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+                                <span className={`lesson-ten-point-one-feedback ${feedbackClass}`}>{feedback}</span>
                             </div> 
 
                         </div>

@@ -105,18 +105,42 @@ html,body {
     min-height: 50px; 
 }
 
+.quiz-container h2 strong {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .input-container {
     display: flex;
     align-items: center;
+    justify-content: center;     
     border: 2px solid #00d5d7;
     border-radius: 8px;
     overflow: hidden;
     background: white;
     margin-bottom: 15px; 
+    width: 100%;
+    padding: 5px; 
+}
+
+.mini-boxes-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    max-width: 800px; 
+}
+
+.mini-boxes {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    flex-grow: 1;
+    gap: 10px;
 }
 
 .input-container input {
     flex-grow: 1;
+    font-family: 'Times New Roman', Times, serif;
     padding: 10px;
     font-size: 1.2rem;
     border: none;
@@ -341,10 +365,104 @@ html,body {
     border: 1px solid rgb(41, 38, 38) !important;
 }
 
+.formula-input {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.base-input, .subscript-input, .charge-input {
+    width: 100px;
+    height: 40px;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+.subscript-input {
+    font-size: 1.2rem;
+    vertical-align: sub;
+}
+
+.charge-input {
+    font-size: 1.2rem;
+    vertical-align: super;
+}
+
+.symbol-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.symbol-row {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.symbol-row p {
+    font-weight: bold;
+}
 
 
+.formula-preview {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
 
 
+.lesson-ten-point-two-feedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 8px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
+.persistent-hint{
+    font-size: 1rem;
+    color: #d35400;
+    font-style: italic;
+    margin-top: 5px;
+}
 
+.base-input, .subscript-input, .charge-input {
+    font-family: 'Times New Roman', Times, serif;
+}
 
+.add-input-group-button {
+    background-color: #226fd3; 
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.add-input-group-button:hover {
+    background-color: #004aad; 
+    transform: scale(1.05);
+}
+
+.add-input-group-button:hover::after {
+    opacity: 1;
+}
+
+.lesson-ten-point-two-button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-left: auto; 
+}

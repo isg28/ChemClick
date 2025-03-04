@@ -5,6 +5,28 @@ import { fetchUpdatedLessonProgress } from '../../components/question/LessonUtil
 function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isTeacher }) {
   const [openUnits, setOpenUnits] = useState(units.map(() => false));
   const [updatedLessonProgress, setUpdatedLessonProgress] = useState({});
+  const [loadedUnit, setLoadedUnits] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const preFetchUnits = async () => {
+      if (!userId) {
+        console.error("Missing userId!");
+        return;
+      }
+
+      const updates = {};
+      for (const unit of units) {
+        for (const lesson of unit.lessons) {
+          updates[lesson.lesson_id] = { status: "loading" }; 
+        }
+      }
+      setUpdatedLessonProgress(updates);
+      setLoading(false); 
+    };
+
+    preFetchUnits();
+  }, [userId, units]);
 
   const toggleUnit = async (index, unitLessons = []) => {
     if (!userId) {
@@ -16,8 +38,11 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
     newOpenUnits[index] = !newOpenUnits[index];
     setOpenUnits(newOpenUnits);
 
-    if (newOpenUnits[index]) {
+    if (newOpenUnits[index] && !loadedUnit[index]) {
         const updates = {};
+        for (const lesson of unitLessons) {
+          updates[lesson.lesson_id] = { status: "loading" };
+      }
 
         for (const lesson of unitLessons) {
             let studentProgress = {};
@@ -80,6 +105,7 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
             };
         }
         setUpdatedLessonProgress((prev) => ({ ...prev, ...updates }));
+        setLoadedUnits((prev) => ({ ...prev, [index]: true }));
     }
   };
 
@@ -114,6 +140,9 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
 
   const getStatusText = (lesson) => {
     const updatedLesson = updatedLessonProgress[lesson.lesson_id] || lesson;
+    if (updatedLesson.status === "loading") {
+      return <span className="status-text">Loading...</span>;
+    }
     const wasLate = updatedLesson.studentData?.is_late || updatedLesson.teacherProgress?.is_late || false;
     const submitted = updatedLesson.studentData?.completion_timestamp || updatedLesson.teacherProgress?.completion_timestamp;
     const dueDate = formatDate(updatedLesson.dueDate);
@@ -166,6 +195,10 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
     const options = { month: "long", day: "2-digit", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };  
+
+  if (loading) {
+    return <div className="loading-spinner">Loading...</div>; 
+  }
 
   return (
     <div className="unitlist-container">
