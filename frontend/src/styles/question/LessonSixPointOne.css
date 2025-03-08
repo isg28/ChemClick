@@ -144,8 +144,6 @@ html,body {
     position: relative;
     width: 100%;
     max-width: 290px;
-    height: 200px;
-    overflow-y: scroll; 
     margin: 0;
     border-radius: 5px;
     border: 5px solid #015770;
@@ -230,14 +228,15 @@ html,body {
 
 .LessonSix-bohr-model-container {
     text-align: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Orelega One', sans-serif;
+
     width: 100%;
     height: 80%;
 }
 
 .LessonSix-bohr-model {
     position: relative;
-    height: 20vh;
+    height: 45vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -263,17 +262,30 @@ html,body {
     position: absolute;
     width: 15px;
     height: 15px;
-    background-color: blue;
+    background: radial-gradient(circle at 30% 30%, #ff9999, #cc0000); /* Light reflection effect */
     border-radius: 50%;
+    box-shadow: 
+      0px 0px 8px rgba(255, 0, 0, 0.8),  /* Outer red glow */
+      3px 3px 6px rgba(0, 0, 0, 0.5),    /* Drop shadow for depth */
+      inset -2px -2px 4px rgba(0, 0, 0, 0.6), /* Inner shadow for volume */
+      inset 2px 2px 4px rgba(255, 255, 255, 0.4); /* Soft light reflection */
+    filter: brightness(1.4) saturate(1.5);
+    transition: transform 0.2s ease-in-out;
 }
 
 .nucleus {
     position: absolute;
     width: 30px;
     height: 30px;
-    background-color: red;
+    background: radial-gradient(circle at 30% 30%, #99ffff, #0099cc); /* Light reflection effect */
     border-radius: 50%;
-    z-index: 2; /* Ensure the nucleus is on top of the shells */
+    box-shadow: 
+      0px 0px 12px rgba(0, 255, 255, 0.8), /* Outer cyan glow */
+      4px 4px 6px rgba(0, 0, 0, 0.6), /* Drop shadow for depth */
+      inset -3px -3px 6px rgba(0, 0, 0, 0.7), /* Inner shadow for volume */
+      inset 3px 3px 6px rgba(255, 255, 255, 0.4); /* Soft light reflection */
+    filter: brightness(1.1) saturate(1.5);
+    z-index: 2;
 }
 
 button {
