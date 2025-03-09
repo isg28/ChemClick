@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import LessonEightPointOne from "../components/question/LessonEightPointOne";
-import LessonEightPointTwo from "../components/question/LessonEightPointTwo";
-import LessonEightPointThree from "../components/question/LessonEightPointThree";
-import LessonEightPointFour from "../components/question/LessonEightPointFour";
+import LessonEightPointOne from "../../components/question/LessonEightPointOne";
+import LessonEightPointTwo from "../../components/question/LessonEightPointTwo";
+import LessonEightPointThree from "../../components/question/LessonEightPointThree";
+import LessonEightPointFour from "../../components/question/LessonEightPointFour";
 
 // Mock localStorage
 beforeEach(() => {

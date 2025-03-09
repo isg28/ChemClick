@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import LessonTenPointOne from '../components/question/LessonTenPointOne';
-import LessonTenPointTwo from '../components/question/LessonTenPointTwo';
-import LessonTenPointThree from '../components/question/LessonTenPointThree';
+import LessonTenPointOne from '../../components/question/LessonTenPointOne';
+import LessonTenPointTwo from '../../components/question/LessonTenPointTwo';
+import LessonTenPointThree from '../../components/question/LessonTenPointThree';
 
 // Mock local storage
 beforeEach(() => {
