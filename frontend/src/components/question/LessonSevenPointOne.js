@@ -150,8 +150,7 @@ function LessonSevenPointOne() {
             </div>
             <div className="LessonSevenPointOneContent">
               <p className="LessonSevenPointOnePrompt">
-                How does the group number predict the ion charge for elements in Group 1?
-              </p>
+              How can we use the group number to predict the charge of a monatomic ion formed from an element in Group 1</p>
               <div className="LessonSevenPointOneRow">
                 <div className="LessonSevenPointOneImageContainer">
                   <img
