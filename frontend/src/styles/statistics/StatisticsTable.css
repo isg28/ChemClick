@@ -1,20 +1,125 @@
 .statistics-container {
-    position: relative; 
+    /* position: relative;  */
     display: flex;
     flex-direction: column;
     align-items: Left;
     width: 100%; 
-    max-width: 1200px; 
+    max-width: 800px; 
     padding: 10px;
     margin: 0 auto; 
-    background-color: #00D5D7;
+    background-color: #00D5D790;
     border-radius: 10px;
     border: 5px solid #ffffff;
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
+    transform: translateX(-24%);
     top: 20px;
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 497px;
+    max-height: 500px;
     overflow-y: auto; 
     overflow-x: hidden;
 }
 
+html,
+body {
+	height: 100%;
+}
+
+.student-stats-table-body {
+	margin: 0;
+	background: linear-gradient(90deg, #2ba59f, #5f2c82);
+	/* font-family: sans-serif; */
+    font-family: 'Orelega One', cursive;
+	font-weight: normal;
+}
+
+.search-input input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* .container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+} */
+
+.student-stats-title {
+    font-size: 2rem;
+    font-family: 'Orelega One', cursive;
+    font-weight: normal;
+    color: black;
+    border: 5px solid #015770;
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: white; 
+    z-index: 1; 
+    box-shadow: 0 8px 15px rgba(1, 87, 112, 0.8);
+}
+
+.student-stats-table {
+	width: 100%;
+	border-collapse: collapse;
+    /* border: 5px solid white; */
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.table-header, .table-data {
+	padding: 15px;
+	background-color: rgba(255,255,255,0.2);
+	color: #fff;
+}
+
+/* .table-row {
+    border: none;
+    outline: none;
+} */
+
+.table-header {
+	text-align: left;
+}
+
+.student-stats-table-head {
+	.table-header {
+		background-color: #55608f;
+        font-family: 'Orelega One', cursive;
+        font-weight: normal;
+	}
+}
+
+.sortable {
+    cursor: pointer;
+  }
+  
+.sortable:hover {
+background-color: #6b76a6 
+}
+
+.student-stats-table-body {
+	.table-row {
+		&:hover {
+			background-color: rgba(255,255,255,0.3);
+		}
+	}
+	.table-data {
+		position: relative;
+		&:hover {
+			&:before {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: -9999px;
+				bottom: -9999px;
+				background-color: rgba(255,255,255,0.2);
+				z-index: -1;
+			}
+		}
+	}
+}

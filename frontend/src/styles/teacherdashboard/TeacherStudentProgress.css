@@ -29,20 +29,27 @@
 }
 
 .student-progress-button {
-    font-family: 'Orelega One', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 59px;
-    color: black;
     background: lightgreen;
     border-style:solid;
     border-color: green;
-    font-size: 30px;
-    font-weight: 700;
     cursor: pointer;
     border-radius: 30px ;
     margin-top: 5px;
+    transition: background 0.3s ease;
 }
 
+.student-progress-button:hover {
+    background: rgb(43, 178, 43); /* Change to the desired hover color */
+}
+
+.student-progress-button p {
+    font-family: 'Orelega One', cursive;
+    font-weight: normal;
+    color: black;
+    font-size: 1.5rem;
+}

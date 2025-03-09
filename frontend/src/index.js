@@ -129,7 +129,7 @@ ReactDOM.render(
         />
         <Route path = "/ConfirmEmail" element = {<ConfirmEmail/>} />
         <Route path = "/NewPassword" element = {<NewPassword/>} />
-        <Route path = "/Statistics" element = {<Statistics/>} />
+        <Route path="/statistics/:lessonId" element={<Statistics />} />
         <Route path = "/StatisticsIndividual" element = {<StatisticsIndividual/>} />
         <Route path = "/Congrats" element = {<Congrats/>} />
         <Route path = "/LessonOnePointOne" element = {<LessonOnePointOne/>}/>

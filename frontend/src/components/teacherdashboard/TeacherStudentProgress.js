@@ -49,8 +49,9 @@ const TeacherProgressBox = ({ lessonId }) => {
            <div className='student-progress-finished'>
             <h3>Students Finished: {studentProgress.completed}</h3>
            </div>
-           <div className='student-progress-button'>
-            <h3 onClick={() => navigate('/statistics')}>View Full Statistics</h3> 
+           <div onClick={() => navigate(`/statistics/${lessonId}`)} 
+            className='student-progress-button'>
+            <p>View Full Statistics</p> 
            </div>
            </>
             )}

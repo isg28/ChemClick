@@ -93,12 +93,13 @@ describe("TeacherStudentProgress Component", () => {
 
   test("navigates to statistics page when clicking 'View Full Statistics'", async () => {
     const mockNavigate = jest.fn();
+    const lessonId = "lesson1.1"; // The lesson ID passed to the component
     useNavigate.mockReturnValue(mockNavigate);
 
     await act(async () => {
       render(
         <MemoryRouter>
-          <TeacherStudentProgress lessonId="lesson1.1" />
+          <TeacherStudentProgress lessonId={lessonId} />
         </MemoryRouter>
       );
     });
@@ -108,7 +109,7 @@ describe("TeacherStudentProgress Component", () => {
       fireEvent.click(screen.getByText("View Full Statistics"));
     });
 
-    expect(mockNavigate).toHaveBeenCalledWith("/statistics");
+    expect(mockNavigate).toHaveBeenCalledWith(`/statistics/${lessonId}`);
   });
 
   test("renders loading state and does not fetch data if lessonId is not provided", async () => {

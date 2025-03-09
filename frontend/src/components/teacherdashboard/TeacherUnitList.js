@@ -180,9 +180,9 @@ function TeacherUnitList({ units, currentUnit }) {
       <div className="teacherunitlist-header">
         <h1>Student Progress</h1> 
       </div>
-      <div className='unit-student-progress-button'>
+      {/* <div className='unit-student-progress-button'>
             <h4 onClick = {handleClickToBegin} >View Full Individual Statistics</h4> 
-      </div>
+      </div> */}
 
       <div className="teacherunitlist-content">
         {units.map((unit, unitIndex) => (

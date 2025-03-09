@@ -62,8 +62,6 @@ function Profile() {
             { lesson_id: "lesson4.1", unit_id: 4, ...getLessonData(lessons, "lesson4.1") },
             { lesson_id: "lesson4.2", unit_id: 4, ...getLessonData(lessons, "lesson4.2") },
             { lesson_id: "lesson4.3", unit_id: 4, ...getLessonData(lessons, "lesson4.3") },
-            { lesson_id: "lesson4.4", unit_id: 4, ...getLessonData(lessons, "lesson4.4") },
-            { lesson_id: "lesson4.5", unit_id: 4, ...getLessonData(lessons, "lesson4.5") },
           ]
         },
         {
@@ -81,6 +79,8 @@ function Profile() {
             { lesson_id: "lesson5.8", unit_id: 5, ...getLessonData(lessons, "lesson5.8") },
             { lesson_id: "lesson5.9", unit_id: 5, ...getLessonData(lessons, "lesson5.9") },
             { lesson_id: "lesson5.10", unit_id: 5, ...getLessonData(lessons, "lesson5.10") },
+            { lesson_id: "lesson5.11", unit_id: 5, ...getLessonData(lessons, "lesson5.11") },
+            { lesson_id: "lesson5.12", unit_id: 5, ...getLessonData(lessons, "lesson5.12") },
           ]
         },
         {
@@ -92,6 +92,23 @@ function Profile() {
             { lesson_id: "lesson6.2", unit_id: 6, ...getLessonData(lessons, "lesson6.2") },
             { lesson_id: "lesson6.3", unit_id: 6, ...getLessonData(lessons, "lesson6.3") },
             { lesson_id: "lesson6.4", unit_id: 6, ...getLessonData(lessons, "lesson6.4") },
+            { lesson_id: "lesson6.5", unit_id: 6, ...getLessonData(lessons, "lesson6.5") },
+            { lesson_id: "lesson6.6", unit_id: 6, ...getLessonData(lessons, "lesson6.6") },
+            { lesson_id: "lesson6.7", unit_id: 6, ...getLessonData(lessons, "lesson6.7") },
+            { lesson_id: "lesson6.8", unit_id: 6, ...getLessonData(lessons, "lesson6.8") },
+            { lesson_id: "lesson6.9", unit_id: 6, ...getLessonData(lessons, "lesson6.9") },
+            { lesson_id: "lesson6.10", unit_id: 6, ...getLessonData(lessons, "lesson6.10") },
+            { lesson_id: "lesson6.11", unit_id: 6, ...getLessonData(lessons, "lesson6.11") },
+            { lesson_id: "lesson6.12", unit_id: 6, ...getLessonData(lessons, "lesson6.12") },
+            { lesson_id: "lesson6.13", unit_id: 6, ...getLessonData(lessons, "lesson6.13") },
+            { lesson_id: "lesson6.14", unit_id: 6, ...getLessonData(lessons, "lesson6.14") },
+            { lesson_id: "lesson6.15", unit_id: 6, ...getLessonData(lessons, "lesson6.15") },
+            { lesson_id: "lesson6.16", unit_id: 6, ...getLessonData(lessons, "lesson6.16") },
+            { lesson_id: "lesson6.17", unit_id: 6, ...getLessonData(lessons, "lesson6.17") },
+            { lesson_id: "lesson6.18", unit_id: 6, ...getLessonData(lessons, "lesson6.18") },
+            { lesson_id: "lesson6.19", unit_id: 6, ...getLessonData(lessons, "lesson6.19") },
+            { lesson_id: "lesson6.20", unit_id: 6, ...getLessonData(lessons, "lesson6.20") },
+            
 
           ]
         },
@@ -110,6 +127,8 @@ function Profile() {
             { lesson_id: "lesson7.8", unit_id: 7, ...getLessonData(lessons, "lesson7.8") },
             { lesson_id: "lesson7.9", unit_id: 7, ...getLessonData(lessons, "lesson7.9") },
             { lesson_id: "lesson7.10", unit_id: 7, ...getLessonData(lessons, "lesson7.10") },
+            { lesson_id: "lesson7.11", unit_id: 7, ...getLessonData(lessons, "lesson7.11") },
+            { lesson_id: "lesson7.12", unit_id: 7, ...getLessonData(lessons, "lesson7.12") },
           ]
         },
         {
@@ -118,6 +137,9 @@ function Profile() {
           title: "Forming Ionic Compounds",
           lessons: [
             { lesson_id: "lesson8.1", unit_id: 8, ...getLessonData(lessons, "lesson8.1") },
+            { lesson_id: "lesson8.2", unit_id: 8, ...getLessonData(lessons, "lesson8.2") },
+            { lesson_id: "lesson8.3", unit_id: 8, ...getLessonData(lessons, "lesson8.3") },
+            { lesson_id: "lesson8.4", unit_id: 8, ...getLessonData(lessons, "lesson8.4") },
           ]
         },
         {
@@ -127,6 +149,23 @@ function Profile() {
           lessons: [
             { lesson_id: "lesson9.1", unit_id: 9, ...getLessonData(lessons, "lesson9.1") },
             { lesson_id: "lesson9.2", unit_id: 9, ...getLessonData(lessons, "lesson9.2") },
+            { lesson_id: "lesson9.3", unit_id: 9, ...getLessonData(lessons, "lesson9.3") },
+            { lesson_id: "lesson9.4", unit_id: 9, ...getLessonData(lessons, "lesson9.4") },
+            { lesson_id: "lesson9.5", unit_id: 9, ...getLessonData(lessons, "lesson9.5") },
+            { lesson_id: "lesson9.6", unit_id: 9, ...getLessonData(lessons, "lesson9.6") },
+            { lesson_id: "lesson9.7", unit_id: 9, ...getLessonData(lessons, "lesson9.7") },
+            { lesson_id: "lesson9.8", unit_id: 9, ...getLessonData(lessons, "lesson9.8") },
+            { lesson_id: "lesson9.9", unit_id: 9, ...getLessonData(lessons, "lesson9.9") },
+          ]
+        },
+        {
+          unit_id: 10,
+          number: 10,
+          title: "Ionic Compounds (Polyatomic Ions)",
+          lessons: [
+            { lesson_id: "lesson10.1", unit_id: 10, ...getLessonData(lessons, "lesson10.1") },
+            { lesson_id: "lesson10.2", unit_id: 10, ...getLessonData(lessons, "lesson10.2") },
+            { lesson_id: "lesson10.3", unit_id: 10, ...getLessonData(lessons, "lesson10.3") },
           ]
         }
       ];
