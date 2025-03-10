@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.lesson-nine-point-five {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.lesson-nine-point-five-box {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lesson-nine-point-five-box-innercont {
+    width: 60vw;
+    max-height: 100vh;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00D5D7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.lesson-nine-point-five-box-title {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.lesson-nine-point-five-content {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff; /* White background */
+    border-radius: 10px;
+    padding: 20px;
+    border: 5px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+    padding-bottom: 40px;
+}
+
+.lesson-nine-point-five-prompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.lesson-nine-point-five-input {
+    width: 37%;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid #015770;
+    background-color: #e7eae2;
+    padding: 10px;
+    font-size: 1.5rem;
+    font-family: 'Orelega One', sans-serif;
+    text-align: center;
+}
+
+.lesson-nine-point-five-submit {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: 10px;
+    color: black;
+}
+
+.lesson-nine-point-five-submit:active {
+    background-color: #98c844;
+}
+
+.feedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.feedback.correct {
+    background-color: #e0f8e0;
+    color: #237B31;
+    border: 2px solid #237B31;
+    opacity: 1;
+}
+
+.feedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+    opacity: 1;
+}
+
+.separator {
+    width: 102%;
+    border: none;
+    border-top: 4px solid #015770;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.completed-answer {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #015770;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Orelega One', sans-serif;
+}
+
+.completion-message {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.completion-message button {
+    background-color: #E3F0CC;
+    border: 5px solid #237B31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: black;
+}
+
+.completion-message button:active {
+    background-color: #98c844;
+}
