@@ -274,7 +274,7 @@ const nextQuestion = () => {
                             <div className="lesson-three-point-one-cylinderWaterContainer">
                                 <div className="bohr-model-section-three-point-one">
                                     <div className="bohr-model-container-three-point-one">
-                                    <div data-testid="nucleus-three-point-one" className={`nucleus-three-point-one' ${isNucleusSelected ? "selected" : ""}`}onClick={handleNucleusClick} style={{zIndex: 400, transition: 'all 0.2s ease',}}>
+                                    <div data-testid="nucleus-three-point-one" className={`nucleus-three-point-one ${isNucleusSelected ? "selected" : ""}`}onClick={handleNucleusClick} style={{zIndex: 400, transition: 'all 0.2s ease',}}>
                                         <span className="proton-counter-three-point-one" style={{
                                             position: 'absolute', 
                                             color: 'white', 
