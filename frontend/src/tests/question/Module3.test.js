@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import LessonThreePointOne from "../components/question/LessonThreePointOne";
-import LessonThreePointTwo from "../components/question/LessonThreePointTwo";
+import LessonThreePointOne from "../../components/question/LessonThreePointOne";
+import LessonThreePointTwo from "../../components/question/LessonThreePointTwo";
 
 beforeEach(() => {
   Storage.prototype.getItem = jest.fn((key) => {
