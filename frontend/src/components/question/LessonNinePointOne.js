@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import '../../styles/question/Question.css';
 import {useNavigate } from 'react-router-dom';
 import '../../styles/question/Question.css';
@@ -13,6 +13,7 @@ import PositiveIon2 from "../../assets/question/+2ioncomb-transparent.png";
 import NegativeIon2 from "../../assets/question/-2ioncomb-transparent.png";
 import PositiveIon3 from "../../assets/question/+3ioncomb-transparent.png";
 import NegativeIon3 from "../../assets/question/-3ioncomb-transparent.png";
+import {motion} from "framer-motion";
 
 const ionImages = {
     "+1": PositiveIon,
@@ -46,10 +47,15 @@ const DraggableIon = ({ ionType, src }) => {
     );
 };
 
+
+
 // Drop Zone Component
-const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
-    const [{ isOver }, drop] = useDrop(() => ({
-        accept: ItemType,
+const DropZone = ({ droppedIons = [], onDrop, onRemoveIon, isPositiveIon }) => {
+    const dropZoneRef = useRef(null);
+    const [isOver, setIsOver] = useState(false);
+
+    const [{ isOver: isOverMonitor }, drop] = useDrop(() => ({
+        accept: "ION",
         drop: (item) => onDrop(item),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
@@ -57,12 +63,21 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
     }));
 
     const handleRemoveIon = (index) => {
-        onRemoveIon(index); // Calls the onRemoveIon function passed as prop
+        onRemoveIon(index);
     };
+
+    // Determine direction based on the positive/negative ion state
+    const slideDirection = isPositiveIon ? 'left' : 'right'; // Left for positive, right for negative
+    // Calculate the size of the images based on the number of dropped ions
+    const imageSize = droppedIons.length === 1 ? 100 : Math.max(30, 105 - droppedIons.length * 20);
+    const overlapAmount = Math.min(2000, droppedIons.length * 5);
 
     return (
         <div
-            ref={drop}
+            ref={(node) => {
+                drop(node);
+                dropZoneRef.current = node;
+            }}
             className="drop-zone"
             style={{
                 width: "200px",
@@ -70,42 +85,63 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
                 border: "2px dashed gray",
                 backgroundColor: isOver ? "#d3f9d8" : "#f0f0f0",
                 display: "flex",
-                flexWrap: "wrap",
+                //flexWrap: "wrap",
                 alignItems: "center",
                 justifyContent: "center",
                 padding: "10px",
                 flexDirection: "column",
+                position: "relative",
+                gap: "-5px",
             }}
         >
             {droppedIons.length === 0 ? (
                 <p>Drop Ions Here</p>
             ) : (
                 droppedIons.map((ion, index) => (
-                    <div key={index} style={{ position: 'relative' }}>
+                    <motion.div
+                        key={index}
+                        initial={{ x: 0, y: 0 }} // Start position
+                        animate={{
+                            x: slideDirection === 'left' ? -100 : 100, // Move left for positive ions, right for negative ions
+                            y: 0,
+                        }} // Moves to its resting place
+                        transition={{ type: "spring", stiffness: 100 }}
+                        style={{ position: "relative",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginTop: "-10px", // Make them touch by fully overlapping
+                                marginBottom: "-20px", // Make them touch by
+                            }}
+                    >
                         <img
                             src={ion.src}
                             alt={`Dropped Ion ${ion.ionType}`}
                             className="dropped-ion-image"
-                            style={{ width: "70px", height: "70px" }}
+                            style={{
+                                width: `${imageSize}px`, // Adjust image size dynamically
+                                height: `${imageSize}px`, // Maintain the same width and height
+
+                            }}
                         />
                         <button
                             onClick={() => handleRemoveIon(index)}
                             style={{
-                                position: 'absolute',
-                                top: '0',
-                                right: '0',
-                                background: 'red',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '50%',
-                                width: '20px',
-                                height: '20px',
-                                cursor: 'pointer',
+                                position: "absolute",
+                                top: "0",
+                                right: "0",
+                                background: "red",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "50%",
+                                width: "20px",
+                                height: "20px",
+                                cursor: "pointer",
                             }}
                         >
-                        X
+                            X
                         </button>
-                    </div>
+                    </motion.div>
                 ))
             )}
         </div>
@@ -148,6 +184,7 @@ function LessonNinePointOne(){
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
     const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
+    const [isPositiveIon, setIsPositiveIon] = useState(false); // State for ion type
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -163,6 +200,23 @@ function LessonNinePointOne(){
     
         setRandomNumber(randomNum);  // Update the random number state
     };
+
+    useEffect(() => {
+        const checkIonType = () => {
+            // Check if the ion is positive or negative based on the ion image path
+            if (
+                randomIon === PositiveIon || 
+                randomIon === PositiveIon2 || 
+                randomIon === PositiveIon3
+            ) {
+                setIsPositiveIon(true); // Positive Ion
+            } else {
+                setIsPositiveIon(false); // Negative Ion
+            }
+        };
+    
+        checkIonType(); // Update ion type whenever randomIon changes
+    }, [randomIon]); // Re-run when randomIon changes
 
     useEffect(() => {
         if (!userId) { 
@@ -202,7 +256,7 @@ function LessonNinePointOne(){
         setDroppedIons((prev) => prev.filter((_, i) => i !== index)); // Remove the ion at the given index
     };
 
-    const isPositiveIon = randomIon === PositiveIon || randomIon === PositiveIon2 || randomIon === PositiveIon3;
+    //const isPositiveIon = randomIon === PositiveIon || randomIon === PositiveIon2 || randomIon === PositiveIon3;
 
     const getIonTypeFromPath = (path) => {
         // Extract the ion type from the image path, e.g., +3 or -3
@@ -367,7 +421,7 @@ function LessonNinePointOne(){
                             </p>
                             <div className="lesson-one-point-one-measurement-container">
                                 <div className="ions-container-top" style={{ flexDirection: isPositiveIon ? 'row-reverse' : 'row' }}>
-                                <DropZone onDrop={handleDrop} droppedIons={droppedIons} onRemoveIon={handleRemoveIon}/>
+                                <DropZone onDrop={handleDrop} droppedIons={droppedIons} onRemoveIon={handleRemoveIon} isPositiveIon={isPositiveIon}/>
                                     {/* Random ion image */}
                                     <img
                                         src={randomIon}

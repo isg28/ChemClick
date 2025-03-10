@@ -15,7 +15,11 @@
     width: 70px;
     height: 70px;
 }
-
+.droppedIons{
+    width: 105px;
+    height: 105px;
+    margin-top: 15px;
+}
 .delete-btn {
     position: absolute;
     top: 0;

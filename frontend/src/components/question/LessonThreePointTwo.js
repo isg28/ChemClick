@@ -372,6 +372,7 @@ function LessonThreePointTwo() {
                         fill="none"
                         stroke={highlightedShell === index + 1 ? "red" : "clear"}
                         strokeWidth={highlightedShell === index + 1 ? 2 : 2} 
+                        data-testid="highlighted-shell"
                         className={highlightedShell === index + 1 ? "highlighted-shell" : ""}
                       />
                     ))}
@@ -382,6 +383,7 @@ function LessonThreePointTwo() {
                   {predefinedPositions.map((pos, index) => (
                     <div
                       key={index}
+                      data-testid="electron-three-point-two"
                       className={`electron-three-point-two ${selectedElectrons.includes(index) ? "selected" : ""}`}
                       style={{ left: pos.x, top: pos.y, zIndex: 200}}
                       onClick={() => handleElectronClick(index)}
@@ -397,7 +399,7 @@ function LessonThreePointTwo() {
               ) : (
                 <button className='lesson-three-point-two-next' onClick={handleNextQuestion}>Next Question</button>
               )}
-              <span className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+              <span data-testid="lesson-three-point-two-feedback" className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
             </div>
           </div>
         </div>
