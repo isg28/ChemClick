@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-html,body {
+html, body {
     height: 100%;
     overflow-x: hidden;
 }
@@ -40,7 +40,6 @@ html,body {
     background-color: #00D5D7;
     border-radius: 15px;
     border: 5px solid #ffffff;
-
     background-image: url('../../assets/question/RainbowBackground.png');
     background-size: cover;
     background-position: center;
@@ -69,39 +68,38 @@ html,body {
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
-    border: 5px solid #015770;
     padding-bottom: 40px;
 }
 
+.lesson-one-point-three-measurement-container {
+    padding-top: 10vh; /* Moves ruler/pencil/cursor further down dynamically */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keeps everything centered */
+}
+
+/* Pencil */
 .lesson-one-point-three-pencil {
     position: absolute;
-    top: 320px; /* Above the ruler */
-    left: 235px; /* Align starting position with the cursor */
+    top: 350px ; /* Above the ruler */
+    left: 0px; /* Will be dynamically set */
     height: auto;
     z-index: 15; /* Highest z-index for visibility */
     transition: width 0.2s ease; /* Smooth width adjustment */
 }
 
-.lesson-one-point-three-starting-measurement{
-    width: 25px;
-    height: 25px;
+/* Red Vertical Line Cursor */
+.lesson-one-point-three-cursor {
     position: absolute;
-    z-index: 4;
-    cursor: pointer;
-    top: 430px;
-}
-
-.lesson-one-point-three-line {
-    position: absolute;
-    top: 475px;
-    left: 235px; /* Starting point for the line */
-    height: 2px;
+    width: 2px;
+    height: 180px; /* calc(100% - 60px);Extends from the ruler to the pencil */
     background-color: red;
-    transform: translateY(-50%);
-    z-index: 3;
+    cursor: pointer;
+    z-index: 10;
+    top: 350px; /* Adjust to start at the top of the measurement container */
 }
-            
 
+/* Ruler */
 .lesson-one-point-three-ruler-container {
     width: 100%;
     max-width: 800px;
@@ -114,59 +112,22 @@ html,body {
 
 .lesson-one-point-three-ruler {
     width: 100%;
-    left: 85px;
 }
 
-
-.lesson-one-point-three-question {
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    gap: 10px; 
-    width: 100%; 
-}
-
-.lesson-one-point-three-question h1, .lesson-one-point-three-box-title h1  {
-    font-size: 1.3rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    margin:0;
-}
-
-.lesson-one-point-three-prompt {
-    font-size: 1.3rem;
-    font-family: 'Orelega One', sans-serif;
-    font-weight: normal;
-    color: #0a0a0a;
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 0 20px;
-    max-width: 800px;
-    line-height: 1.5;
-}
-
-
+/* Input Box */
 .lesson-one-point-three-input {
-    width: 37%; 
+    width: 37%;
     height: 40px;
     border-radius: 15px;
     border: 2px solid #015770;
     background-color: #e7eae2;
     padding: 10px;
-    font-size: 1.5rem; 
+    font-size: 1.5rem;
     font-family: 'Orelega One', sans-serif;
     text-align: center;
 }
 
-.submit-feedback-container {
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 8px; 
-    margin-top: 5px;
-    position: relative;
-}
-
+/* Feedback Box */
 .lesson-one-point-three-feedback {
     font-size: 1.25rem;
     font-family: 'Orelega One', sans-serif;
@@ -197,21 +158,12 @@ html,body {
     transform: translateY(-10px);
 }
 
-.lesson-one-point-three-box {
-    margin-top: 10px; 
-    padding-bottom: 15px; 
-}
-
-.lesson-one-point-three-question {
-    gap: 8px; 
-}
-
-.lesson-one-point-three-submit, .lesson-one-point-three-next {
+/* Buttons */
+.lesson-one-point-three-submit {
     background-color: #E3F0CC;
     border: 5px solid #237B31;
     border-radius: 10px;
     padding: 10px 20px;
-    margin: 10px;
     font-family: 'Orelega One', sans-serif;
     font-size: 1.25rem;
     cursor: pointer;
@@ -219,12 +171,13 @@ html,body {
     color: black;
 }
 
-.lesson-one-point-four-submit:active, .lesson-one-point-four-next:active {
+.lesson-one-point-three-submit:active {
     background-color: #98c844;
 }
 
+/* Separators */
 .separator {
-    width: 102%; 
+    width: 102%;
     border: none;
     border-top: 4px solid #015770;
     margin-top: 20px;
