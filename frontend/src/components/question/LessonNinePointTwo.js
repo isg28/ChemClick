@@ -14,6 +14,7 @@ import PositiveIon2 from "../../assets/question/+2ioncomb-transparent.png";
 import NegativeIon2 from "../../assets/question/-2ioncomb-transparent.png";
 import PositiveIon3 from "../../assets/question/+3ioncomb-transparent.png";
 import NegativeIon3 from "../../assets/question/-3ioncomb-transparent.png";
+import {motion} from "framer-motion";
 
 const ionImages = {
     "+1": PositiveIon,
@@ -48,7 +49,7 @@ const DraggableIon = ({ ionType, src }) => {
 };
 
 // Drop Zone Component
-const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
+const DropZone = ({ droppedIons = [], onDrop, onRemoveIon, isFirstZone = false }) => {
     const [{ isOver }, drop] = useDrop(() => ({
         accept: ItemType,
         drop: (item) => onDrop(item),
@@ -60,6 +61,26 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
     const handleRemoveIon = (index) => {
         onRemoveIon(index); // Calls the onRemoveIon function passed as prop
     };
+
+    const droppedIonVariants = {
+        hidden: { 
+            x: -50,
+            opacity: 0,
+            zIndex: 1000,
+        },
+        visible: { 
+            x:150, 
+            opacity: 1,
+            transition: { 
+                type: "spring", 
+                stiffness: 300,
+                damping: 20
+            }
+        }
+    };
+
+    const imageSize = droppedIons.length === 1 ? 100 : Math.max(30, 105 - droppedIons.length * 15);
+    const baseZIndex = isFirstZone ? 100 : 1;
 
     return (
         <div
@@ -76,18 +97,36 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
                 justifyContent: "center",
                 padding: "10px",
                 flexDirection: "column",
+                position: "relative",
+                gap: "-5px",
+                zIndex: baseZIndex, // Baseline z-index for the drop zone
+                overflow: "visible"
             }}
         >
             {droppedIons.length === 0 ? (
                 <p>Drop Ions Here</p>
             ) : (
                 droppedIons.map((ion, index) => (
-                    <div key={index} style={{ position: 'relative' }}>
+                    <motion.div 
+                        key={index} 
+                        style={{ position: 'relative',
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginTop: "-10px", // Make them touch by fully overlapping
+                                marginBottom: "-20px",
+                                zIndex: isFirstZone ? 1000 : baseZIndex + 1
+                        }}
+                        initial="hidden"
+                        animate="visible"
+                        variants={isFirstZone ? droppedIonVariants : {}}
+                    >
                         <img
                             src={ion.src}
                             alt={`Dropped Ion ${ion.ionType}`}
                             className="dropped-ion-image"
-                            style={{ width: "70px", height: "70px" }}
+                            style={{ width: `${imageSize}px`, // Adjust image size dynamically
+                            height: `${imageSize}px`, }}
                         />
                         <button
                             onClick={() => handleRemoveIon(index)}
@@ -102,11 +141,12 @@ const DropZone = ({ droppedIons = [], onDrop, onRemoveIon }) => {
                                 width: '20px',
                                 height: '20px',
                                 cursor: 'pointer',
+                                zIndex: isFirstZone ? 1001 : baseZIndex + 2 
                             }}
                         >
                         X
                         </button>
-                    </div>
+                    </motion.div>
                 ))
             )}
         </div>
@@ -141,6 +181,25 @@ function LessonNinePointTwo(){
     const [canSubmit, setCanSubmit] = useState(false);
     const [questionText, setQuestionText] = useState('');  // Add state for question text
 
+    // Track formula input states
+    const [formulaInputs, setFormulaInputs] = useState({
+        base1: "",
+        base2: "",
+        super1: "",
+        super2: "",
+        sub1: "",
+        sub2: ""
+    });
+
+    // Track which inputs are unlocked
+    const [unlockedInputs, setUnlockedInputs] = useState({
+        base1: true,    // First base is initially unlocked
+        base2: false,
+        super1: false,
+        super2: false,
+        sub1: false,
+        sub2: false
+    });
 
     const studentId = localStorage.getItem('studentId'); 
     const teacherId = localStorage.getItem('teacherId'); 
@@ -158,11 +217,6 @@ function LessonNinePointTwo(){
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
     const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
-    const explicitFormulacorrectAnswers = ["base1", "base2", "super1", "super2", "sub1", "sub2"];
-    const [userInputs, setUserInputs] = useState(["", "", "", "", "", ""]);
-    const [isExplicitFormulaCorrect, setIsExplicitFormulaCorrect] = useState([false, false, false, false, false, false]);
-    const [currentIndex, setCurrentIndex] = useState(0); // Tracks which input is being validated
-
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -196,6 +250,32 @@ function LessonNinePointTwo(){
             setShowCompletionModal(true);
         }
     }, [progress]);
+
+    // Handle input changes and progressive unlocking
+    const handleInputChange = (field, value) => {
+        // Update the input value
+        setFormulaInputs(prev => ({
+            ...prev,
+            [field]: value
+        }));
+
+        // Logic for unlocking next fields
+        if (field === 'base1' && value.trim() !== '') {
+            setUnlockedInputs(prev => ({ ...prev, base2: true }));
+        }
+        else if (field === 'base2' && value.trim() !== '') {
+            setUnlockedInputs(prev => ({ ...prev, super1: true }));
+        }
+        else if (field === 'super1' && value.trim() !== '') {
+            setUnlockedInputs(prev => ({ ...prev, super2: true }));
+        }
+        else if (field === 'super2' && value.trim() !== '') {
+            setUnlockedInputs(prev => ({ ...prev, sub1: true }));
+        }
+        else if (field === 'sub1' && value.trim() !== '') {
+            setUnlockedInputs(prev => ({ ...prev, sub2: true }));
+        }
+    };
 
     const handleDropZone1 = (item) => {
         // Allow only positive ions in the first drop zone
@@ -238,6 +318,26 @@ function LessonNinePointTwo(){
         if (path.includes("+1")) return "+1";
         if (path.includes("-1")) return "-1";
         return null;  // Return null if no match
+    };
+
+    const resetFormFields = () => {
+        setFormulaInputs({
+            base1: "",
+            base2: "",
+            super1: "",
+            super2: "",
+            sub1: "",
+            sub2: ""
+        });
+        
+        setUnlockedInputs({
+            base1: true,    // Reset to initial state
+            base2: false,
+            super1: false,
+            super2: false,
+            sub1: false,
+            sub2: false
+        });
     };
 
     const handleSubmit = () => {
@@ -295,27 +395,6 @@ function LessonNinePointTwo(){
                 "formula": {base1: "Ga", super1: "3+", sub1: "2", base2: "S", super2: "2-", sub2: "3"}
             }
         };
-
-        // Handle input change
-    const handleInputChange = (index, value) => {
-        if (index === currentIndex) {
-        const updatedInputs = [...userInputs];
-        updatedInputs[index] = value;
-        setUserInputs(updatedInputs);
-        }
-    };
-
-  // Check if the current input is correct
-    const checkAnswer = () => {
-        if (userInputs[currentIndex] === correctAnswers[currentIndex]) {
-            const updatedCorrect = [...isExplicitFormulaCorrect];
-            updatedCorrect[currentIndex] = true;
-            setIsCorrect(updatedCorrect);
-            setCurrentIndex(currentIndex + 1); // Move to the next input
-        } else {
-        alert("Incorrect! Try again.");
-        }
-    };
     
         const currentQuestion = correctIons[questionText];
         if (!currentQuestion) return;
@@ -324,17 +403,13 @@ function LessonNinePointTwo(){
         const correctIonsSorted = [...currentQuestion.ions].sort();
         const isIonCorrect = JSON.stringify(userIons) === JSON.stringify(correctIonsSorted);
     
-        const baseInputs = document.querySelectorAll(".base-input");
-        const superInputs = document.querySelectorAll(".super-input");
-        const subInputs = document.querySelectorAll(".sub-input");
-        
-        const isFormulaCorrect =
-            baseInputs[0].value === currentQuestion.formula.base1 &&
-            superInputs[0].value === currentQuestion.formula.super1 &&
-            subInputs[0].value === currentQuestion.formula.sub1 &&
-            baseInputs[1].value === currentQuestion.formula.base2 &&
-            superInputs[1].value === currentQuestion.formula.super2 &&
-            subInputs[1].value === currentQuestion.formula.sub2;
+        const isFormulaCorrect = 
+            formulaInputs.base1 === currentQuestion.formula.base1 &&
+            formulaInputs.super1 === currentQuestion.formula.super1 &&
+            formulaInputs.sub1 === currentQuestion.formula.sub1 &&
+            formulaInputs.base2 === currentQuestion.formula.base2 &&
+            formulaInputs.super2 === currentQuestion.formula.super2 &&
+            formulaInputs.sub2 === currentQuestion.formula.sub2;
     
         if (isIonCorrect && isFormulaCorrect) {
             setFeedbackMessage("✅ Correct! Great job!");
@@ -345,11 +420,9 @@ function LessonNinePointTwo(){
                 setQuestionText(questions[Math.floor(Math.random() * questions.length)]);
                 setDroppedIons1([]);
                 setDroppedIons2([]);
-            baseInputs.forEach(input => input.value = "");
-            superInputs.forEach(input => input.value = "");
-            subInputs.forEach(input => input.value = "");
-            setFeedbackMessage("");
-        }, 1500); // Delay before switching to next question
+                resetFormFields();
+                setFeedbackMessage("");
+            }, 1500); // Delay before switching to next question
         } else {
             setFeedbackMessage("❌ Incorrect. Try again!");
             setFeedbackClass("incorrect-feedback");
@@ -358,7 +431,6 @@ function LessonNinePointTwo(){
         setTotalAttempts(totalAttempts + 1);
     };
     
-
     return (
         <DndProvider backend={HTML5Backend}>
             <div className='lesson-one-point-one'>
@@ -388,11 +460,13 @@ function LessonNinePointTwo(){
                                             onDrop={handleDropZone1}
                                             droppedIons={droppedIons1}
                                             onRemoveIon={handleRemoveIonZone1}
+                                            isFirstZone = {true}
                                         />
                                 <DropZone
                                             onDrop={handleDropZone2}
                                             droppedIons={droppedIons2}
                                             onRemoveIon={handleRemoveIonZone2}
+                                            isFirstZone = {false}
                                         />
                                         
                                 </div>
@@ -412,26 +486,110 @@ function LessonNinePointTwo(){
                             <div className='lesson-one-point-one-question'>
                                 <h1> {questionText} </h1>
                                 <div className="formula-input-container">
-                                <div className="formula-row">
-                                    <div className="base-group">
-                                        <input type="text" className="formula-input base-input" placeholder="Base" />
-                                        <div className="exponent-group">
-                                            <input type="text" className="formula-input super-input" placeholder="Charge" />
-                                            <input type="text" className="formula-input sub-input" placeholder="Ion" />
-                                        </div>
-                                        <input type="text" className="formula-input base-input" placeholder="Base" />
-                                        <div className="exponent-group">
-                                            <input type="text" className="formula-input super-input" placeholder="Charge" />
-                                            <input type="text" className="formula-input sub-input" placeholder="Ion" />
-                                        </div>
-                                    </div>
-                            
-                                </div>
-                            </div>
+  <div className="formula-row">
+    {/* First element group */}
+    <div className="element-group">
+      {/* Base 1 */}
+      <input 
+        type="text" 
+        className="formula-input base-input" 
+        placeholder="Base" 
+        value={formulaInputs.base1}
+        onChange={(e) => handleInputChange('base1', e.target.value)}
+        disabled={!unlockedInputs.base1}
+        style={{
+          backgroundColor: unlockedInputs.base1 ? 'white' : '#f0f0f0',
+          cursor: unlockedInputs.base1 ? 'text' : 'not-allowed',
+          borderColor: unlockedInputs.base1 ? '#007bff' : '#ccc'
+        }}
+      />
+      
+      {/* Charge and Ion 1 in a column */}
+      <div className="exponent-column">
+        <input 
+          type="text" 
+          className="formula-input super-input" 
+          placeholder="Charge" 
+          value={formulaInputs.super1}
+          onChange={(e) => handleInputChange('super1', e.target.value)}
+          disabled={!unlockedInputs.super1}
+          style={{
+            backgroundColor: unlockedInputs.super1 ? 'white' : '#f0f0f0',
+            cursor: unlockedInputs.super1 ? 'text' : 'not-allowed',
+            borderColor: unlockedInputs.super1 ? '#007bff' : '#ccc'
+          }}
+        />
+        
+        <input 
+          type="text" 
+          className="formula-input sub-input" 
+          placeholder="Ion" 
+          value={formulaInputs.sub1}
+          onChange={(e) => handleInputChange('sub1', e.target.value)}
+          disabled={!unlockedInputs.sub1}
+          style={{
+            backgroundColor: unlockedInputs.sub1 ? 'white' : '#f0f0f0',
+            cursor: unlockedInputs.sub1 ? 'text' : 'not-allowed',
+            borderColor: unlockedInputs.sub1 ? '#007bff' : '#ccc'
+          }}
+        />
+      </div>
+    </div>
+    
+    {/* Second element group */}
+    <div className="element-group">
+      {/* Base 2 */}
+      <input 
+        type="text" 
+        className="formula-input base-input" 
+        placeholder="Base" 
+        value={formulaInputs.base2}
+        onChange={(e) => handleInputChange('base2', e.target.value)}
+        disabled={!unlockedInputs.base2}
+        style={{
+          backgroundColor: unlockedInputs.base2 ? 'white' : '#f0f0f0',
+          cursor: unlockedInputs.base2 ? 'text' : 'not-allowed',
+          borderColor: unlockedInputs.base2 ? '#007bff' : '#ccc'
+        }}
+      />
+      
+      {/* Charge and Ion 2 in a column */}
+      <div className="exponent-column">
+        <input 
+          type="text" 
+          className="formula-input super-input" 
+          placeholder="Charge" 
+          value={formulaInputs.super2}
+          onChange={(e) => handleInputChange('super2', e.target.value)}
+          disabled={!unlockedInputs.super2}
+          style={{
+            backgroundColor: unlockedInputs.super2 ? 'white' : '#f0f0f0',
+            cursor: unlockedInputs.super2 ? 'text' : 'not-allowed',
+            borderColor: unlockedInputs.super2 ? '#007bff' : '#ccc'
+          }}
+        />
+        
+        <input 
+          type="text" 
+          className="formula-input sub-input" 
+          placeholder="Ion" 
+          value={formulaInputs.sub2}
+          onChange={(e) => handleInputChange('sub2', e.target.value)}
+          disabled={!unlockedInputs.sub2}
+          style={{
+            backgroundColor: unlockedInputs.sub2 ? 'white' : '#f0f0f0',
+            cursor: unlockedInputs.sub2 ? 'text' : 'not-allowed',
+            borderColor: unlockedInputs.sub2 ? '#007bff' : '#ccc'
+          }}
+        />
+      </div>
+    </div>
+  </div>
+</div>
                         </div>
                     </div>
                         <div className="submit-feedback-container">
-                            <button className='lesson-one-point-one-submit' onClick = {handleSubmit}>Submit Answer</button>
+                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
                             <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
@@ -479,6 +637,5 @@ function LessonNinePointTwo(){
         
     );
 }
-
 
 export default LessonNinePointTwo;

@@ -1,45 +1,52 @@
 .formula-input-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-}
-
-/* Grouping bases side by side */
-.base-group {
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .formula-row {
     display: flex;
-    gap: 10px; /* Space between the two base inputs */
-}
-
-.formula-input {
+    gap: 40px; /* Space between element groups */
+    align-items: center;
+  }
+  
+  .element-group {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between base and exponent column */
+  }
+  
+  .exponent-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Space between charge and ion inputs */
+  }
+  
+  .base-input {
+    width: 70px;
+    height: 70px; /* Make it tall enough to align with the column */
     text-align: center;
-    font-size: 18px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* Base input (same size) */
-.base-input {
+    font-size: 1.2em;
+    padding: 8px;
+  }
+  
+  .super-input, .sub-input {
     width: 60px;
-    height: 50px;
-}
-
-/* Superscript input (smaller, raised above bases) */
-.super-input {
-    width: 40px;
-    height: 30px;
-    font-size: 14px;
-    position: relative;
-    bottom: 15px;
-    margin-left: 20px; /* Adjust position to align with base */
-}
-
-/* Subscript input (smaller, lowered below bases) */
-.sub-input {
-    width: 40px;
-    height: 30px;
-    font-size: 14px;
-    position: relative;
-    top: 15px;
-    margin-left: 20px; /* Adjust position to align with base */
-} 
+    text-align: center;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  
+  /* Optional: Add some visual distinction to the different input types */
+  .base-input {
+    border: 2px solid #007bff;
+  }
+  
+  .super-input {
+    border: 2px solid #28a745;
+  }
+  
+  .sub-input {
+    border: 2px solid #dc3545;
+  }
