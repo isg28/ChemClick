@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.LessonElevenPointOne {
+    background-image: url('../../assets/question/ChemClick_Background_Faded.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.LessonElevenPointOneBox {
+    height: 66vh;
+    width: 66vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LessonElevenPointOneBoxInnercont {
+    width: 60vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #00d5d7;
+    border-radius: 15px;
+    border: 5px solid #ffffff;
+    background-image: url('../../assets/question/RainbowBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: scroll;
+    box-shadow: 0 4px 10px rgba(1, 87, 112, 0.5);
+}
+
+.LessonElevenPointOneBoxTitle {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.LessonElevenPointOneBoxTitle h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+}
+
+.LessonElevenPointOneContent {
+    width: 100%;
+    max-width: 950px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 5px solid #015770;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+.LessonElevenPointOnePrompt {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    color: #0a0a0a;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    max-width: 800px;
+    line-height: 1.5;
+}
+
+.LessonElevenPointOneRow {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.LessonElevenPointOneInput {
+    display: flex;
+    position: relative;
+    width: 80%;
+    max-width: 400px;
+    height: 100%;
+    overflow-y: scroll; 
+    margin: 0;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.LessonElevenPointOneImageSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LessonElevenPointOneArrows {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.LessonElevenArrowLeft,
+.LessonElevenArrowRight {
+    all: unset;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #015770;
+    border: 3px solid #015770;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 3px;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.LessonElevenPointOneImageContainer {
+    position: relative;
+    width: 100%;
+    max-width: 290px;
+    margin: 0;
+    border-radius: 5px;
+    border: 5px solid #015770;
+    padding: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.LessonElevenArrowLeft:hover,
+.LessonElevenArrowRight:hover {
+    background-color: #00d3d785;
+    color: #ffffff;
+}
+
+.LessonElevenArrowLeft:active,
+.LessonElevenArrowRight:active {
+    background-color: #d3f6f7;
+    transform: scale(0.95);
+}
+
+.LessonElevenPointOneImageContainer::-webkit-scrollbar {
+    width:8px; 
+}
+
+.LessonElevenPointOneImageContainer::-webkit-scrollbar-thumb {
+    background: #a0a0a0;
+    border-radius: 5px;
+}
+
+.LessonElevenPointOneImageContainer .scrollable-image {
+    width: 100%;
+    height: auto;
+}
+
+.LessonElevenPointOneFeedback {
+    font-size: 1.25rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    margin-top: 5px;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.LessonElevenPointOneFeedback.correct {
+    background-color: #e0f8e0;
+    margin-top: 15px;
+    color: #237b31;
+    border: 2px solid #237b31;
+}
+
+.LessonElevenPointOneFeedback.incorrect {
+    background-color: #ffe6e6;
+    color: #662e2e;
+    border: 2px solid #c94444;
+    margin-top: 15px;
+}
+
+.LessonElevenPointOneFeedback.image-feedback {
+    background-color: #e0f0ff;
+    color: #003366;
+    border: 2px solid #005bb5;
+    margin-top: 15px;
+}
+
+.LessonElevenPointOneSubmit, .LessonElevenPointOneNext {
+    background-color: #e3f0cc;
+    border: 5px solid #237b31;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: 'Orelega One', sans-serif;
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-top: -15px;
+    color: black;
+}
+
+.LessonElevenPointOneSubmit:active, .LessonElevenPointOneNext:active {
+    background-color: #98c844;
+}
+
+
+.LessonEleven-Lewis-Model-container {
+    text-align: center;
+    font-family: 'Orelega One', sans-serif;
+
+    width: 100%;
+    height: 80%;
+}
+
+.LessonEleven-Inner-Lewis-Model-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.Lewis-Dot-structure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.Lewis-Dot-atom {
+    width: 80px;
+    text-align: center;
+}
+
+.Lewis-Dot-dots {
+    font-size: 30px;
+    height: 30px;
+}
+
+
+button {
+    margin: 5px;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ddd;
+}

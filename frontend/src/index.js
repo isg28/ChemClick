@@ -102,6 +102,9 @@ import LessonTenPointOne from './components/question/LessonTenPointOne';
 import LessonTenPointTwo from './components/question/LessonTenPointTwo';
 import LessonTenPointThree from './components/question/LessonTenPointThree';
 
+import LessonElevenPointOne from './components/question/LessonElevenPointOne';
+import LessonElevenPointThree from './components/question/LessonElevenPointThree';
+
 import TeacherLogin from './components/teacherlogin/TeacherLogin';
 
 import ProtectedRoute from "./ProtectedRoute";
@@ -216,6 +219,9 @@ ReactDOM.render(
         <Route path = "/LessonTenPointOne" element = {<LessonTenPointOne/>}/>
         <Route path = "/LessonTenPointTwo" element = {<LessonTenPointTwo/>}/>
         <Route path = "/LessonTenPointThree" element = {<LessonTenPointThree/>}/>
+
+        <Route path = "/LessonElevenPointOne" element = {<LessonElevenPointOne/>}/>
+        <Route path = "/LessonElevenPointThree" element = {<LessonElevenPointThree/>}/>
         
         <Route path = "/teacherlogin" element = {<TeacherLogin/>}/>
 
