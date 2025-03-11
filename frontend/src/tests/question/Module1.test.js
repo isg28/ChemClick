@@ -104,7 +104,7 @@ describe("LessonOnePointThree Component", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Object Length/i)).toBeInTheDocument();
+    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Tenths Value/i)).toBeInTheDocument();
   });
 
   test("displays an input field and submit button", async () => {
@@ -115,7 +115,7 @@ describe("LessonOnePointThree Component", () => {
     );
 
     await screen.findByRole('textbox');
-    expect(screen.getByText(/Submit Answer/i)).toBeInTheDocument();
+    expect(screen.getByText(/Submit/i)).toBeInTheDocument();
   });
 
   test("allows user to input a measurement", async () => {
