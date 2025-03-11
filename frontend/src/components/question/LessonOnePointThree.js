@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../../styles/question/Question.css';
 import { useNavigate } from 'react-router-dom';
+import '../../styles/question/Question.css';
 import '../../styles/question/LessonOnePointThree.css';
-import { renderStars, renderGoalChecks } from '../../components/question/LessonUtils';
+import {renderStars, renderGoalChecks, fetchLessonData, fetchLessonProgress, CorrectResponses, IncorrectResponses} from '../../components/question/LessonUtils';
 
 function LessonOnePointThree() {
     const navigate = useNavigate();
@@ -10,6 +11,13 @@ function LessonOnePointThree() {
     const cursorRef = useRef(null);
     const pencilRef = useRef(null);
     
+    const studentId = localStorage.getItem('studentId'); 
+    const teacherId = localStorage.getItem('teacherId'); 
+
+    const isTeacher = !!teacherId; 
+    const userId = isTeacher ? teacherId : studentId;     
+    const lessonId = 'lesson1.3'; 
+
     const PIXELS_PER_INCH = 136;
     
     const [initialPosition, setInitialPosition] = useState(0);
@@ -20,6 +28,48 @@ function LessonOnePointThree() {
     const [cursorPosition, setCursorPosition] = useState(0);
     const dragState = useRef({ isDragging: false, offsetX: 0 });
 
+   const [goal, setGoal] = useState(); 
+       const [correctAnswers, setCorrectAnswers] = useState(0);
+       const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+       const [totalAttempts, setTotalAttempts] = useState(0);
+       const [progress, setProgress] = useState(0); 
+       const [masteryLevel, setMasteryLevel] = useState(0); 
+       const [showCompletionModal, setShowCompletionModal] = useState(false); 
+       const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);    
+       const displayMedals = starsEarned >= 5;
+
+       const handlequestion = () => {
+        navigate('/dashboard');
+    };
+
+    useEffect(() => {
+            if (!userId) { 
+                console.error('ID not found');
+                navigate('/login');
+                return;
+              }
+    
+            const initializeData = async () => {
+                await fetchLessonData(lessonId, setGoal);
+                await fetchLessonProgress(userId, lessonId, isTeacher, {
+                    setCorrectAnswers,
+                    setIncorrectAnswers,
+                    setProgress,
+                    setMasteryLevel,
+                    setGoal,
+                    setTotalAttempts,
+                });        
+            };
+    
+            initializeData();
+        }, [userId, lessonId, navigate, isTeacher]);
+
+        useEffect(() => {
+                if (progress === 100) {
+                    setShowCompletionModal(true);
+                }
+            }, [progress]);
+    
     useEffect(() => {
         if (rulerRef.current) {
             const rulerLeft = rulerRef.current.getBoundingClientRect().left;
@@ -28,8 +78,6 @@ function LessonOnePointThree() {
         }
         generateRandomPencilLength();
     }, []); 
-
-
 
     const generateRandomPencilLength = () => {
         const length = (Math.random() * 5 + 1).toFixed(1);
@@ -54,33 +102,57 @@ function LessonOnePointThree() {
         dragState.current.isDragging = false;
     };
 
-const handleSubmit = () => {
-    // Convert cursor position to inches
-    const measuredInches = ((cursorPosition - initialPosition) / PIXELS_PER_INCH).toFixed(1);
-    
-    // Ensure floating-point rounding does not cause off-by-one errors
-    const correctAnswer = pencilLength.toFixed(1);
-    
-    // Allow for a small tolerance of ±0.05 to compensate for small pixel misalignment
-    const tolerance = 0.05;
-    
-    if (Math.abs(parseFloat(userInput) - parseFloat(correctAnswer)) <= tolerance) {
-        setFeedbackMessage(`Correct! The measurement is approximately ${correctAnswer} inches.`);
-        setFeedbackClass('correct');
-        setTimeout(() => resetQuestion(), 2000);
-    } else {
-        setFeedbackMessage(`Incorrect. The correct measurement is around ${correctAnswer} inches.`);
-        setFeedbackClass('incorrect');
-        setTimeout(() => setFeedbackMessage(''), 4000);
-    }
-};
     const resetQuestion = () => {
         setUserInput("");
         setFeedbackMessage('');
         setFeedbackClass('');
-        setCursorPosition(initialPosition);
-        generateRandomPencilLength();
+        setCursorPosition(initialPosition); // Reset cursor position
+        generateRandomPencilLength(); // Generate new pencil length
     };
+    
+
+const handleSubmit = async () => {
+    const correctAnswer = pencilLength.toFixed(1);
+    const userAnswer = parseFloat(userInput).toFixed(1);
+
+    if (Math.abs(userAnswer - correctAnswer) <= 0.05) {
+        setFeedbackMessage("Correct! Moving to the next question.");
+        setFeedbackClass('correct');
+
+        await CorrectResponses({
+            userId, lessonId, isTeacher, 
+            correctAnswers, incorrectAnswers, totalAttempts, 
+            progress, masteryLevel, goal, starsEarned, 
+            setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts
+        });
+
+        // Reset cursor, input field, and generate new question
+        setTimeout(() => {
+            setFeedbackMessage('');
+            setFeedbackClass('');
+            setUserInput("");  // ✅ Clears input field
+            setCursorPosition(initialPosition);  // ✅ Resets cursor position
+            generateRandomPencilLength();  // ✅ Generates a new pencil length
+        }, 2000);
+    
+    } else {
+        setFeedbackMessage("Try again! Please adjust your measurement.");
+        setFeedbackClass('incorrect');
+
+        await IncorrectResponses({
+            userId, lessonId, isTeacher, 
+            correctAnswers, incorrectAnswers, totalAttempts, 
+            progress, masteryLevel, goal, starsEarned, 
+            setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts
+        });
+
+        setTimeout(() => {
+            setFeedbackMessage('');
+            setFeedbackClass('');
+        }, 4000);
+    }
+};
+
 
     return (
         <div className='lesson-one-point-three' onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
@@ -143,17 +215,36 @@ const handleSubmit = () => {
                 </div>
                 {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                    <div className="side-column-box-holder">
-                        <div className="side-column-box masterybox">
-                            <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
-                            <div className="side-column-box-info masteryboxstars"></div>
-                        </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>{renderGoalChecks()}</div>
-                        </div>
+    <div className="side-column-box-holder">
+        <div className="side-column-box masterybox">
+            <div className="side-column-box-title masteryboxtitle">
+                <h1>Mastery</h1>
+            </div>
+            {displayMedals && (
+                <>
+                    <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">🏅</div>
+                    <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">🏅</div>
+                </>
+            )}
+            <div className="side-column-box-info masteryboxstars">{stars}</div>
+        </div>
+        <div className='side-column-box'>
+            <div className='side-column-box-title'><h1>Goal</h1></div>
+            <div className='side-column-box-info'>
+                {renderGoalChecks(goal, correctAnswers)}
+            </div>
+        </div>
+    </div>
+</div>
+{showCompletionModal && (
+                <div className="completion-modal">
+                    <div className="completion-modal-content">
+                        <h2>🎉 Congratulations! 🎉</h2>
+                        <p>You've finished the assignment! Keep practicing to strengthen your skills.</p>
+                        <button onClick={() => setShowCompletionModal(false)}>Continue</button>
                     </div>
                 </div>
+            )}
             </div>
         </div>
     );
