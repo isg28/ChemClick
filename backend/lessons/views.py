@@ -130,9 +130,9 @@ class StudentStatisticsView(APIView):
             def format_status(status):
                 if status == 'completed':
                     return 'Completed'
-                elif status == 'in-progress':
+                elif status == 'in-progress' or status == 'in_progress':
                     return 'In Progress'
-                elif status == 'not_started':
+                elif status == 'not_started' or status == 'not-started':
                     return 'Not Started'
                 return status  # Fallback for unexpected values
             
@@ -179,3 +179,50 @@ class StudentStatisticsView(APIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+    
+    def patch(self, request, lesson_id, user_id):
+        """
+        Reset a given student's progress for a particular lesson.
+        """
+        try:
+            # find the student's progress entry for this lesson
+            progress_entry = LessonProgress.objects.get(user_id=user_id, lesson_id=lesson_id)
+
+            # reset progress fields
+            progress_entry.progress = 0
+            progress_entry.mastery_level = 0
+            progress_entry.correct_answers = 0
+            progress_entry.incorrect_answers = 0
+            progress_entry.total_attempts = 0
+            progress_entry.status = 'not-started'
+            progress_entry.is_late = False
+            progress_entry.completion_timestamp = None
+            progress_entry.save()
+
+            return Response({"message": f"Student {user_id}'s progress reset for lesson {lesson_id}."}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def post(self, request, lesson_id):
+        """
+            Reset all user progress for a particular lesson.
+        """
+        try:
+            progress_entries = LessonProgress.objects.filter(lesson_id=lesson_id)
+            
+            for progress_entry in progress_entries:
+                progress_entry.progress = 0
+                progress_entry.mastery_level = 0
+                progress_entry.correct_answers = 0
+                progress_entry.incorrect_answers = 0
+                progress_entry.total_attempts = 0
+                progress_entry.status = 'not-started'
+                progress_entry.is_late = False
+                progress_entry.completion_timestamp = None
+                progress_entry.save()
+            
+            return Response({"message": f"All student progress reset for lesson {lesson_id}."}, status=status.HTTP_200_OK)
+        
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
