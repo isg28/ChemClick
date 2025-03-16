@@ -33,7 +33,7 @@ class TeacherLessonProgress(me.Document):
             self.status = "completed"
             if not self.completion_timestamp:
                 self.completion_timestamp = datetime.utcnow()
-        elif self.progress > 0:
+        elif self.progress >= 0:
             self.status = "in-progress"
         else:
             self.status = "not-started"

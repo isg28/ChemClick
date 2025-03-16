@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/teacherdashboard/TeacherUnitList.css';
 import TeacherProgressBox from "./TeacherStudentProgress";
@@ -11,8 +11,23 @@ function TeacherUnitList({ units, currentUnit }) {
   const [isCreating, setIsCreating] = useState(false); 
   const [modalScrollTop, setModalScrollTop] = useState(0);
   const [shake, setShake] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const [userList, setUserList] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
+  const fetchUsers = async () => {
+      try {
+          const response = await fetch("http://localhost:8000/users/");
+          if (!response.ok) throw new Error("Failed to fetch users");
 
+          const data = await response.json();
+          setUserList(data);
+          setShowUserModal(true);  
+      } catch (error) {
+          console.error("Error fetching users:", error);
+          setUserList([]);
+      }
+  };
 
   const toggleUnit = (index) => {
     const newOpenUnits = [...openUnits];
@@ -175,14 +190,110 @@ function TeacherUnitList({ units, currentUnit }) {
     container.scrollTop = modalScrollTop;
   };
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/users/");
+            if (!response.ok) throw new Error("Failed to fetch users");
+
+            const data = await response.json();
+            setUserList(data);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleDeleteUser = async (userId) => {
+      const confirmDelete = window.confirm(`Are you sure you want to delete user ${userId} and their progress?`);
+      if (!confirmDelete) return;
+
+      try {
+          const response = await fetch(`http://localhost:8000/users/${userId}/`, { method: "DELETE" });
+
+          if (!response.ok) {
+              throw new Error("Failed to delete user.");
+          }
+
+          alert(`User ${userId} and their progress have been deleted.`);
+          setUserList((prevUsers) => prevUsers.filter((user) => user.student_id !== userId));
+      } catch (error) {
+          console.error("Error deleting user:", error);
+          alert("Failed to delete user.");
+      }
+  };
+
+  const handleDeleteAllUsers = async () => {
+      const confirmDelete = window.confirm("Are you sure you want to DELETE ALL USERS and their progress?");
+      if (!confirmDelete) return;
+
+      try {
+          const response = await fetch(`http://localhost:8000/users/`, { method: "DELETE" });
+
+          if (!response.ok) {
+              throw new Error("Failed to delete all users.");
+          }
+
+          alert("All users and their progress have been deleted.");
+          setUserList([]);
+      } catch (error) {
+          console.error("Error deleting all users:", error);
+          alert("Failed to delete all users.");
+      }
+  };
+
   return (
     <div className={`teacherunitlist-container ${editingLesson ? 'modalActive' : ''}`}>
       <div className="teacherunitlist-header">
         <h1>Student Progress</h1> 
+        <button className="manageUsersButton" onClick={() => fetchUsers()}>Manage Users</button>
       </div>
       {/* <div className='unit-student-progress-button'>
             <h4 onClick = {handleClickToBegin} >View Full Individual Statistics</h4> 
       </div> */}
+      {showUserModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Manage Users</h2>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search student ID..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="user-list-container">
+              {userList.length > 0 ? (
+                userList
+                  .filter((user) =>
+                    user.student_id.includes(searchQuery.trim())
+                  ) 
+                  .map((user) => (
+                    <div key={user.student_id} className="user-item">
+                      <span className="user-id">{user.student_id}</span>
+                      <span
+                        className="teacher-delete-icon"
+                        onClick={() => handleDeleteUser(user.student_id)}
+                      >
+                        🗑️
+                      </span>
+                    </div>
+                  ))
+              ) : (
+                <p>No users found.</p>
+              )}
+            </div>
+            <div className="modal-actions">
+              <button className="delete-all-users" onClick={handleDeleteAllUsers}>
+                Delete All Users
+              </button>
+              <button onClick={() => setShowUserModal(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="teacherunitlist-content">
         {units.map((unit, unitIndex) => (

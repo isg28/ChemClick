@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from lessons.models import LessonProgress
 from .serializers import UserSerializer
 from django.contrib.auth.hashers import check_password
 from .models import User
@@ -29,3 +30,40 @@ class LoginView(APIView):
         except User.DoesNotExist:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
+class UserManagementView(APIView):
+    def delete(self, request, user_id=None):
+        """
+        Deletes a user ONLY AFTER clearing their lesson progress.
+        If user_id is provided, delete only that user. Otherwise, delete all users.
+        """
+        try:
+            if user_id:
+                user = User.objects.get(student_id=user_id)
+                user.delete()
+                return Response({
+                    "message": f"User {user_id} and their progress have been deleted."
+                }, status=status.HTTP_200_OK)
+
+            else:
+                # Delete all student progress & users in general
+                LessonProgress.objects.all().delete()
+                deleted_count = User.objects.all().delete()
+
+                if deleted_count[0] == 0:
+                    return Response({"message": "No users found."}, status=status.HTTP_404_NOT_FOUND)
+
+                return Response({"message": "All users and their progress have been deleted."}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class UserListView(APIView):
+    def get(self, request):
+        try:
+            users = User.objects.only('student_id') 
+            user_list = [{"student_id": user.student_id} for user in users] 
+            
+            return Response(user_list, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

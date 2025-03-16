@@ -47,6 +47,13 @@
     border: 3px solid #015770;
 }
 
+.teacherunitlist-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 10px;
+}
+
 .teacherunitlist-content {
     width: 100%;
 }
@@ -350,5 +357,93 @@ button:hover {
     border: 2px solid red !important;
 }
   
+.manageUsersButton {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
 
-  
+.manageUsersButton:hover {
+    background-color: #ff4c4c;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.user-list-container {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f3f3f3;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.user-item:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.0);
+}
+
+.user-id {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.teacher-delete-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.teacher-delete-icon:hover {
+    color: darkred;
+    transform: scale(1.3); 
+}
+
+.delete-all-users {
+    background-color: #ff3b3b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.delete-all-users:hover {
+    background-color: #cc0000;
+}

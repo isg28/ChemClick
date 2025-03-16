@@ -167,6 +167,43 @@ function ProfileUnitList({ units, currentUnit }) {
     }
   };
 
+  const deleteTeacherUnitProgress = async (unit) => {
+    if (!teacherId || unit.lessons.length === 0) return;
+
+    // Extract the unit number (X from lessonX.Y)
+    const unitNumber = unit.number; 
+
+    const confirmDelete = window.confirm(
+        `Are you sure you want to delete all progress for Unit: ${unitNumber}?`
+    );
+    if (!confirmDelete) return;
+
+    try {
+        const lessonsToDelete = unit.lessons.filter((lesson) =>
+            lesson.lesson_id.startsWith(unitNumber + ".")
+        );
+        // Loop through all lessons in the unit and send DELETE requests
+        await Promise.all(
+            unit.lessons.map(async (lesson) => {
+                const response = await fetch(
+                    `http://localhost:8000/teacherLessons/progress/${teacherId}/${lesson.lesson_id}/`,
+                    {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json" },
+                    }
+                );
+                if (!response.ok) {
+                    console.error(`Failed to delete progress for lesson ${lesson.lesson_id}`);
+                }
+            })
+        );
+
+        alert(`All progress for Unit: ${unitNumber} deleted successfully!`);
+        window.location.reload();
+    } catch (error) {
+        console.error("Error deleting unit progress:", error);
+    }
+  };
 
   return (
     <div className="profileunitlist-container">
@@ -239,16 +276,26 @@ function ProfileUnitList({ units, currentUnit }) {
 
                       <table className="printResultsExpandedTable">
                         <thead>
-                          <tr>
+                        <tr>
+                          {isTeacher ? (
+                            <button 
+                            className='deleteAllButton' 
+                            onClick={() => deleteTeacherUnitProgress(unit)} 
+                            disabled={unit.lessons.length === 0}
+                          >
+                            Delete All Progress for Unit {unit.number}
+                          </button>
+                          ) : (
                             <button 
                               className='printButton' 
                               onClick={() => handlePrintCertificate(unit)}
                               disabled={/Locked|Work In-Progress/.test(checkLessonsCompleted(unit))}
-                              >
-                                Click to Print Certificate
-                              </button>
-                          </tr>
-                        </thead>
+                            >
+                              Click to Print Certificate
+                            </button>
+                          )}
+                        </tr>
+                      </thead>
                       </table>
                     </>
                   </div>

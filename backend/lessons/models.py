@@ -14,7 +14,7 @@ class LessonProgress(me.Document):
     goal_level = me.IntField(default=0)  
     email_sent = me.BooleanField(default=False)
     completion_timestamp = me.DateTimeField(null=True)
-    status = me.StringField(choices=STATUS_CHOICES, default="not-started") 
+    status = me.StringField(choices=STATUS_CHOICES, default="in-progress") 
     is_late = me.BooleanField(default=False)  
 
 
@@ -33,7 +33,7 @@ class LessonProgress(me.Document):
             self.status = "completed"
             if not self.completion_timestamp:
                 self.completion_timestamp = datetime.utcnow()
-        elif self.progress > 0:
+        elif self.progress >= 0:
             self.status = "in-progress"
         else:
             self.status = "not-started"
