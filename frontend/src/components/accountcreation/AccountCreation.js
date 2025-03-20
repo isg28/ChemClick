@@ -105,6 +105,7 @@ function AccountCreation() {
                                 name="studentId" 
                                 value={formData.studentId} 
                                 onChange={handleChange} 
+                                data-testid="studentId-input"
                             />                      
                         </div> 
                     </div>
@@ -119,7 +120,8 @@ function AccountCreation() {
                                 type="text" 
                                 name="confirmId" 
                                 value={formData.confirmId} 
-                                onChange={handleChange} 
+                                onChange={handleChange}
+                                data-testid="confirmId-input" 
                             />                         
                         </div> 
                     </div>
@@ -134,7 +136,8 @@ function AccountCreation() {
                                 type="password" 
                                 name="password" 
                                 value={formData.password} 
-                                onChange={handleChange} 
+                                onChange={handleChange}
+                                data-testid="password-input" 
                             />                          
                         </div> 
                     </div>
@@ -149,7 +152,8 @@ function AccountCreation() {
                                 type="password" 
                                 name="confirmPassword" 
                                 value={formData.confirmPassword} 
-                                onChange={handleChange} 
+                                onChange={handleChange}
+                                data-testid="confirmPassword-input" 
                             />                          
                         </div> 
                     </div>
@@ -161,7 +165,9 @@ function AccountCreation() {
                     <div className = 'options'>
                         <div className = 'already-have-account' onClick={() => navigate('/login')}>Already Have Account? Login</div>
                         <div className = 'submit-container'></div>
-                        <div className = 'submit' onClick = {handleCreateAccount}>CREATE ACCOUNT</div>
+                        <div className = 'submit' onClick = {handleCreateAccount} data-testid="create-account-button">
+                            CREATE ACCOUNT
+                        </div>
                 </div>    
             </div>
         </div>
