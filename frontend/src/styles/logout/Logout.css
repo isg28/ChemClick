@@ -28,10 +28,10 @@ html, body {
     flex-direction: column;
     margin: auto;
     margin-top: 200px;
-    /*background-image: url('../../assets/logout/ChemClickBackground.jpg'); */
+    background-image: url('../../assets/logout/logoutbg.png');
     background-color: white; 
-    /*background-size: cover;*/
-    /*background-position: center;*/
+    background-size: cover;
+    background-position: center;
     padding-bottom: 30px;
     width: 90%;
     max-width: 800px;
