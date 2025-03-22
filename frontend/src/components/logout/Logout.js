@@ -19,7 +19,7 @@ function Logout() {
 
     return (
       <div className = 'Logout'>
-         <div className = 'container'> 
+         <div className = 'logout-container'> 
             <div className = 'header'>
                <img  
                   src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "profile-logo" 

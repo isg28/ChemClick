@@ -13,8 +13,8 @@
     box-shadow: 0 4px 10px rgba(1, 87, 112, 0.8);
     transform: translateX(-23%);
     top: 20px;
-    min-height: 620px;
-    max-height: 620px;
+    min-height: 497px;
+    max-height: 497px;
     overflow-y: auto; 
     overflow-x: hidden;
 }

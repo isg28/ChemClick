@@ -136,7 +136,11 @@ function LessonTwoPointOne() {
 
                         <hr className="separator" />    
                         <div className="lesson-two-point-one-question">
-                            <input type="text" value={userInput} onChange={(e) => setUserInput(e.target.value)} placeholder="Enter the uncertain digit" />
+                            <input type="text" 
+                                value={userInput} 
+                                onChange={(e) => setUserInput(e.target.value)}
+                                className="lesson-two-point-one-input" 
+                                placeholder="Enter the uncertain digit" />
                             </div>
                         </div>
 

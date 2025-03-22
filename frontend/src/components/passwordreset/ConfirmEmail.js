@@ -49,16 +49,16 @@ function ConfirmEmail() {
 	
 		return (
 			<div className="ConfirmEmail">
-				<div className="container">
-					<div className="header">
-						<img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="profile-logo" />
+				<div className="login-container">
+					<div className="login-header">
+						<img src={`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt="ChemClick Logo" className="login-profile-logo" />
 						<div className="underline"></div>
 					</div>
 	
-					<div className="input-box">
-						<div className="inputs">
+					<div className="login-input-box">
+						<div className="login-inputs">
 							<label className="Email">EMAIL</label>
-							<div className="input">
+							<div className="login-input">
 								<input
 									type="email"
 									value={email}
@@ -67,9 +67,9 @@ function ConfirmEmail() {
 							</div>
 						</div>
 	
-						<div className="inputs">
+						<div className="login-inputs">
 							<label className="VerificationCode">VERIFICATION CODE</label>
-							<div className="input">
+							<div className="login-input">
 								<input
 									type="text"
 									//replace with actual verification code when process is set up

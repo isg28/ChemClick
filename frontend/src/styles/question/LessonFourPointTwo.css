@@ -23,7 +23,7 @@ html,body {
 }
 
 .lesson-four-point-two-box {
-    height: 66vh;
+    height: 77vh;
     width: 66vw;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@ html,body {
     background-color: #00D5D7;
     border-radius: 15px;
     border: 5px solid #ffffff;
-
+    overflow-x: hidden;
     background-image: url('../../assets/question/RainbowBackground.png');
     background-size: cover;
     background-position: center;

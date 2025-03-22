@@ -50,16 +50,16 @@ function Login() {
 
   return (
     <div className = 'Login'>
-      <div className = 'container'>
-        <div className = 'header'>
-            <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "profile-logo" />
+      <div className = 'login-container'>
+        <div className = 'login-header'>
+            <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "login-profile-logo" />
           <div className = 'underline'></div>
         </div>
         
-        <div className = 'input-box'>
-          <div className = 'inputs'>
-            <div className = "Student-ID">STUDENT ID</div>
-            <div className = 'input'>
+        <div className = 'login-input-box'>
+          <div className = 'login-inputs'>
+            <div className = "login-Student-ID">STUDENT ID</div>
+            <div className = 'login-input'>
               <input
                 type="text"
                 value={studentId}
@@ -67,9 +67,9 @@ function Login() {
               />
             </div>
           </div>
-          <div className = 'inputs'>
-            <div className = 'Password'>PASSWORD</div>
-            <div className = 'input'>
+          <div className = 'login-inputs'>
+            <div className = 'login-Password'>PASSWORD</div>
+            <div className = 'login-input'>
               <input
                 type="password"
                 value={password}
@@ -78,7 +78,7 @@ function Login() {
             </div>
           </div>
           <div className = 'options'>
-            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password?</div>
+            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password</div>
             <div className='create-account' onClick={() => navigate('/accountcreation')}>Create Account</div>
             <div className = 'submit-container'>
             </div>

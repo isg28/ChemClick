@@ -90,16 +90,16 @@ function AccountCreation() {
 
     return (
         <div className = 'CreateAccount'>
-            <div className = 'container'>
-                <div className = 'header'>
-                    <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "profile-logo" />
+            <div className = 'acc-container'>
+                <div className = 'acc-header'>
+                    <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "acc-profile-logo" />
                     <div className = 'underline'></div>
                 </div>
 
-                <div className = 'input-box'>
-                    <div className = 'inputs'>
-                        <div className = "Student-ID">STUDENT ID</div>
-                        <div className = 'input'>
+                <div className = 'acc-input-box'>
+                    <div className = 'acc-inputs'>
+                        <div className = "acc-Student-ID">STUDENT ID</div>
+                        <div className = 'acc-input'>
                             <input 
                                 type="text" 
                                 name="studentId" 
@@ -113,9 +113,9 @@ function AccountCreation() {
                                 <span className="error-message">
                                     {errors.studentId}
                                 </span>)} 
-                    <div className = 'inputs'>
-                        <div className = "Student-ID">CONFIRM STUDENT ID</div>
-                        <div className = 'input'>
+                    <div className = 'acc-inputs'>
+                        <div className = "acc-Student-ID">CONFIRM STUDENT ID</div>
+                        <div className = 'acc-input'>
                             <input 
                                 type="text" 
                                 name="confirmId" 
@@ -129,9 +129,9 @@ function AccountCreation() {
                                 <span className="error-message">
                                     {errors.confirmId}
                                 </span>)} 
-                    <div className = 'inputs'>
-                        <div className = "Password">PASSWORD</div>
-                        <div className = 'input'>
+                    <div className = 'acc-inputs'>
+                        <div className = "acc-Password">PASSWORD</div>
+                        <div className = 'acc-input'>
                             <input 
                                 type="password" 
                                 name="password" 
@@ -145,9 +145,9 @@ function AccountCreation() {
                             <span className="error-message">
                                 {errors.password}
                             </span>)} 
-                    <div className = 'inputs'>
-                        <div className = "Password">CONFIRM PASSWORD</div>
-                        <div className = 'input'>
+                    <div className = 'acc-inputs'>
+                        <div className = "acc-Password">CONFIRM PASSWORD</div>
+                        <div className = 'acc-input'>
                             <input 
                                 type="password" 
                                 name="confirmPassword" 
@@ -163,10 +163,10 @@ function AccountCreation() {
                             </span>)} 
                     {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
                     <div className = 'options'>
-                        <div className = 'already-have-account' onClick={() => navigate('/login')}>Already Have Account? Login</div>
+                        <div className = 'already-have-account' onClick={() => navigate('/login')}>Already have an account? Login</div>
                         <div className = 'submit-container'></div>
-                        <div className = 'submit' onClick = {handleCreateAccount} data-testid="create-account-button">
-                            CREATE ACCOUNT
+                        <div className = 'acc-submit' onClick = {handleCreateAccount} data-testid="create-account-button">
+                            Create Account
                         </div>
                 </div>    
             </div>

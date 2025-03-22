@@ -49,17 +49,17 @@ function TeacherLogin() {
   };
 
   return (
-    <div className = 'TeacherLogin'>
-      <div className = 'container-teacher'>
-        <div className = 'header-teacher'>
-            <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "profile-logo" />
-          <div className = 'underline-teacher'></div>
+    <div className = 'Login'>
+      <div className = 'login-container'>
+        <div className = 'login-header'>
+            <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "login-profile-logo" />
+          <div className = 'underline'></div>
         </div>
         
-        <div className = 'input-box-teacher'>
-          <div className = 'inputs-teacher'>
-            <div className = "Student-ID-teacher">TEACHER ID</div>
-            <div className = 'input-teacher'>
+        <div className = 'login-input-box'>
+          <div className = 'login-inputs'>
+            <div className = "login-Student-ID">TEACHER ID</div>
+            <div className = 'login-input'>
               <input
                 type="text"
                 value={teacherId}
@@ -67,9 +67,9 @@ function TeacherLogin() {
               />
             </div>
           </div>
-          <div className = 'inputs-teacher'>
-            <div className = 'Password-teacher'>PASSWORD</div>
-            <div className = 'input-teacher'>
+          <div className = 'login-inputs'>
+            <div className = 'login-Password'>PASSWORD</div>
+            <div className = 'login-input'>
               <input
                 type="password"
                 value={password}
@@ -77,13 +77,13 @@ function TeacherLogin() {
               />            
             </div>
           </div>
-          <div className = 'options-teacher'>
-            <div className = 'forgot-password-teacher' onClick={() => navigate('/ConfirmEmail')}>Forgot Password?</div>
-            <div className = 'submit-container-teacher'>
+          <div className = 'options'>
+            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password</div>
+            <div className = 'submit-container'>
             </div>
           </div>
           {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
-        <div className = 'submit-teacher' onClick = {handleSignIn}>SIGN IN</div>
+        <div className = 'submit' onClick = {handleSignIn}>SIGN IN</div>
         
       </div>
     </div>

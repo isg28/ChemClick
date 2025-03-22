@@ -23,7 +23,7 @@ html, body {
     overflow-x: hidden;
 }
 
-.container {
+.logout-container {
     display: flex;
     flex-direction: column;
     margin: auto;
