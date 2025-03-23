@@ -215,7 +215,7 @@ describe("LessonOnePointSix Component", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Advanced Measurement/i)).toBeInTheDocument();
+    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Hundreths Value/i)).toBeInTheDocument();
   });
 
   test("displays an input field and submit button", async () => {
