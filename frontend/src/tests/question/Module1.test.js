@@ -232,9 +232,9 @@ describe("LessonOnePointSix Component", () => {
     );
     const input = screen.getByRole('textbox');
     act(() => {
-      fireEvent.change(input, { target: { value: '25.95' } });
+      fireEvent.change(input, { target: { value: '25.9' } });
     });
-    expect(input.value).toBe('25.95');
+    expect(input.value).toBe('25.9');
   });
 });
 
