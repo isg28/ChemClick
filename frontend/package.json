@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
