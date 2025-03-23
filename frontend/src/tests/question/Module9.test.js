@@ -3,6 +3,13 @@ import { MemoryRouter } from "react-router-dom";
 import { act } from 'react';
 import LessonNinePointOne from "../../components/question/LessonNinePointOne";
 import LessonNinePointTwo from "../../components/question/LessonNinePointTwo";
+import LessonNinePointThree from "../../components/question/LessonNinePointThree";
+import LessonNinePointFour from "../../components/question/LessonNinePointFour";
+import LessonNinePointFive from "../../components/question/LessonNinePointFive";
+import LessonNinePointSix from "../../components/question/LessonNinePointSix";
+import LessonNinePointSeven from "../../components/question/LessonNinePointSeven";
+import LessonNinePointEight from "../../components/question/LessonNinePointEight";
+import LessonNinePointNine from "../../components/question/LessonNinePointNine";
 
 global.__dropCallbacks__ = [];
 let dropCallback = null;
@@ -523,3 +530,96 @@ describe("LessonNinePointTwo Component", () => {
     });
     
 });
+
+/* Lesson 9.3 Tests */
+describe("LessonNinePointThree Component", () => {
+    test("renders and displays prompt", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointThree />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Explicit to Implicit Naming/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.4 Tests */
+  describe("LessonNinePointFour Component", () => {
+    test("renders and shows drop zone", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointFour />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Build the Ionic Compound/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Drop Ions Here/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.5 Tests */
+  describe("LessonNinePointFive Component", () => {
+    test("renders and shows all input steps", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointFive />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Build the Ionic Compound/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Enter the Explicit Formula/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Enter the Implicit Formula/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Enter the Explicit Name/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.6 Tests */
+  describe("LessonNinePointSix Component", () => {
+    test("renders and displays removal prompt", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointSix />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Click on the words you want to remove/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.7 Tests */
+  describe("LessonNinePointSeven Component", () => {
+    test("renders and walks through 5 steps", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointSeven />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Step 1: Build the Ionic Compound/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Step 2: Enter the Explicit Formula/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Step 3: Enter the Implicit Formula/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Step 4: Enter the Explicit Name/i)).toBeInTheDocument();
+      expect(await screen.findByText(/Step 5: Enter the Implicit Name/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.8 Tests */
+  describe("LessonNinePointEight Component", () => {
+    test("renders and displays first implicit phrase", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointEight />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Given the implicit name:/i)).toBeInTheDocument();
+    });
+  });
+  
+  /* Lesson 9.9 Tests */
+  describe("LessonNinePointNine Component", () => {
+    test("renders and starts with implicit formula", async () => {
+      render(
+        <MemoryRouter>
+          <LessonNinePointNine />
+        </MemoryRouter>
+      );
+      expect(await screen.findByText(/Lesson 9.9: Implicit Formula/i)).toBeInTheDocument();
+    });
+  });
+  
