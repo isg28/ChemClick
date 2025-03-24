@@ -79,18 +79,12 @@ function LessonOnePointOne(){
         const targetPosition = randomNumber;
         
         if (parseFloat(targetPosition) === parseFloat((sliderValue / 100).toFixed(1))) {
-            setFeedbackMessage("Correct! Moving to the next question.");
+            setFeedbackMessage("Correct!");
             setFeedbackClass('correct');
             await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
-
-            setTimeout(() => {
-                setFeedbackMessage('');
-                setFeedbackClass('');
-            }, 2000);
-
-            setRandomNumber((Math.random() * 5.99).toFixed(1))
+            return;
         
         } else {
             setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
