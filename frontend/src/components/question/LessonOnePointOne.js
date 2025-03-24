@@ -29,6 +29,7 @@ function LessonOnePointOne(){
     const [showCompletionModal, setShowCompletionModal] = useState(false); 
     const { starsEarned, stars } = renderStars(goal, correctAnswers, totalAttempts, progress);
     const displayMedals = starsEarned >= 5;
+    const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
     const handlequestion = () => {
         navigate('/dashboard');
@@ -81,9 +82,14 @@ function LessonOnePointOne(){
         if (parseFloat(targetPosition) === parseFloat((sliderValue / 100).toFixed(1))) {
             setFeedbackMessage("Correct!");
             setFeedbackClass('correct');
+            setIsAnswerCorrect(true);
             await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 3000);
             return;
         
         } else {
@@ -98,7 +104,17 @@ function LessonOnePointOne(){
                 setFeedbackClass('');
             }, 4000);
         }
+
     };
+    const handleNextQuestion = () => {
+        if(isAnswerCorrect){
+            setRandomNumber((Math.random() * 5.99).toFixed(1));
+            setFeedbackMessage('');
+            setFeedbackClass('');
+            setIsAnswerCorrect(false);
+            setSliderValue(50);
+        }
+    }
 
     return (
         <div className='lesson-one-point-one'>
@@ -145,13 +161,17 @@ function LessonOnePointOne(){
                             <hr className="separator" />
                             <div className='lesson-one-point-one-question'>
                                 <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
+                                <span className={`lesson-one-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
                             </div>
                         </div>
                         <div className="submit-feedback-container">
+                        {!isAnswerCorrect && (
                             <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
-                            <p>{feedbackMessage}</p>
-                            </div>
+                        )}
+                        {isAnswerCorrect && (
+                            <button className='lesson-one-point-one-next' onClick={handleNextQuestion}>Next Question</button>
+                        )}
+                            
                         </div>
                     </div>
                 </div>
