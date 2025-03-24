@@ -11,6 +11,8 @@ function LessonOnePointFour(){
     const [randomNumber, setRandomNumber] = useState(0);
     const [feedbackMessage, setFeedbackMessage] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('');
+    const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
+
 
     const studentId = localStorage.getItem('studentId'); 
     const teacherId = localStorage.getItem('teacherId'); 
@@ -79,18 +81,12 @@ function LessonOnePointFour(){
         const targetPosition = randomNumber;
         
         if (targetPosition == sliderValue/100) {
-            setFeedbackMessage("Correct! Moving to the next question.");
+            setFeedbackMessage("Correct!");
             setFeedbackClass('correct');
+            setIsAnswerCorrect(true);
             await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
-
-            setTimeout(() => {
-                setFeedbackMessage('');
-                setFeedbackClass('');
-            }, 2000);
-
-            setRandomNumber((Math.random() * 5.99).toFixed(2))
         
         } else {
             setFeedbackMessage("Try again! Please adjust the measurement. You may just be a little off.");
@@ -103,6 +99,16 @@ function LessonOnePointFour(){
                 setFeedbackMessage('');
                 setFeedbackClass('');
             }, 4000);
+        }
+    };
+
+    const handleNextQuestion = () => {
+        if (isAnswerCorrect) {
+            setRandomNumber((Math.random() * 5.99).toFixed(2))
+            setFeedbackMessage('');
+            setFeedbackClass('');
+            setIsAnswerCorrect(false);
+            setSliderValue(50);
         }
     };
 
@@ -151,14 +157,18 @@ function LessonOnePointFour(){
                             <hr className="separator" />
                             <div className='lesson-one-point-four-question'>
                                 <h1>Click and drag the cursor to show the measurement of {randomNumber} inches. </h1>
+                                <span className={`lesson-one-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
                             </div>
                         </div>
+
                         <div className="submit-feedback-container">
+                        {!isAnswerCorrect && (
                             <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
-                            <p>{feedbackMessage}</p>
-                            </div>
-                        </div>
+                        )}
+                        {isAnswerCorrect && (
+                            <button className='lesson-one-point-one-next' onClick={handleNextQuestion}>Next Question</button>
+                        )}
+                    </div>
                     </div>
                 </div>
 

@@ -91,6 +91,7 @@ html,body {
 .lesson-one-point-four-question {
     display: flex;
     align-items: center; 
+    flex-direction: column;
     justify-content: center; 
     gap: 10px; 
     width: 100%; 
