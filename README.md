@@ -28,12 +28,15 @@
 - [Getting Started](#getting-started)
   - [Installation](#installation)
 - [Testing](#running-tests)
+- [User Interface](#user-interface)
 - [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![Screenshot 2024-10-30 at 10 44 34 PM](https://github.com/user-attachments/assets/49fce4f3-5f4c-4dd9-af21-3673bd1b6cf9)
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/landing_page.png" alt="Landing Page" width="750">
+</div>
 
 
 Code Blue has been tasked with creating a web application designed to facilitate learning of core high school chemistry concepts by serving as an interactive, dynamic, and autonomous learning tool. The focus is to encourage high school students to learn through interactivity rather than rote memorization. This website will house the unique curriculum of our client and will be designed with our client's students in mind.
@@ -60,13 +63,13 @@ We are building this project using the following:
 <!-- CONTRIBUTORS -->
 ## Contributors
 ### Contact Us!
-Anthony Dominguez - Email: <anthonyd24uc@gmail.com> <br>
+**Anthony Dominguez - Email: <anthonyd24uc@gmail.com>** <br>
 Danica Galang - Email: <danica.k.galang@gmail.com> <br>
-Oliver Jezildzic - Email: <Olijez55@gmail.com> <br>
+**Oliver Jezildzic - Email: <Olijez55@gmail.com>** <br>
 Isabel Santoyo-Garcia - Email: <> <br>
-Marilyn Sarabia - Email: <mkdso0527@gmail.com> <br>
+**Marilyn Sarabia - Email: <mkdso0527@gmail.com>** <br>
 Maria Valencia - Email: <Mariasworkspace1@gmail.com> <br>
-Jessica Villanueva - Email: <jessicabvillanueva@gmail.com> <br>
+**Jessica Villanueva - Email: <jessicabvillanueva@gmail.com>** <br>
 Zhenkang Zhao - Email: <zhenkang209@gmail.com> <br>
 
 
@@ -162,6 +165,41 @@ Testing files can be found here:
           login/      # Component folder
             login.test.js   # Test file
   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USER INTERFACE -->
+## User Interface
+
+#### Log In Page
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/login_page.png" alt="Login Page" width="750">
+</div>
+
+#### Student Dashboard
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/dashboard.png" alt="Dashboard" width="750">
+</div>
+
+#### Lesson
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/example_lesson.png" alt="Lesson Page" width="750">
+</div>
+
+#### Profile Page
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/profile_page.png" alt="Profile Page" width="750">
+</div>
+
+#### Teacher Dashboard (Admin Access)
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/teacher_dashboard.png" alt="Teacher Dashboard" width="750">
+</div>
+
+#### Statistics Page (Admin Access)
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/statistics_page.png" alt="Statistics Page" width="750">
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
