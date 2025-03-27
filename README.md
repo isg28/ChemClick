@@ -13,22 +13,24 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="frontend/src/assets/login/ChemClickLogo.png" alt="Logo" width="80" height="80">
+    <img src="frontend/src/assets/login/ChemClickLogo.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h3 align="center">ChemClicks: An Interactive Chemistry Learning Website</h3>
+  <h3 align="center">ChemClicks: An Interactive Educational Chemistry  Website</h3>
 </div>
 
 <!--TABLE OF CONTENTS-->
 ## Table of Contents
 - [About The Project](#about-the-project)
   - [Built With](#built-with)
-  - [Project Timeline](#project-timeline)
+  - [Contributors](#contributors)
   - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites-installing-nodejs-react-framework-python-and-mongodb)
   - [Installation](#installation)
   - [Running Locally](#running-locally)
+- [Testing](#running-tests)
+- [License](#license)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -36,9 +38,9 @@
 ![Screenshot 2024-10-30 at 10 44 34 PM](https://github.com/user-attachments/assets/49fce4f3-5f4c-4dd9-af21-3673bd1b6cf9)
 
 
-Code Blue has been tasked with creating a web application designed to facilitate learning of core high school chemistry concepts by serving as an interactive, dynamic, and autonomous learning tool.  The focus is to encourage high school students to learn by creating knowledge rather than just recollecting it. This website will house the curriculum of our client and will be designed with our client's students in mind.
+Code Blue has been tasked with creating a web application designed to facilitate learning of core high school chemistry concepts by serving as an interactive, dynamic, and autonomous learning tool. The focus is to encourage high school students to learn through interactivity rather than rote memorization. This website will house the unique curriculum of our client and will be designed with our client's students in mind.
 
-This project is being undertaken by the development team Code Blue, composed of undergraduate students majoring in Computer Science at California State University, Sacramento. Its members consist of Jessica Villanueva, Danica Galang, Isabel Santoyo-Garcia, Anthony Dominguez, Maria Valencia, Marilyn Sarabia, Zhenkang Zhao, and Oliver Jezildzic.
+This project is being undertaken by the development team Code Blue, composed of undergraduate students majoring in Computer Science at California State University, Sacramento. Its members consist of Anthony Dominguez, Danica Galang, Oliver Jezildzic, Isabel Santoyo-Garcia, Marilyn Sarabia, Maria Valencia, Jessica Villanueva, and Zhenkang Zhao.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -57,31 +59,18 @@ We are building this project using the following:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- TIME LINE -->
-## Project Timeline
-At this moment, we've completed the first part of senior project (Fall semester 2024). We will continue this project in the Spring semester during the second part of senior project. Here is our projected timeline and what we expect to get done during that phase of the development process.
+<!-- CONTRIBUTORS -->
+## Contributors
+### Contact Us!
+Anthony Dominguez - Email: <anthonyd24uc@gmail.com>
+Danica Galang - Email: <danica.k.galang@gmail.com>
+Oliver Jezildzic - Email: <Olijez55@gmail.com>
+Isabel Santoyo-Garcia - Email: <>
+Marilyn Sarabia - Email: <mkdso0527@gmail.com>
+Maria Valencia - Email: <Mariasworkspace1@gmail.com>
+Jessica Villanueva - Email: <jessicabvillanueva@gmail.com>
+Zhenkang Zhao - Email: <zhenkang209@gmail.com>
 
-<div style="text-align: center;">
-    <img src="frontend/src/assets/readme/timeline.png" alt="Excel Sheet Timeline Estimation" width="750">
-</div>
-
-### Explanation
-This is a very high-level overview of what we plan to develop in the Spring. Thus, these are the major milestones that we hope to accomplish to be on track to present our final product for senior showcase. Within these major milestones will be multiple sub-tasks that we will individually assign to each developer with story points to indicate difficulty and time spent on the task. There will also be acceptance criteria that each developer must complete for their task in order for it to be considered finished and marked "done". 
-
-Additionally, as part of our project management, here is an example of the tasks that we have in the backlog that we will assign to sprints according to their priority.
-
-<div style="text-align: center;">
-    <img src="frontend/src/assets/readme/backlog.png" alt="Jira Backlog of Tasks" width="750">
-</div>
-
-Finally, here is an example of a story that we've created sub-tasks for in Jira and assigned to developers whose responsibility it was to finish coding before the sprint ended.
-
-<div style="text-align: center;">
-    <img src="frontend/src/assets/readme/jira.png" alt="Jira Story Example" width="750">
-</div>
-
-### Current Status
-Out of eight total sprints, we have finished four during the Fall semester and are looking forward to continue development in the next four sprints during the Spring semester of 2025.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -97,28 +86,13 @@ Below is the current Entity-Relationship Diagram (ERD) for our project. This dia
 
 ### Explanation
 
-- **Students**: Stores basic student information, including a unique `student_id`, `school_email`, hashed `password`, and `admin_id`.
-- **Admin**: Stores information about an administrator, including a unique `admin_id` and `email`.
-- **Profiles**: Tracks a student's overall progress with `questions_completed` and `questions_correct`. 
-- **Lessons**: Contains a unique `lesson_id` and `lesson_name` for each lesson. 
-- **Lesson Progress**: Records each student's performance in individual lessons, including `questions_completed` and `questions_correct`. 
+- **User**: Stores basic student information, including a unique `user_id`, `school_email`, hashed `password`.
+- **Teacher_User**: Stores information about an administrator, including a unique `teacher_id`.
+- **Lesson_Progress**: Tracks a student's progress per lesson with key information and statistics. 
+- **Teacher_Lesson_Progress**: Separates teacher progress from student progress for each lesson. This is used if the teacher wants to demonstrate a lesson.
+- **Lesson_Details**: Stores the admin's settings and preferences for each lesson, including `due_date` and `goal_level` indicating how many questions a student must get right in order to pass to the next lesson. 
+- **Announcement**: Stores admin's anouncements to users on the website in `message`. The `post_number` attribute ensure the most recent announcement appears at the top.
 
-
-### How Data Flows Between Entities
-- **Students**: This is the main table that holds the primary information about users (students). Each student:
-  - Is assigned to a specific admin through `admin_id` (many-to-one relationship).
-  - Has a single profile that tracks their overall progress (one-to-one relationship).
-  - Can have multiple lesson progress records (one-to-many relationship).
-- **Admin**: Manages multiple students via the `admin_id` field in the `Students` table (one-to-many relationship).
-- **Profiles**: Aggregates the overall progress data for each student, linked via `student_id` (one-to-one relationship).
-- **Lessons**: Stores information about each lesson and connects to Lesson_Progress for tracking student activity (independent table).
-- **Lesson Progress**: Tracks individual student performance for specific lessons. Acts as a bridge table:
-  - Links each entry to a specific student via `student_id` (many-to-one relationship).
-  - Links each entry to a specific lesson via `lesson_id` (many-to-one relationship).
-
-
-### Current Status
-- The ERD is still a work in progress as we refine and expand the database structure to accommodate additional features.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -127,41 +101,12 @@ Below is the current Entity-Relationship Diagram (ERD) for our project. This dia
 <!-- GETTING STARTED -->
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To clone and run this application, you will need [Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed on your computer. You will also need [Python](https://www.python.org/downloads/).
 
-### Prerequisites: Installing Node.js, React framework, Python, and MongoDB
-
-* npm and node.js installation on MacOS
-  ```sh
-  # installs nvm (Node Version Manager)
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-  # download and install Node.js (you may need to restart the terminal)
-  nvm install 22
-  # verifies the right Node.js version is in the environment
-  node -v 
-  # verifies the right npm version is in the environment
-  npm -v 
-  ```
-* npm and node.js installation on Windows
-  ```sh
-  # installs fnm (Fast Node Manager)
-  winget install Schniz.fnm
-  # configure fnm environment
-  fnm env --use-on-cd | Out-String | Invoke-Expression
-  # download and install Node.js
-  fnm use --install-if-missing 22
-  # verifies the right Node.js version is in the environment
-  node -v 
-  # verifies the right npm version is in the environment
-  npm -v 
-  ```
-* Installing Python
-
-      Make sure you have Python 3.8+ installed. You can download it here: https://www.python.org/downloads/
-* MongoDB Setup
-
-      Ensure MongoDB is installed and running. You can download MongoDB here: https://www.mongodb.com/try/download/community
-
+**Versions**:
+- Python 3.8.x+
+- Node.js v20.x+
+- npm 10.x+
 
 ### Installation
 
@@ -170,97 +115,62 @@ To get a local copy up and running follow these simple example steps.
    git clone https://github.com/isg28/ChemClick.git
    cd ChemClick
    ```
-2. Change git remote url to avoid accidental pushes to base project
-   ```sh
-   git remote set-url origin github_username/repo_name
-   git remote -v # confirm the changes
-   ```
-3. Initial Setup
+2. Initial Setup
     * Change directories into the ChemClick folder
       ```sh
       cd ChemClick
        ```
-    * Install Mongoose, NodeJS, and other packages
+    * Install dependencies
       ```sh
-      npm i express ejs 
-      npm i mongoose 
-      npm install concurrently --save-dev
-      npm i cors 
-      npm install node.js
+      npm install
        ```
 3. Setup Backend 
-
     * Change directories into the backend folder
       ```sh
       cd backend
        ```
+    * Ensure environment variables are set up correctly
+      - Rename `.env.example` to `.env` and fill in the required values.
     
-    * create a virtual environment
-      ```sh
-      python -m venv venv
-      source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-       ```
-      
-    * Install Django and other packages
-      ```sh
-      pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
-      ```
-    * Start the backend servers
-      ```sh
-      python manage.py runserver
-      ```
-4. Setup Frontend
-   * Open a new terminal & change directories into frontend folder 
-       ```sh
-       cd frontend
-       ```
-   * Install NPM packages
-       ```sh
-       npm install
-       ```
-   * Run the frontend server
-       ```sh
-       npm start
-       ```
-5. Access the Application
-   * Open your browser and access the web application at http://localhost:3000/
+    
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Running Locally
-  1. Clone the project
+<!-- DEPLOYMENT -->
+## Deployment
 
-      ```sh
-      git clone https://github.com/isg28/ChemClick.git
-      cd ChemClick
-      ```
-
-  2. Set up backend in new terminal
-      ```sh
-      # Change directories into backend folder
-      cd backend
-      # Install necessary packages and libraries
-      pip install django djangorestframework django-cors-headers mongoengine pymongo python-dotenv
-      # Run backend
-      python manage.py runserver
-      ```
-  3. Set up frontend in new terminal
-      ```sh
-      # Change directories into frontend folder
-      cd frontend
-      # Install necessary packages and libraries for frontend
-      npm install
-      # Start up frontend server
-      npm start
-      ```
-
-### Deployment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!--TESTING -->
 ## Running Tests
-To be continued in CSC191
+### Set up Jest for unit testing
+This project uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit testing. Jest should have already been installed when dependencies were installed for the project. Follow these steps to run tests:
+
+* Execute all tests:
+  ```sh
+    npm test
+  ```
+* Run tests in watch mode (automatically re-runs on changes):
+  ```sh
+    npm test -- --watch
+  ```
+Testing files can be found here:
+  ```sh
+  chemclick/
+    frontend/
+      src/
+        tests/    # Testing folder
+          login/      # Component folder
+            login.test.js   # Test file
+  ```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LICENSE -->
+## License
 
+!! INCLUDE DISTRIBUTING LICENSE !!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
