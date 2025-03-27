@@ -13,7 +13,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="frontend/src/assets/login/ChemClickLogo.png" alt="Logo" width="100" height="100">
+    <img src="frontend/src/assets/login/ChemClickLogo.png" alt="Logo" width="150" height="150">
   </a>
 
   <h3 align="center">ChemClicks: An Interactive Educational Chemistry  Website</h3>
@@ -26,9 +26,7 @@
   - [Contributors](#contributors)
   - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites-installing-nodejs-react-framework-python-and-mongodb)
   - [Installation](#installation)
-  - [Running Locally](#running-locally)
 - [Testing](#running-tests)
 - [License](#license)
 
@@ -62,14 +60,14 @@ We are building this project using the following:
 <!-- CONTRIBUTORS -->
 ## Contributors
 ### Contact Us!
-Anthony Dominguez - Email: <anthonyd24uc@gmail.com>
-Danica Galang - Email: <danica.k.galang@gmail.com>
-Oliver Jezildzic - Email: <Olijez55@gmail.com>
-Isabel Santoyo-Garcia - Email: <>
-Marilyn Sarabia - Email: <mkdso0527@gmail.com>
-Maria Valencia - Email: <Mariasworkspace1@gmail.com>
-Jessica Villanueva - Email: <jessicabvillanueva@gmail.com>
-Zhenkang Zhao - Email: <zhenkang209@gmail.com>
+Anthony Dominguez - Email: <anthonyd24uc@gmail.com> <br>
+Danica Galang - Email: <danica.k.galang@gmail.com> <br>
+Oliver Jezildzic - Email: <Olijez55@gmail.com> <br>
+Isabel Santoyo-Garcia - Email: <> <br>
+Marilyn Sarabia - Email: <mkdso0527@gmail.com> <br>
+Maria Valencia - Email: <Mariasworkspace1@gmail.com> <br>
+Jessica Villanueva - Email: <jessicabvillanueva@gmail.com> <br>
+Zhenkang Zhao - Email: <zhenkang209@gmail.com> <br>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -78,7 +76,7 @@ Zhenkang Zhao - Email: <zhenkang209@gmail.com>
 <!-- ERD -->
 ## Entity-Relationship Diagram (ERD)
 
-Below is the current Entity-Relationship Diagram (ERD) for our project. This diagram represents the relationships between key entities in our database:
+Below is the Entity-Relationship Diagram (ERD) for our project. This diagram represents the relationships between key entities in our database:
 
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/chemclick_ERD.png" alt="Entity-Relationship Diagram" width="750">
@@ -113,6 +111,8 @@ To clone and run this application, you will need [Node.js](https://docs.npmjs.co
 1. Clone the repo & change directories
    ```sh
    git clone https://github.com/isg28/ChemClick.git
+   ```
+  ```sh
    cd ChemClick
    ```
 2. Initial Setup
