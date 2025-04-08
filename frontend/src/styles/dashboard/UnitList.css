@@ -205,6 +205,18 @@ span.due-date, span.due-date:hover {
     font-weight: bold;
 }
 
+.locked-lesson span {
+    text-decoration: none !important;
+    background-color: transparent !important;
+    color: #999 !important;
+    pointer-events: none;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    transition: none !important;
+  }
+  
+
 .completed-lesson .due-date {
     position: relative; 
     cursor: pointer;
