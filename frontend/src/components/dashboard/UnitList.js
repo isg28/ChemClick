@@ -234,28 +234,42 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
                         >
                         <div className="lesson-info">
                         <span
+                          className={`${lessonData.status === "locked" ? "locked-cursor" : ""}`}
+                          style={{
+                            cursor:
+                              isTeacher || ["not-started", "in-progress", "late"].includes(lessonData.status)
+                                ? "pointer"
+                                : "not-allowed",
+                          }}
                           onClick={() => {
-                            // For teachers, allow all access
                             if (isTeacher) {
                               onLessonClick(lesson.route);
                               return;
                             }
 
-                            // For students, check the lesson status
                             const status = lessonData.status;
-
                             const allowedStatuses = ["not-started", "in-progress", "late", "completed"];
                             if (allowedStatuses.includes(status)) {
                               onLessonClick(lesson.route);
                             } else {
-                              console.warn(`Access denied: Lesson "${lesson.name}" is ${status}`);
-                              alert(`This lesson is currently locked. You can only access lessons that are not started, in progress, completed or late.`);
+                              alert("This lesson is currently locked.");
                             }
                           }}
-                          style={{ cursor: (isTeacher || ["not-started", "in-progress", "late"].includes(lessonData.status)) ? 'pointer' : 'not-allowed' }}
                         >
                           {lessonIndex + 1}. {lesson.name}
                         </span>
+
+                        {/* Show Demo link for locked lessons if teacher */}
+                        {isTeacher && lessonData.status === "locked" && (
+                          <span
+                            className="demo-link"
+                            onClick={() => onLessonClick(lesson.route)}
+                            style={{ marginLeft: '6px' }}
+                          >
+                            (Demo)
+                          </span>
+                        )}
+
 
                         </div>
                         <div className="due-date-container">

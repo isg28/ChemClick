@@ -205,18 +205,16 @@ span.due-date, span.due-date:hover {
     font-weight: bold;
 }
 
-.locked-lesson span {
+.locked-lesson span:not(.demo-link) {
     text-decoration: none !important;
     background-color: transparent !important;
     color: #999 !important;
-    pointer-events: none;
     cursor: not-allowed !important;
     box-shadow: none !important;
     padding: 0 !important;
     transition: none !important;
-  }
+}
   
-
 .completed-lesson .due-date {
     position: relative; 
     cursor: pointer;
@@ -294,3 +292,20 @@ span.due-date, span.due-date:hover {
     display: block;
 }
 
+.demo-link {
+    color: #007BFF; 
+    cursor: pointer;
+    text-decoration: underline;
+    margin-left: 6px;
+    font-size: 1rem;
+    transition: color 0.2s ease-in-out;
+}
+  
+.demo-link:hover {
+    color: #0056b3;
+}
+
+.locked-cursor {
+    cursor: not-allowed !important;
+}
+  

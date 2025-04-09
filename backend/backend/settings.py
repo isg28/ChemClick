@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 SECRET_KEY = os.getenv('SECRET_KEY')  # Load SECRET_KEY from .env
 DEBUG = os.getenv('DEBUG') == 'True'  # Convert to boolean
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 
 
 # Application definition
@@ -89,6 +89,11 @@ connect(
     ssl=True
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.dummy'  # disables SQL DB
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -130,3 +135,20 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'loggers': {
+        'django.request': {
+            'handlers': ['null'],
+            'level': 'ERROR',  # Only log 500-level errors
+            'propagate': False,
+        },
+    },
+    'handlers': {
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+    },
+}
