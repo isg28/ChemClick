@@ -366,7 +366,7 @@ function LessonNinePointOne(){
 
     const handleSubmit = async () => {
         if (isCorrectCombination()) {
-            setFeedbackMessage('Correct!');
+            setFeedbackMessage('Correct! Moving on to the next question...');
             setFeedbackClass('correct');
             await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
@@ -377,13 +377,19 @@ function LessonNinePointOne(){
             setTimeout(() => {
                 setRandomIon(getRandomIonImage()); // Generate a new random ion
                 generateRandomNumberAndPosition(); // Generate new random number
-            }, 100); // Delay to allow state updates to happen sequentially
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 1500); // Delay to allow state updates to happen sequentially
         } else {
             setFeedbackMessage('Incorrect. Please look closely at the combs that need to be used to balance out the ion!');
             setFeedbackClass('incorrect');
             await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
                 setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             });
+            setTimeout(() => {
+                setFeedbackMessage('');
+                setFeedbackClass('');
+            }, 4000);
         }
     };
 
@@ -415,7 +421,7 @@ function LessonNinePointOne(){
                         <div className='lesson-one-point-one-box-title'>
                             <h1>Unit Nine: Ionic Compounds</h1>
                         </div>
-                        <div className='lesson-one-point-one-content'>
+                        <div className='lesson-nine-point-one-content'>
                             <p className='lesson-one-point-one-prompt'>
                                 Each comb simulates an ion. Click and drag the provided combs to make an ionic compound, creating a neutral charge. Drag the appropriate combs into the dropzone with your mouse to create a rectangle, simulating an ionic compound.
                             </p>
@@ -445,14 +451,15 @@ function LessonNinePointOne(){
                             <hr className="separator" />
                             <div className='lesson-one-point-one-question'>
                                 <h1> {getQuestionText()} </h1>
+                                <div className="submit-feedback-container">
+                                    <div className={`lesson-nine-point-one-feedback ${feedbackClass}`}>
+                                    <p>{feedbackMessage}</p>
+                                    </div>
+                                    <button className='lesson-one-point-one-submit' onClick={handleSubmit} >Submit Answer</button>
+                                </div>
                             </div>
                         </div>
-                        <div className="submit-feedback-container">
-                            <button className='lesson-one-point-one-submit' onClick={handleSubmit} >Submit Answer</button>
-                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
-                            <p>{feedbackMessage}</p>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
