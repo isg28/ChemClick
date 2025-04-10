@@ -281,6 +281,7 @@ function LessonOnePointSeven() {
                             <hr className="separator" />
                         <div className='lesson-one-point-seven-question'>
                             <h1>Use the up and down arrow keys to show the measurement of {randomizedQuestions[currentQuestionIndex]?.value} mL.</h1>
+                            <span className={`lesson-one-point-seven-feedback ${feedbackClass}`}>{feedback}</span>
                         </div>
                     </div>
 
@@ -291,7 +292,7 @@ function LessonOnePointSeven() {
                             {isAnswerCorrect && (
                                 <button className='lesson-one-point-seven-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-one-point-seven-feedback ${feedbackClass}`}>{feedback}</span>
+                            
                         </div>
                     </div>
                 </div>

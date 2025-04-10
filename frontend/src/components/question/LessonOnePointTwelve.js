@@ -279,6 +279,7 @@ function LessonOnePointTwelve() {
                                 <hr className="separator" />
                                 <div className='lesson-one-point-twelve-question'>
                                     <h1>Use the up and down arrow keys to show the measurement of {randomizedQuestions[currentQuestionIndex]?.value} mL.</h1>
+                                    <span className={`lesson-one-point-twelve-feedback ${feedbackClass}`}>{feedback}</span>
                                 </div>
                             </div>
 
@@ -289,7 +290,7 @@ function LessonOnePointTwelve() {
                             {isAnswerCorrect && (
                                 <button className='lesson-one-point-twelve-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-one-point-twelve-feedback ${feedbackClass}`}>{feedback}</span>
+                            
                         </div>
                     </div>
                 </div> 
