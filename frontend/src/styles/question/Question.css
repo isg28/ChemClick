@@ -9,9 +9,22 @@ html,body {
     overflow-x: hidden;
 }
 
-.side-column {
+/*.side-column { //replaced with the bottom to ensure scaling when zooming in/out
     height: 90vh;
     width: 33vw;
+}
+*/
+
+.side-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    width: 28%;
+    min-width: 280px;
+    max-width: 360px;
+    height: auto;
 }
 
 .Question {
@@ -53,6 +66,7 @@ html,body {
     padding: 1%;
     width: 93vw;
 }
+
 
 .insideheader {
     background-color: #ffffff;
@@ -232,7 +246,8 @@ html,body {
 .side-column-box-holder {
     display: flex;
     flex-direction: column;
-    height: 52vh;
+    /*height: 52vh;*/
+    gap: 1.5rem;
     width: 33vw;
     align-items: center;
     justify-content: space-between;
@@ -249,7 +264,7 @@ html,body {
     justify-content: center;
     margin: 5%;
     padding: 2%;
-    font-size: 1.3vw;
+    font-size: clamp(1rem, 1.3vw, 2rem);
     font-family: 'Orelega One', sans-serif;
     font-weight: normal;
 }
