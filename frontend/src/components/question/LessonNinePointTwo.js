@@ -283,7 +283,7 @@ function LessonNinePointTwo(){
             setDroppedIons1((prev) => [...prev, item]);
         } else {
             setFeedbackMessage("❌ Only positive ions can go here!");
-            setFeedbackClass("incorrect-feedback");
+            setFeedbackClass("incorrect");
             setTimeout(() => setFeedbackMessage(""), 2000);
         }
     };
@@ -294,7 +294,7 @@ function LessonNinePointTwo(){
             setDroppedIons2((prev) => [...prev, item]);
         } else {
             setFeedbackMessage("❌ Only negative ions can go here!");
-            setFeedbackClass("incorrect-feedback");
+            setFeedbackClass("incorrect");
             setTimeout(() => setFeedbackMessage(""), 2000);
         }
     };
@@ -413,7 +413,7 @@ function LessonNinePointTwo(){
     
         if (isIonCorrect && isFormulaCorrect) {
             setFeedbackMessage("✅ Correct! Great job!");
-            setFeedbackClass("correct-feedback");
+            setFeedbackClass("correct");
             setCorrectAnswers(correctAnswers + 1);
             // Generate new question
             setTimeout(() => {
@@ -425,7 +425,7 @@ function LessonNinePointTwo(){
             }, 1500); // Delay before switching to next question
         } else {
             setFeedbackMessage("❌ Incorrect. Try again!");
-            setFeedbackClass("incorrect-feedback");
+            setFeedbackClass("incorrect");
             setIncorrectAnswers(incorrectAnswers + 1);
         }
         setTotalAttempts(totalAttempts + 1);
@@ -586,11 +586,11 @@ function LessonNinePointTwo(){
     </div>
   </div>
 </div>
-                        </div>
-                        <div className="submit-feedback-container">
-                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
+<div className={`lesson-nine-point-two-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
+                        <div className="lesson-nine-point-two-submit-feedback-container">
+                            
                             <button className='lesson-nine-point-two-submit' onClick={handleSubmit}>Submit Answer</button>
                         </div>
                     </div>
@@ -636,7 +636,7 @@ function LessonNinePointTwo(){
                 </div>
                 
             )}
-        
+        </div>
     </DndProvider>
         
     );

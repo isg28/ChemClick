@@ -79,3 +79,29 @@
   border: 5px solid #015770;
   padding-bottom: 40px;
 }
+
+.lesson-nine-point-two-feedback {
+  font-size: 1.25rem;
+  font-family: 'Orelega One', sans-serif;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 8px;
+  margin-top: -20px;
+  margin-bottom: 25px;
+  text-align: center;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lesson-nine-point-two-feedback.correct {
+  background-color: #e0f8e0;
+  color: #237B31;
+  border: 2px solid #237B31;
+  opacity: 1;
+}
+
+.lesson-nine-point-two-feedback.incorrect {
+  background-color: #ffe6e6;
+  color: #662e2e;
+  border: 2px solid #c94444;
+  opacity: 1;
+}
