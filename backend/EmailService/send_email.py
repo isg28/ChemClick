@@ -6,11 +6,14 @@ import time
 from pymongo import MongoClient
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+load_dotenv()
 
 print("pymongo version:", pymongo.version)
 
 # MongoDB connection
-url = ('mongodb+srv://ChemClicks:xprVfEaoxMAidRe2@cluster0.hjo3g.mongodb.net/ChemClicks?retryWrites=true&w=majority') #change with os.getenv()
+url = os.getenv("DATABASE_URL") 
 client = MongoClient(url)
 db = client['ChemClicks']
 collection = db['lesson_progress']
@@ -61,10 +64,11 @@ def get_students_with_completed_progress():
     else:
         print("No students found with 100% progress.")
 
-# Schedule the script to run every hour
-schedule.every(10).seconds.do(main)
+if __name__ == "__main__":
+    # Schedule the script to run every hour
+    schedule.every(10).seconds.do(main)
+    while True:
+        schedule.run_pending()
+        time.sleep(5)
 
-while True:
-    schedule.run_pending()
-    time.sleep(5)  # Wait a minute before checking again
 

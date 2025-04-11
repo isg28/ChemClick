@@ -338,10 +338,11 @@ function LessonOnePointFive() {
                                 <input
                                     type='text'
                                     className='lesson-one-point-five-input'
-                                    placeholder='Enter the measurement here'
+                                    placeholder='ex. 0.50'
                                     value={userAnswer}
                                     onChange={handleInputChange}
                                 />
+                                <span className={`lesson-one-point-five-feedback ${feedbackClass}`}>{feedback}</span>
                             </div>
                         </div>
                         <div className="submit-feedback-container">
@@ -351,7 +352,7 @@ function LessonOnePointFive() {
                             {isAnswerCorrect && (
                                 <button className='lesson-one-point-five-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-one-point-five-feedback ${feedbackClass}`}>{feedback}</span>
+                            
                         </div>
                     </div>
                 </div>

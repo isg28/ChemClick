@@ -233,12 +233,44 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
                           )}`}
                         >
                         <div className="lesson-info">
+                        <span
+                          className={`${lessonData.status === "locked" ? "locked-cursor" : ""}`}
+                          style={{
+                            cursor:
+                              isTeacher || ["not-started", "in-progress", "late"].includes(lessonData.status)
+                                ? "pointer"
+                                : "not-allowed",
+                          }}
+                          onClick={() => {
+                            if (isTeacher) {
+                              onLessonClick(lesson.route);
+                              return;
+                            }
+
+                            const status = lessonData.status;
+                            const allowedStatuses = ["not-started", "in-progress", "late", "completed"];
+                            if (allowedStatuses.includes(status)) {
+                              onLessonClick(lesson.route);
+                            } else {
+                              alert("This lesson is currently locked.");
+                            }
+                          }}
+                        >
+                          {lessonIndex + 1}. {lesson.name}
+                        </span>
+
+                        {/* Show Demo link for locked lessons if teacher */}
+                        {isTeacher && lessonData.status === "locked" && (
                           <span
-                            onClick={() => lesson.route && onLessonClick(lesson.route)}
-                            style={{ cursor: lesson.route ? 'pointer' : 'default' }}
+                            className="demo-link"
+                            onClick={() => onLessonClick(lesson.route)}
+                            style={{ marginLeft: '6px' }}
                           >
-                            {lessonIndex + 1}. {lesson.name}
+                            (Demo)
                           </span>
+                        )}
+
+
                         </div>
                         <div className="due-date-container">
                           <span className="due-date">

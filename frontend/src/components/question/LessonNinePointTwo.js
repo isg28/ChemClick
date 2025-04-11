@@ -450,7 +450,7 @@ function LessonNinePointTwo(){
                         <div className='lesson-one-point-one-box-title'>
                             <h1>Unit Nine: Ionic Compounds</h1>
                         </div>
-                        <div className='lesson-one-point-one-content'>
+                        <div className='lesson-nine-point-two-content'>
                             <p className='lesson-one-point-one-prompt'>
                                 Click and drag the provided combs to make an ionic compound, creating a neutral charge. Drag the appropriate combs into the dropzone with your mouse to create a rectangle, simulating an ionic compound.
                             </p>
@@ -586,14 +586,14 @@ function LessonNinePointTwo(){
     </div>
   </div>
 </div>
-<div className="submit-feedback-container">
-                        <div className={`lesson-nine-point-one-feedback ${feedbackClass}`}>
+                        </div>
+                        <div className="submit-feedback-container">
+                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
-                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                            
+                            <button className='lesson-nine-point-two-submit' onClick={handleSubmit}>Submit Answer</button>
                         </div>
-                        </div>
+                    </div>
                     </div>
                         
                     </div>

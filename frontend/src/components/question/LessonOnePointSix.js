@@ -126,7 +126,7 @@ const handleSubmit = async () => {
     const correctAnswer = pencilLength.toFixed(2);
     const userAnswer = parseFloat(userInput).toFixed(2);
     if (Math.abs(userAnswer - correctAnswer) <= 0.05) {
-        setFeedbackMessage("Correct! Moving to the next question.");
+        setFeedbackMessage("Correct!");
         setFeedbackClass('correct');
         setIsAnswerCorrect(true);
 
@@ -205,7 +205,7 @@ const handleSubmit = async () => {
                                     className="lesson-one-point-six-input"
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
-                                    placeholder="Enter your measurement"
+                                    placeholder="ex. 3.00"
                                 />
                                 {!isAnswerCorrect ? (
                                     <button className='lesson-one-point-six-submit' onClick={handleSubmit}>Submit Answer</button>

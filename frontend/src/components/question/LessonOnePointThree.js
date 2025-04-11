@@ -203,7 +203,7 @@ const handleSubmit = async () => {
                                     className="lesson-one-point-three-input"
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
-                                    placeholder="Enter your measurement"
+                                    placeholder="ex. 4.5"
                                 />
                                 <button className='lesson-one-point-three-submit' onClick={handleSubmit}>Submit</button>
                             </div>

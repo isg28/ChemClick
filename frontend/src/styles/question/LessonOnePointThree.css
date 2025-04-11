@@ -57,6 +57,13 @@ html, body {
     margin-bottom: 20px;
 }
 
+.lesson-one-point-three-question h1, .lesson-one-point-three-box-title h1 {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
+    margin:0;
+}
+
 .lesson-one-point-three-content {
     width: 100%;
     max-width: 950px;
@@ -69,6 +76,12 @@ html, body {
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 40px;
+}
+
+.lesson-one-point-three-content p {
+    font-size: 1.3rem;
+    font-family: 'Orelega One', sans-serif;
+    font-weight: normal;
 }
 
 .lesson-one-point-three-measurement-container {
@@ -116,7 +129,7 @@ html, body {
 
 /* Input Box */
 .lesson-one-point-three-input {
-    width: 37%;
+    width: 50%;
     height: 40px;
     border-radius: 15px;
     border: 2px solid #015770;

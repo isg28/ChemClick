@@ -369,10 +369,11 @@ function LessonOnePointEleven() {
                                 <input 
                                     type='text' 
                                     className='lesson-one-point-eleven-input' 
-                                    placeholder='Enter the measurement here' 
+                                    placeholder='ex. 1.45' 
                                     value={userAnswer}
                                     onChange={handleInputChange} 
                                 /> 
+                                <span className={`lesson-one-point-eleven-feedback ${feedbackClass}`}>{feedback}</span>
                             </div>
                         </div>
 
@@ -383,7 +384,7 @@ function LessonOnePointEleven() {
                             {isAnswerCorrect && (
                                 <button className='lesson-one-point-eleven-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-one-point-eleven-feedback ${feedbackClass}`}>{feedback}</span>
+                            
                         </div>
                     </div>
                 </div>
