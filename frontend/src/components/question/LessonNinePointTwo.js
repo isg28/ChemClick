@@ -614,6 +614,7 @@ function LessonNinePointTwo(){
                             </div>
                         </>
                         )}
+                        
                         <div className="side-column-box-info masteryboxstars">{stars}</div>
                     </div>
                         <div className='side-column-box'>
@@ -633,8 +634,9 @@ function LessonNinePointTwo(){
                         <button onClick={() => setShowCompletionModal(false)}>Continue</button>
                     </div>
                 </div>
+                
             )}
-        </div>
+        
     </DndProvider>
         
     );
