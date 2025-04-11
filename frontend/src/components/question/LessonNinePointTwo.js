@@ -586,14 +586,16 @@ function LessonNinePointTwo(){
     </div>
   </div>
 </div>
-                        </div>
-                    </div>
-                        <div className="submit-feedback-container">
-                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
-                            <div className={`lesson-one-point-one-feedback ${feedbackClass}`}>
+<div className="submit-feedback-container">
+                        <div className={`lesson-nine-point-one-feedback ${feedbackClass}`}>
                             <p>{feedbackMessage}</p>
                             </div>
+                            <button className='lesson-one-point-one-submit' onClick={handleSubmit}>Submit Answer</button>
+                            
                         </div>
+                        </div>
+                    </div>
+                        
                     </div>
                 </div>
 

@@ -66,6 +66,7 @@ html,body {
 
 .lesson-two-point-one-content {
   width: 100%;
+  height: 100%;
   max-width: 950px;
   background-color: #ffffff;
   border-radius: 10px;
@@ -81,6 +82,7 @@ html,body {
 
 .lesson-two-point-one-container {
   width: 100%;
+  height: 100%;
   max-width: 800px;
   display: flex;
   justify-content: center;
@@ -171,7 +173,8 @@ html,body {
   font-weight: bold;
   padding: 8px 16px;
   border-radius: 8px;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   text-align: center;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }

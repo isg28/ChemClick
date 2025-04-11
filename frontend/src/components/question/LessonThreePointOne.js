@@ -189,7 +189,7 @@ const LessonThreePointOne = () => {
     setTimeout(() => {
         setFeedback('');
         setFeedbackClass('');
-    }, 2000);
+    }, 3000);
 
     for (let i = 0; i < electronShells.length; i++) {
         if (shellElectrons[i] !== expectedDistribution[i]) {
@@ -399,20 +399,21 @@ const nextQuestion = () => {
                                                                             
                                 </div>
                                 <div className="controls">
-                                    <button disabled={selectedShellIndex === null} onClick={addElectron}>Add Electron ({shellElectrons})</button>
+                                    <button disabled={selectedShellIndex === null} onClick={addElectron}>Add Electron ({shellElectrons.join(':')})</button>
                                     <button disabled={selectedShellIndex === null} onClick={removeElectron}>Remove Electron</button>
                                     <button disabled={!isNucleusSelected} onClick={addProton}>Add Proton</button>
                                     <button disabled={!isNucleusSelected} onClick={removeProton}>Remove Proton</button>
                                 </div>
                             </div>    
-                        </div>                    
+                        </div>     
+                                       
                     </div>
-                </div>
-                <div className="submit-feedback-container-three-point-one">
+                    <div className={`lesson-three-point-one-feedback ${feedbackClass}`}>{feedback}</div>
+                    <div className="submit-feedback-container-three-point-one">
                                 {!isAnswerCorrect ? (<button className='lesson-three-point-one-submit' onClick={handleCheckAnswer}>Submit Answer</button>)
                                     : (<button className='lesson-three-point-one-submit' onClick={nextQuestion}>Next Question</button>
                                                                         )}
-              <span className={`lesson-three-point-one-feedback ${feedbackClass}`}>{feedback}</span>
+                    </div>
             </div>
             </div>  
         </div>                           

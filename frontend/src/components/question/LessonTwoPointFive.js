@@ -164,8 +164,8 @@ function LessonTwoPointFive() {
                                         No
                                     </label>
                                 </div>
-                            </div>
-
+                            
+                        <span className={`lesson-two-point-five-feedback ${feedbackClass}`}>{feedback}</span>
                         <div className="submit-feedback-container">
                             {!isAnswerCorrect && (
                                 <button className='lesson-two-point-five-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
@@ -173,7 +173,7 @@ function LessonTwoPointFive() {
                             {isAnswerCorrect && (
                                 <button className='lesson-two-point-five-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-two-point-five-feedback ${feedbackClass}`}>{feedback}</span>
+                            </div>
                         </div>
                     </div>
                 </div> 

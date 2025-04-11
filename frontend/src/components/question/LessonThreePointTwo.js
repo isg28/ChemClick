@@ -302,7 +302,7 @@ function LessonThreePointTwo() {
         setTimeout(() => {
             setFeedback('');
             setFeedbackClass('');
-        }, 2000);
+        }, 3000);
     };
 
     const handleSubmitAnswer = () => {
@@ -391,15 +391,15 @@ function LessonThreePointTwo() {
                   ))}
                 </div>
                 </div>
-            </div>
-
+            
+            <div data-testid="lesson-three-point-two-feedback" className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</div>
             <div className="submit-feedback-container-three-point-two">
               {!isAnswerCorrect ? (
                 <button className='lesson-three-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
               ) : (
                 <button className='lesson-three-point-two-next' onClick={handleNextQuestion}>Next Question</button>
               )}
-              <span data-testid="lesson-three-point-two-feedback" className={`lesson-three-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+              </div>
             </div>
           </div>
         </div>

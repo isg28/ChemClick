@@ -141,9 +141,9 @@ function LessonTwoPointOne() {
                                 onChange={(e) => setUserInput(e.target.value)}
                                 className="lesson-two-point-one-input" 
                                 placeholder="Enter the uncertain digit" />
-                            </div>
                         </div>
-
+                        
+                        <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
                         <div className="submit-feedback-container">
                             {!isAnswerCorrect && (
                                 <button className='lesson-two-point-one-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
@@ -151,8 +151,9 @@ function LessonTwoPointOne() {
                             {isAnswerCorrect && (
                                 <button className='lesson-two-point-one-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-two-point-one-feedback ${feedbackClass}`}>{feedbackMessage}</span>
+                            
                         </div>
+                    </div>
                     </div>
                 </div>
 

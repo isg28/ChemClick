@@ -149,7 +149,8 @@ html,body {
     font-weight: bold;
     padding: 8px 16px;
     border-radius: 8px;
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-align: center;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }

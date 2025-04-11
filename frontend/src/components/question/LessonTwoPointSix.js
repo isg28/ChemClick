@@ -147,59 +147,58 @@ function LessonTwoPointSix() {
                                     <img src={require('../../assets/question/frog.png')} className="lesson-two-point-six-frog" alt="Frog" />
                                     <h3 className="lesson-two-point-six-scale-reading">{randomNumber}</h3>
                                 </div>
-                            </div>
-
+                            
+                                </div>
                                 <hr className="separator" />
-                                <div className='lesson-two-point-six-question'>
-                                    <h1>Does the reading on the scale pass?</h1>
-                                    <br />
-                                    <label className='lesson-two-point-six-answer1'>
-                                        <input type="radio" value="Yes" checked={selectedOption === 'Yes'} onChange={handleOptionChange} />
-                                        Yes
-                                    </label>
-                                    <br />
-                                    <label className='lesson-two-point-six-answer2'>
-                                        <input type="radio" value="No" checked={selectedOption === 'No'} onChange={handleOptionChange} />
-                                        No
-                                    </label>
+                                    <div className='lesson-two-point-six-question'>
+                                        <h1>Does the reading on the scale pass?</h1>
+                                        <br />
+                                        <label className='lesson-two-point-six-answer1'>
+                                            <input type="radio" value="Yes" checked={selectedOption === 'Yes'} onChange={handleOptionChange} />
+                                            Yes
+                                        </label>
+                                        <br />
+                                        <label className='lesson-two-point-six-answer2'>
+                                            <input type="radio" value="No" checked={selectedOption === 'No'} onChange={handleOptionChange} />
+                                            No
+                                        </label>
+                                    </div>
+                                    <span className={`lesson-two-point-six-feedback ${feedbackClass}`}>{feedback}</span>
+                                    <div className="submit-feedback-container">
+                                        {!isAnswerCorrect && (
+                                            <button className='lesson-two-point-six-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
+                                        )}
+                                        {isAnswerCorrect && (
+                                            <button className='lesson-two-point-six-next' onClick={handleNextQuestion}>Next Question</button>
+                                        )}
                                 </div>
                             </div>
-
-                        <div className="submit-feedback-container">
-                            {!isAnswerCorrect && (
-                                <button className='lesson-two-point-six-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
-                            )}
-                            {isAnswerCorrect && (
-                                <button className='lesson-two-point-six-next' onClick={handleNextQuestion}>Next Question</button>
-                            )}
-                            <span className={`lesson-two-point-six-feedback ${feedbackClass}`}>{feedback}</span>
                         </div>
-                    </div>
-                </div> 
+                    </div> 
 
                 {/* Consistent for Each Question Page */}
                 <div className="side-column">
-                <div className="side-column-box-holder">
-                    <div className="side-column-box masterybox">
-                        <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
-                        {displayMedals && (
-                            <>
-                            <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
-                                🏅 
-                            </div>
-                            <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
-                                🏅 
-                            </div>
-                        </>
-                        )}
-                        <div className="side-column-box-info masteryboxstars">{stars}</div>
-                    </div>
-                        <div className='side-column-box'>
-                            <div className='side-column-box-title'><h1>Goal</h1></div>
-                            <div className='side-column-box-info'>
-                                {renderGoalChecks(goal, correctAnswers)}
-                            </div>
+                    <div className="side-column-box-holder">
+                        <div className="side-column-box masterybox">
+                            <div className="side-column-box-title masteryboxtitle"> <h1>Mastery</h1> </div>
+                            {displayMedals && (
+                                <>
+                                <div className='reward-box-left' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                    🏅 
+                                </div>
+                                <div className='reward-box-right' title="Congrats on achieving mastery! Feel free to keep practicing!">
+                                    🏅 
+                                </div>
+                            </>
+                            )}
+                            <div className="side-column-box-info masteryboxstars">{stars}</div>
                         </div>
+                            <div className='side-column-box'>
+                                <div className='side-column-box-title'><h1>Goal</h1></div>
+                                <div className='side-column-box-info'>
+                                    {renderGoalChecks(goal, correctAnswers)}
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>

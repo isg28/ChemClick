@@ -142,16 +142,17 @@ function LessonTwoPointTwo() {
                                     className='lesson-two-point-two-input'
                                     placeholder="Enter the uncertain digit" />
                             </div>
-                        </div>
-
-                        <div className="submit-feedback-container">
+                        
+                        <span className={`lesson-two-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+                        <div className="lesson-two-point-two-submit-feedback-container">
                             {!isAnswerCorrect && (
                                 <button className='lesson-two-point-two-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
                             )}
                             {isAnswerCorrect && (
                                 <button className='lesson-two-point-two-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-two-point-two-feedback ${feedbackClass}`}>{feedback}</span>
+                            
+                        </div>
                         </div>
                     </div>
                 </div>

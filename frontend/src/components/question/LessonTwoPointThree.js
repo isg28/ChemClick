@@ -164,16 +164,17 @@ function LessonTwoPointThree() {
                                         No
                                     </label>
                                 </div>
-                            </div>
+                            
 
-                        <div className="submit-feedback-container">
+                        <div className="lesson-two-point-three-submit-feedback-container">
+                        <span className={`lesson-two-point-three-feedback ${feedbackClass}`}>{feedback}</span>
                             {!isAnswerCorrect && (
                                 <button className='lesson-two-point-three-submit' onClick={handleSubmitAnswer}>Submit Answer</button>
                             )}
                             {isAnswerCorrect && (
                                 <button className='lesson-two-point-three-next' onClick={handleNextQuestion}>Next Question</button>
                             )}
-                            <span className={`lesson-two-point-three-feedback ${feedbackClass}`}>{feedback}</span>
+                            </div>
                         </div>
                     </div>
                 </div> 
