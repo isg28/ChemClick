@@ -237,10 +237,11 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
                           className={`${lessonData.status === "locked" ? "locked-cursor" : ""}`}
                           style={{
                             cursor:
-                              isTeacher || ["not-started", "in-progress", "late"].includes(lessonData.status)
+                              isTeacher || ["not-started", "in-progress", "late", "completed", "submitted-late"].includes(lessonData.status)
                                 ? "pointer"
                                 : "not-allowed",
                           }}
+                          
                           onClick={() => {
                             if (isTeacher) {
                               onLessonClick(lesson.route);
