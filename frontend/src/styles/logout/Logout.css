@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,8 +11,8 @@ html, body {
     overflow-x: hidden;
 }
 
-.Logout {
-    background-image: url('../../assets/logout/ChemClickBackground.jpg'); 
+.logout-body {
+    background-image: url('../../assets/logout/ChemClickBackground.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -20,79 +20,126 @@ html, body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    align-items: center;
+    justify-content: center;
 }
 
-.logout-container {
+.logout-home-container {
     display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 200px;
-    background-image: url('../../assets/logout/logoutbg.png');
-    background-color: white; 
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    width: 80vw;
+    padding: 4%;
+    background: #00D5D7;
+    border-radius: 25px;
+}
+
+.logout-main-container {
+    display: flex;
+    height: 55vh;
+    width: 80vw;
+    border: 1vh solid #015770;
+    border-radius: 2vh;
+    background: white;
+    background-image: url('../../assets/home/homebg.png');
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center;
-    padding-bottom: 30px;
-    width: 90%;
-    max-width: 800px;
-    padding: 40px;
-    min-height: 500px;
-    height: auto;
-    border-radius: 30px;
-    border: 6px solid #003f52;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    justify-content: center;
+    align-items: center;
 }
 
-.header {
+.logout-main-item {
+    display: flex;
+    width: 38vw;
+    height: 40vh;
+    padding: 2vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#logoutTitle {
+    font-size: clamp(2rem, 7.5vw, 10rem);
+    color: #015770;
+    text-align: center;
+    font-family: 'Orelega One', cursive;
+    font-weight: bold;
+    padding-left: 1vw;
+}
+
+#logoutMenuOptions {
+    width: 36vw;
+    height: 55vh;
+    padding-left: 8%;
+}
+
+.logout-menu-container {
     display: flex;
     flex-direction: column;
+    height: 50vh;
+    width: 25vw;
+    border: 1vh solid #015770;
+    border-radius: 2vh;
     align-items: center;
-    gap: 10px;
-    width: 100%;
-    margin-top: 20px;
+    justify-content: space-around;
+    background-color: #00D5D7;
 }
 
-.profile-logo {
-    width: 180px;
-    height: 180px;
-    margin-right: 10px;
+.logout-logo-wrapper {
+    background-color: white;
+    border: 1vh solid #015770;
+    border-radius: 2vh;
+    padding: 15px;
+    padding-bottom: 1px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5vh;
 }
 
+.logout-logo {
+    width: clamp(35px, 20vw, 200px);
+    height: auto;
+    max-width: 100%;
+    padding-left: 5%;
+    display: block;
+    margin: 0 auto;
+}
 
-.message {
+.logout-message {
     font-family: 'Orelega One', cursive;
-    font-size: 1.8rem;
-    color: #333;
+    font-size: 1.5rem;
     text-align: center;
-    margin-top: 30px;
+    color: #015770;
 }
 
-.message h2 {
-    font-weight: bold;
-}
-
-.message p {
-    margin-top: 10px;
-    color: #555;
-}
-
-.submit {
-    margin-top: 30px;
+.logout-button {
     font-family: 'Orelega One', cursive;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px;
-    height: 59px;
+    width: 20vw;
+    height: 10vh;
     color: #fff;
     background: #2C2C2C;
-    font-size: 30px;
+    font-size: 2vw;
     font-weight: 700;
     cursor: pointer;
     border-radius: 30px;
+    margin-top: -22px;
 }
 
-.submit:hover {
+.logout-button:hover {
     background: #1a1a1a;
+}
+
+.logout-title-text {
+    text-align: center;
+    font-size: clamp(2rem, 7.5vw, 10rem);
+    color: #015770;
+    font-family: 'Orelega One', cursive;
+    font-weight: bold;
+    transform: translateX(45px);
 }
