@@ -44,9 +44,9 @@ function LessonSixPointSix() {
     const nucleusFeedbackMessage = useState("A monatomic ion is created by adding or removing only valence electrons.");
 
     const images = [
-        require("../../assets/question/Helium.png"),
-        require("../../assets/question/Neon.png"),
-        require("../../assets/question/Argon.png"),
+        require("../../assets/question/HeL6.png"),
+        require("../../assets/question/NeL6.png"),
+        require("../../assets/question/ArL6.png"),
     ];
 
     const electronPositions = [
