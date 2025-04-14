@@ -1,26 +1,16 @@
+from rest_framework.views import APIView  
+from rest_framework.response import Response  
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
 from rest_framework import status # type: ignore
-#from .serializer import TeacherUserSerializer 
+from .serializer import TeacherUserSerializer 
 from django.contrib.auth.hashers import check_password,make_password
-#from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password
 from .models import TeacherUser
 # Create your views here.
-
-#class CreateUserView(APIView):
-#    def post(self, request):
-#        serializer = UserSerializer(data=request.data)
-#        if serializer.is_valid():
-#            serializer.save()
-#            return Response({'message': 'Account created successfully'}, status=status.HTTP_201_CREATED)
-#        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#teacher = TeacherUser.objects.create(
-#    teacher_id="87654321",
-#   password= make_password( "securepassword1"),  # Hashing the password
-#)
 
 @method_decorator(csrf_exempt, name='dispatch')
 class TeacherLoginView(View):
