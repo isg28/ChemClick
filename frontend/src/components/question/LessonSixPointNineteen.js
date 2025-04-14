@@ -284,6 +284,22 @@ function LessonSixPointNineteen() {
                             </div>
                         </div>
                     </div>
+                    {/* Next Lesson button positioned below the Goals box */}
+                    <div className="next-lesson-button-container" style={{ marginTop: '20px' }}>
+                        <button 
+                            className="next-lesson-button" 
+                            onClick={() => navigate('/lessonsixpointtwenty')}
+                            style={{ 
+                                padding: '20px 40px', 
+                                fontSize: '20px', 
+                                border: '5px solid #006400', 
+                                borderRadius: '8px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Next Lesson
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
