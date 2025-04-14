@@ -117,20 +117,20 @@ describe("LessonThreePointOne Component", () => {
         const firstShell = screen.getByTestId('shell-click-zone-0');
         fireEvent.click(firstShell);
         
-        expect(addElectronButton.textContent).toContain('Add Electron (0000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (0:0:0:0)');
 
         fireEvent.click(addElectronButton);
 
-        expect(addElectronButton.textContent).toContain('Add Electron (1000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:0:0:0)');
 
         fireEvent.click(addElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (2000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (2:0:0:0)');
 
         fireEvent.click(removeElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (1000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:0:0:0)');
 
         fireEvent.click(removeElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (0000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (0:0:0:0)');
       });
     
       test('can switch between different shells', () => {
@@ -149,19 +149,19 @@ describe("LessonThreePointOne Component", () => {
 
         fireEvent.click(shell1);
         fireEvent.click(addElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (1000)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:0:0:0)');
     
         fireEvent.click(shell2);
         fireEvent.click(addElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (1100)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:1:0:0)');
    
         fireEvent.click(shell3);
         fireEvent.click(addElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (1110)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:1:1:0)');
   
         fireEvent.click(shell4);
         fireEvent.click(addElectronButton);
-        expect(addElectronButton.textContent).toContain('Add Electron (1111)');
+        expect(addElectronButton.textContent).toContain('Add Electron (1:1:1:1)');
       });
     
       test('submit button triggers answer checking and shows next button on correct answer', async () => {
