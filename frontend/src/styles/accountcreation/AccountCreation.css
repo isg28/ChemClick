@@ -20,10 +20,12 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    
 }
 
 .acc-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     margin: auto;
     /* margin-top: 200px; */
@@ -41,6 +43,7 @@ html, body {
     border: 6px solid #003f52;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     justify-content: center;
+    z-index: 1;
 }
 
 .acc-header{
@@ -129,9 +132,10 @@ html, body {
 
 .options{
     color: black;
-    text-decoration: underline;
     position: relative;
     justify-content: center;
+    text-decoration: underline;
+
 }
 
 .already-have-account{
@@ -159,4 +163,56 @@ html, body {
     padding: 15px;
     padding-left: 30px;
     margin-top: 40px;
+    transition: transform 0.2s ease, background 0.3s ease;
+
+}
+
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Subtle glow behind container */
+.acc-container::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle, rgba(0,213,215,0.15), transparent);
+    border-radius: 40px;
+    z-index: -1;
+}
+
+.acc-submit:hover {
+    background: #015770;
+    transform: translateY(-3px); 
+}
+
+.acc-input:hover {
+    transform: scale(1.015);
+    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(1, 87, 112, 0.25);
+}
+
+/* Slight fade-in effect for smoother page load */
+.acc-container {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -239,9 +239,6 @@ ReactDOM.render(
         <Route path = "/LessonTenPointOne" element = {<LessonTenPointOne/>}/>
         <Route path = "/LessonTenPointTwo" element = {<LessonTenPointTwo/>}/>
         <Route path = "/LessonTenPointThree" element = {<LessonTenPointThree/>}/>
-
-        <Route path = "/LessonElevenPointOne" element = {<LessonElevenPointOne/>}/>
-        <Route path = "/LessonElevenPointThree" element = {<LessonElevenPointThree/>}/>
         
         <Route path = "/teacherlogin" element = {<TeacherLogin/>}/>
 

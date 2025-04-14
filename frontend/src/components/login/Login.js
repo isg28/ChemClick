@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useNavigate} from  'react-router-dom';
 import '../../styles/login/Login.css';
+import chemVideo from '../../assets/home/ChemClickVid.mp4'; 
+
 
 function Login() {
   const navigate = useNavigate();
@@ -50,6 +52,10 @@ function Login() {
 
   return (
     <div className = 'Login'>
+      <video autoPlay muted loop playsInline className="bg-video">
+                <source src={chemVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
       <div className = 'login-container'>
         <div className = 'login-header'>
             <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "login-profile-logo" />

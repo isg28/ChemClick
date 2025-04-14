@@ -41,7 +41,7 @@ html, body {
     border: 6px solid #003f52;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     justify-content: center;
-      
+    z-index: 1;
 }
 
 .login-header{
@@ -148,4 +148,62 @@ html, body {
     cursor: pointer;
     border-radius: 30px;
     margin-bottom: 20px;
+}
+
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+
+.Login {
+    backdrop-filter: brightness(0.97); 
+}
+
+.login-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-container:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.login-profile-logo {
+    transition: transform 0.3s ease;
+}
+
+.login-profile-logo:hover {
+    transform: rotate(2deg) scale(1.05);
+}
+
+.submit {
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.Login .submit:hover {
+    transform: translateY(-3px);
+    background: #015770;
+}
+
+.options:hover {
+    text-decoration: underline;
+    color: #015770;
 }

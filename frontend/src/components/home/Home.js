@@ -1,6 +1,7 @@
 import React from "react";
 import {useNavigate} from  'react-router-dom';
 import '../../styles/home/Home.css';
+import chemVideo from '../../assets/home/ChemClickVid.mp4'; 
 
 function Home() {
     const navigate = useNavigate();
@@ -19,6 +20,10 @@ function Home() {
 
     return (
         <body>
+            <video autoPlay muted loop playsInline className="bg-video">
+                <source src={chemVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
             <div className="home-container">
                 <div className="main-container">
                     <div className="main-item" id="welcomeTitle">

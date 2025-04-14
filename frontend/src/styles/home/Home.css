@@ -19,9 +19,11 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden; 
-
     align-items: center;
     justify-content: center;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../../assets/login/ChemClick_Background.jpg');
+    background-size: cover;
 }
 
 .home-container {
@@ -31,8 +33,24 @@ body {
     height: 80vh;
     width: 80vw;
     padding: 5%;
-    background: #00D5D7;
+    background: rgba(0, 213, 215, 0.8);
     border-radius: 25px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .main-container {
@@ -41,32 +59,33 @@ body {
     width: 80vw;
     border: 1vh solid #015770;
     border-radius: 2vh;
-
     background: white;
     background-image: url('../../assets/home/homebg.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center; 
-
     align-items: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
 .main-item {
     display: flex;
     width: 38vw;
     height: 50vh;
-    padding: 2vh
+    padding: 2vh;
+    transition: transform 0.2s ease;
 }
 
 #welcomeTitle {
-    font-size: clamp(2rem, 7.5vw, 10rem);        /* Makes the text a lot bigger */
-    color: #015770;            /* Set a color that contrasts the background */
+    font-size: clamp(2rem, 7.5vw, 8rem); 
+    color: #015770;
     text-align: center; 
     font-family: 'Orelega One', cursive;
     font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
 }
 
-#menuOptions  {
+#menuOptions {
     width: 36vw;
     height: 69vh;
     padding-left: 10%;
@@ -80,21 +99,30 @@ body {
     border: 1vh solid #015770;
     border-radius: 2vh;
     align-items: center;
-
     justify-content: space-around;
-
     background-color: #00D5D7;
+    padding: 2vh;
+    background: rgba(0, 213, 215, 0.85); 
 }
 
 .home-logo {
-    width: clamp(20px, 11vw, 120px);  /* Minimum width 100px, ideal width 20% of viewport, maximum width 300px */
-    height: auto;  /* Keeps aspect ratio */
-    max-width: 100%;  /* Prevents the image from exceeding the width of its container */
-    display: block;  /* Allows for margin auto centering */
+    width: clamp(20px, 11vw, 120px);
+    height: auto;
+    max-width: 100%;
+    display: block;
     margin: 0 auto;
+    border-radius: 50%;
+    border: 3px solid #015770;
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s ease;
 }
 
-.home-button{
+.home-logo:hover {
+    transform: rotate(5deg); 
+}
+
+.home-button {
     font-family: 'Orelega One', cursive;
     display: flex;
     justify-content: center;
@@ -107,5 +135,21 @@ body {
     font-weight: 700;
     cursor: pointer;
     border-radius: 30px;
+    transition: background 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
+.home-button:hover {
+    background: #015770;
+    transform: translateY(-3px); 
+}
+
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+}

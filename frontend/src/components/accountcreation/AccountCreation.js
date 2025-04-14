@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useNavigate} from  'react-router-dom';
 import '../../styles/accountcreation/AccountCreation.css';
+import chemVideo from '../../assets/home/ChemClickVid.mp4'; 
+
 
 function AccountCreation() {
     const navigate = useNavigate();
@@ -90,6 +92,10 @@ function AccountCreation() {
 
     return (
         <div className = 'CreateAccount'>
+            <video autoPlay muted loop playsInline className="bg-video">
+                <source src={chemVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
             <div className = 'acc-container'>
                 <div className = 'acc-header'>
                     <img src = {`${process.env.PUBLIC_URL}/ChemClickLogo.png`} alt = "ChemClick Logo" className = "acc-profile-logo" />
