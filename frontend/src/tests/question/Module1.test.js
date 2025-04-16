@@ -298,7 +298,7 @@ describe("LessonOnePointEight Component", () => {
       </MemoryRouter>
     );
 
-    await screen.findByPlaceholderText(/Enter the measurement here/i);
+    await expect(screen.getByText(/Enter the measurement shown:/i)).toBeInTheDocument();
     expect(screen.getByText(/Submit Answer/i)).toBeInTheDocument();
   });
 
@@ -309,7 +309,7 @@ describe("LessonOnePointEight Component", () => {
       </MemoryRouter>
     );
 
-    const input = screen.getByPlaceholderText(/Enter the measurement here/i);
+    const input = screen.getByTestId("lesson-one-point-eight-input")
     fireEvent.change(input, { target: { value: '5.5' } });
 
     expect(input.value).toBe('5.5');
@@ -412,7 +412,7 @@ describe("LessonOnePointEleven Component", () => {
       </MemoryRouter>
     );
 
-    await screen.findByPlaceholderText(/Enter the measurement here/i);
+    await expect(screen.getByText(/Enter the measurement shown:/i)).toBeInTheDocument();
     expect(screen.getByText(/Submit Answer/i)).toBeInTheDocument();
   });
 
@@ -423,7 +423,7 @@ describe("LessonOnePointEleven Component", () => {
       </MemoryRouter>
     );
 
-    const input = screen.getByPlaceholderText(/Enter the measurement here/i);
+    const input = screen.getByTestId("lesson-one-point-eleven-input")
     fireEvent.change(input, { target: { value: '2.50' } });
 
     expect(input.value).toBe('2.50');

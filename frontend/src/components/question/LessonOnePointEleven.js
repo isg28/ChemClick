@@ -369,6 +369,7 @@ function LessonOnePointEleven() {
                                 <input 
                                     type='text' 
                                     className='lesson-one-point-eleven-input' 
+                                    data-testid='lesson-one-point-eleven-input'
                                     placeholder='ex. 1.45' 
                                     value={userAnswer}
                                     onChange={handleInputChange} 
