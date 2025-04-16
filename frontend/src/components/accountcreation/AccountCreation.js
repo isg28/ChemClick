@@ -35,9 +35,12 @@ function AccountCreation() {
 
         if (Object.keys(newErrors).length === 0) {
             try {
-                const BASE_URL = window.location.hostname === 'localhost'
-                ? 'http://localhost:8000'
-                : 'https://chemclick-backend.onrender.com';
+                const isLocal = window.location.hostname === 'localhost';
+
+                const BASE_URL = isLocal
+                  ? 'http://localhost:8000'
+                  : 'https://chemclick-backend.onrender.com';
+                
                 const response = await fetch(`${BASE_URL}/users/create/`, {
                     method: 'POST',
                     headers: {
