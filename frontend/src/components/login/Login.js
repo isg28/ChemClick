@@ -25,7 +25,7 @@ function Login() {
 
         const BASE_URL = isLocal
           ? 'http://localhost:8000'
-          : 'https://chemclick-backend.onrender.com';
+          : 'https://chemclick.onrender.com';
         
       
         const response = await fetch(`${BASE_URL}/users/login/`, {
