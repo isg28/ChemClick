@@ -65,7 +65,12 @@ const ClickToBegin = () => {
     useEffect(() => {
         const fetchLessons = async () => {
             try {
-                const response = await fetch('http://localhost:8000/lessons/');
+                const BASE_URL = window.location.hostname === 'localhost'
+                ? 'http://localhost:8000'
+                : 'https://chemclick-backend.onrender.com';
+              
+              const response = await fetch(`${BASE_URL}/lessons/`);
+              
                 if (!response.ok) throw new Error('Failed to fetch lessons');
 
                 const lessons = await response.json();

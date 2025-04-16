@@ -69,8 +69,11 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
 
             // Fetch lesson details
             try {
-                const lessonDetailsResponse = await fetch(`http://localhost:8000/lessons/${lesson.lesson_id}`);
-                lessonDetails = lessonDetailsResponse.ok ? await lessonDetailsResponse.json() : {};
+              const BASE_URL = window.location.hostname === 'localhost'
+              ? 'http://localhost:8000'
+              : 'https://chemclick-backend.onrender.com';
+              const lessonDetailsResponse = await fetch(`${BASE_URL}/lessons/${lesson.lesson_id}`);
+              lessonDetails = lessonDetailsResponse.ok ? await lessonDetailsResponse.json() : {};
             } catch (error) {
                 console.error(`Failed to fetch lesson details for ${lesson.lesson_id}`, error);
             }
