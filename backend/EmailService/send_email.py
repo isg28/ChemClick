@@ -66,7 +66,7 @@ def get_students_with_completed_progress():
 
 if __name__ == "__main__":
     # Schedule the script to run every hour
-    schedule.every(10).seconds.do(main)
+    schedule.every(15).minutes.do(main)
     while True:
         schedule.run_pending()
         time.sleep(5)
