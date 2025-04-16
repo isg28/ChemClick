@@ -65,9 +65,13 @@ const ClickToBegin = () => {
     useEffect(() => {
         const fetchLessons = async () => {
             try {
-                const BASE_URL = window.location.hostname === 'localhost'
-                ? 'http://localhost:8000'
-                : 'https://chemclick-backend.onrender.com';
+
+                const isLocal = window.location.hostname.includes('localhost');
+
+                const BASE_URL = isLocal
+                  ? 'http://localhost:8000'
+                  : 'https://chemclick.onrender.com'
+
               
               const response = await fetch(`${BASE_URL}/lessons/`);
               

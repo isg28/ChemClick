@@ -26,7 +26,12 @@ function NewPassword() {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/users/resetpassword/', {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/users/resetpassword/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

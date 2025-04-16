@@ -17,7 +17,12 @@ const StatisticsPie = () => {
         const fetchStudentProgress = async () => {
             try {
                 // setLoading(true);
-                const response = await fetch(`http://localhost:8000/lessons/studentProgress/${lessonId}/`);
+                const isLocal = window.location.hostname.includes('localhost');
+
+                const BASE_URL = isLocal
+                  ? 'http://localhost:8000'
+                  : 'https://chemclick.onrender.com'
+                const response = await fetch(`${BASE_URL}/lessons/studentProgress/${lessonId}/`);
                 if (!response.ok) throw new Error("Failed to fetch progress");
                 
                 const data = await response.json();

@@ -17,7 +17,12 @@ function TeacherUnitList({ units, currentUnit }) {
 
   const fetchUsers = async () => {
       try {
-          const response = await fetch("http://localhost:8000/users/");
+          const isLocal = window.location.hostname.includes('localhost');
+
+          const BASE_URL = isLocal
+            ? 'http://localhost:8000'
+            : 'https://chemclick.onrender.com'
+          const response = await fetch(`${BASE_URL}/users/`);
           if (!response.ok) throw new Error("Failed to fetch users");
 
           const data = await response.json();
@@ -58,7 +63,12 @@ function TeacherUnitList({ units, currentUnit }) {
 
     setEditingLesson({ unitIndex, lessonIndex });
 
-    fetch(`http://localhost:8000/lessons/${lesson.lesson_id}/`)
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
+    fetch(`${BASE_URL}/lessons/${lesson.lesson_id}/`)
       .then((res) => {
         if (res.status === 404) {
           // If the lesson does not exist, set to create mode
@@ -99,9 +109,15 @@ function TeacherUnitList({ units, currentUnit }) {
       setTimeout(() => setShake(false), 600); 
       return;
     }
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
+
     const url = isCreating
-      ? `http://localhost:8000/lessons/`
-      : `http://localhost:8000/lessons/${editedData.lessonId}/`;
+      ? `${BASE_URL}/lessons/`
+      : `${BASE_URL}/lessons/${editedData.lessonId}/`;
   
     const method = isCreating ? 'POST' : 'PATCH';
   
@@ -193,7 +209,12 @@ function TeacherUnitList({ units, currentUnit }) {
   useEffect(() => {
     const fetchUsers = async () => {
         try {
-            const response = await fetch("http://localhost:8000/users/");
+            const isLocal = window.location.hostname.includes('localhost');
+
+            const BASE_URL = isLocal
+              ? 'http://localhost:8000'
+              : 'https://chemclick.onrender.com'
+            const response = await fetch(`${BASE_URL}/users/`);
             if (!response.ok) throw new Error("Failed to fetch users");
 
             const data = await response.json();
@@ -211,7 +232,12 @@ function TeacherUnitList({ units, currentUnit }) {
       if (!confirmDelete) return;
 
       try {
-          const response = await fetch(`http://localhost:8000/users/${userId}/`, { method: "DELETE" });
+          const isLocal = window.location.hostname.includes('localhost');
+
+          const BASE_URL = isLocal
+            ? 'http://localhost:8000'
+            : 'https://chemclick.onrender.com'
+          const response = await fetch(`${BASE_URL}/users/${userId}/`, { method: "DELETE" });
 
           if (!response.ok) {
               throw new Error("Failed to delete user.");
@@ -230,7 +256,12 @@ function TeacherUnitList({ units, currentUnit }) {
       if (!confirmDelete) return;
 
       try {
-          const response = await fetch(`http://localhost:8000/users/`, { method: "DELETE" });
+          const isLocal = window.location.hostname.includes('localhost');
+
+          const BASE_URL = isLocal
+            ? 'http://localhost:8000'
+            : 'https://chemclick.onrender.com'
+          const response = await fetch(`${BASE_URL}/users/`, { method: "DELETE" });
 
           if (!response.ok) {
               throw new Error("Failed to delete all users.");

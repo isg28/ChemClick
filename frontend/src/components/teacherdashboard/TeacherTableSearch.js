@@ -15,7 +15,12 @@ function TableSearch() {
     const fetchStudentProgress = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:8000/lessons/${lessonId}/students/`);
+        const isLocal = window.location.hostname.includes('localhost');
+
+        const BASE_URL = isLocal
+          ? 'http://localhost:8000'
+          : 'https://chemclick.onrender.com'
+        const response = await fetch(`${BASE_URL}/lessons/${lessonId}/students/`);
         if (!response.ok) throw new Error("Failed to fetch statistics");
 
         const data = await response.json();
@@ -116,7 +121,12 @@ function TableSearch() {
     if (!confirmReset) return;
   
     try {
-      const response = await fetch(`http://localhost:8000/lessons/${lessonId}/students/${studentId}/`, {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/lessons/${lessonId}/students/${studentId}/`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -155,7 +165,12 @@ function TableSearch() {
     if (!confirmReset) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/lessons/${lessonId}/reset_all_progress/`, {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/lessons/${lessonId}/reset_all_progress/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

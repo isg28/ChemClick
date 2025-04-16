@@ -54,9 +54,11 @@ function Dashboard() {
   
   useEffect(() => {
 
-    const BASE_URL = window.location.hostname === 'localhost'
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
       ? 'http://localhost:8000'
-      : 'https://chemclick-backend.onrender.com';
+      : 'https://chemclick.onrender.com'
 
     fetch(`${BASE_URL}/announcements/`) 
     .then((response) => {
@@ -250,9 +252,11 @@ function Dashboard() {
       return;
     }
 
-    const BASE_URL = window.location.hostname === 'localhost'
-    ? 'http://localhost:8000'
-    : 'https://chemclick-backend.onrender.com';
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
     const lessonProgressUrl = isTeacher 
     ? `${BASE_URL}/teacherLessons/progress/${userId}` 
     : `${BASE_URL}/lessons/progress/${userId}`; 

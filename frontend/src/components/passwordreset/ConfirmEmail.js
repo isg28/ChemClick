@@ -23,7 +23,12 @@ function ConfirmEmail() {
 			}
 			*/
 			try {
-				const response = await fetch('http://localhost:8000/users/verify/', {
+				const isLocal = window.location.hostname.includes('localhost');
+
+                const BASE_URL = isLocal
+                  ? 'http://localhost:8000'
+                  : 'https://chemclick.onrender.com'
+				const response = await fetch(`${BASE_URL}/users/verify/`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

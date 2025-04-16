@@ -69,9 +69,11 @@ function UnitList({ units, currentUnit, onLessonClick, progressData, userId, isT
 
             // Fetch lesson details
             try {
-              const BASE_URL = window.location.hostname === 'localhost'
-              ? 'http://localhost:8000'
-              : 'https://chemclick-backend.onrender.com';
+              const isLocal = window.location.hostname.includes('localhost');
+
+              const BASE_URL = isLocal
+                ? 'http://localhost:8000'
+                : 'https://chemclick.onrender.com'
               const lessonDetailsResponse = await fetch(`${BASE_URL}/lessons/${lesson.lesson_id}`);
               lessonDetails = lessonDetailsResponse.ok ? await lessonDetailsResponse.json() : {};
             } catch (error) {
