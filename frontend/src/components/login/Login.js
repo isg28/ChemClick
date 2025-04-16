@@ -21,7 +21,7 @@ function Login() {
       }
 
       try {
-        const isLocal = window.location.hostname === 'localhost';
+        const isLocal = window.location.hostname.includes('localhost');
 
         const BASE_URL = isLocal
           ? 'http://localhost:8000'
