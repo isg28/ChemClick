@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from corsheaders.defaults import default_headers, default_methods
 from pathlib import Path
 import os
 from dotenv import load_dotenv
@@ -57,8 +57,11 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000', 
     'https://chem-clicks.vercel.app',
-     
 ]
+
+CORS_ALLOW_HEADERS = list(default_headers)
+CORS_ALLOW_METHODS = list(default_methods)
+
 
 ROOT_URLCONF = 'backend.urls'
 
