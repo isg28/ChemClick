@@ -1,4 +1,6 @@
-Django==5.1.2
+Django==4.2.16
 gunicorn
-mongoengine
-python-dotenv
+django-cors-headers==4.4.0
+djangorestframework==3.15.2
+mongoengine==0.29.1
+python-dotenv==1.0.1
