@@ -44,7 +44,7 @@ export const fetchLessonData = async (lessonId, setGoal) => {
         ? 'http://localhost:8000/'
         : 'https://chemclick.onrender.com/'
         
-        const response = await fetch(`http://${BASE_URL}/lessons/`, { method: 'GET', headers });
+        const response = await fetch(`${BASE_URL}/lessons/`, { method: 'GET', headers });
         if (!response.ok) throw new Error(`Failed to fetch lesson data: ${response.status} ${response.statusText}`);
         
         const data = await response.json();
@@ -74,7 +74,7 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
                  const BASE_URL = isLocal
                    ? 'http://localhost:8000/'
                    : 'https://chemclick.onrender.com/'
-        const lessonDataResponse = await fetch(`http://${BASE_URL}/lessons/${lessonId}`);
+        const lessonDataResponse = await fetch(`${BASE_URL}/lessons/${lessonId}`);
         if (!lessonDataResponse.ok) {
             console.error('Failed to fetch lesson data.');
             return;
@@ -82,9 +82,10 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
         const lessonData = await lessonDataResponse.json();
         const teacherGoalLevel = lessonData.goal_level;
 
+        
         const progressEndpoint = isTeacher
-            ? `http://${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
-            : `http://${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
+            ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
+            : `${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
 
         
         const progressResponse = await fetch(progressEndpoint);
@@ -177,10 +178,14 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
                 progress: 0,
                 goal_level: teacherGoalLevel,
             };
-
+        const isLocal = window.location.hostname.includes('localhost');
+ 
+                 const BASE_URL = isLocal
+                   ? 'http://localhost:8000/'
+                   : 'https://chemclick.onrender.com/'
             const postUrl = isTeacher
-                ? `http://${BASE_URL}/teacherLessons/progress/`
-                : `http://${BASE_URL}/lessons/progress/`;
+                ? `${BASE_URL}/teacherLessons/progress/`
+                : `${BASE_URL}/lessons/progress/`;
 
             const postResponse = await fetch(postUrl, {
                 method: 'POST',
@@ -216,8 +221,8 @@ export const fetchLessonMastery = async (userId, isTeacher, setUserMastery) => {
             : 'https://chemclick.onrender.com/'
 
         const url = isTeacher
-            ? `http://${BASE_URL}/teacherLessons/progress/${userId}/`
-            : `http://${BASE_URL}/lessons/progress/${userId}/`;
+            ? `${BASE_URL}/teacherLessons/progress/${userId}/`
+            : `${BASE_URL}/lessons/progress/${userId}/`;
 
         const response = await fetch(url);
         if (!response.ok) {
@@ -257,8 +262,8 @@ export const createLessonProgress = async (userId, isTeacher, lessonId, goal) =>
     : 'https://chemclick.onrender.com/'
 
     const url = isTeacher
-        ? `http://${BASE_URL}/teacherLessons/progress/`
-        : `http://${BASE_URL}/lessons/progress/`;
+        ? `${BASE_URL}/teacherLessons/progress/`
+        : `${BASE_URL}/lessons/progress/`;
 
     try {
         const response = await fetch(url, {
@@ -297,8 +302,8 @@ export const decreaseProgressAndGoal = async (userId, isTeacher, lessonId, corre
     : 'https://chemclick.onrender.com/'
 
     const progressEndpoint = isTeacher
-        ? `http://${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
-        : `http://${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
+        ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
+        : `${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
 
     try {
         const response = await fetch(progressEndpoint, {
@@ -351,8 +356,8 @@ export const CorrectResponses = async ({
     : 'https://chemclick.onrender.com/'
 
     const progressEndpoint = isTeacher
-        ? `http://${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
-        : `http://${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
+        ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
+        : `${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
 
 
     const payload = {
@@ -410,8 +415,8 @@ export const IncorrectResponses = async ({
     : 'https://chemclick.onrender.com/'
 
     const progressEndpoint = isTeacher
-        ? `http://${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
-        : `http://${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
+        ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
+        : `${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
 
     const payload = {
         incorrect_answers: newIncorrectAnswers,
@@ -447,8 +452,8 @@ export const fetchUpdatedLessonProgress = async (userId, lessonId, isTeacher) =>
     : 'https://chemclick.onrender.com/'
     
     const progressEndpoint = isTeacher
-        ? `http://${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
-        : `http://${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
+        ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
+        : `${BASE_URL}/lessons/progress/${userId}/${lessonId}/`;
 
     
 
