@@ -27,6 +27,7 @@
   - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
 - [Getting Started](#getting-started)
   - [Installation](#installation)
+- [Deployment](#deployment)
 - [Testing](#running-tests)
 - [User Interface](#user-interface)
 - [License](#license)
@@ -50,9 +51,11 @@ This project is being undertaken by the development team Code Blue, composed of 
 
 We are building this project using the following:
 * [![React][React.js]][React-url] **React** - Frontend framework  
+* [![Vercel][Vercel-img]][Vercel-url] **Vercel** – Frontend hosting and deployment  
 * [![Node.js][Node.js]][Node-url] **Node.js** - Server-side runtime environment  
 * [![MongoDB][MongoDB]][MongoDB-url] **MongoDB** - Database  
 * [![Django][Django]][Django-url] **Django** - Backend web framework  
+* [![Render][Render-img]][Render-url] **Render** – Backend deployment platform  
 * [![HTML][HTML]][HTML-url] **HTML** - Markup language
 * [![CSS][CSS]][CSS-url] **CSS** - Styling language 
 * [![JavaScript][JavaScript]][JavaScript-url] **JavaScript** - Programming language for frontend 
@@ -66,7 +69,7 @@ We are building this project using the following:
 **Anthony Dominguez - Email: <anthonyd24uc@gmail.com>** <br>
 Danica Galang - Email: <danica.k.galang@gmail.com> <br>
 **Oliver Jezildzic - Email: <Olijez55@gmail.com>** <br>
-Isabel Santoyo-Garcia - Email: <> <br>
+Isabel Santoyo-Garcia - Email: <isabelsantoyogarcia28@gmail.com> <br>
 **Marilyn Sarabia - Email: <mkdso0527@gmail.com>** <br>
 Maria Valencia - Email: <Mariasworkspace1@gmail.com> <br>
 **Jessica Villanueva - Email: <jessicabvillanueva@gmail.com>** <br>
@@ -115,9 +118,6 @@ To clone and run this application, you will need [Node.js](https://docs.npmjs.co
    ```sh
    git clone https://github.com/isg28/ChemClick.git
    ```
-  ```sh
-   cd ChemClick
-   ```
 2. Initial Setup
     * Change directories into the ChemClick folder
       ```sh
@@ -134,6 +134,34 @@ To clone and run this application, you will need [Node.js](https://docs.npmjs.co
        ```
     * Ensure environment variables are set up correctly
       - Rename `.env.example` to `.env` and fill in the required values.
+4. Install Python Dependencies  
+   * While in the `backend/` folder, install all required Python packages listed in `requirements.txt`:
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+<p><br></p>
+<p><br></p>
+
+### Running the Application Locally
+<p>To launch the full application, you must run both the backend and frontend servers simultaneously in two separate terminal windows or tabs:</p>
+
+<ol>
+  <li>
+    <strong>Run the Django Backend Server</strong><br>
+    From inside the <code>backend/</code> folder:
+    <pre><code>python manage.py runserver</code></pre>
+  </li>
+
+  <li>
+    <strong>Run the React Frontend Server</strong><br>
+    From inside the <code>frontend/</code> folder:
+    <pre><code>npm start</code></pre>
+  </li>
+</ol>
+
+<p>This setup ensures both the backend API and frontend UI are running and communicating properly for local development.</p>
+
     
     
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -141,13 +169,51 @@ To clone and run this application, you will need [Node.js](https://docs.npmjs.co
 <!-- DEPLOYMENT -->
 ## Deployment
 
+<ul>
+  <li><strong>Backend:</strong> Hosted on 
+    <a href="https://render.com/" target="_blank" rel="noopener noreferrer">Render</a>, 
+    a cloud platform that automatically builds and deploys web services. 
+    The backend uses <code>Gunicorn</code> as the WSGI server to serve the Django application.
+    
+  <div style="text-align: center; margin-top: 10px;">
+      <img src="frontend/src/assets/readme/render_logs.png" alt="Render Deployment Logs" width="750">
+      <p style="font-size: 14px;"><em>Deployment logs confirming successful server boot on Render.</em></p>
+  </div>
+  </li>
+
+  <li><strong>Database:</strong> Integrated with 
+    <a href="https://www.mongodb.com/cloud/atlas" target="_blank" rel="noopener noreferrer">MongoDB Atlas</a>, 
+    a cloud-based NoSQL database. Environment variables were used to securely manage connection strings 
+    and credentials.
+  </li>
+
+  <li><strong>Frontend:</strong> Deployed using 
+    <a href="https://vercel.com/" target="_blank" rel="noopener noreferrer">Vercel</a>, 
+    a frontend hosting platform optimized for React applications. It handles continuous deployment 
+    from GitHub and automatically builds the project on each push.
+  </li>
+</ul>
+
+<p><br></p>
+<p>
+  The live application is accessible at: 🎉
+  <a href="https://chem-clicks.vercel.app" target="_blank" rel="noopener noreferrer">
+    https://chem-clicks.vercel.app
+  </a>🎉
+</p>
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!--TESTING -->
 ## Running Tests
-### Set up Jest for unit testing
+### Frontend Unit Testing (Jest)
 This project uses [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit testing. Jest should have already been installed when dependencies were installed for the project. Follow these steps to run tests:
 
+* Navigate to the frontend folder:
+  ```sh
+    cd frontend
+  ```
 * Execute all tests:
   ```sh
     npm test
@@ -165,6 +231,56 @@ Testing files can be found here:
           login/      # Component folder
             login.test.js   # Test file
   ```
+
+<p><br></p>
+<p><br></p>
+
+
+### Backend Unit Testing (Django + MongoMock)
+<p>
+  The backend uses Python’s built-in 
+  <a href="https://docs.python.org/3/library/unittest.html" target="_blank" rel="noopener noreferrer">unittest</a> module, 
+  along with 
+  <a href="https://mongomock.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">mongomock</a> 
+  to mock MongoDB interactions. Each test is isolated and does not affect production data.
+</p>
+
+<p>Follow these steps to run tests:</p>
+
+  * Navigate to the backend folder:
+    ```sh
+      cd backend
+    ```
+  * Execute all tests:
+    ```sh
+      python -m unittest discover
+    ```
+
+<p>Testing files can be found here:</p>
+
+  ```sh
+  chemclick/
+    backend/
+      EmailService/
+        tests.py                # Email notifications logic
+      lessons/
+        tests.py                # Lesson creation and progress tracking
+      teacher/
+        tests.py                # Teacher login
+      teacherLessons/
+        tests.py                # Teacher-specific progress tracking
+      users/
+        tests.py                # User creation and login
+      announcements/
+        tests.py                # Announcement CRUD operations
+  ```
+
+<p>Each backend test module includes:</p>
+<ul>
+  <li>In-memory MongoDB setup with <code>mongomock</code></li>
+  <li>Validation of API responses using Django’s test client or DRF’s <code>APIClient</code></li>
+  <li><code>print()</code> statements for visible test output in the terminal</li>
+</ul>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -227,6 +343,11 @@ Testing files can be found here:
 [JavaScript-url]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
 [Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
 [Python-url]: https://www.python.org/
+[Vercel-img]: https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com/
+[Render-img]: https://img.shields.io/badge/Render-46E3B7?logo=render&logoColor=white
+[Render-url]: https://render.com/
+
 
 
 
