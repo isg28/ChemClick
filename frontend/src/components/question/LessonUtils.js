@@ -41,8 +41,8 @@ export const fetchLessonData = async (lessonId, setGoal) => {
         const isLocal = window.location.hostname.includes('localhost');
  
         const BASE_URL = isLocal
-        ? 'http://localhost:8000/'
-        : 'https://chemclick.onrender.com/'
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
         
         const response = await fetch(`${BASE_URL}/lessons/`, { method: 'GET', headers });
         if (!response.ok) throw new Error(`Failed to fetch lesson data: ${response.status} ${response.statusText}`);
@@ -71,9 +71,9 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
         // Fetch the current lesson goal from the teacher's settings
         const isLocal = window.location.hostname.includes('localhost');
  
-                 const BASE_URL = isLocal
-                   ? 'http://localhost:8000/'
-                   : 'https://chemclick.onrender.com/'
+        const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
         const lessonDataResponse = await fetch(`${BASE_URL}/lessons/${lessonId}`);
         if (!lessonDataResponse.ok) {
             console.error('Failed to fetch lesson data.');
@@ -180,9 +180,9 @@ export const fetchLessonProgress = async (userId, lessonId, isTeacher, setProgre
             };
         const isLocal = window.location.hostname.includes('localhost');
  
-                 const BASE_URL = isLocal
-                   ? 'http://localhost:8000/'
-                   : 'https://chemclick.onrender.com/'
+        const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
             const postUrl = isTeacher
                 ? `${BASE_URL}/teacherLessons/progress/`
                 : `${BASE_URL}/lessons/progress/`;
@@ -216,9 +216,9 @@ export const fetchLessonMastery = async (userId, isTeacher, setUserMastery) => {
     try {
         const isLocal = window.location.hostname.includes('localhost');
  
-            const BASE_URL = isLocal
-            ? 'http://localhost:8000/'
-            : 'https://chemclick.onrender.com/'
+        const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
 
         const url = isTeacher
             ? `${BASE_URL}/teacherLessons/progress/${userId}/`
@@ -258,8 +258,8 @@ export const createLessonProgress = async (userId, isTeacher, lessonId, goal) =>
     const isLocal = window.location.hostname.includes('localhost');
  
     const BASE_URL = isLocal
-    ? 'http://localhost:8000/'
-    : 'https://chemclick.onrender.com/'
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
 
     const url = isTeacher
         ? `${BASE_URL}/teacherLessons/progress/`
@@ -298,8 +298,8 @@ export const decreaseProgressAndGoal = async (userId, isTeacher, lessonId, corre
     const isLocal = window.location.hostname.includes('localhost');
  
     const BASE_URL = isLocal
-    ? 'http://localhost:8000/'
-    : 'https://chemclick.onrender.com/'
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
 
     const progressEndpoint = isTeacher
         ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
@@ -352,8 +352,8 @@ export const CorrectResponses = async ({
     const isLocal = window.location.hostname.includes('localhost');
  
     const BASE_URL = isLocal
-    ? 'http://localhost:8000/'
-    : 'https://chemclick.onrender.com/'
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
 
     const progressEndpoint = isTeacher
         ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
@@ -411,8 +411,8 @@ export const IncorrectResponses = async ({
     const isLocal = window.location.hostname.includes('localhost');
  
     const BASE_URL = isLocal
-    ? 'http://localhost:8000/'
-    : 'https://chemclick.onrender.com/'
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
 
     const progressEndpoint = isTeacher
         ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
@@ -448,8 +448,8 @@ export const fetchUpdatedLessonProgress = async (userId, lessonId, isTeacher) =>
     const isLocal = window.location.hostname.includes('localhost');
  
     const BASE_URL = isLocal
-    ? 'http://localhost:8000/'
-    : 'https://chemclick.onrender.com/'
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
     
     const progressEndpoint = isTeacher
         ? `${BASE_URL}/teacherLessons/progress/${userId}/${lessonId}/`
