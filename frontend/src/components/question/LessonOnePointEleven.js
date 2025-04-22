@@ -233,7 +233,7 @@ function LessonOnePointEleven() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2500);
+            }, 3000);
             return;
         }
     
@@ -247,7 +247,7 @@ function LessonOnePointEleven() {
                 setTimeout(() => {
                     setFeedback('');
                     setFeedbackClass('');
-                }, 2500);
+                }, 3000);
                 return;
             }
 
@@ -255,9 +255,9 @@ function LessonOnePointEleven() {
                 setFeedback("The last two digits are not quite right. Double-check your answer.");
                 setLastDigitAttempts(lastDigitAttempts + 1);
             } else {
-                if (positionType === 'closer to lower') {
+                if (positionType === 'close to lower') {
                     setFeedback('For measurements closer to the lower half, the last two digits should be between .05 and .45.');
-                } else if (positionType === 'closer to upper') {
+                } else if (positionType === 'close to upper') {
                     setFeedback('For measurements closer to the upper half, the last two digits should be between .55 and .95.');
                 } else if (positionType === 'on tick') {
                     setFeedback('For on-tick measurements, the last digits should be .00.');
@@ -274,7 +274,7 @@ function LessonOnePointEleven() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2500);
+            }, 5000);
             return;
         }
 
@@ -287,7 +287,7 @@ function LessonOnePointEleven() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2500);
+            }, 3000);
             return;
         }
 
@@ -301,7 +301,7 @@ function LessonOnePointEleven() {
         setTimeout(() => {
             setFeedback('');
             setFeedbackClass('');
-        }, 2000);
+        }, 3000);
     };
 
     const handleSubmitAnswer = () => {

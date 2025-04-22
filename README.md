@@ -68,11 +68,11 @@ We are building this project using the following:
 ### Contact Us!
 **Anthony Dominguez - Email: <anthonyd24uc@gmail.com>** <br>
 Danica Galang - Email: <danica.k.galang@gmail.com> <br>
-**Oliver Jezildzic - Email: <Olijez55@gmail.com>** <br>
+**Oliver Jezildzic - Email: <olijez55@gmail.com>** <br>
 Isabel Santoyo-Garcia - Email: <isabelsantoyogarcia28@gmail.com> <br>
 **Marilyn Sarabia - Email: <mkdso0527@gmail.com>** <br>
-Maria Valencia - Email: <Mariasworkspace1@gmail.com> <br>
-**Jessica Villanueva - Email: <jessicabvillanueva@gmail.com>** <br>
+Maria Valencia - Email: <mariasworkspace1@gmail.com> <br>
+**Jessica Villanueva - Email: <jessvanillaa@gmail.com>** <br>
 Zhenkang Zhao - Email: <zhenkang209@gmail.com> <br>
 
 

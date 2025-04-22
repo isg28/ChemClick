@@ -213,7 +213,7 @@ function LessonOnePointNine() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2000);
+            }, 2500);
             return;
         }
     };
