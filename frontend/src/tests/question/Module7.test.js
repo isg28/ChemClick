@@ -165,7 +165,7 @@ const lessons = [
   }
 ];
 
-describe('Lessons 7.1 - 7.10 Components', () => {
+describe('Lessons 7.1 - 7.12 Components', () => {
   beforeEach(() => {
     jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
       if (key === 'studentId') return 'mockStudentId';
@@ -186,7 +186,9 @@ describe('Lessons 7.1 - 7.10 Components', () => {
           { lesson_id: 'lesson7.7', goal_level: 1 },
           { lesson_id: 'lesson7.8', goal_level: 1 },
           { lesson_id: 'lesson7.9', goal_level: 1 },
-          { lesson_id: 'lesson7.10', goal_level: 1 }
+          { lesson_id: 'lesson7.10', goal_level: 1 },
+          { lesson_id: 'lesson7.11', goal_level: 1 },
+          { lesson_id: 'lesson7.12', goal_level: 1 }
         ]),
       };
     });
