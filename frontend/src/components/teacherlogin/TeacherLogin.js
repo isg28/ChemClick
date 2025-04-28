@@ -88,11 +88,6 @@ function TeacherLogin() {
               />            
             </div>
           </div>
-          <div className = 'options'>
-            <div className = 'forgot-password' onClick={() => navigate('/ConfirmEmail')}>Forgot Password</div>
-            <div className = 'submit-container'>
-            </div>
-          </div>
           {errorMessage&& <p style={{color:'red' }}>{errorMessage}</p>}
         <div className = 'submit' onClick = {handleSignIn}>SIGN IN</div>
         

@@ -145,7 +145,6 @@ function LessonOnePointTwo() {
     const [feedback, setFeedback] = useState('');
     const [feedbackClass, setFeedbackClass] = useState('hidden');
     const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
-    const [lastDigitAttempts, setLastDigitAttempts] = useState(0); 
 
     useEffect(() => {
         const shuffleQuestions = () => {
@@ -184,7 +183,6 @@ function LessonOnePointTwo() {
             setFeedback('Correct!');
             setFeedbackClass('correct');
             setIsAnswerCorrect(true);
-            setLastDigitAttempts(0); 
             await CorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal,starsEarned, 
                 setCorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
             }); 
@@ -194,26 +192,36 @@ function LessonOnePointTwo() {
         if (Math.abs(userAnswerNum - correctAnswer) <= 0.15) {
             setFeedback("Your answer is valid; however, most chemists agree there is a better answer. Please try again.");
             setFeedbackClass('incorrect');
-            setLastDigitAttempts(0); 
             return;
         }
     
         if (userWhole === correctWhole && userDecimal !== correctDecimal) {
-            if (lastDigitAttempts < 1) {
-                setFeedback("Last digit is not quite right.");
-                setLastDigitAttempts(lastDigitAttempts + 1);
-            } else {
-                if (positionType === 'closer to lower') {
-                    setFeedback('For measurements closer to the lower tick, the last digit should be between 1 and 4.');
-                } else if (positionType === 'closer to upper') {
-                    setFeedback('For measurements closer to the upper tick, the last digit should be between 6 and 9.');
-                } else if (positionType === 'on tick') {
-                    setFeedback('For on-tick measurements, the last digit should be 0.');
-                }
+            const digit = parseInt(userDecimal, 10);
+          
+            if (positionType === 'closer to lower' && digit >= 6 && digit <= 9) {
+              setFeedback(
+                'For measurements closer to the lower tick, the last digit should be between 1 and 4.'
+              );
             }
+            else if (positionType === 'closer to upper' && digit >= 1 && digit <= 4) {
+              setFeedback(
+                'For measurements closer to the upper tick, the last digit should be between 6 and 9.'
+              );
+            }
+            else if (positionType === 'on tick') {
+              setFeedback('For on-tick measurements, the last digit should be 0.');
+            }
+            else {
+              setFeedback('Last digit is not quite right.');
+            }
+          
             setFeedbackClass('incorrect');
-            await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned, 
-                setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
+            await IncorrectResponses({
+              userId, lessonId, isTeacher,
+              correctAnswers, incorrectAnswers, totalAttempts,
+              progress, masteryLevel, goal, starsEarned,
+              setIncorrectAnswers, setProgress,
+              setMasteryLevel, setTotalAttempts,
             });
             return;
         }
@@ -222,7 +230,6 @@ function LessonOnePointTwo() {
         await IncorrectResponses({userId, lessonId, isTeacher, correctAnswers, incorrectAnswers, totalAttempts, progress, masteryLevel, goal, starsEarned,
             setIncorrectAnswers, setProgress, setMasteryLevel, setTotalAttempts,
         });
-        setLastDigitAttempts(0); 
     };
 
     const handleSubmitAnswer = async () => {

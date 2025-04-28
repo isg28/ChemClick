@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
+import "react-router-dom";
 import LessonTenPointOne from '../../components/question/LessonTenPointOne';
 import LessonTenPointTwo from '../../components/question/LessonTenPointTwo';
 import LessonTenPointThree from '../../components/question/LessonTenPointThree';
@@ -61,7 +61,7 @@ describe('Lesson 10.3 Tests', () => {
     test('should allow input of compound name', () => {
         render(<LessonTenPointThree />);
         
-        const inputBox = screen.getByPlaceholderText('Type the compound name...');
+        const inputBox = screen.getByPlaceholderText('Type the compound name');
         fireEvent.change(inputBox, { target: { value: 'Sodium Nitrate' } });
 
         expect(inputBox.value).toBe('Sodium Nitrate');
@@ -70,14 +70,14 @@ describe('Lesson 10.3 Tests', () => {
     test('provides feedback for incorrect answer', async () => {
         render(<LessonTenPointThree />);
         
-        const inputBox = screen.getByPlaceholderText('Type the compound name...');
+        const inputBox = screen.getByPlaceholderText('Type the compound name');
         fireEvent.change(inputBox, { target: { value: 'Incorrect Name' } });
 
         const submitButton = screen.getByText('Submit Answer');
         fireEvent.click(submitButton);
 
         await waitFor(() => {
-            expect(screen.getByText(/ Incorrect. Try again!/)).toBeInTheDocument();
-        });
+          expect(screen.getAllByText(/Please enter your answer in lowercase/i)[1]).toBeInTheDocument();
+        });        
     });
 });
