@@ -6,7 +6,7 @@ function Logout() {
   const navigate = useNavigate();
 
   const handleSignIn = () => {
-    navigate('/login');
+    navigate('/');
   };
 
   const handleLogoClick = () => {

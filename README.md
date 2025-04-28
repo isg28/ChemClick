@@ -287,35 +287,69 @@ Testing files can be found here:
 <!-- USER INTERFACE -->
 ## User Interface
 
-#### Log In Page
+#### Landing Page
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/landing_page.png" alt="Landing Page" width="750">
+</div>
+<p>This displays when you first click the ChemClicks website link. It allows for
+navigation to other log-in and account creation pages.</p>
+
+#### Student Log In Page
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/login_page.png" alt="Login Page" width="750">
 </div>
+<p>This page provides students a secure place to input their proper account details
+to enter the website. It also gives a solution for users who forget their
+password. </p>
 
 #### Student Dashboard
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/dashboard.png" alt="Dashboard" width="750">
 </div>
+<p>This page is the central hub for ChemClicks. Students can access their lessons
+and see announcements made by their teacher on this page. Additionally,
+the menu bar at the top provides for navigation to other pages. </p>
 
 #### Lesson
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/example_lesson.png" alt="Lesson Page" width="750">
 </div>
+<p>Lessons differ in user interface from module to module but here's an example
+of Lesson 4.1. This is where students would complete their task, depending on the
+predetermined number of correct answers they must submit (indicated by the goal
+box to the right). The goal number can be changed by an administrator account.
+The mastery box displays how proficient the user is in answering questions for 
+that particular lesson (mastery is determined by the ratio of correct answers
+relative to total questions answered). </p>
 
 #### Profile Page
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/profile_page.png" alt="Profile Page" width="750">
 </div>
+<p>This page displays to the user their personal statistics for every lesson
+under each module. If all lessons under a module are completed and submitted, 
+a button will unlock in the module's dropdown and allow the user to generate a
+PDF certificate of completion to send to their teacher. </p>
 
 #### Teacher Dashboard (Admin Access)
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/teacher_dashboard.png" alt="Teacher Dashboard" width="750">
 </div>
+<p>This page is only visible to administrator accounts. This dashboard includes
+additionally summary information that tracks the status of every user's progress
+for each lesson across the website. The administrator can manage existing users on the site and have the option to delete their account or delete all accounts currently registered on the site (this action is irreversible). If the administrator clicks the "View Full Statistics" button, they will be redirected to the Statistics Page (see below). </p>
 
 #### Statistics Page (Admin Access)
 <div style="text-align: center;">
     <img src="frontend/src/assets/readme/statistics_page.png" alt="Statistics Page" width="750">
 </div>
+<p>This page can be accessed from the teacher dashboard (see above) and shows a more detailed view of student statistics. The table search bar can filter the table across multiple attributes (e.g., status: completed, late: yes). If the progress header or the mastery header is clicked, the table will sort according to that column (ascending or descending depending on how many times the header is clicked). If a row is clicked, the administrator will be given the option to reset that student's data to zero. Scrolling all the way to the bottom will show a red button that provides the option to wipe all the student's progress to zero. </p>
+
+#### Logout Page
+<div style="text-align: center;">
+    <img src="frontend/src/assets/readme/logout_page.png" alt="Logout Page" width="750">
+</div>
+<p>The user is redirected to this page once they click the "Sign Out" option from the header of either the dashboard or the profile page. </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
