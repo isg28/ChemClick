@@ -365,7 +365,7 @@ describe("LessonOnePointTen Component", () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Tenths Value/i)).toBeInTheDocument();
+    expect(screen.getByText(/Unit One: Uncertainty in Measurement - Hundredths Value/i)).toBeInTheDocument();
   });
 
   test("displays a submit button and current measurement", async () => {
@@ -439,7 +439,7 @@ describe("LessonOnePointTwelve Component", () => {
         </MemoryRouter>
       );
   
-      expect(screen.getByText(/Unit One: Uncertainty in Measurement - Tenths Value/i)).toBeInTheDocument();
+      expect(screen.getByText(/Unit One: Uncertainty in Measurement - Hundredths Value/i)).toBeInTheDocument();
     });
   
     test("displays a submit button and instructions", async () => {

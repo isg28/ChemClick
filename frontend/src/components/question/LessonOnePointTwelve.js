@@ -248,7 +248,7 @@ function LessonOnePointTwelve() {
                 <div className='lesson-one-point-twelve-box'>
                     <div className='lesson-one-point-twelve-box-innercont'>
                         <div className='lesson-one-point-twelve-box-title'>
-                            <h1>Unit One: Uncertainty in Measurement - Tenths Value</h1>
+                            <h1>Unit One: Uncertainty in Measurement - Hundredths Value</h1>
                         </div>
                         <div className='lesson-one-point-twelve-content'>
                             <p className='lesson-one-point-twelve-prompt'>

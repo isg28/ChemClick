@@ -21,17 +21,24 @@ function Login() {
       }
 
       try {
-          const response = await fetch('http://localhost:8000/users/login/', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                  student_id: studentId,
-                  password: password,
-              }),
-          });
+        const isLocal = window.location.hostname.includes('localhost');
 
+        const BASE_URL = isLocal
+          ? 'http://localhost:8000'
+          : 'https://chemclick.onrender.com';
+        
+      
+        const response = await fetch(`${BASE_URL}/users/login/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            student_id: studentId,
+            password: password,
+          }),
+        });
+      
           if (response.ok) {
               const data = await response.json();
               console.log(data.message);

@@ -35,14 +35,14 @@ function LessonEightPointThree() {
     };
 
     const ions = [
-        { symbol: "Be²⁻", name: "beryllium ion", category: "positive2", input: "Be2-" },
-        { symbol: "Mg²⁻", name: "magnesium ion", category: "positive2", input: "Mg2-" },
-        { symbol: "Sr²⁻", name: "strontium ion", category: "positive2", input: "Sr2-" },
-        { symbol: "Ba²⁻", name: "barium ion", category: "positive2", input: "Ba2-" },
-        { symbol: "Ra²⁻", name: "radium ion", category: "positive2", input: "Ra2-" },
-        { symbol: "Zn²⁻", name: "zinc ion", category: "positive2", input: "Zn2-" },
-        { symbol: "Ca²⁻", name: "calcium ion", category: "positive2", input: "Ca2-" },
-        { symbol: "Al³⁻", name: "aluminum ion", category: "positive3", input: "Al3-" },
+        { symbol: "Be²⁺", name: "beryllium ion", category: "positive2", input: "Be2+" },
+        { symbol: "Mg²⁺", name: "magnesium ion", category: "positive2", input: "Mg2+" },
+        { symbol: "Sr²⁺", name: "strontium ion", category: "positive2", input: "Sr2+" },
+        { symbol: "Ba²⁺", name: "barium ion", category: "positive2", input: "Ba2+" },
+        { symbol: "Ra²⁺", name: "radium ion", category: "positive2", input: "Ra2+" },
+        { symbol: "Zn²⁺", name: "zinc ion", category: "positive2", input: "Zn2+" },
+        { symbol: "Ca²⁺", name: "calcium ion", category: "positive2", input: "Ca2+" },
+        { symbol: "Al³⁺", name: "aluminum ion", category: "positive3", input: "Al3+" },
     ];
 
     const questions = ions.flatMap(ion => [   

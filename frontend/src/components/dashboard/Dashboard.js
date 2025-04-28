@@ -53,7 +53,14 @@ function Dashboard() {
   };
   
   useEffect(() => {
-    fetch('http://localhost:8000/announcements/') 
+
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
+
+    fetch(`${BASE_URL}/announcements/`) 
     .then((response) => {
       if (!response.ok) throw new Error('Failed to fetch announcements');
       return response.json();
@@ -66,7 +73,7 @@ function Dashboard() {
     })
     .catch((error) => console.error('Error fetching announcements:', error));
 
-    fetch('http://localhost:8000/lessons/') 
+    fetch(`${BASE_URL}/lessons/`) 
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch lesson data');
         return res.json();
@@ -245,9 +252,14 @@ function Dashboard() {
       return;
     }
 
+    const isLocal = window.location.hostname.includes('localhost');
+
+    const BASE_URL = isLocal
+      ? 'http://localhost:8000'
+      : 'https://chemclick.onrender.com'
     const lessonProgressUrl = isTeacher 
-    ? `http://localhost:8000/teacherLessons/progress/${userId}` 
-    : `http://localhost:8000/lessons/progress/${userId}`; 
+    ? `${BASE_URL}/teacherLessons/progress/${userId}` 
+    : `${BASE_URL}/lessons/progress/${userId}`; 
 
 
     fetch(lessonProgressUrl)

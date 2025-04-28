@@ -61,7 +61,12 @@ function ProfileUnitList({ units, currentUnit }) {
                 }
 
                 try {
-                    const lessonDetailsResponse = await fetch(`http://localhost:8000/lessons/${lesson.lesson_id}`);
+                    const isLocal = window.location.hostname.includes('localhost');
+
+                    const BASE_URL = isLocal
+                      ? 'http://localhost:8000'
+                      : 'https://chemclick.onrender.com'
+                    const lessonDetailsResponse = await fetch(`${BASE_URL}/lessons/${lesson.lesson_id}`);
                     lessonDetails = lessonDetailsResponse.ok ? await lessonDetailsResponse.json() : {};
                 } catch (error) {
                     console.error(`Failed to fetch lesson details for ${lesson.lesson_id}`, error);
@@ -110,8 +115,17 @@ function ProfileUnitList({ units, currentUnit }) {
 
 
   const checkLessonsCompleted = (unit) => {
-    if (unit.lessons.every((lesson) => lesson.status === 'completed')) return "Not Started";
-    if (unit.lessons.every((lesson) => lesson.status === 'locked')) return "Locked";
+    // check if all lessons are completed
+    if (unit.lessons.every((lesson) => {
+      const lessonData = updatedLessonProgress[lesson.lesson_id] || lesson;
+      return lessonData.status === 'completed';
+    })) return "Completed"; 
+    
+    if (unit.lessons.every((lesson) => {
+      const lessonData = updatedLessonProgress[lesson.lesson_id] || lesson;
+      return lessonData.status === 'locked';
+    })) return "Locked";
+    
     return "Work In-Progress";
   };
 
@@ -151,7 +165,12 @@ function ProfileUnitList({ units, currentUnit }) {
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`http://localhost:8000/teacherLessons/progress/${teacherId}/${lessonId}/`, {
+        const isLocal = window.location.hostname.includes('localhost');
+
+        const BASE_URL = isLocal
+          ? 'http://localhost:8000'
+          : 'https://chemclick.onrender.com'
+        const response = await fetch(`${BASE_URL}/teacherLessons/progress/${teacherId}/${lessonId}/`, {
             method: "DELETE",
         });
 
@@ -183,10 +202,15 @@ function ProfileUnitList({ units, currentUnit }) {
             lesson.lesson_id.startsWith(unitNumber + ".")
         );
         // Loop through all lessons in the unit and send DELETE requests
+        const isLocal = window.location.hostname.includes('localhost');
+
+        const BASE_URL = isLocal
+          ? 'http://localhost:8000'
+          : 'https://chemclick.onrender.com'
         await Promise.all(
             unit.lessons.map(async (lesson) => {
                 const response = await fetch(
-                    `http://localhost:8000/teacherLessons/progress/${teacherId}/${lesson.lesson_id}/`,
+                    `${BASE_URL}/teacherLessons/progress/${teacherId}/${lesson.lesson_id}/`,
                     {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },
@@ -289,7 +313,7 @@ function ProfileUnitList({ units, currentUnit }) {
                             <button 
                               className='printButton' 
                               onClick={() => handlePrintCertificate(unit)}
-                              disabled={/Locked|Work In-Progress/.test(checkLessonsCompleted(unit))}
+                              disabled={checkLessonsCompleted(unit) !== "Completed"}
                             >
                               Click to Print Certificate
                             </button>

@@ -209,7 +209,7 @@ function LessonOnePointEight() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2000);
+            }, 3000);
             return;
         }
     
@@ -234,7 +234,7 @@ function LessonOnePointEight() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2500);
+            }, 3000);
             return;
         }
     
@@ -243,9 +243,9 @@ function LessonOnePointEight() {
                 setFeedback("Last digit is not quite right.");
                 setLastDigitAttempts(lastDigitAttempts + 1);
             } else {
-                if (positionType === 'closer to lower') {
+                if (positionType === 'close to lower') {
                     setFeedback('For measurements closer to the lower tick, the last digit should be between 1 and 4.');
-                } else if (positionType === 'closer to upper') {
+                } else if (positionType === 'close to upper') {
                     setFeedback('For measurements closer to the upper tick, the last digit should be between 6 and 9.');
                 } else if (positionType === 'on tick') {
                     setFeedback('For on-tick measurements, the last digit should be 0.');
@@ -258,7 +258,7 @@ function LessonOnePointEight() {
             setTimeout(() => {
                 setFeedback('');
                 setFeedbackClass('');
-            }, 2000);
+            }, 5000);
             return;
         }
         setFeedback("The answer is incorrect. Please check your answer and try again.");
@@ -271,7 +271,7 @@ function LessonOnePointEight() {
         setTimeout(() => {
             setFeedback('');
             setFeedbackClass('');
-        }, 2000);
+        }, 3000);
     };
 
     const handleSubmitAnswer = () => {

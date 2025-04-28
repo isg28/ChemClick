@@ -17,7 +17,12 @@ function TeacherDashboard() {
 
   const fetchLessonData = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8000/lessons/'); 
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/lessons/`); 
       const lessons = await response.json();
       const updatedUnits = [
         {
@@ -207,7 +212,12 @@ function TeacherDashboard() {
     
   const fetchAnnouncements = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:8000/announcements/');
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/announcements/`);
       const data = await response.json();
       const sortedAnnouncements = data.sort((a, b) => b.post_number - a.post_number); 
 
@@ -219,7 +229,12 @@ function TeacherDashboard() {
   
   const postAnnouncement = async (author, message) => {
     try {
-      const response = await fetch('http://localhost:8000/announcements/', {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/announcements/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ author, message }),
@@ -241,7 +256,12 @@ function TeacherDashboard() {
 
   const editAnnouncement = async (id, updatedMessage) => {
     try {
-      const response = await fetch(`http://localhost:8000/announcements/${id}/`, {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/announcements/${id}/`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: updatedMessage , date: new Date().toISOString()}),
@@ -261,7 +281,12 @@ function TeacherDashboard() {
   
   const deleteAnnouncement = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/announcements/${id}/`, {
+      const isLocal = window.location.hostname.includes('localhost');
+
+      const BASE_URL = isLocal
+        ? 'http://localhost:8000'
+        : 'https://chemclick.onrender.com'
+      const response = await fetch(`${BASE_URL}/announcements/${id}/`, {
         method: 'DELETE',
       });
   
@@ -286,7 +311,12 @@ function TeacherDashboard() {
     );
     if (userConfirmed) {
       try {
-        const response = await fetch('http://localhost:8000/announcements/', {
+        const isLocal = window.location.hostname.includes('localhost');
+
+        const BASE_URL = isLocal
+          ? 'http://localhost:8000'
+          : 'https://chemclick.onrender.com'
+        const response = await fetch(`${BASE_URL}/announcements/`, {
           method: 'DELETE',
         });
   
