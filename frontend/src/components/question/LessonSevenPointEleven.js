@@ -131,7 +131,7 @@ function LessonSevenPointEleven() {
           <div className="LessonSevenPointElevenBoxInnercont">
             <div className="LessonSevenPointElevenBoxTitle">
               <h1>
-                Unit Eleven: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Left Side
+                Unit Seven: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Left Side
               </h1>
             </div>
             <div className="LessonSevenPointElevenContent">

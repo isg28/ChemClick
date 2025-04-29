@@ -133,7 +133,7 @@ function LessonSevenPointTwelve() {
                     <div className="LessonSevenPointTwelveBoxInnercont">
                         <div className="LessonSevenPointTwelveBoxTitle">
                             <h1>
-                                Unit Twelve: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Right Side
+                                Unit Seven: Periodic Trends - (Predicting Monatomic Ion Charge by Group Number) - Right Side
                             </h1>
                         </div>
                         <div className="LessonSevenPointTwelveContent">
