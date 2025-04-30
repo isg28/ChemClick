@@ -51,6 +51,8 @@ html,body {
 
     overflow-y: auto; 
     scrollbar-width: thin; 
+    margin-right: 5%;
+
 }
 
 .lesson-ten-point-one-box-title {

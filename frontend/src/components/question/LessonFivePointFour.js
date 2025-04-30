@@ -60,6 +60,26 @@ function LessonFivePointFour() {
         initializeData();
         // eslint-disable-line react-hooks/exhaustive-deps
     }, [userId, lessonId, navigate, isTeacher]);
+
+        const [nextLessonLocked, setNextLessonLocked] = useState(true);
+        useEffect(() => {
+            const checkNextLessonStatus = async () => {
+            const nextLessonId = 'lesson5.5'; 
+            try {
+                const isLocal = window.location.hostname.includes('localhost');
+                const BASE_URL = isLocal
+                            ? 'http://localhost:8000'
+                            : 'https://chemclick.onrender.com';
+                const res = await fetch(`${BASE_URL}/lessons/${nextLessonId}`);
+                const data = await res.json();
+                setNextLessonLocked(data.status === 'locked');
+            } catch (error) {
+                console.error("Failed to check next lesson lock status:", error);
+            }
+        };
+            
+        checkNextLessonStatus();
+        }, []);       
   async function handleSubmit() {
     if (selectedAnswer === '') {
       alert('Please select an answer.');
@@ -226,19 +246,14 @@ function LessonFivePointFour() {
           </div>
           {/* Next Lesson button positioned below the Goals box */}
           <div className="next-lesson-button-container" style={{ marginTop: '20px' }}>
-                        <button 
-                            className="next-lesson-button" 
-                            onClick={() => navigate('/lessonfivepointfive')}
-                            style={{ 
-                                padding: '20px 40px', 
-                                fontSize: '20px', 
-                                border: '5px solid #006400', 
-                                borderRadius: '8px',
-                                cursor: 'pointer'
-                            }}
+          <button 
+                        className={`next-lesson-button ${nextLessonLocked ? 'locked' : ''}`} 
+                        onClick={() => {
+                            if (!nextLessonLocked) navigate('/lessonfivepointfive');
+                        }}
                         >
-                            Next Lesson
-                        </button>
+                        {nextLessonLocked ? 'Locked' : 'Next Lesson'}
+                    </button>
                     </div>
         </div>
       </div>

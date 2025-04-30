@@ -50,6 +50,8 @@ html,body {
 
     overflow-y: auto; /* Enables vertical scrolling */
     overflow-x: hidden; /* Prevents horizontal scrolling */
+    margin-right: 5%;
+
 }
 
 
