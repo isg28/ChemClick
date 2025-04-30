@@ -44,18 +44,28 @@ class UserManagementView(APIView):
                     "message": f"User {user_id} and their progress have been deleted."
                 }, status=status.HTTP_200_OK)
 
-            else:
-                # Delete all student progress & users in general
-                LessonProgress.objects.all().delete()
-                deleted_count = User.objects.all().delete()
-
-                if deleted_count[0] == 0:
-                    return Response({"message": "No users found."}, status=status.HTTP_404_NOT_FOUND)
-
-                return Response({"message": "All users and their progress have been deleted."}, status=status.HTTP_200_OK)
-
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class DeleteAllUsersView(APIView):
+    def delete(self, request):
+        try:
+            LessonProgress.objects.all().delete()
+            deleted_count = User.objects.all().delete()
+
+            if isinstance(deleted_count, tuple) and deleted_count[0] == 0:
+                return Response({"message": "No users found."}, status=status.HTTP_404_NOT_FOUND)
+
+            if isinstance(deleted_count, int) and deleted_count == 0:
+                return Response({"message": "No users found."}, status=status.HTTP_404_NOT_FOUND)
+
+
+            return Response({"message": "All users and their progress have been deleted."}, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            print("ERROR during delete-all:", str(e))
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 
 class UserListView(APIView):
     def get(self, request):

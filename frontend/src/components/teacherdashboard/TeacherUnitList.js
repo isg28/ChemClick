@@ -261,7 +261,7 @@ function TeacherUnitList({ units, currentUnit }) {
           const BASE_URL = isLocal
             ? 'http://localhost:8000'
             : 'https://chemclick.onrender.com'
-          const response = await fetch(`${BASE_URL}/users/`, { method: "DELETE" });
+          const response = await fetch(`${BASE_URL}/users/delete-all/`, { method: "DELETE" });
 
           if (!response.ok) {
               throw new Error("Failed to delete all users.");
