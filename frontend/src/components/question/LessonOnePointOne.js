@@ -36,9 +36,9 @@ function LessonOnePointOne(){
     };
 
     const generateRandomNumberAndPosition = () => {
-        const randomNum = (Math.random() * 5.99).toFixed(1);
+        const randomNum = (Math.random() * 5.9 + 0.1).toFixed(1);
         setRandomNumber(randomNum);
-    };
+    };    
 
     useEffect(() => {
         if (!userId) { 
@@ -160,12 +160,12 @@ function LessonOnePointOne(){
                                 Click and drag the cursor to the indicated measurement below. You may also use the arrow keys for more precision. Submit the answer when you are ready.
                             </p>
                             <div className="lesson-one-point-one-measurement-container">
-                            <div 
+                                <div 
                                 className="slider-value-display"
                                 style={{ left: `${(sliderValue / 600) * 100}%` }}
-                            >
-                                {sliderValue/100}
-                            </div>
+                                >
+                                {(sliderValue / 100).toFixed(1)}
+                                </div>
                                 <input
                                 type="range"
                                 min="0"
